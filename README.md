@@ -15,7 +15,7 @@ Before starting development, make sure you have these tools installed:
 ### Environment
 To define and manage environment variables, make sure to maintain `.env` files in both the `frontend` and `backend` directories. Ensure that `.env` is specified in your root `.gitignore` file to prevent pushing secrets. This should already be the case, but the secret scanner hook will check for this if something gets changed
 
-Add the `.env.frontend` and `.env.backend` from the project google drive to their respective directories in your local branch.
+Add the `.env.frontend` and `.env.backend` from the project google drive to their respective directories in your local branch. (not yet created)
 
 ### Backend
 
