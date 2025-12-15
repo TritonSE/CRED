@@ -1,5 +1,7 @@
 # CRED
 
+A website revamp for Cred, an organization focused on providing help for post-incarcerated inviduals. This website aims to declutter the original website while adding modular features that allow the website to grow with the organization.
+
 This website adds an admin portal to facilitate website integration into organization operations, including a custom form for clients to send their information.
 
 ## Setup
