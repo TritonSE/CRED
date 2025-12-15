@@ -16,6 +16,7 @@
   "parserOptions": {
     "project": true
   },
+  "ignorePatterns": ["**/*.json", "**/*.md", "**/*.mjs"],
   "rules": {
     // Add all of these:
 
