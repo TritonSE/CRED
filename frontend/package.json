@@ -1,0 +1,37 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "check-git-hooks": "cd .. && node .secret-scan/secret-scan.js -- --check-git-hooks",
+    "format": "npm run check-git-hooks && prettier --write .",
+    "lint-fix": "npm run check-git-hooks && (eslint --fix --cache --report-unused-disable-directives . || true) && prettier --write .",
+    "lint-check": "npm run check-git-hooks && eslint --cache --report-unused-disable-directives . && prettier --check .",
+    "prepare": "cd .. && husky"
+  },
+  "dependencies": {
+    "next": "^15.5.9",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.18.1",
+    "@typescript-eslint/parser": "^8.18.1",
+    "eslint": "^8",
+    "eslint-config-next": "^15.0.3",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "husky": "^9.1.7",
+    "postcss": "^8",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

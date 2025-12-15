@@ -1,0 +1,9 @@
+.env
+node_modules/
+.eslintcache
+ServiceAccountKey.json
+
+#Compiled JavaScript files
+lib/**/*.js
+lib/**/*.js.map
+lib
