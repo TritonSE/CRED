@@ -2,13 +2,26 @@
  * admin file
  */
 
-import { Table } from "@tritonse/tse-constellation";
+import { Button, Table } from "@tritonse/tse-constellation";
 
 export type ApplicationTableProps = {
   title: string;
 };
 
 export function ApplicationTable() {
+  type ApplicationRow = {
+    dateSubmitted: string;
+    clientNumber: string;
+    name: string;
+    typeOfAid: string;
+    status: number;
+    actions: string;
+  };
+
+  type CellContext<T = ApplicationRow> = {
+    row: { original: T };
+  };
+
   return (
     <Table
       columns={[
@@ -35,6 +48,18 @@ export function ApplicationTable() {
         {
           accessorKey: "actions",
           header: "Actions",
+          cell: (row: CellContext) => (
+            <Button
+              small
+              trailingIcon="ic_caretdown"
+              variant="secondary"
+              onClick={() => {
+                alert(row.row.original.name);
+              }}
+            >
+              {row.row.original.name}
+            </Button>
+          ),
         },
       ]}
       data={[
