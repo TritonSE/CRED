@@ -5,10 +5,12 @@
 
 import { ThemeProvider } from "@tritonse/tse-constellation";
 
+import { ApplicationTable } from "./ApplicationTable";
+
 export default function Admin() {
   return (
     <ThemeProvider>
-      <h1>Hello, TSE ADMIN PAGE</h1>
+      <ApplicationTable />
     </ThemeProvider>
   );
 }
