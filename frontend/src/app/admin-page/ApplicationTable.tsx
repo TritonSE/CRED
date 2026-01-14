@@ -8,7 +8,7 @@ export type ApplicationTableProps = {
   title: string;
 };
 
-export function ApplicationTable({ title }: ApplicationTableProps) {
+export function ApplicationTable() {
   return (
     <Table
       columns={[

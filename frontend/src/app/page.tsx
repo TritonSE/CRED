@@ -1,11 +1,18 @@
+/**
+ * @todo This file is temporarily edited so that the admin page can be accessed, update
+ * once routes has been setup properly.
+ */
+
 "use client";
 
 import { ThemeProvider } from "@tritonse/tse-constellation";
 
+import Admin from "./admin-page/admin";
+
 export default function ExamplePage() {
   return (
     <ThemeProvider>
-      <h1>Hello, TSE</h1>
+      <Admin />
     </ThemeProvider>
   );
 }
