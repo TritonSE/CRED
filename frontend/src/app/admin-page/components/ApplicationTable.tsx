@@ -51,7 +51,7 @@ export function ApplicationTable({ title }: ApplicationTableProps) {
           {
             accessorKey: "status",
             header: "Status",
-            cell: () => <StatusLabel status="Pending"></StatusLabel>,
+            cell: () => <StatusLabel status="Reviewed"></StatusLabel>,
           },
           {
             accessorKey: "actions",
