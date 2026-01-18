@@ -1,20 +1,19 @@
 import React from "react";
 
 export type ButtonProps = {
-  label: string;
-  iconImageURL?: string;
+  mode: "view" | "hide";
 } & React.ComponentProps<"button">;
 
-export const Button = function Button({
+export const DetailButton = function DetailButton({
   ref,
-  label,
-  iconImageURL,
+  mode,
   ...props
 }: ButtonProps & { ref?: React.RefObject<HTMLButtonElement | null> }) {
+  const label = mode === "view" ? "View Details" : "Hide Details";
   return (
     <button ref={ref} type="button" {...props}>
       <p>{label}</p>
-      <img src={iconImageURL}></img>
+      <img src="/downCarat.svg"></img>
     </button>
   );
 };

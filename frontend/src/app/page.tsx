@@ -7,7 +7,7 @@
 
 import { ThemeProvider } from "@tritonse/tse-constellation";
 
-import Admin from "./admin-page/admin";
+import Admin from "./admin-page/adminPage";
 
 export default function ExamplePage() {
   return (
