@@ -14,3 +14,69 @@
  * status: string, required
  * action??: string
  */
+
+import { Schema, model, models } from "mongoose";
+
+import type { InferSchemaType } from "mongoose";
+
+export const RACE_ETHNICITY_OPTIONS = [
+  "White",
+  "Black or African American",
+  "Asian",
+  "American Indian or Alaska Native",
+  "Native Hawaiian or Other Pacific Islander",
+  "Two or More Races",
+  "Hispanic or Latino",
+  "Not Hispanic or Latino",
+  "Other",
+] as const;
+
+export const STATUS_OPTIONS = ["Pending", "Need to Review", "Reviewed"] as const;
+
+export const AID_TYPES = [
+  "Life skills Training", 
+  "Workforce Program", 
+  "Other/Not Sure"
+] as const;
+
+const applicantSchema = new Schema(
+  {
+    firstName: { type: String, required: true },
+    
+    dateOfBirth: { type: Date, required: true },
+    
+    raceEthnicity: { 
+        type: String, 
+        required: true,
+        enum: RACE_ETHNICITY_OPTIONS
+    },
+    
+    gender: { type: String, required: true },
+    
+    cdcrNumber: { type: String, unique: true, sparse: true },
+    
+    description: { type: String },
+    
+    typeOfAid: { 
+        type: [String], 
+        required: true,
+        enum: AID_TYPES
+     },
+    
+    status: { 
+      type: String, 
+      required: true, 
+      default: "Pending", 
+      enum: STATUS_OPTIONS
+    },
+
+    actionPlan: { type: String },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+type Applicant = InferSchemaType<typeof applicantSchema>;
+
+export default models.Applicant || model<Applicant>("Applicant", applicantSchema);
