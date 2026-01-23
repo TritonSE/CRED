@@ -4,7 +4,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 24px; /* add horizontal padding so items aren't flush to edges */
+  padding: 8px 152px; /* add horizontal padding so items aren't flush to edges */
 }
 
 .headerColumn {
@@ -22,6 +22,7 @@
   font-weight: 590;
   line-height: 100%;
   letter-spacing: 0%;
+  font-style: semibold;
 }
 
 .searchColumn {

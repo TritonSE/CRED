@@ -1,58 +1,59 @@
 /**
- * admin file
+ * ApplicationTable file
+ *
+ * @todo Style the table to match the color of the figma design
  */
 
 import { Table } from "@tritonse/tse-constellation";
+import Image from "next/image";
 
+import styles from "./ApplicationTable.module.css";
 import { DetailButton } from "./DetailButton";
 import { StatusLabel } from "./StatusLabel";
 
-export type ApplicationTableProps = {
-  title: string;
+export type ApplicationRowData = {
+  dateSubmitted: string;
+  clientNumber: string;
+  clientName: string;
+  status: "Reviewed" | "Need to Review" | "Under Review";
 };
 
-export function ApplicationTable({ title }: ApplicationTableProps) {
-  /*
-  type ApplicationRow = {
-    dateSubmitted: string;
-    clientNumber: string;
-    name: string;
-    typeOfAid: string;
-    status: number;
-    actions: string;
+export type ApplicationTableProps = {
+  title: string;
+  data: ApplicationRowData[];
+};
+
+export function ApplicationTable({ title, data }: ApplicationTableProps) {
+  type StatusRow = {
+    row: { original: { status: "Reviewed" | "Need to Review" | "Under Review" } };
   };
-  
-  type CellContext<T = ApplicationRow> = {
-    row: { original: T };
-  }
-  */
 
   return (
-    <div>
-      <h3>{title}</h3>
+    <div className={styles.tableContainer}>
+      <div className={styles.tableTitleContainer}>
+        <h3 className={styles.tableTitle}>{title}</h3>
+        <Image src="/downCarat.svg" width="16" height="16" alt="Filter Options"></Image>
+      </div>
+
       <Table
         enableGlobalFiltering={false}
         columns={[
-          {
-            accessorKey: "dateSubmitted",
-            header: "Date Submitted",
-          },
           {
             accessorKey: "clientNumber",
             header: "Client Number",
           },
           {
-            accessorKey: "name",
-            header: "Name",
+            accessorKey: "clientName",
+            header: "Client Name",
           },
           {
-            accessorKey: "typeOfAid",
-            header: "Type of Aid",
+            accessorKey: "dateSubmitted",
+            header: "Date Submitted",
           },
           {
             accessorKey: "status",
             header: "Status",
-            cell: () => <StatusLabel status="Reviewed"></StatusLabel>,
+            cell: ({ row }: StatusRow) => <StatusLabel status={row.original.status}></StatusLabel>,
           },
           {
             accessorKey: "actions",
@@ -60,16 +61,7 @@ export function ApplicationTable({ title }: ApplicationTableProps) {
             cell: () => <DetailButton mode="view"></DetailButton>,
           },
         ]}
-        data={[
-          {
-            dateSubmitted: "Ori",
-            clientNumber: "Rigel",
-            name: "Orion",
-            typeOfAid: "Hunter",
-            status: 7,
-            actions: "Hunter",
-          },
-        ]}
+        data={data}
       />
     </div>
   );

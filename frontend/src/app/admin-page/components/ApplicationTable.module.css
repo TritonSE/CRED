@@ -1,0 +1,21 @@
+.tableContainer {
+  padding: 8px 152px; /* add horizontal padding so items aren't flush to edges */
+}
+
+.tableTitleContainer {
+  display: flex;
+  height: 40px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0px; /* add horizontal padding so items aren't flush to edges */
+}
+
+.tableTitle {
+  color: #175892;
+  font: Lato;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: bold;
+  letter-spacing: 0%;
+}

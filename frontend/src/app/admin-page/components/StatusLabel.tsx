@@ -4,7 +4,7 @@
 import styles from "./StatusLabel.module.css";
 
 export type StatusLabelProps = {
-  status: "Need to Review" | "Pending" | "Reviewed";
+  status: "Need to Review" | "Under Review" | "Reviewed";
 };
 
 export function StatusLabel({ status }: StatusLabelProps) {
@@ -13,8 +13,8 @@ export function StatusLabel({ status }: StatusLabelProps) {
     case "Need to Review":
       statusLabelClass += ` ${styles.needToReview}`;
       break;
-    case "Pending":
-      statusLabelClass += ` ${styles.pending}`;
+    case "Under Review":
+      statusLabelClass += ` ${styles.underReview}`;
       break;
     case "Reviewed":
       statusLabelClass += ` ${styles.reviewed}`;

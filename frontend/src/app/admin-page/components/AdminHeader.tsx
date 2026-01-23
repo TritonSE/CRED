@@ -1,3 +1,7 @@
+/**
+ * AdminHeader file
+ */
+
 import { Search } from "@tritonse/tse-constellation";
 import React from "react";
 
