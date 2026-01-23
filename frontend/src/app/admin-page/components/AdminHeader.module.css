@@ -1,0 +1,32 @@
+.flexContainer {
+  display: flex;
+  height: 40px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px; /* add horizontal padding so items aren't flush to edges */
+}
+
+.headerColumn {
+  flex: 1 1 auto;
+  width: auto;
+  height: 40px;
+  text-align: left;
+  align-items: center;
+}
+
+.headingStyle {
+  margin: 0;
+  color: #004377;
+  font-size: 40px; /* bigger to match screenshot */
+  font-weight: 590;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.searchColumn {
+  width: 552px;
+  height: 40px;
+  align-items: center;
+  justify-content: right;
+}

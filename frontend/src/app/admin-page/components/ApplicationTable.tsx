@@ -29,8 +29,9 @@ export function ApplicationTable({ title }: ApplicationTableProps) {
 
   return (
     <div>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <Table
+        enableGlobalFiltering={false}
         columns={[
           {
             accessorKey: "dateSubmitted",
