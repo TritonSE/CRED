@@ -2,6 +2,8 @@ import { body } from "express-validator";
 
 import { AID_TYPES, RACE_ETHNICITY_OPTIONS, STATUS_OPTIONS } from "../models/applicant";
 
+const OTHER_OPTION = "Not Sure/Other";
+
 const makeIDValidator = () =>
   body("_id")
     .exists()
@@ -20,6 +22,17 @@ const makeFirstNameValidator = () =>
     .bail()
     .notEmpty()
     .withMessage("firstName cannot be empty");
+
+const makeLastNameValidator = () =>
+  body("lastName")
+    .exists()
+    .withMessage("lastName is required")
+    .bail()
+    .isString()
+    .withMessage("lastName must be a string")
+    .bail()
+    .notEmpty()
+    .withMessage("lastName cannot be empty");
 
 const makeDateOfBirthValidator = () =>
   body("dateOfBirth")
@@ -51,16 +64,10 @@ const makeGenderValidator = () =>
     .withMessage("gender cannot be empty");
 
 const makeCdcrNumberValidator = () =>
-  body("cdcrNumber")
-    .optional()
-    .isString()
-    .withMessage("cdcrNumber must be a string");
+  body("cdcrNumber").optional().isString().withMessage("cdcrNumber must be a string");
 
 const makeDescriptionValidator = () =>
-  body("description")
-    .optional()
-    .isString()
-    .withMessage("description must be a string");
+  body("description").optional().isString().withMessage("description must be a string");
 
 const makeTypeOfAidValidator = () =>
   body("typeOfAid")
@@ -73,6 +80,18 @@ const makeTypeOfAidValidator = () =>
     })
     .withMessage(`typeOfAid must be selected from: ${AID_TYPES.join(", ")}`);
 
+const makeOtherAidDescriptionValidator = () => 
+  body("otherAidDescription")
+    .if((value, { req }) => {
+      const selectedAids = (req.body as Record<string, string[]>).typeOfAid ?? [];
+      return Array.isArray(selectedAids) && selectedAids.includes(OTHER_OPTION);
+    })
+    .exists()
+    .withMessage("Please describe the other aid needed")
+    .notEmpty()
+    .withMessage("Description cannot be empty when 'Other' is selected")
+    .isString();
+
 const makeStatusValidator = () =>
   body("status")
     .optional()
@@ -82,10 +101,7 @@ const makeStatusValidator = () =>
     .withMessage("status must be one of: Pending, Need to Review, Reviewed");
 
 const makeActionPlanValidator = () =>
-  body("actionPlan")
-    .optional()
-    .isString()
-    .withMessage("actionPlan must be a string");
+  body("actionPlan").optional().isString().withMessage("actionPlan must be a string");
 
 // ==========================================================
 // EXPORTS
@@ -93,25 +109,29 @@ const makeActionPlanValidator = () =>
 
 export const createApplicant = [
   makeFirstNameValidator(),
+  makeLastNameValidator(),
   makeDateOfBirthValidator(),
   makeRaceEthnicityValidator(),
   makeGenderValidator(),
   makeCdcrNumberValidator(),
   makeDescriptionValidator(),
   makeTypeOfAidValidator(),
+  makeOtherAidDescriptionValidator(),
   makeStatusValidator(),
   makeActionPlanValidator(),
 ];
 
 export const updateApplicant = [
-  makeIDValidator(), 
+  makeIDValidator(),
   makeFirstNameValidator(),
+  makeLastNameValidator(),
   makeDateOfBirthValidator(),
   makeRaceEthnicityValidator(),
   makeGenderValidator(),
   makeCdcrNumberValidator(),
   makeDescriptionValidator(),
   makeTypeOfAidValidator(),
+  makeOtherAidDescriptionValidator(),
   makeStatusValidator(),
   makeActionPlanValidator(),
 ];

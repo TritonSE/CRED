@@ -1,16 +1,16 @@
 //SCHEMA FOR AN APPLICANT
 
 /**
- * 
+ *
  * First name: string required
  * Date of birth: Date, required
  * Race/Ethnicity: String, required
  * Gender: string, required
  * CDCR: string
- * 
+ *
  * Description: string
  * type of aid: list of strings?, requried
- * 
+ *
  * status: string, required
  * action??: string
  */
@@ -34,47 +34,54 @@ export const RACE_ETHNICITY_OPTIONS = [
 export const STATUS_OPTIONS = ["Pending", "Need to Review", "Reviewed"] as const;
 
 export const AID_TYPES = [
-  "Life skills Training", 
-  "Workforce Program", 
-  "Other/Not Sure"
+    "Transitional/Rental Housing Support", 
+    "Rent Subsidies/Onsite support", 
+    "Effective Life skills training", 
+    "Workforce Development/Employment",
+    "Not Sure/Other"
 ] as const;
 
 const applicantSchema = new Schema(
   {
     firstName: { type: String, required: true },
-    
+    lastName: { type: String, required: true },
+
     dateOfBirth: { type: Date, required: true },
-    
-    raceEthnicity: { 
-        type: String, 
-        required: true,
-        enum: RACE_ETHNICITY_OPTIONS
+
+    raceEthnicity: {
+      type: String,
+      required: true,
+      enum: RACE_ETHNICITY_OPTIONS,
     },
-    
+
     gender: { type: String, required: true },
-    
+
     cdcrNumber: { type: String, unique: true, sparse: true },
-    
+
     description: { type: String },
-    
+
     typeOfAid: { 
-        type: [String], 
-        required: true,
-        enum: AID_TYPES
-     },
-    
-    status: { 
-      type: String, 
-      required: true, 
-      default: "Pending", 
-      enum: STATUS_OPTIONS
+      type: [String], 
+      required: true,
+      enum: AID_TYPES 
+    },
+
+    otherAidDescription: { 
+      type: String,
+    },
+
+    status: {
+      type: String,
+      required: true,
+      default: "Pending",
+      enum: STATUS_OPTIONS,
     },
 
     actionPlan: { type: String },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 type Applicant = InferSchemaType<typeof applicantSchema>;
