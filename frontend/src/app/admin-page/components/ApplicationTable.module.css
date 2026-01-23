@@ -19,3 +19,7 @@
   font-style: bold;
   letter-spacing: 0%;
 }
+
+.tableVisibilityButton {
+  cursor: pointer;
+}

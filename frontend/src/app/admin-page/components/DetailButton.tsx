@@ -12,7 +12,7 @@ export const DetailButton = function DetailButton({
   const hidden = mode !== "view"; // If not view mode, then details are hidden
   return (
     <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end", width: "55%" }}>
-      <Image src="/downCarat.svg" width="16" height="16" alt="Down Carat"></Image>
+      <Image src="/downCaret.svg" width="16" height="16" alt="Down Carat"></Image>
       <Image
         src={hidden ? "/eyeWithSlash.svg" : "/eye.svg"}
         width="16"

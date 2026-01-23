@@ -1,5 +1,5 @@
 /**
- * admin file
+ * StatusLabel file
  */
 import styles from "./StatusLabel.module.css";
 
