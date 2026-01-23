@@ -1,31 +1,42 @@
+/**
+ * StatusLabel.module.css
+ * Styles for the StatusLabel component which displays color-coded
+ * status indicators for application review states.
+ */
+
+/* Base styles shared by all status labels */
 .statusLabel {
-  border-radius: 8px;
+  border-radius: 8px; /* Rounded pill shape */
   height: 32px;
 
+  /* Center the text within the label */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* "Need to Review" status - Red/pink theme indicating urgent attention needed */
 .needToReview {
-  color: #561818;
-  background-color: #fff3f3;
+  color: #561818; /* Dark red text */
+  background-color: #fff3f3; /* Light pink background */
   font-size: 16px;
   font-style: normal;
   font: Lato;
 }
 
+/* "Under Review" status - Gray theme indicating in-progress */
 .underReview {
-  color: #1b1b1b;
-  background-color: #d9d9d9;
+  color: #1b1b1b; /* Dark gray text */
+  background-color: #d9d9d9; /* Light gray background */
   font-size: 16px;
   font-style: normal;
   font: Lato;
 }
 
+/* "Reviewed" status - Green theme indicating completion */
 .reviewed {
-  color: #02542d;
-  background-color: #ebf9f1;
+  color: #02542d; /* Dark green text */
+  background-color: #ebf9f1; /* Light green background */
   font-size: 16px;
   font-style: normal;
   font: Lato;

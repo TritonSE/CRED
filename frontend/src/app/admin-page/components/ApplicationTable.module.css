@@ -1,18 +1,27 @@
+/**
+ * ApplicationTable.module.css
+ * Styles for the ApplicationTable component which displays
+ * a collapsible table of client applications.
+ */
+
+/* Main container with horizontal padding to match page layout */
 .tableContainer {
-  padding: 8px 152px; /* add horizontal padding so items aren't flush to edges */
+  padding: 8px 152px; /* Matches AdminHeader padding for alignment */
 }
 
+/* Header row containing title and collapse/expand button */
 .tableTitleContainer {
   display: flex;
   height: 40px;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-between; /* Title on left, button on right */
   align-items: center;
-  padding: 8px 0px; /* add horizontal padding so items aren't flush to edges */
+  padding: 8px 0px;
 }
 
+/* Section title styling */
 .tableTitle {
-  color: #175892;
+  color: #175892; /* CRED brand secondary blue */
   font: Lato;
   font-size: 24px;
   font-weight: 700;
@@ -20,6 +29,7 @@
   letter-spacing: 0%;
 }
 
+/* Collapse/expand toggle button - indicates clickable area */
 .tableVisibilityButton {
   cursor: pointer;
 }
