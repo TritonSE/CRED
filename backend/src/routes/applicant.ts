@@ -1,12 +1,11 @@
 import express from "express";
-import * as ApplicantController from "src/controllers/applicant";
-import * as ApplicantValidator from "src/validators/applicant";
 
-//GET: get an applicant based on id
-//POST: create applicant
-//PUT: Edit applicant/status
-//DELETE: delete an applicant
+import * as ApplicantController from "../controllers/applicant";
+import * as ApplicantValidator from "../validators/applicant";
 
+/**
+ * Define the routes for the router
+ */
 const router = express.Router();
 
 router.get("/:id", ApplicantController.getApplicant);
