@@ -13,7 +13,6 @@ export const Button = function Button({
   return (
     <button className={styles.button} ref={ref} type="button">
       <span className={styles.label}>{label}</span>
-      <img src="Arrow 1.svg" alt="Forward Arrow" />
     </button>
   );
 };

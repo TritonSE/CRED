@@ -1,30 +1,53 @@
 .mainBox {
-  background-color: lightgray;
-  /* these measurements are from figma */
-  width: 550px;
-  height: 494px;
-  padding: 20px;
+  position: relative;
+  width: 40%;
+  height: 55%;
+  border-radius: 15px;
+
+  opacity: 1;
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+.mainBox::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  border-radius: inherit;
+
+  pointer-events: none;
+}
+
+.mainBox > * {
+  position: relative;
+  z-index: 1; /* keep text/button/image on top */
 }
 
 .imageSpace {
-  /* these measurements are from figma */
-  width: 99px;
-  height: 82px;
-  background-color: white;
-  margin: 3rem 1rem 0;
+  width: 72px;
+  height: 72px;
+  margin: 3rem 2rem 0;
 }
 
 .title {
   /* the styling is from figma */
-  font-size: 48px;
-  font-weight: bold;
-  margin: 2rem 1rem 2rem;
+  font-size: 40px;
+  font-weight: 590;
+  margin: 2rem 2rem 2rem;
+  color: white;
   /* needs font */
 }
 
 .body {
   /* the styling is from figma */
   font-size: 16px;
-  margin: 2rem 1rem 2rem;
+  margin: 2rem 2rem 2rem;
+  color: white;
   /* needs font */
 }
