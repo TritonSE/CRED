@@ -34,11 +34,11 @@ export const RACE_ETHNICITY_OPTIONS = [
 export const STATUS_OPTIONS = ["Pending", "Need to Review", "Reviewed"] as const;
 
 export const AID_TYPES = [
-    "Transitional/Rental Housing Support", 
-    "Rent Subsidies/Onsite support", 
-    "Effective Life skills training", 
-    "Workforce Development/Employment",
-    "Not Sure/Other"
+  "Transitional/Rental Housing Support",
+  "Rent Subsidies/Onsite support",
+  "Effective Life skills training",
+  "Workforce Development/Employment",
+  "Not Sure/Other",
 ] as const;
 
 const applicantSchema = new Schema(
@@ -60,13 +60,13 @@ const applicantSchema = new Schema(
 
     description: { type: String },
 
-    typeOfAid: { 
-      type: [String], 
+    typeOfAid: {
+      type: [String],
       required: true,
-      enum: AID_TYPES 
+      enum: AID_TYPES,
     },
 
-    otherAidDescription: { 
+    otherAidDescription: {
       type: String,
     },
 

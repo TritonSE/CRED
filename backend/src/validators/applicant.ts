@@ -73,14 +73,14 @@ const makeTypeOfAidValidator = () =>
   body("typeOfAid")
     .exists()
     .withMessage("typeOfAid is required")
-    .isArray({ min: 1 }) 
+    .isArray({ min: 1 })
     .withMessage("You must select at least one type of aid")
     .custom((arr: string[]) => {
-      return arr.every((item) => AID_TYPES.includes(item as typeof AID_TYPES[number]));
+      return arr.every((item) => AID_TYPES.includes(item as (typeof AID_TYPES)[number]));
     })
     .withMessage(`typeOfAid must be selected from: ${AID_TYPES.join(", ")}`);
 
-const makeOtherAidDescriptionValidator = () => 
+const makeOtherAidDescriptionValidator = () =>
   body("otherAidDescription")
     .if((value, { req }) => {
       const selectedAids = (req.body as Record<string, string[]>).typeOfAid ?? [];

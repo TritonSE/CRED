@@ -2,8 +2,9 @@
 
 import { validationResult } from "express-validator";
 import createHttpError from "http-errors";
-import ApplicantModel from "src/models/applicant";
-import validationErrorParser from "src/util/validationErrorParser";
+
+import ApplicantModel from "../models/applicant";
+import validationErrorParser from "../util/validationErrorParser";
 
 import type { RequestHandler } from "express";
 
