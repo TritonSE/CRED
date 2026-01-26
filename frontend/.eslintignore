@@ -7,3 +7,4 @@ public/
 next.config.js
 vite.config.ts
 next-env.d.ts
+**/*.css

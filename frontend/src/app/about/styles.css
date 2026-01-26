@@ -1,0 +1,129 @@
+.about-page {
+  min-height: 0;
+}
+
+.about-top-section {
+  background-color: #e5e7eb;
+  padding: 4rem 4rem 5rem 4rem;
+}
+
+.about-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .about-title {
+    font-size: 3rem;
+  }
+}
+
+.about-intro {
+  color: #000000;
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  padding: 0 1rem;
+}
+
+.about-vision-section {
+  background-color: #ffffff;
+  padding: 4rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.about-vision-wrapper {
+  padding-right: 2rem;
+}
+
+@media (min-width: 768px) {
+  .about-vision-wrapper {
+    padding-right: 3rem;
+  }
+}
+
+.about-vision-heading {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.about-vision-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.about-vision-content p {
+  color: #000000;
+}
+
+.about-image-placeholder {
+  background-color: #e5e7eb;
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.directorBoxContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 4rem 1rem;
+}
+
+.startJourneyContainer {
+  display: flex;
+  justify-content: space-between;
+  background-color: lightgray;
+  margin: 0;
+}
+
+.textContainer {
+  width: 50%;
+  padding: 6rem;
+}
+
+.applyButton {
+  background-color: gray;
+  border: none;
+  padding: 2rem 5rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 10rem 7rem;
+}
