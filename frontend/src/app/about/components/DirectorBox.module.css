@@ -1,7 +1,7 @@
 .mainBox {
   position: relative;
-  width: 40%;
-  height: 55%;
+  width: 38%;
+  height: 100%;
   border-radius: 15px;
 
   opacity: 1;
@@ -32,14 +32,14 @@
 .imageSpace {
   width: 72px;
   height: 72px;
-  margin: 3rem 2rem 0;
+  margin: 3rem 3rem 0;
 }
 
 .title {
   /* the styling is from figma */
   font-size: 40px;
   font-weight: 590;
-  margin: 2rem 2rem 2rem;
+  margin: 1rem 3rem 2rem;
   color: white;
   /* needs font */
 }
@@ -47,7 +47,7 @@
 .body {
   /* the styling is from figma */
   font-size: 16px;
-  margin: 2rem 2rem 2rem;
+  margin: 1rem 3rem 2rem;
   color: white;
   /* needs font */
 }
