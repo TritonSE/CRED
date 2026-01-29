@@ -12,10 +12,10 @@ export default function AboutUsPage() {
         <div className="about-page">
           <div className="about-top-section">
             <div className="about-container">
-              <h1 className="about-title">About CRED</h1>
+              <h1 className="about-title">We Are CRED</h1>
               <p className="about-intro">
-                <strong>Community Realignment Education Development (CRED)</strong> was founded in
-                2018 by DeQuan Patterson, a Formerly Incarcerated Individual.
+                CRED provides individualized services for system-impacted individuals, low-income
+                families, and transitional age youth seeking stability and self-sufficiency.
               </p>
             </div>
           </div>
@@ -39,7 +39,9 @@ export default function AboutUsPage() {
                   </div>
                 </div>
 
-                <div className="about-image-placeholder">{/* Insert Image */}</div>
+                <div className="about-image-placeholder">
+                  <img src="/AboutPic1.png" alt="Description" />
+                </div>
               </div>
             </div>
           </div>

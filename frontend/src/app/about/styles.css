@@ -3,12 +3,23 @@
 }
 
 .about-top-section {
-  background-color: #e5e7eb;
-  padding: 4rem 4rem 5rem 4rem;
+  position: relative;
+  height: 300px;
+  display: flex;
+  align-items: center;
+
+  background: linear-gradient(to right, #004377, rgba(30, 115, 190, 0.8)), url("/BannerPic.jpg");
+
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
+
+  padding: 0rem 2rem;
+  overflow: hidden;
 }
 
 .about-container {
-  max-width: 1280px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 1rem;
   display: flex;
@@ -19,7 +30,7 @@
 .about-title {
   font-size: 2.25rem;
   font-weight: 700;
-  color: #000000;
+  color: #ffffff;
   text-align: center;
   margin-bottom: 2rem;
   margin-top: 0;
@@ -32,9 +43,8 @@
 }
 
 .about-intro {
-  color: #000000;
+  color: #ffffff;
   text-align: center;
-  max-width: 40rem;
   margin: 0 auto;
   font-size: 1.125rem;
   line-height: 1.6;
@@ -43,20 +53,19 @@
 
 .about-vision-section {
   background-color: #ffffff;
-  padding: 4rem;
+  padding: 6rem 2rem;
 }
 
 .about-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
-  align-items: start;
+  gap: 4rem;
+  align-items: center;
 }
 
 @media (min-width: 768px) {
   .about-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1.1fr 0.9fr;
   }
 }
 
@@ -71,9 +80,9 @@
 }
 
 .about-vision-heading {
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #000000;
+  color: #004377;
   margin-bottom: 1.5rem;
 }
 
@@ -87,14 +96,12 @@
   color: #000000;
 }
 
-.about-image-placeholder {
-  background-color: #e5e7eb;
-  width: 100%;
-  min-height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+.about-image-placeholder img {
+  width: 110%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .directorBoxContainer {
