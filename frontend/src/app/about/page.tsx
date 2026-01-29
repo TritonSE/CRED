@@ -51,14 +51,14 @@ export default function AboutUsPage() {
           title="What We Do"
           textBody="We empower individuals to thrive by offering clients financial literacy training, comprehensive re-entry services, job opportunities, and a path to entrepreneurship."
           buttonlabel="Our Services"
-          imageUrl="/Map_Marker.svg"
+          // imageUrl="/Map_Marker.svg"
           backgroundUrl="/What_We_Do_Background.jpg"
         />
         <DirectorBox
           title="Our Goal"
           textBody="CRED's main goal is to provide case management support along with interpersonal skill training support so our clients can thrive as self-sufficient individuals."
           buttonlabel="Support Us"
-          imageUrl="/folder_people.svg"
+          // imageUrl="/folder_people.svg"
           backgroundUrl="/Our_Goal_Background.jpg"
         />
       </div>

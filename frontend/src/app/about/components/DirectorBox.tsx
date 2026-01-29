@@ -7,7 +7,7 @@ export type DirectorBoxProps = {
   title: string;
   textBody: string;
   buttonlabel: string;
-  imageUrl: string;
+  // imageUrl: string;
   backgroundUrl: string;
 };
 
@@ -15,12 +15,12 @@ export const DirectorBox: React.FC<DirectorBoxProps> = ({
   title,
   textBody,
   buttonlabel,
-  imageUrl,
+  // imageUrl,
   backgroundUrl,
 }) => {
   return (
     <div className={styles.mainBox} style={{ backgroundImage: `url(${backgroundUrl})` }}>
-      <img src={imageUrl} className={styles.imageSpace} />
+      {/* <img src={imageUrl} className={styles.imageSpace} alt="Director Box Image"/> */}
 
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.body}>{textBody}</p>
