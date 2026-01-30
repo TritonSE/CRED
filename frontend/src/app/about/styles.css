@@ -54,13 +54,15 @@
 .about-vision-section {
   background-color: #ffffff;
   padding: 6rem 2rem;
+  /* border: 2px solid black; */
 }
 
 .about-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 4rem;
-  align-items: center;
+  display: flex;
+  gap: 3rem;
+  width: 90%;
+  margin: 0 auto;
+  /* border: 2px solid black; */
 }
 
 @media (min-width: 768px) {
@@ -71,6 +73,8 @@
 
 .about-vision-wrapper {
   padding-right: 2rem;
+  /* border: 2px solid black; */
+  width: 50%;
 }
 
 @media (min-width: 768px) {
@@ -94,12 +98,11 @@
 
 .about-vision-content p {
   color: #000000;
+  line-height: 150%;
 }
 
 .about-image-placeholder img {
-  width: 110%;
-  height: auto;
-  max-height: 420px;
+  height: 100%;
   object-fit: cover;
   border-radius: 12px;
 }

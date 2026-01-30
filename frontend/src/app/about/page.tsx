@@ -21,27 +21,25 @@ export default function AboutUsPage() {
           </div>
 
           <div className="about-vision-section">
-            <div className="about-container">
-              <div className="about-grid">
-                <div className="about-vision-wrapper">
-                  <h2 className="about-vision-heading">Our Vision</h2>
-                  <div className="about-vision-content">
-                    <p>
-                      We seek to address systemic issues that impact our communities, including
-                      racial inequality, economic disparities, and barriers to higher education and
-                      employment opportunities.
-                    </p>
-                    <p>
-                      Through education, interpersonal development of life skills and lived
-                      experience mentorship, CRED&apos;s empowerment and healing centered engagement
-                      ensures clients success.
-                    </p>
-                  </div>
+            <div className="about-grid">
+              <div className="about-vision-wrapper">
+                <h2 className="about-vision-heading">Our Vision</h2>
+                <div className="about-vision-content">
+                  <p>
+                    We seek to address systemic issues that impact our communities, including racial
+                    inequality, economic disparities, and barriers to higher education and
+                    employment opportunities.
+                  </p>
+                  <p>
+                    Through education, interpersonal development of life skills and lived experience
+                    mentorship, CRED&apos;s empowerment and healing centered engagement ensures
+                    clients success.
+                  </p>
                 </div>
+              </div>
 
-                <div className="about-image-placeholder">
-                  <img src="/AboutPic1.png" alt="Description" />
-                </div>
+              <div className="about-image-placeholder">
+                <img src="/AboutPic1.png" alt="Description" />
               </div>
             </div>
           </div>
@@ -53,7 +51,7 @@ export default function AboutUsPage() {
             textBody="We empower individuals to thrive by offering clients financial literacy training, comprehensive re-entry services, job opportunities, and a path to entrepreneurship."
             buttonlabel="Our Services"
             imageUrl="/Map_Marker.svg"
-            backgroundUrl="/Our_Goal_Background.jpg"
+            backgroundUrl="/What_We_Do_Background.jpg"
           />
           <DirectorBox
             title="Our Goal"

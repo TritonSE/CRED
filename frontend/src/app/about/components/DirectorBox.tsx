@@ -2,12 +2,13 @@ import React from "react";
 
 import { Button } from "./Button";
 import styles from "./DirectorBox.module.css";
+import Image from "next/image";
 
 export type DirectorBoxProps = {
   title: string;
   textBody: string;
   buttonlabel: string;
-  // imageUrl: string;
+  imageUrl: string;
   backgroundUrl: string;
 };
 
@@ -15,12 +16,18 @@ export const DirectorBox: React.FC<DirectorBoxProps> = ({
   title,
   textBody,
   buttonlabel,
-  // imageUrl,
+  imageUrl,
   backgroundUrl,
 }) => {
   return (
     <div className={styles.mainBox} style={{ backgroundImage: `url(${backgroundUrl})` }}>
-      {/* <img src={imageUrl} className={styles.imageSpace} alt="Director Box Image"/> */}
+      <Image
+        src={imageUrl}
+        alt="Director Box Image"
+        width={60}
+        height={60}
+        className={styles.imageSpace}
+      />
 
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.body}>{textBody}</p>
