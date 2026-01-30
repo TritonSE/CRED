@@ -1,8 +1,8 @@
+import Image from "next/image";
 import React from "react";
 
 import { Button } from "./Button";
 import styles from "./DirectorBox.module.css";
-import Image from "next/image";
 
 export type DirectorBoxProps = {
   title: string;
