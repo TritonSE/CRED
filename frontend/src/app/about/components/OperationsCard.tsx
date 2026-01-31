@@ -1,21 +1,23 @@
-// import styles from "./OperationsCard.module.css";
+import Image from "next/image";
 import React from "react";
 
+import styles from "./OperationsCard.module.css";
+
 export type OperationsCardProps = {
-  num: number;
+  iconURL: string;
   title: string;
   textBody: string;
 };
 
-export const OperationsCard: React.FC<OperationsCardProps> = ({ num, title, textBody }) => {
+export const OperationsCard: React.FC<OperationsCardProps> = ({ iconURL, title, textBody }) => {
   return (
-    <div className="cardContainer">
-      <div className="cardNumberCircle">
-        <h3>{num}</h3>
+    <div className={styles.cardContainer}>
+      <div className={styles.cardNumberCircle}>
+        <Image src={iconURL} alt="Card Icon" fill className={styles.cardIcon} />
       </div>
-      <h2 className="cardTitle">{title}</h2>
+      <h2 className={styles.cardTitle}>{title}</h2>
 
-      <p className="cardText">{textBody}</p>
+      <p className={styles.cardText}>{textBody}</p>
     </div>
   );
 };

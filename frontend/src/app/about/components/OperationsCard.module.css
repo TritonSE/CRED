@@ -6,4 +6,20 @@
   padding: 20px;
   border-radius: 10px;
   background-color: #004377;
+  width: 25%;
+}
+
+.cardNumberCircle {
+  position: relative;
+  margin-bottom: 15px;
+  width: 133px;
+  height: 133px;
+  border-radius: 50%;
+  background: white;
+}
+
+.cardIcon {
+  object-fit: contain;
+  width: 60%;
+  height: 60%;
 }

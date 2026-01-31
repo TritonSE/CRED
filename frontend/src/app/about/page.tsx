@@ -4,6 +4,8 @@ import { ThemeProvider } from "@tritonse/tse-constellation";
 import Image from "next/image";
 
 import { DirectorBox } from "./components/DirectorBox";
+import { OperationsCard } from "./components/OperationsCard";
+
 import "./styles.css";
 
 export default function AboutUsPage() {
@@ -23,7 +25,7 @@ export default function AboutUsPage() {
         <div className="about-vision-section">
           <div className="about-grid">
             <div className="about-vision-wrapper">
-              <h2 className="about-vision-heading">Our Vision</h2>
+              <h2 className="about-heading">Our Vision</h2>
               <div className="about-vision-content">
                 <p>
                   We seek to address systemic issues that impact our communities, including racial
@@ -61,6 +63,36 @@ export default function AboutUsPage() {
             imageUrl="/folder_people.svg"
             backgroundUrl="/Our_Goal_Background.jpg"
           />
+        </div>
+      </div>
+
+      <div className="how-we-operate-section">
+        <div className="operate-wrapper">
+          <h2 className="about-heading">How We Operate</h2>
+          <p className="about-operate-content">
+            CRED is unique in being a lived experience expert-based organization serving minorities
+            as our main clientele to bridge the barrier gap in services. We support survivors of
+            systemic injustice and misplacement due to recidivism, homelessness, domestic violence,
+            gang violence, and human trafficking.
+          </p>
+
+          <div className="operateCards">
+            <OperationsCard
+              iconURL="/apply_icon.svg"
+              title="You Apply to CRED"
+              textBody="Review CRED's programs and see which type of support best fits your current situation. Then, fill out the application form."
+            />
+            <OperationsCard
+              iconURL="/assess_needs_icon.svg"
+              title="We Assess Your Needs"
+              textBody="After you submit, CRED's team will review your application and follow up with next steps. We'll contact you if we need more information."
+            />
+            <OperationsCard
+              iconURL="/client_icon.svg"
+              title="You Become a Client!"
+              textBody="Our clients have moved on to find stability and build better lives through entrepreneurship and life skill development."
+            />
+          </div>
         </div>
       </div>
     </ThemeProvider>

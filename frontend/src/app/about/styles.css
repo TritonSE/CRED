@@ -51,10 +51,11 @@
   padding: 0 1rem;
 }
 
+/* Vision Section */
+
 .about-vision-section {
   background-color: #ffffff;
   padding: 6rem 2rem;
-  /* border: 2px solid black; */
 }
 
 .about-grid {
@@ -73,7 +74,6 @@
 
 .about-vision-wrapper {
   padding-right: 2rem;
-  /* border: 2px solid black; */
   width: 50%;
 }
 
@@ -83,7 +83,8 @@
   }
 }
 
-.about-vision-heading {
+/* Applicable to all sections text */
+.about-heading {
   font-size: 2rem;
   font-weight: 700;
   color: #004377;
@@ -108,6 +109,7 @@
 }
 
 .directorBoxContainer {
+  background-color: #ffffff;
   padding: 7rem 0;
 }
 
@@ -117,4 +119,28 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+}
+
+.how-we-operate-section {
+  background-color: #ffffff;
+  padding: 6rem 2rem;
+}
+
+.operate-wrapper {
+  gap: 3rem;
+  width: 87%;
+  margin: 0 auto;
+}
+
+.about-operate-content {
+  color: #000000;
+  line-height: 150%;
+  margin-bottom: 3rem;
+}
+
+.operateCards {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 0 auto;
 }
