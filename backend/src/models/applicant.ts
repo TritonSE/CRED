@@ -1,21 +1,4 @@
-//SCHEMA FOR AN APPLICANT
-
-/**
- *
- * First name: string required
- * Date of birth: Date, required
- * Race/Ethnicity: String, required
- * Gender: string, required
- * CDCR: string
- *
- * Description: string
- * type of aid: list of strings?, requried
- *
- * status: string, required
- * action??: string
- */
-
-import { Schema, model, models } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 
 import type { InferSchemaType } from "mongoose";
 
@@ -86,4 +69,5 @@ const applicantSchema = new Schema(
 
 type Applicant = InferSchemaType<typeof applicantSchema>;
 
-export default models.Applicant || model<Applicant>("Applicant", applicantSchema);
+export default (models.Applicant as Model<Applicant>) ||
+  model<Applicant>("Applicant", applicantSchema);

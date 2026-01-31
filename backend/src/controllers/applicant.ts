@@ -1,5 +1,3 @@
-//DRAFT JUST TO REMOVE ERRORS IN ROUTES
-
 import { validationResult } from "express-validator";
 import createHttpError from "http-errors";
 
@@ -25,36 +23,79 @@ export const getApplicant: RequestHandler = async (req, res, next) => {
 };
 
 type CreateApplicantBody = {
-  //Replace with new model
-  title: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: Date;
+
+  raceEthnicity: string;
+
+  gender: string;
+
+  cdcrNumber?: string;
+
   description?: string;
-  isChecked?: boolean;
-  assignee?: string;
+
+  typeOfAid: [string];
+
+  otherAidDescription?: string;
+  status: string;
+
+  actionPlan?: string;
 };
 
 type UpdateApplicantBody = {
-  //Replace with new model
-  title: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: Date;
+
+  raceEthnicity: string;
+
+  gender: string;
+
+  cdcrNumber?: string;
+
   description?: string;
-  isChecked?: boolean;
-  assignee?: string;
+
+  typeOfAid: [string];
+
+  otherAidDescription?: string;
+  status: string;
+
+  actionPlan?: string;
 };
 
 export const createApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
   // Extract assignee along with other fields
-  const { title, description, isChecked, assignee } = req.body as CreateApplicantBody;
+  const {
+    firstName,
+    lastName,
+    dateOfBirth,
+    raceEthnicity,
+    gender,
+    cdcrNumber,
+    description,
+    typeOfAid,
+    otherAidDescription,
+    status,
+    actionPlan,
+  } = req.body as CreateApplicantBody;
 
   try {
     validationErrorParser(errors);
 
     const applicant = await ApplicantModel.create({
-      //Replace with new model
-      title,
+      firstName,
+      lastName,
+      dateOfBirth,
+      raceEthnicity,
+      gender,
+      cdcrNumber,
       description,
-      isChecked,
-      assignee, // Save the assignee
-      dateCreated: Date.now(),
+      typeOfAid,
+      otherAidDescription,
+      status,
+      actionPlan,
     });
 
     res.status(201).json(applicant);
@@ -78,7 +119,20 @@ export const removeApplicant: RequestHandler = async (req, res, next) => {
 export const updateApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
   // Extract ALL fields: title, description, assignee, isChecked
-  const { title, description, assignee, isChecked, _id } = req.body as UpdateApplicantBody & {
+  const {
+    firstName,
+    lastName,
+    dateOfBirth,
+    raceEthnicity,
+    gender,
+    cdcrNumber,
+    description,
+    typeOfAid,
+    otherAidDescription,
+    status,
+    actionPlan,
+    _id,
+  } = req.body as UpdateApplicantBody & {
     _id: string;
   };
   const { id } = req.params;
@@ -94,10 +148,17 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
     const applicant = await ApplicantModel.findByIdAndUpdate(
       id,
       {
-        title,
+        firstName,
+        lastName,
+        dateOfBirth,
+        raceEthnicity,
+        gender,
+        cdcrNumber,
         description,
-        assignee,
-        isChecked,
+        typeOfAid,
+        otherAidDescription,
+        status,
+        actionPlan,
       },
       { new: true }, // Optional: returns the modified document
     );
