@@ -258,29 +258,45 @@ export function ApplicationTable({
                 ))}
               </thead>
               <tbody>
-                {table.getRowModel().rows.map((row) => (
-                  <React.Fragment key={row.id}>
-                    <tr
-                      className={`${styles.tableRow} ${expandedRows[row.id] ? styles.expandedRow : ""}`}
-                      onClick={() => {
-                        toggleRowExpanded(row.id);
-                      }}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <td key={cell.id} className={styles.tableCell}>
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </td>
-                      ))}
-                    </tr>
-                    {expandedRows[row.id] && (
-                      <tr className={styles.expandedDetailRow}>
-                        <td colSpan={columns.length} className={styles.expandedDetailCell}>
-                          <ExpandedRowContent row={row.original} />
-                        </td>
-                      </tr>
-                    )}
-                  </React.Fragment>
-                ))}
+                {(() => {
+                  let visibleRowIndex = 0;
+                  return table.getRowModel().rows.map((row) => {
+                    const isExpanded = expandedRows[row.id];
+                    let rowClass = styles.tableRow;
+                    rowClass += " " + (visibleRowIndex % 2 === 0 ? styles.even : styles.odd);
+                    visibleRowIndex++;
+                    return (
+                      <React.Fragment key={row.id}>
+                        <tr
+                          className={rowClass}
+                          onClick={() => {
+                            toggleRowExpanded(row.id);
+                          }}
+                        >
+                          {row.getVisibleCells().map((cell) => (
+                            <td key={cell.id} className={styles.tableCell}>
+                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                            </td>
+                          ))}
+                        </tr>
+                        {isExpanded &&
+                          (() => {
+                            // Expanded row should also increment the index for striping
+                            const expandedClass =
+                              visibleRowIndex % 2 === 0 ? styles.even : styles.odd;
+                            visibleRowIndex++;
+                            return (
+                              <tr className={styles.expandedDetailRow + " " + expandedClass}>
+                                <td colSpan={columns.length} className={styles.expandedDetailCell}>
+                                  <ExpandedRowContent row={row.original} />
+                                </td>
+                              </tr>
+                            );
+                          })()}
+                      </React.Fragment>
+                    );
+                  });
+                })()}
               </tbody>
             </table>
           </div>

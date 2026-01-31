@@ -1,0 +1,5 @@
+.mainContent {
+  padding-top: 5rem;
+  width: 84%; /* TODO: figure out a better way to do this and line up the table */
+  margin: 0 auto;
+}

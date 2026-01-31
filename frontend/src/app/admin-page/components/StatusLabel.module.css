@@ -19,7 +19,7 @@
 .needToReview {
   width: 128px;
   color: #561818; /* Dark red text */
-  background-color: #fff3f3; /* Light pink background */
+  background-color: #fcb3ad; /* Light pink background */
   font-size: 16px;
   font-style: normal;
   font: Lato;
@@ -39,7 +39,7 @@
 .reviewed {
   width: 85px;
   color: #02542d; /* Dark green text */
-  background-color: #ebf9f1; /* Light green background */
+  background-color: #aff4c6; /* Light green background */
   font-size: 16px;
   font-style: normal;
   font: Lato;

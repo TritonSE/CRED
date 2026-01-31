@@ -5,6 +5,7 @@
 
 import { ThemeProvider } from "@tritonse/tse-constellation";
 
+import styles from "./adminPage.module.css";
 import { AdminHeader } from "./components/AdminHeader";
 import { ApplicationTable } from "./components/ApplicationTable";
 
@@ -111,9 +112,11 @@ const comData: ApplicationRowData[] = [
 export default function Admin() {
   return (
     <ThemeProvider>
-      <AdminHeader name="Dequan" />
-      <ApplicationTable title="New Applications" data={ipData} totalApplications={3} />
-      <ApplicationTable title="Completed Applications" data={comData} totalApplications={50} />
+      <main className={styles.mainContent}>
+        <AdminHeader name="Dequan" />
+        <ApplicationTable title="New Applications" data={ipData} totalApplications={3} />
+        <ApplicationTable title="Completed Applications" data={comData} totalApplications={50} />
+      </main>
     </ThemeProvider>
   );
 }
