@@ -284,7 +284,7 @@ export function ApplicationTable({
                             // Expanded row should also increment the index for striping
                             const expandedClass =
                               visibleRowIndex % 2 === 0 ? styles.even : styles.odd;
-                            visibleRowIndex++;
+                            // visibleRowIndex++;
                             return (
                               <tr className={styles.expandedDetailRow + " " + expandedClass}>
                                 <td colSpan={columns.length} className={styles.expandedDetailCell}>
