@@ -95,7 +95,7 @@ function SortIndicator({ isSorted }: { isSorted: false | "asc" | "desc" }) {
 export function ApplicationTable({
   title,
   data,
-  pageSize = 10,
+  pageSize = 6,
   totalApplications,
 }: ApplicationTableProps) {
   // State to track whether the table content is visible
@@ -284,7 +284,7 @@ export function ApplicationTable({
                             // Expanded row should also increment the index for striping
                             const expandedClass =
                               visibleRowIndex % 2 === 0 ? styles.even : styles.odd;
-                            // visibleRowIndex++;
+                            // visibleRowIndex++; // So that it does not change the alternating colors
                             return (
                               <tr className={styles.expandedDetailRow + " " + expandedClass}>
                                 <td colSpan={columns.length} className={styles.expandedDetailCell}>

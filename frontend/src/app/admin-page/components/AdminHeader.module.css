@@ -11,6 +11,7 @@
   flex-direction: row;
   justify-content: space-between; /* Pushes header and search to opposite ends */
   align-items: center;
+  padding-bottom: 2rem;
   /* padding: 8px 152px; /* Horizontal padding to match page layout margins */
 }
 

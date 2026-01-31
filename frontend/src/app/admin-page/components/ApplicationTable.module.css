@@ -75,15 +75,16 @@
   font-size: 14px;
   white-space: nowrap;
   border: none;
+  position: relative;
 }
 
-.tableHeader:nth-child(n):after {
+.tableHeader:not(:first-child):after {
   content: "";
-  background: black;
+  background: white;
   position: absolute;
-  bottom: 0;
+  bottom: 7%;
   left: 0;
-  height: 50%;
+  height: 86%;
   width: 1px;
 }
 
@@ -209,7 +210,7 @@
 
 .expandedDetailCell {
   padding: 0 !important;
-  border-bottom: 2px solid #175892;
+  /* border-bottom: 2px solid #175892; */
 }
 
 .expandedContent {
@@ -218,14 +219,35 @@
   gap: 24px;
   padding: 24px;
   background-color: #fff;
-  border: 1px solid #e5e7eb;
-  border-top: none;
+  /* border: 1px solid #e5e7eb; */
+  position: relative;
+}
+
+.expandedContent::before {
+  content: "";
+  background: #b4b4b4;
+  position: absolute;
+  left: 2%;
+  bottom: 98%;
+  width: 96%;
+  height: 1px;
+}
+
+.expandedSection:not(:last-child):after {
+  content: "";
+  background: #b4b4b4;
+  position: absolute;
+  right: -0.7rem;
+  bottom: 0%;
+  width: 1px;
+  height: 100%;
 }
 
 .expandedSection {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  position: relative;
 }
 
 .sectionTitle {
