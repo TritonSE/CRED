@@ -2,35 +2,46 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 20px;
   border-radius: 15px;
   background-color: #004377;
   width: 25%;
   height: 19rem;
+
+  transition:
+    height 0.35s ease,
+    transform 0.35s ease;
 }
 
 .cardContent {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  /* border: 2px solid white; */
+  justify-content: flex-start;
   width: 50%;
-  margin-top: 8rem;
+  margin-top: 3rem;
+
+  transition: transform 0.35s ease;
 }
 
 .cardNumberCircle {
   position: relative;
-  margin-bottom: 15px;
   width: 7rem;
   height: 7rem;
   border-radius: 50%;
   background: white;
+  margin: 0.5rem 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease;
+
+  will-change: transform;
 }
 
 .iconWrapper {
@@ -42,25 +53,51 @@
 .cardTitle {
   color: white;
   font-size: 1.2rem;
-  margin-bottom: 10px;
   text-align: center;
+  margin: 1rem;
+  line-height: 150%;
+  margin: 0;
+
+  transition: transform 0.35s ease;
 }
 
 .cardText {
-  opacity: 0;
-  transition: opacity 0.35s ease;
   color: white;
   text-align: center;
   line-height: 150%;
+  width: 80%;
+  font-size: 0.8rem;
+  transform: translateY(0rem);
+
+  opacity: 0;
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s ease;
 }
 
 .cardContainer:hover {
-  height: 22rem;
+  height: 20rem;
+}
+
+.cardContainer:hover .cardContent {
+  width: 50%;
+  transform: translateY(-1rem);
+}
+
+.cardContainer:hover .cardNumberCircle {
+  width: 6.8rem;
+  height: 6.8rem;
+  border-radius: 50%;
+  background: #ffb341;
+
+  transform: translateY(-1.5rem) scale(0.93);
+}
+
+.cardContainer:hover .cardTitle {
+  transform: translateY(-1rem);
 }
 
 .cardContainer:hover .cardText {
   opacity: 1;
+  transform: translateY(-2rem);
 }
-
-/* must do the stretch animation on hover */
-/* must do fade in and out for text on hover */
