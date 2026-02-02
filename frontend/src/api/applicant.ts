@@ -116,7 +116,7 @@ export async function createApplicant(
   applicant: CreateApplicantRequest,
 ): Promise<APIResult<Applicant>> {
   try {
-    const response = await post("/api/applicant", applicant);
+    const response = await post("/applicant", applicant);
     const json = (await response.json()) as ApplicantJSON;
     return { success: true, data: parseApplicant(json) };
   } catch (error) {
@@ -126,7 +126,7 @@ export async function createApplicant(
 
 export async function getApplicant(id: string): Promise<APIResult<Applicant>> {
   try {
-    const response = await get(`/api/applicant/${id}`);
+    const response = await get(`/applicant/${id}`);
     const json = (await response.json()) as ApplicantJSON;
     return { success: true, data: parseApplicant(json) };
   } catch (error) {
@@ -136,7 +136,7 @@ export async function getApplicant(id: string): Promise<APIResult<Applicant>> {
 
 export async function getAllApplicants(): Promise<APIResult<Applicant[]>> {
   try {
-    const response = await get(`/api/applicant`);
+    const response = await get(`/applicant`);
 
     const json = (await response.json()) as ApplicantJSON[];
 
@@ -152,7 +152,7 @@ export async function updateApplicant(
   applicant: UpdateApplicantRequest,
 ): Promise<APIResult<Applicant>> {
   try {
-    const response = await put(`/api/applicant/${applicant._id}`, applicant);
+    const response = await put(`/applicant/${applicant._id}`, applicant);
     const json = (await response.json()) as ApplicantJSON;
     return { success: true, data: parseApplicant(json) };
   } catch (error) {
