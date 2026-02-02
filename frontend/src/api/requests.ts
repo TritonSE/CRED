@@ -1,11 +1,18 @@
+/**
+ * Based on the TSE Onboarding API client implementation by benjaminJohnson2204:
+ * https://github.com/TritonSE/onboarding/blob/main/frontend/src/api/requests.ts
+ */
+
+/**
+ * A custom type defining which HTTP methods we will handle in this file
+ */
 type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api";
 
 /**
  * A wrapper around the built-in `fetch()` function that abstracts away some of
  * the low-level details so we can focus on the important parts of each request.
- * See https://developer.mozilla.org/en-US/docs/Web/API/fetch for information
- * about the Fetch API.
  *
  * @param method The HTTP method to use
  * @param url The URL to request
@@ -71,7 +78,7 @@ async function assertOk(response: Response): Promise<void> {
  */
 export async function get(url: string, headers: Record<string, string> = {}): Promise<Response> {
   // GET requests do not have a body
-  const response = await fetchRequest("GET", API_BASE_URL + url, undefined, headers);
+  const response = await fetchRequest("GET", `${API_BASE_URL}${url}`, undefined, headers);
   await assertOk(response);
   return response;
 }
@@ -89,7 +96,7 @@ export async function post(
   body: unknown,
   headers: Record<string, string> = {},
 ): Promise<Response> {
-  const response = await fetchRequest("POST", API_BASE_URL + url, body, headers);
+  const response = await fetchRequest("POST", `${API_BASE_URL}${url}`, body, headers);
   await assertOk(response);
   return response;
 }
@@ -107,7 +114,7 @@ export async function put(
   body: unknown,
   headers: Record<string, string> = {},
 ): Promise<Response> {
-  const response = await fetchRequest("PUT", API_BASE_URL + url, body, headers);
+  const response = await fetchRequest("PUT", `${API_BASE_URL}${url}`, body, headers);
   await assertOk(response);
   return response;
 }
@@ -125,7 +132,7 @@ export async function patch(
   body: unknown,
   headers: Record<string, string> = {},
 ): Promise<Response> {
-  const response = await fetchRequest("PATCH", API_BASE_URL + url, body, headers);
+  const response = await fetchRequest("PATCH", `${API_BASE_URL}${url}`, body, headers);
   await assertOk(response);
   return response;
 }
@@ -137,44 +144,29 @@ export async function patch(
  * @param headers The headers of the request (optional)
  * @returns The Response object returned by `fetch()`
  */
-export async function httpDelete(
+export async function del(
   url: string,
   headers: Record<string, string> = {},
+  body?: unknown, //  ← new
 ): Promise<Response> {
-  const response = await fetchRequest("DELETE", API_BASE_URL + url, undefined, headers);
+  const response = await fetchRequest(
+    "DELETE",
+    `${API_BASE_URL}${url}`,
+    body, //  ← pass through
+    headers,
+  );
   await assertOk(response);
   return response;
 }
 
 export type APIData<T> = { success: true; data: T };
 export type APIError = { success: false; error: string };
-/**
- * Utility type for the result of an API request. API client functions should
- * always return an object of this type (without throwing an exception if
- * something goes wrong). This allows users of the functions to perform easier
- * error checking without excessive try-catch statements, making use of
- * TypeScript's type narrowing feature. Specifically, by checking whether the
- * `success` field is true or false, you'll know whether you can access the
- * `data` field with the actual API response or the `error` field with an error
- * message.
- *
- * For example, assume we have some API function with the type definition
- * `doSomeRequest: (parameters: SomeParameters) => Promise<APIResult<SomeData>>`.
- * Then we could use it in a frontend component as follows:
- * ```
- * doSomeRequest(parameters).then((result: APIResult<SomeData>) => {
- *   if (result.success) {
- *     console.log(result.data); // do something with the data, which is of type SomeData
- *   } else {
- *     console.error(result.error); // do something to inform the user of the error
- *   }
- * })
- * ```
- */
 export type APIResult<T> = APIData<T> | APIError;
 
 /**
  * Helper function for API client functions to handle errors consistently.
+ * Recommended usage is in a `catch` block--see `createTask` in `src/api/tasks`
+ * for an example.
  *
  * @param error An error thrown by a lower-level API function
  * @returns An `APIError` object with a message from the given error
