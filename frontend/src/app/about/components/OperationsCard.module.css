@@ -4,22 +4,63 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #004377;
   width: 25%;
+  height: 19rem;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: 2px solid white; */
+  width: 50%;
+  margin-top: 8rem;
 }
 
 .cardNumberCircle {
   position: relative;
   margin-bottom: 15px;
-  width: 133px;
-  height: 133px;
+  width: 7rem;
+  height: 7rem;
   border-radius: 50%;
   background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cardIcon {
-  object-fit: contain;
-  width: 60%;
-  height: 60%;
+.iconWrapper {
+  position: relative;
+  width: 55%;
+  height: 55%;
 }
+
+.cardTitle {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.cardText {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  color: white;
+  text-align: center;
+  line-height: 150%;
+}
+
+.cardContainer:hover {
+  height: 22rem;
+}
+
+.cardContainer:hover .cardText {
+  opacity: 1;
+}
+
+/* must do the stretch animation on hover */
+/* must do fade in and out for text on hover */
