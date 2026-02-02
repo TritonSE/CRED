@@ -8,6 +8,8 @@ import * as ApplicantValidator from "../validators/applicant";
  */
 const router = express.Router();
 
+router.get("/", ApplicantController.getAllApplicants);
+
 router.get("/:id", ApplicantController.getApplicant);
 router.post("/", ApplicantValidator.createApplicant, ApplicantController.createApplicant);
 router.put("/:id", ApplicantValidator.updateApplicant, ApplicantController.updateApplicant);

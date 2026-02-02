@@ -3,11 +3,7 @@ import cors from "cors";
 import express from "express";
 import { isHttpError } from "http-errors";
 
-//Change these when we get new routes
-
-// import taskRoutes from "src/routes/task";
-// import tasksRoutes from "src/routes/tasks";
-// import userRoutes from "src/routes/user";
+import applicantRoutes from "../src/routes/applicant";
 
 import type { NextFunction, Request, Response } from "express";
 
@@ -22,11 +18,7 @@ app.use(
   }),
 );
 
-//CHANGE THESE WHEN WE GET ROUTES
-
-// app.use("/api/task", taskRoutes);
-// app.use("/api/tasks", tasksRoutes);
-// app.use("/api/user", userRoutes);
+app.use("/api/applicant", applicantRoutes);
 
 /**
  * Error handler; all errors thrown by server are handled here.

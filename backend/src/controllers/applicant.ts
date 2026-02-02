@@ -22,24 +22,27 @@ export const getApplicant: RequestHandler = async (req, res, next) => {
   }
 };
 
+export const getAllApplicants: RequestHandler = async (req, res, next) => {
+  try {
+    const applicants = await ApplicantModel.find().sort({ firstName: "desc" });
+
+    res.status(200).json(applicants);
+  } catch (error) {
+    next(error);
+  }
+};
+
 type CreateApplicantBody = {
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
-
   raceEthnicity: string;
-
   gender: string;
-
   cdcrNumber?: string;
-
   description?: string;
-
-  typeOfAid: [string];
-
+  typeOfAid: string[];
   otherAidDescription?: string;
   status: string;
-
   actionPlan?: string;
 };
 
@@ -47,20 +50,13 @@ type UpdateApplicantBody = {
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
-
   raceEthnicity: string;
-
   gender: string;
-
   cdcrNumber?: string;
-
   description?: string;
-
-  typeOfAid: [string];
-
+  typeOfAid: string[];
   otherAidDescription?: string;
   status: string;
-
   actionPlan?: string;
 };
 
