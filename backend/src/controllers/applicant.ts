@@ -155,16 +155,14 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
         status,
         actionPlan,
       },
-      { new: true }, // Optional: returns the modified document
+      { new: true },
     );
 
     if (applicant === null) {
       throw createHttpError(404, "Applicant not found.");
     }
 
-    const updatedApplicant = await ApplicantModel.findById(id);
-
-    res.status(200).json(updatedApplicant);
+    res.status(200).json(applicant);
   } catch (error) {
     next(error);
   }
