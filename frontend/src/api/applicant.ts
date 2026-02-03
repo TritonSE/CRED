@@ -71,9 +71,7 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
 }
 
 /**
- * The expected inputs when we want to create a new Applicant object. In the MVP, we only
- * need to provide the title and optionally the description, but in the course of
- * this tutorial you'll likely want to add more fields here.
+ * The expected inputs when we want to create a new Applicant object.
  */
 export type CreateApplicantRequest = {
   firstName: string;
@@ -108,10 +106,6 @@ export type UpdateApplicantRequest = {
   actionPlan?: string;
 };
 
-/**
- * The implementations of these API client functions are provided as part of the
- * MVP. You can use them as a guide for writing the other client functions.
- */
 export async function createApplicant(
   applicant: CreateApplicantRequest,
 ): Promise<APIResult<Applicant>> {

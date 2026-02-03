@@ -114,7 +114,6 @@ export const removeApplicant: RequestHandler = async (req, res, next) => {
 
 export const updateApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
-  // Extract ALL fields: title, description, assignee, isChecked
   const {
     firstName,
     lastName,
