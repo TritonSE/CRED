@@ -8,6 +8,7 @@
   background-color: #004377;
   width: 25%;
   height: 19rem;
+  box-shadow: 0px 4px 4px 0px #00000040;
 
   transition:
     height 0.35s ease,
@@ -66,7 +67,7 @@
   text-align: center;
   line-height: 150%;
   width: 80%;
-  font-size: 0.8rem;
+  font-size: 1rem;
   transform: translateY(0rem);
 
   opacity: 0;
@@ -76,7 +77,7 @@
 }
 
 .cardContainer:hover {
-  height: 20rem;
+  height: 22rem;
 }
 
 .cardContainer:hover .cardContent {
