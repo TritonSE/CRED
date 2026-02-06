@@ -74,6 +74,8 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
           </div>
         </div>
 
+        <div className={styles.sectionDivider} />
+
         {/* Contact Information */}
         <h4 className={styles.sectionTitle}>Contact Information</h4>
         <div className={styles.contactGrid}>

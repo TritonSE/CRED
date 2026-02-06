@@ -138,6 +138,7 @@ export function ApplicationTable({
             className={styles.actionButton}
             onClick={(e) => {
               e.stopPropagation();
+              toggleRowExpanded(row.id);
               // Toggle visibility logic can be added here
             }}
             aria-label="View details"
@@ -153,26 +154,24 @@ export function ApplicationTable({
             className={styles.actionButton}
             onClick={(e) => {
               e.stopPropagation();
-              toggleRowExpanded(row.id);
             }}
             aria-label="Expand row"
           >
             <Image
-              src={expandedRows[row.id] ? "/upCaret.svg" : "/downCaret.svg"}
+              src={"/ic_download.svg"}
               width={16}
               height={16}
               alt={expandedRows[row.id] ? "Collapse" : "Expand"}
             />
           </button>
-          <button
+          <input
+            type="checkbox"
             className={styles.moreButton}
             onClick={(e) => {
               e.stopPropagation();
             }}
-            aria-label="More options"
-          >
-            <Image src="/more.svg" width={16} height={16} alt="More options" />
-          </button>
+            aria-label="Select application"
+          />
         </div>
       ),
     },
