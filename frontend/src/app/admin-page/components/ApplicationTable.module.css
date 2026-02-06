@@ -250,6 +250,28 @@
   position: relative;
 }
 
+.expandedContentWrapper {
+  max-height: 0; /* starting at 0 height */
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 1s cubic-bezier(0.42, 0, 0.58, 1) 0s,
+    opacity 1s cubic-bezier(0.42, 0, 0.58, 1) 0s;
+  will-change: max-height, opacity;
+}
+
+.expandedContentWrapper.open {
+  max-height: 371px; /* Hard coded height of expanded content */
+  opacity: 1;
+}
+
+.expandedContentWrapper > * {
+  transition: transform 1s cubic-bezier(0.42, 0, 0.58, 1);
+}
+.expandedContentWrapper.open > * {
+  transform: translateY(0);
+}
+
 .sectionTitle {
   color: #004377;
   font-family: "Lato", sans-serif;

@@ -279,20 +279,24 @@ export function ApplicationTable({
                             </td>
                           ))}
                         </tr>
-                        {isExpanded &&
-                          (() => {
-                            // Expanded row should also increment the index for striping
-                            const expandedClass =
-                              visibleRowIndex % 2 === 0 ? styles.even : styles.odd;
-                            // visibleRowIndex++; // So that it does not change the alternating colors
-                            return (
-                              <tr className={styles.expandedDetailRow + " " + expandedClass}>
-                                <td colSpan={columns.length} className={styles.expandedDetailCell}>
-                                  <ExpandedRowContent row={row.original} />
-                                </td>
-                              </tr>
-                            );
-                          })()}
+                        <tr
+                          className={
+                            styles.expandedDetailRow +
+                            " " +
+                            (visibleRowIndex % 2 === 0 ? styles.even : styles.odd)
+                          }
+                        >
+                          <td colSpan={columns.length} className={styles.expandedDetailCell}>
+                            <div
+                              className={`${styles.expandedContentWrapper} ${
+                                isExpanded ? styles.open : ""
+                              }`}
+                            >
+                              {/* Must render at all times for animation */}
+                              <ExpandedRowContent row={row.original} />
+                            </div>
+                          </td>
+                        </tr>
                       </React.Fragment>
                     );
                   });
