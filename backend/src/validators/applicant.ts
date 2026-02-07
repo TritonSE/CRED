@@ -98,7 +98,7 @@ const makeStatusValidator = () =>
     .isString()
     .bail()
     .isIn(STATUS_OPTIONS)
-    .withMessage("status must be one of: Pending, Need to Review, Reviewed");
+    .withMessage("status must be one of: Under Review, Need to Review, Reviewed");
 
 const makeActionPlanValidator = () =>
   body("actionPlan").optional().isString().withMessage("actionPlan must be a string");

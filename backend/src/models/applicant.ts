@@ -14,7 +14,7 @@ export const RACE_ETHNICITY_OPTIONS = [
   "Other",
 ] as const;
 
-export const STATUS_OPTIONS = ["Pending", "Need to Review", "Reviewed"] as const;
+export const STATUS_OPTIONS = ["Under Review", "Need to Review", "Reviewed"] as const;
 
 export const AID_TYPES = [
   "Transitional/Rental Housing Support",
