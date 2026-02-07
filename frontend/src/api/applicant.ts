@@ -4,8 +4,7 @@ import type { APIResult } from "../api/requests";
 
 /**
  * Defines the "shape" of a Applicant object (what fields are present and their types) for
- * frontend components to use. This will be the return type of most functions in this
- * file.
+ * frontend components to use.
  */
 export type Applicant = {
   _id: string;
@@ -22,15 +21,8 @@ export type Applicant = {
   actionPlan?: string;
 };
 
-/**
- * Defines the shape of JSON that we'll receive from the backend when we ask the API
- * for a Applicant object. That is, when the backend sends us a JSON object representing a
- * Applicant, we expect it to match these fields and types.
- *
- * The difference between this type and `Applicant` above is that `dateCreated` is a string
- * instead of a Date object. This is because JSON doesn't support Dates, so we use a
- * date-formatted string in requests and responses.
- */
+// ... (ApplicantJSON and parseApplicant remain the same) ...
+
 type ApplicantJSON = {
   _id: string;
   firstName: string;
@@ -46,13 +38,6 @@ type ApplicantJSON = {
   actionPlan?: string;
 };
 
-/**
- * Converts a Applicant from JSON that only contains primitive types to our custom
- * Applicant interface.
- *
- * @param applicant The JSON representation of the applicant
- * @returns The parsed Applicant object
- */
 function parseApplicant(applicant: ApplicantJSON): Applicant {
   return {
     _id: applicant._id,
@@ -70,9 +55,8 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
   };
 }
 
-/**
- * The expected inputs when we want to create a new Applicant object.
- */
+// ... (CreateApplicantRequest and UpdateApplicantRequest remain the same) ...
+
 export type CreateApplicantRequest = {
   firstName: string;
   lastName: string;
@@ -87,10 +71,6 @@ export type CreateApplicantRequest = {
   actionPlan?: string;
 };
 
-/**
- * The expected inputs when we want to update an existing Applicant object. Similar to
- * `CreateApplicantRequest`.
- */
 export type UpdateApplicantRequest = {
   _id: string;
   firstName: string;
@@ -105,6 +85,26 @@ export type UpdateApplicantRequest = {
   status: string;
   actionPlan?: string;
 };
+
+// --- NEW TYPES FOR PAGINATION ---
+
+export type PaginatedResponse<T> = {
+  data: T[];
+  meta: {
+    total: number;
+    page: number;
+    totalPages: number;
+  };
+};
+
+export type GetApplicantsOptions = {
+  page?: number;
+  limit?: number;
+  sortBy?: string;
+  order?: "asc" | "desc";
+};
+
+// --- API FUNCTIONS ---
 
 export async function createApplicant(
   applicant: CreateApplicantRequest,
@@ -128,15 +128,46 @@ export async function getApplicant(id: string): Promise<APIResult<Applicant>> {
   }
 }
 
-export async function getAllApplicants(): Promise<APIResult<Applicant[]>> {
+/**
+ * Updated to support Pagination.
+ * Returns either a raw array (if no params) or a PaginatedResponse object (if params exist).
+ */
+export async function getAllApplicants(
+  options?: GetApplicantsOptions,
+): Promise<APIResult<Applicant[] | PaginatedResponse<Applicant>>> {
   try {
-    const response = await get(`/applicant`);
+    // 1. Construct Query String
+    const params = new URLSearchParams();
+    if (options?.page) params.append("page", options.page.toString());
+    if (options?.limit) params.append("limit", options.limit.toString());
+    if (options?.sortBy) params.append("sortBy", options.sortBy);
+    if (options?.order) params.append("order", options.order);
 
+    const queryString = params.toString();
+    const url = queryString ? `/applicant?${queryString}` : `/applicant`;
+
+    const response = await get(url);
     const json = (await response.json()) as ApplicantJSON[];
 
-    const applicants = json.map(parseApplicant);
+    // 2. Handle "Paginated" Response (Object with data & meta)
+    if ("data" in json && "meta" in json) {
+      const result = json as {
+        data: ApplicantJSON[];
+        meta: { total: number; page: number; totalPages: number };
+      };
+      return {
+        success: true,
+        data: {
+          data: result.data.map(parseApplicant),
+          meta: result.meta,
+        },
+      };
+    }
 
-    return { success: true, data: applicants };
+    // 3. Handle "All" Response (Array)
+    // This runs if you didn't pass options, ensuring backward compatibility
+    const list = json;
+    return { success: true, data: list.map(parseApplicant) };
   } catch (error) {
     return handleAPIError(error);
   }

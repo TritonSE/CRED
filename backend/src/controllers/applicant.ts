@@ -24,9 +24,42 @@ export const getApplicant: RequestHandler = async (req, res, next) => {
 
 export const getAllApplicants: RequestHandler = async (req, res, next) => {
   try {
-    const applicants = await ApplicantModel.find().sort({ firstName: "desc" });
+    const pageParam = req.query.page;
+    const limitParam = req.query.limit;
+    const sortByParam = req.query.sortBy;
+    const orderParam = req.query.order;
 
-    res.status(200).json(applicants);
+    const page = typeof pageParam === "string" ? parseInt(pageParam, 10) : NaN;
+    const limit = typeof limitParam === "string" ? parseInt(limitParam, 10) : NaN;
+    const sortBy = typeof sortByParam === "string" ? sortByParam : "firstName";
+    const order = typeof orderParam === "string" && orderParam === "asc" ? 1 : -1;
+
+    const sortOptions: Record<string, 1 | -1> = {
+      [sortBy]: order,
+      _id: order,
+    };
+
+    if (isNaN(page) || isNaN(limit)) {
+      const applicants = await ApplicantModel.find().sort(sortOptions);
+      res.status(200).json(applicants);
+      return;
+    }
+
+    const skip = (page - 1) * limit;
+
+    const [applicants, total] = await Promise.all([
+      ApplicantModel.find().sort(sortOptions).skip(skip).limit(limit),
+      ApplicantModel.countDocuments(),
+    ]);
+
+    res.status(200).json({
+      data: applicants,
+      meta: {
+        total,
+        page,
+        totalPages: Math.ceil(total / limit),
+      },
+    });
   } catch (error) {
     next(error);
   }
