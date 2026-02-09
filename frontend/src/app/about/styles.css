@@ -61,8 +61,8 @@
 .about-grid {
   display: flex;
   justify-content: space-between;
-  gap: 3rem;
-  width: 87%;
+  gap: 2rem;
+  width: 85%;
   margin: 0 auto;
 }
 
@@ -84,6 +84,8 @@
 }
 
 /* Applicable to all sections text */
+/* make headings larger */
+/* change font */
 .about-heading {
   font-size: 2rem;
   font-weight: 700;
@@ -106,6 +108,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+  width: 30rem;
 }
 
 .directorBoxContainer {
@@ -115,7 +118,7 @@
 
 .directorBoxes {
   height: 400px;
-  width: 83%;
+  width: 82%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -128,7 +131,7 @@
 
 .operate-wrapper {
   gap: 3rem;
-  width: 87%;
+  width: 85%;
   margin: 0 auto;
 }
 
