@@ -25,30 +25,38 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
 }
 
 .about-title {
-  font-size: 2.25rem;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 64px;
   font-weight: 700;
   color: #ffffff;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   margin-top: 0;
 }
 
 @media (min-width: 768px) {
   .about-title {
-    font-size: 3rem;
+    font-size: 3.5rem;
   }
 }
 
 .about-intro {
+  font-family: var(--font-lato), Lato, sans-serif;
   color: #ffffff;
   text-align: center;
   margin: 0 auto;
   font-size: 1.125rem;
-  line-height: 1.6;
+  line-height: 1.7;
   padding: 0 1rem;
+  max-width: 800px;
 }
 
 /* Vision Section */
@@ -83,11 +91,13 @@
   }
 }
 
-/* Applicable to all sections text */
 .about-heading {
-  font-size: 2rem;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #004377;
+  color: #0a326d;
   margin-bottom: 1.5rem;
 }
 
@@ -98,6 +108,7 @@
 }
 
 .about-vision-content p {
+  font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   line-height: 150%;
 }
@@ -133,6 +144,7 @@
 }
 
 .about-operate-content {
+  font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   line-height: 150%;
   margin-bottom: 3rem;
