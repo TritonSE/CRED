@@ -26,8 +26,9 @@ const ipData: ApplicationRowData[] = [
     convictionDetails:
       "Lorem ipsum dolor sit amet consectetur. Venenatis eget odio nunc vitae. Quisque commodo aliquam ornare nisl. Sit sit elementum libero varius turpis a felis.",
     aidRequested: ["Elective Life Training", "Not Sure/Other:"],
-    additionalComments:
-      "I need help with managing my monthly income because I am struggling with paying my bills.\n\nIs there a physical location I can meet with you guys?",
+    otherAidRequested:
+      "I need help with managing my monthly income because I am struggling with paying my bills.",
+    additionalComments: "Is there a physical location I can meet with you guys?",
     todos: [
       { id: "1", label: "Emailed response?", completed: false },
       { id: "2", label: "Contacted collaborators?", completed: false },
@@ -113,7 +114,7 @@ export default function Admin() {
   return (
     <ThemeProvider>
       <main className={styles.mainContent}>
-        <AdminHeader name="Dequan" />
+        <AdminHeader name="DeQuan" />
         <ApplicationTable title="New Applications" data={ipData} totalApplications={3} />
         <ApplicationTable title="Completed Applications" data={comData} totalApplications={50} />
       </main>

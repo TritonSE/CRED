@@ -30,7 +30,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 
 import styles from "./ApplicationTable.module.css";
 import { ExpandedRowContent } from "./ExpandedRowContent";
@@ -53,6 +53,7 @@ export type ApplicationRowData = {
   phoneNumber?: string;
   convictionDetails?: string;
   aidRequested?: string[];
+  otherAidRequested?: string;
   additionalComments?: string;
   todos?: { id: string; label: string; completed: boolean }[];
   notes?: { date: string; content: string }[];
@@ -102,6 +103,9 @@ export function ApplicationTable({
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
+  const [expandedHeights, setExpandedHeights] = useState<Record<string, number>>({});
+  const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
+  const expandedRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const toggleRowExpanded = (rowId: string) => {
     setExpandedRows((prev) => ({
@@ -109,6 +113,28 @@ export function ApplicationTable({
       [rowId]: !prev[rowId],
     }));
   };
+
+  const toggleRowSelected = (rowId: string) => {
+    setSelectedRows((prev) => ({
+      ...prev,
+      [rowId]: !prev[rowId],
+    }));
+  };
+
+  // Measure heights of expanded content
+  useLayoutEffect(() => {
+    const heights: Record<string, number> = {};
+    Object.entries(expandedRefs.current).forEach(([rowId, wrapper]) => {
+      if (wrapper) {
+        // Get the height of the child content
+        const child = wrapper.firstElementChild as HTMLElement;
+        if (child) {
+          heights[rowId] = child.scrollHeight;
+        }
+      }
+    });
+    setExpandedHeights(heights);
+  }, [expandedRows]);
 
   const columns: ColumnDef<ApplicationRowData>[] = [
     {
@@ -145,9 +171,10 @@ export function ApplicationTable({
           >
             <Image
               src={expandedRows[row.id] ? "/eyeWithSlash.svg" : "/eye.svg"}
-              width={16}
-              height={16}
+              width={24}
+              height={24}
               alt={expandedRows[row.id] ? "Hide details" : "View details"}
+              className={styles.blueFilter}
             />
           </button>
           <button
@@ -159,19 +186,26 @@ export function ApplicationTable({
           >
             <Image
               src={"/ic_download.svg"}
-              width={16}
-              height={16}
+              width={24}
+              height={24}
               alt={expandedRows[row.id] ? "Collapse" : "Expand"}
+              className={styles.blueFilter}
             />
           </button>
-          <input
-            type="checkbox"
-            className={styles.moreButton}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            aria-label="Select application"
-          />
+          <div className={styles.buttonWrapper}>
+            <input
+              type="checkbox"
+              checked={selectedRows[row.id] ?? false}
+              onChange={(e) => {
+                e.stopPropagation();
+                toggleRowSelected(row.id);
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              aria-label="Select application"
+            />
+          </div>
         </div>
       ),
     },
@@ -287,9 +321,17 @@ export function ApplicationTable({
                         >
                           <td colSpan={columns.length} className={styles.expandedDetailCell}>
                             <div
+                              ref={(el) => {
+                                if (el) expandedRefs.current[row.id] = el;
+                              }}
                               className={`${styles.expandedContentWrapper} ${
                                 isExpanded ? styles.open : ""
                               }`}
+                              style={{
+                                maxHeight: isExpanded
+                                  ? `${String(expandedHeights[row.id] || 0)}px`
+                                  : "0px",
+                              }}
                             >
                               {/* Must render at all times for animation */}
                               <ExpandedRowContent row={row.original} />

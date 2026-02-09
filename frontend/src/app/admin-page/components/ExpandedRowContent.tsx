@@ -107,6 +107,11 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
                 <span>{aid}</span>
               </label>
             )) ?? <span>-</span>}
+            {row.otherAidRequested && (
+              <div className={styles.otherAidRequestedBox}>
+                <p className={styles.otherAidRequestedText}>{row.otherAidRequested}</p>
+              </div>
+            )}
           </div>
 
           <span className={styles.programSubtitle}>Additional Comments/Questions</span>
