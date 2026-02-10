@@ -41,7 +41,7 @@ export default function AboutUsPage() {
             </div>
 
             <div className="about-image-placeholder">
-              <Image src="/AboutPic1.png" alt="About Us Image" width={400} height={300} />
+              <Image src="/OurVisionImage.png" alt="About Us Image" width={400} height={300} />
             </div>
           </div>
         </div>
