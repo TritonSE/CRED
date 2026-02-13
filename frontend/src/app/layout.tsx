@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={`${lato.variable} antialiased overflow-x-hidden`}>
         <div className="min-h-screen w-full bg-[#faf8f6] flex flex-col overflow-x-hidden">
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pt-[70px]">{children}</main>
           <Footer />
         </div>
       </body>
