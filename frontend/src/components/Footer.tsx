@@ -132,7 +132,7 @@ export default function Footer() {
             <p className="font-['Lato',sans-serif] font-medium text-[16px] text-white leading-[1.5]">
               Built for free by{" "}
               <a
-                href="http://tse.ucsd.edu"
+                href="https://tritonse.github.io/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#ffb341] transition-colors"
