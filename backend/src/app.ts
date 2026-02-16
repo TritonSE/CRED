@@ -4,9 +4,8 @@ import express from "express";
 import { isHttpError } from "http-errors";
 import mongoose from "mongoose";
 
-import applicantRoutes from "../src/routes/applicant";
-
 import { MONGODB_URI, port } from "./config";
+import applicantRoutes from "./routes/applicant";
 
 import type { NextFunction, Request, Response } from "express";
 

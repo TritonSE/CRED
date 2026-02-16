@@ -18,7 +18,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
  * @param url The URL to request
  * @param body The body of the request, or undefined if there is none
  * @param headers The headers of the request
- * @returns The Response object returned by `fetch()
+ * @returns The Response object returned by `fetch()`
  */
 async function fetchRequest(
   method: Method,

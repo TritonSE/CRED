@@ -73,8 +73,10 @@ const makeTypeOfAidValidator = () =>
   body("typeOfAid")
     .exists()
     .withMessage("typeOfAid is required")
+    .bail()
     .isArray({ min: 1 })
     .withMessage("You must select at least one type of aid")
+    .bail()
     .custom((arr: string[]) => {
       return arr.every((item) => AID_TYPES.includes(item as (typeof AID_TYPES)[number]));
     })

@@ -1,5 +1,6 @@
 import { validationResult } from "express-validator";
 import createHttpError from "http-errors";
+import mongoose from "mongoose";
 
 import ApplicantModel from "../models/applicant";
 import validationErrorParser from "../util/validationErrorParser";
@@ -10,6 +11,10 @@ export const getApplicant: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
 
   try {
+    if (!mongoose.isValidObjectId(id)) {
+      throw createHttpError(400, "Invalid applicant ID.");
+    }
+
     const applicant = await ApplicantModel.findById(id);
 
     if (applicant === null) {
@@ -39,9 +44,19 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
       _id: order,
     };
 
-    if (isNaN(page) || isNaN(limit)) {
+    const pageProvided = pageParam !== undefined;
+    const limitProvided = limitParam !== undefined;
+
+    // If both page and limit are omitted, return all applicants
+    if (!pageProvided && !limitProvided) {
       const applicants = await ApplicantModel.find().sort(sortOptions);
       res.status(200).json(applicants);
+      return;
+    }
+
+    // If either param is present but invalid (NaN or < 1), return 400
+    if (isNaN(page) || isNaN(limit) || page < 1 || limit < 1) {
+      res.status(400).json({ error: "Invalid pagination parameters." });
       return;
     }
 
@@ -95,7 +110,7 @@ type UpdateApplicantBody = {
 
 export const createApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
-  // Extract assignee along with other fields
+  // Extract applicant fields from request body
   const {
     firstName,
     lastName,
@@ -137,7 +152,15 @@ export const removeApplicant: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
 
   try {
+    if (!mongoose.isValidObjectId(id)) {
+      throw createHttpError(400, "Invalid applicant ID.");
+    }
+
     const result = await ApplicantModel.deleteOne({ _id: id });
+
+    if (result.deletedCount === 0) {
+      throw createHttpError(404, "Applicant not found.");
+    }
 
     res.status(200).json(result);
   } catch (error) {
@@ -168,8 +191,12 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
   try {
     validationErrorParser(errors);
 
+    if (!mongoose.isValidObjectId(id)) {
+      throw createHttpError(400, "Invalid applicant ID.");
+    }
+
     if (_id && id !== _id) {
-      throw createHttpError(404, "Applicant ID Mismatch.");
+      throw createHttpError(400, "Applicant ID Mismatch.");
     }
 
     // Update all fields in the database

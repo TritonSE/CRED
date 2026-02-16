@@ -56,7 +56,7 @@ const applicantSchema = new Schema(
     status: {
       type: String,
       required: true,
-      default: "Pending",
+      default: "Need to Review",
       enum: STATUS_OPTIONS,
     },
 
