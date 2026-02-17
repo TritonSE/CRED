@@ -96,9 +96,12 @@ export default function Footer() {
                     fill="#FFB341"
                   />
                 </svg>
-                <p className="flex-1 font-['Lato',sans-serif] font-medium leading-[1.5] text-[20px] text-white">
+                <a
+                  href="tel:1-888-453-4943"
+                  className="flex-1 font-['Lato',sans-serif] font-medium leading-[1.5] text-[20px] text-white"
+                >
                   1-888-453-4943
-                </p>
+                </a>
               </div>
 
               {/* Address */}
