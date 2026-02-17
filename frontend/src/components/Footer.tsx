@@ -80,9 +80,12 @@ export default function Footer() {
                     fill="#FFB341"
                   />
                 </svg>
-                <p className="flex-1 font-['Lato',sans-serif] font-medium leading-[1.5] text-[20px] text-white break-words">
+                <a
+                  href="mailto:credsd@credsd.org"
+                  className="flex-1 font-['Lato',sans-serif] font-medium leading-[1.5] text-[20px] text-white break-words"
+                >
                   credsd@credsd.org
-                </p>
+                </a>
               </div>
 
               {/* Phone */}
