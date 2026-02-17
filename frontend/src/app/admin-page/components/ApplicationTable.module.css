@@ -391,9 +391,55 @@
 }
 
 .checkbox {
-  width: 16px;
-  height: 16px;
-  accent-color: #535353;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #175892;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.checkbox:checked {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 3px;
+  background-image: url("/checkedBox.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.aidCheckbox {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #000000;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.aidCheckbox:checked {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 3px;
+  background-image: url("/checkedBoxAid.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.aidText {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  color: #000000;
 }
 
 .otherAidRequestedBox {

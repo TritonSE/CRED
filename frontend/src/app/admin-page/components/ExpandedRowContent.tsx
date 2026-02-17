@@ -103,8 +103,8 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
           <div className={styles.aidList}>
             {row.aidRequested?.map((aid, index) => (
               <label key={index} className={styles.aidItem}>
-                <input type="checkbox" checked readOnly className={styles.checkbox} />
-                <span>{aid}</span>
+                <input type="checkbox" checked readOnly className={styles.aidCheckbox} />
+                <span className={styles.aidText}>{aid}</span>
               </label>
             )) ?? <span>-</span>}
             {row.otherAidRequested && (
