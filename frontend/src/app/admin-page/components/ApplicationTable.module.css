@@ -4,8 +4,6 @@
  * a collapsible table of client applications.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@600&display=swap");
-
 /* Main container with horizontal padding to match page layout */
 .tableContainer {
   /* padding: 16px 24px; */
@@ -29,7 +27,7 @@
 /* Section title styling */
 .tableTitle {
   color: #175892;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 24px;
   font-weight: 700;
   margin: 0;
@@ -73,7 +71,7 @@
   padding: 12px 16px;
   font-weight: 600;
   color: #fff;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 14px;
   white-space: nowrap;
   border: none;
@@ -156,7 +154,7 @@
 .tableCell {
   padding: 12px 16px;
   color: #032b35;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   vertical-align: middle;
 }
@@ -309,7 +307,7 @@
 
 .sectionTitle {
   color: #004377;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 20px;
   font-weight: 400;
   margin: 0 0 8px 0;
@@ -342,6 +340,7 @@
 }
 
 .profileLabel {
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   color: #757880;
   font-weight: 400;
@@ -349,6 +348,7 @@
 }
 
 .profileValue {
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 14px;
   color: #000000;
   font-weight: 400;
@@ -363,6 +363,7 @@
 }
 
 .programSubtitle {
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   color: #757880;
   font-weight: 400;
@@ -370,6 +371,7 @@
 }
 
 .programText {
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   color: #000000;
   line-height: 1.5;
@@ -383,6 +385,7 @@
 }
 
 .aidItem {
+  font-family: var(--font-lato), Lato, sans-serif;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -437,7 +440,7 @@
 }
 
 .aidText {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   color: #000000;
 }
@@ -451,10 +454,11 @@
 }
 
 .otherAidRequestedText {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   color: #7a7a7a;
   font-style: italic;
+  line-height: 150%;
   width: 90%;
 }
 
@@ -466,7 +470,7 @@
 }
 
 .commentsText {
-  font-family: "Lato" sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   color: #000000;
   margin: 0;
@@ -481,15 +485,17 @@
 }
 
 .todoItem {
+  font-family: var(--font-lato), Lato, sans-serif;
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
-  color: #374151;
+  font-size: 16px;
+  color: black;
   cursor: pointer;
 }
 
 .addTodoButton {
+  font-family: var(--font-lato), Lato, sans-serif;
   background: none;
   border: none;
   color: #175892;
@@ -517,11 +523,13 @@
 }
 
 .noteItem {
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   color: #7a7a7a;
 }
 
 .viewMoreButton {
+  font-family: var(--font-lato), Lato, sans-serif;
   background: none;
   border: none;
   color: #175892;
@@ -534,6 +542,7 @@
 
 /* Mark complete button */
 .markCompleteButton {
+  font-family: var(--font-lato), Lato, sans-serif;
   background-color: #175892;
   color: #fff;
   border: none;
@@ -563,9 +572,9 @@
 }
 
 .paginationInfo {
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   color: #6b7280;
-  font-family: "Lato", sans-serif;
 }
 
 .paginationControls {
@@ -575,6 +584,7 @@
 }
 
 .paginationButton {
+  font-family: var(--font-lato), Lato, sans-serif;
   background-color: #f3f4f6;
   border: 1px solid #d1d5db;
   border-radius: 4px;
@@ -595,9 +605,9 @@
 }
 
 .pageIndicator {
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 13px;
   color: #6b7280;
-  font-family: "Lato", sans-serif;
 }
 
 .pageInput {
