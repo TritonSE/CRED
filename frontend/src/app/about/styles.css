@@ -166,3 +166,9 @@
   gap: 2rem;
   margin: 0 auto;
 }
+
+.vectors {
+  height: 20%;
+  margin: 9rem auto;
+  position: relative;
+}

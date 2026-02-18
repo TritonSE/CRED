@@ -77,7 +77,7 @@
 }
 
 .cardContainer:hover {
-  height: 23rem;
+  height: 22rem;
 }
 
 .cardContainer:hover .cardContent {
