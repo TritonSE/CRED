@@ -95,7 +95,7 @@
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   color: #0a326d;
   margin-bottom: 1.5rem;
@@ -111,13 +111,14 @@
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   line-height: 150%;
+  font-size: 1.3rem;
 }
 
 .about-image-placeholder img {
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
-  width: 100%;
+  width: 33rem;
 }
 
 .directorBoxContainer {
@@ -131,6 +132,7 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  gap: 7rem;
 }
 
 @media (max-width: 1000px) {
@@ -163,7 +165,6 @@
 .operateCards {
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
   margin: 0 auto;
 }
 
