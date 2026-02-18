@@ -8,12 +8,10 @@
 }
 
 .label {
-  /* figma styling numbers */
   font-size: 15px;
   font-weight: 400;
 }
 
-/* idk if this is a feauture */
 .button:hover {
   background-color: #ffbc58cc;
 }
