@@ -22,7 +22,7 @@
   background-color: #fcb3ad; /* Light pink background */
   font-size: 16px;
   font-style: normal;
-  font: Lato;
+  font-family: Lato, var(--font-lato), sans-serif;
 }
 
 /* "Under Review" status - Gray theme indicating in-progress */
@@ -32,7 +32,7 @@
   background-color: #d9d9d9; /* Light gray background */
   font-size: 16px;
   font-style: normal;
-  font: Lato;
+  font-family: Lato, var(--font-lato), sans-serif;
 }
 
 /* "Reviewed" status - Green theme indicating completion */
@@ -42,5 +42,5 @@
   background-color: #aff4c6; /* Light green background */
   font-size: 16px;
   font-style: normal;
-  font: Lato;
+  font-family: Lato, var(--font-lato), sans-serif;
 }

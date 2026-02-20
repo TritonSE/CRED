@@ -3,7 +3,6 @@
  */
 "use client";
 
-import { ThemeProvider } from "@tritonse/tse-constellation";
 import { useState } from "react";
 
 import styles from "./adminPage.module.css";
@@ -34,8 +33,8 @@ const ipData: ApplicationRowData[] = [
       { id: "1", label: "Emailed response?", completed: true },
       { id: "2", label: "Contacted collaborators?", completed: false },
       { id: "3", label: "Assigned programs?", completed: false },
-      { id: "3", label: "Assigned programs?", completed: false },
-      { id: "3", label: "Assigned programs?", completed: false },
+      { id: "4", label: "Assigned programs?", completed: false },
+      { id: "5", label: "Assigned programs?", completed: false },
     ],
     notes: [
       { date: "M/D/YYYY", content: "New Note" },
@@ -113,7 +112,7 @@ const comData: ApplicationRowData[] = [
   },
 ];
 
-export default function Admin() {
+export default function AdminPage() {
   const [newApps, setNewApps] = useState<ApplicationRowData[]>(ipData);
   const [completedApps, setCompletedApps] = useState<ApplicationRowData[]>(comData);
 
@@ -132,23 +131,21 @@ export default function Admin() {
   };
 
   return (
-    <ThemeProvider>
-      <main className={styles.mainContent}>
-        <AdminHeader name="DeQuan" />
-        <ApplicationTable
-          title="New Applications"
-          data={newApps}
-          totalApplications={newApps.length}
-          onRowMove={moveToCompleted}
-        />
-        <ApplicationTable
-          title="Completed Applications"
-          data={completedApps}
-          totalApplications={completedApps.length}
-          onRowMove={moveToNew}
-          isCompleted
-        />
-      </main>
-    </ThemeProvider>
+    <main className={styles.mainContent}>
+      <AdminHeader name="DeQuan" />
+      <ApplicationTable
+        title="New Applications"
+        data={newApps}
+        totalApplications={newApps.length}
+        onRowMove={moveToCompleted}
+      />
+      <ApplicationTable
+        title="Completed Applications"
+        data={completedApps}
+        totalApplications={completedApps.length}
+        onRowMove={moveToNew}
+        isCompleted
+      />
+    </main>
   );
 }

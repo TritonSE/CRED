@@ -5,8 +5,14 @@
 
 "use client";
 
-import Admin from "./admin-page/adminPage";
+import { ThemeProvider } from "@tritonse/tse-constellation";
+
+import AdminPage from "./admin-page/adminPage";
 
 export default function ExamplePage() {
-  return <Admin />;
+  return (
+    <ThemeProvider>
+      <AdminPage />
+    </ThemeProvider>
+  );
 }
