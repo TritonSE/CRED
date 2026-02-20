@@ -6,9 +6,7 @@
 
 /* Main container with horizontal padding to match page layout */
 .tableContainer {
-  /* padding: 16px 24px; */
   border-radius: 8px;
-  /* margin: 16px auto; */
   width: 100%;
 }
 
@@ -236,7 +234,6 @@
 
 .expandedDetailCell {
   padding: 0 !important;
-  /* border-bottom: 2px solid #175892; */
 }
 
 .expandedContent {
@@ -470,10 +467,7 @@
 }
 
 .commentsBox {
-  /* background-color: #f9fafb;
-  border: 1px solid #e5e7eb; */
   border-radius: 6px;
-  /* padding: 6px; */
 }
 
 .commentsText {
@@ -498,9 +492,6 @@
   max-height: calc(3 * (1em + 8px) + 2 * 8px);
   overflow-y: scroll;
   padding-right: 6px;
-  /* Fade out the bottom edge to hint at more content */
-  /* -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 50%, transparent 100%); */
 }
 
 /* Styled scrollbar — always visible, on-brand */

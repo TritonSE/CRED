@@ -236,7 +236,6 @@ export function ApplicationTable({
   const currentPage = table.getState().pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
   const startRow = table.getState().pagination.pageIndex * pageSize + 1;
-  const _endRow = Math.min(startRow + pageSize - 1, data.length);
 
   return (
     <div className={styles.tableContainer}>
@@ -301,8 +300,16 @@ export function ApplicationTable({
                       <React.Fragment key={row.id}>
                         <tr
                           className={rowClass}
+                          tabIndex={0}
+                          aria-expanded={isExpanded}
                           onClick={() => {
                             toggleRowExpanded(row.id);
+                          }}
+                          onKeyDown={(event) => {
+                            if (event.key === "Enter" || event.key === " ") {
+                              event.preventDefault();
+                              toggleRowExpanded(row.id);
+                            }
                           }}
                         >
                           {row.getVisibleCells().map((cell) => (
@@ -333,7 +340,11 @@ export function ApplicationTable({
                               }}
                             >
                               {/* Must render at all times for animation */}
-                              <ExpandedRowContent row={row.original} />
+                              <ExpandedRowContent
+                                row={row.original}
+                                onRowMove={onRowMove}
+                                rowIndex={row.index}
+                              />
                             </div>
                           </td>
                         </tr>
@@ -367,7 +378,8 @@ export function ApplicationTable({
                   value={currentPage}
                   onChange={(e) => {
                     const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                    table.setPageIndex(page);
+                    const clamped = Math.max(0, Math.min(page, totalPages - 1));
+                    table.setPageIndex(clamped);
                   }}
                   className={styles.pageInput}
                   min={1}

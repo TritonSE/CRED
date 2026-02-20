@@ -12,7 +12,6 @@
   justify-content: space-between; /* Pushes header and search to opposite ends */
   align-items: center;
   padding-bottom: 2rem;
-  /* padding: 8px 152px; /* Horizontal padding to match page layout margins */
 }
 
 /* Column containing the welcome heading */
@@ -32,7 +31,6 @@
   font-weight: 590;
   line-height: 100%;
   letter-spacing: 0%;
-  font-style: semibold;
 }
 
 /* Column containing the search input */
