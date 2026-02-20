@@ -35,7 +35,7 @@ export const DetailButton = function DetailButton({
   return (
     <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end", width: "55%" }}>
       {/* Expand/collapse caret icon */}
-      <Image src="/downCaret.svg" width={16} height={16} alt="Down Carat"></Image>
+      <Image src="/downCaret.svg" width={16} height={16} alt="Down Caret"></Image>
 
       {/* Toggle visibility icon - shows slashed eye when hidden */}
       <Image
