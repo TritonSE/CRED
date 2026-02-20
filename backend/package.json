@@ -15,11 +15,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "bootstrap": "^5.3.8",
     "dotenv": "^16.4.7",
     "express": "^4.21.1",
-    "mongoose": "^8.8.3",
-    "react-bootstrap": "^2.10.10"
+    "mongoose": "^8.8.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",

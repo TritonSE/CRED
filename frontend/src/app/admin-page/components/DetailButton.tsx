@@ -35,18 +35,18 @@ export const DetailButton = function DetailButton({
   return (
     <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end", width: "55%" }}>
       {/* Expand/collapse caret icon */}
-      <Image src="/downCaret.svg" width="16" height="16" alt="Down Carat"></Image>
+      <Image src="/downCaret.svg" width={16} height={16} alt="Down Carat"></Image>
 
       {/* Toggle visibility icon - shows slashed eye when hidden */}
       <Image
         src={hidden ? "/eyeWithSlash.svg" : "/eye.svg"}
-        width="16"
-        height="16"
+        width={16}
+        height={16}
         alt={hidden ? "Hide Details" : "View Details"}
       ></Image>
 
       {/* More options menu icon */}
-      <Image src="/more.svg" width="16" height="16" alt="More Options"></Image>
+      <Image src="/more.svg" width={16} height={16} alt="More Options"></Image>
     </div>
   );
 };
