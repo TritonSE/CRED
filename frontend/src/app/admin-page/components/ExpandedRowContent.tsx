@@ -125,20 +125,25 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
       <div className={styles.expandedSection}>
         <h4 className={styles.sectionTitle}>To-Dos</h4>
         <div className={styles.todoList}>
-          {todos.map((todo) => (
-            <label key={todo.id} className={styles.todoItem}>
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                onChange={() => {
-                  toggleTodo(todo.id);
-                }}
-                className={styles.checkbox}
-              />
-              <span>{todo.label}</span>
-            </label>
-          ))}
-          <button className={styles.addTodoButton}>+ Add To-do</button>
+          <div className={styles.todoListWrapper}>
+            {todos.map((todo) => (
+              <label key={todo.id} className={styles.todoItem}>
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => {
+                    toggleTodo(todo.id);
+                  }}
+                  className={styles.checkbox}
+                />
+                <span>{todo.label}</span>
+              </label>
+            ))}
+          </div>
+          <button className={styles.addTodoButton}>
+            <span className={styles.addTodoPlus}>+</span>
+            <span>Add To-do</span>
+          </button>
         </div>
 
         {/* Notes/History Log */}

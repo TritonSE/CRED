@@ -70,6 +70,10 @@ export type ApplicationTableProps = {
   data: ApplicationRowData[];
   pageSize?: number;
   totalApplications?: number;
+  /** Called with the row's index in `data` when the checkbox is toggled */
+  onRowMove?: (index: number) => void;
+  /** If true, all rows render with their checkbox checked */
+  isCompleted?: boolean;
 };
 
 /**
@@ -98,24 +102,18 @@ export function ApplicationTable({
   data,
   pageSize = 6,
   totalApplications,
+  onRowMove,
+  isCompleted = false,
 }: ApplicationTableProps) {
   // State to track whether the table content is visible
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
   const [expandedHeights, setExpandedHeights] = useState<Record<string, number>>({});
-  const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
   const expandedRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const toggleRowExpanded = (rowId: string) => {
     setExpandedRows((prev) => ({
-      ...prev,
-      [rowId]: !prev[rowId],
-    }));
-  };
-
-  const toggleRowSelected = (rowId: string) => {
-    setSelectedRows((prev) => ({
       ...prev,
       [rowId]: !prev[rowId],
     }));
@@ -195,10 +193,11 @@ export function ApplicationTable({
           <div className={styles.buttonWrapper}>
             <input
               type="checkbox"
-              checked={selectedRows[row.id] ?? false}
+              checked={isCompleted}
               onChange={(e) => {
                 e.stopPropagation();
-                toggleRowSelected(row.id);
+                setExpandedRows((prev) => ({ ...prev, [row.id]: false }));
+                onRowMove?.(row.index);
               }}
               onClick={(e) => {
                 e.stopPropagation();

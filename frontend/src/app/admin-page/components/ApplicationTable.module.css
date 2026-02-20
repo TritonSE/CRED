@@ -484,6 +484,31 @@
   margin-bottom: 16px;
 }
 
+.todoListWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: calc(3 * (1em + 8px) + 2 * 8px);
+  overflow-y: scroll;
+  padding-right: 6px;
+  /* Fade out the bottom edge to hint at more content */
+  /* -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%); */
+}
+
+/* Styled scrollbar — always visible, on-brand */
+.todoListWrapper::-webkit-scrollbar {
+  width: 4px;
+}
+.todoListWrapper::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+.todoListWrapper::-webkit-scrollbar-thumb {
+  background-color: #175892;
+  border-radius: 4px;
+}
+
 .todoItem {
   font-family: var(--font-lato), Lato, sans-serif;
   display: flex;
@@ -498,14 +523,28 @@
   font-family: var(--font-lato), Lato, sans-serif;
   background: none;
   border: none;
-  color: #175892;
-  font-size: 13px;
+  color: #000;
+  font-size: 16px;
   cursor: pointer;
   text-align: left;
-  padding: 4px 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.addTodoButton:hover {
+.addTodoPlus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  color: #175892;
+}
+
+.addTodoButton:hover span:last-child {
   text-decoration: underline;
 }
 
