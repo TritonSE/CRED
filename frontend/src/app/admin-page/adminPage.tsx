@@ -31,7 +31,7 @@ const ipData: ApplicationRowData[] = [
       "I need help with managing my monthly income because I am struggling with paying my bills.",
     additionalComments: "Is there a physical location I can meet with you guys?",
     todos: [
-      { id: "1", label: "Emailed response?", completed: false },
+      { id: "1", label: "Emailed response?", completed: true },
       { id: "2", label: "Contacted collaborators?", completed: false },
       { id: "3", label: "Assigned programs?", completed: false },
       { id: "3", label: "Assigned programs?", completed: false },

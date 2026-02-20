@@ -101,12 +101,30 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
 
           <span className={styles.programSubtitle}>Type of Aid Requested</span>
           <div className={styles.aidList}>
-            {row.aidRequested?.map((aid, index) => (
-              <label key={index} className={styles.aidItem}>
+            <label key={0} className={styles.aidItem}>
+              {row.aidRequested?.includes("Elective Life Training") ? (
                 <input type="checkbox" checked readOnly className={styles.aidCheckbox} />
-                <span className={styles.aidText}>{aid}</span>
-              </label>
-            )) ?? <span>-</span>}
+              ) : (
+                <input type="checkbox" readOnly className={styles.aidCheckbox} />
+              )}
+              <span className={styles.aidText}>Elective Life Training</span>
+            </label>
+            <label key={1} className={styles.aidItem}>
+              {row.aidRequested?.includes("Workforce Development/Employment") ? (
+                <input type="checkbox" checked readOnly className={styles.aidCheckbox} />
+              ) : (
+                <input type="checkbox" readOnly className={styles.aidCheckbox} />
+              )}
+              <span className={styles.aidText}>Workforce Development/Employment</span>
+            </label>
+            <label key={2} className={styles.aidItem}>
+              {row.otherAidRequested ? (
+                <input type="checkbox" checked readOnly className={styles.aidCheckbox} />
+              ) : (
+                <input type="checkbox" readOnly className={styles.aidCheckbox} />
+              )}
+              <span className={styles.aidText}>Not Sure/Other</span>
+            </label>
             {row.otherAidRequested && (
               <div className={styles.otherAidRequestedBox}>
                 <p className={styles.otherAidRequestedText}>{row.otherAidRequested}</p>
