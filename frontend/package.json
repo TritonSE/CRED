@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@tanstack/react-table": "^8.21.3",
-    "bootstrap": "^5.3.8",
     "next": "^15.5.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

@@ -24,6 +24,8 @@ import type { ApplicationRowData } from "./ApplicationTable";
  */
 export type ExpandedRowContentProps = {
   row: ApplicationRowData;
+  onRowMove?: (index: number) => void;
+  rowIndex?: number;
 };
 
 /**
@@ -33,7 +35,7 @@ export type ExpandedRowContentProps = {
  * @param {ApplicationRowData} props.row - The application data to display
  * @returns {JSX.Element} Expanded content with client details
  */
-export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
+export function ExpandedRowContent({ row, onRowMove, rowIndex }: ExpandedRowContentProps) {
   const [todos, setTodos] = useState(row.todos ?? []);
 
   const toggleTodo = (id: string) => {
@@ -101,7 +103,7 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
 
           <span className={styles.programSubtitle}>Type of Aid Requested</span>
           <div className={styles.aidList}>
-            <label key={0} className={styles.aidItem}>
+            <label key="elective-life-training" className={styles.aidItem}>
               {row.aidRequested?.includes("Elective Life Training") ? (
                 <input type="checkbox" checked readOnly className={styles.aidCheckbox} />
               ) : (
@@ -109,7 +111,7 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
               )}
               <span className={styles.aidText}>Elective Life Training</span>
             </label>
-            <label key={1} className={styles.aidItem}>
+            <label key="workforce-development" className={styles.aidItem}>
               {row.aidRequested?.includes("Workforce Development/Employment") ? (
                 <input type="checkbox" checked readOnly className={styles.aidCheckbox} />
               ) : (
@@ -117,7 +119,7 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
               )}
               <span className={styles.aidText}>Workforce Development/Employment</span>
             </label>
-            <label key={2} className={styles.aidItem}>
+            <label key="not-sure-other" className={styles.aidItem}>
               {row.otherAidRequested ? (
                 <input type="checkbox" checked readOnly className={styles.aidCheckbox} />
               ) : (
@@ -158,7 +160,7 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
               </label>
             ))}
           </div>
-          <button className={styles.addTodoButton}>
+          <button className={styles.addTodoButton} aria-label="Add a new to-do item">
             <span className={styles.addTodoPlus}>+</span>
             <span>Add To-do</span>
           </button>
@@ -172,10 +174,21 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
               • New Note ({note.date})
             </div>
           )) ?? <span>-</span>}
-          <button className={styles.viewMoreButton}>view more</button>
+          <button className={styles.viewMoreButton} aria-label="View more notes">
+            view more
+          </button>
         </div>
 
-        <button className={styles.markCompleteButton}>Mark as Complete</button>
+        <button
+          className={styles.markCompleteButton}
+          onClick={() => {
+            if (rowIndex !== undefined) {
+              onRowMove?.(rowIndex);
+            }
+          }}
+        >
+          Mark as Complete
+        </button>
       </div>
     </div>
   );
