@@ -60,6 +60,7 @@ const makeGenderValidator = () =>
     .bail()
     .isString()
     .withMessage("gender must be a string")
+    .bail()
     .notEmpty()
     .withMessage("gender cannot be empty");
 
@@ -137,3 +138,5 @@ export const updateApplicant = [
   makeStatusValidator(),
   makeActionPlanValidator(),
 ];
+
+export const removeApplicant = [makeIDValidator()];

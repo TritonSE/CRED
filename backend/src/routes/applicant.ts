@@ -13,6 +13,6 @@ router.get("/", ApplicantController.getAllApplicants);
 router.get("/:id", ApplicantController.getApplicant);
 router.post("/", ApplicantValidator.createApplicant, ApplicantController.createApplicant);
 router.put("/:id", ApplicantValidator.updateApplicant, ApplicantController.updateApplicant);
-router.delete("/:id", ApplicantController.removeApplicant);
+router.delete("/:id", ApplicantValidator.removeApplicant, ApplicantController.removeApplicant);
 
 export default router;

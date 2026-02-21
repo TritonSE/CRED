@@ -152,10 +152,6 @@ export const removeApplicant: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    if (!mongoose.isValidObjectId(id)) {
-      throw createHttpError(400, "Invalid applicant ID.");
-    }
-
     const result = await ApplicantModel.deleteOne({ _id: id });
 
     if (result.deletedCount === 0) {
