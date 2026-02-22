@@ -225,6 +225,12 @@
   font-size: 20px;
   color: white;
   word-break: break-word;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contactText:hover {
+  color: #ffb341;
 }
 
 .addressWrapper {

@@ -67,7 +67,9 @@ export default function Footer() {
                     fill="#FFB341"
                   />
                 </svg>
-                <p className={styles.contactText}>credsd@credsd.org</p>
+                <a href="mailto:credsd@credsd.org" className={styles.contactText}>
+                  credsd@credsd.org
+                </a>
               </div>
 
               {/* Phone */}
@@ -78,9 +80,9 @@ export default function Footer() {
                     fill="#FFB341"
                   />
                 </svg>
-                <p className="flex-1 font-['Lato',sans-serif] font-medium leading-[1.5] text-[20px] text-white">
+                <a href="tel:18884534943" className={styles.contactText}>
                   1-888-453-4943
-                </p>
+                </a>
               </div>
 
               {/* Address */}
