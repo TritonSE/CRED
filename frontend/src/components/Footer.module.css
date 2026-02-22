@@ -1,0 +1,284 @@
+.footer {
+  background-color: #175892;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+@media (min-width: 1024px) {
+  .footer {
+    min-height: 497px;
+  }
+}
+
+.footerInner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 64px 24px 56px;
+  flex: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 40px;
+    row-gap: 48px;
+  }
+}
+
+/* Left Section */
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .leftSection {
+    grid-column: 1 / span 5;
+    justify-self: start;
+  }
+}
+
+@media (min-width: 1280px) {
+  .leftSection {
+    margin-left: -40px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .leftSection {
+    margin-left: -56px;
+  }
+}
+
+.logoWrapper {
+  position: relative;
+  height: 115px;
+  width: 250px;
+  max-width: 100%;
+}
+
+.missionText {
+  margin-top: -8px;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 16px;
+  color: white;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .missionText {
+    max-width: 40ch;
+  }
+}
+
+.backToTop {
+  margin-top: -4px;
+  width: fit-content;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 16px;
+  color: #ffb341;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.backToTop:hover {
+  opacity: 0.8;
+}
+
+/* Middle Section */
+.middleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .middleSection {
+    grid-column: 7 / span 3;
+    justify-self: end;
+    transform: translateX(-25px);
+  }
+}
+
+/* Right Section */
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .rightSection {
+    grid-column: 10 / span 3;
+    justify-self: end;
+    transform: translateX(90px);
+  }
+}
+
+.sectionTitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  line-height: 1.5;
+  font-size: 24px;
+  color: #ffb341;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.navLink {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: #ffb341;
+}
+
+.applyLink {
+  width: fit-content;
+  text-decoration: none;
+}
+
+.applyButton {
+  background-color: #ffb341;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 12px 24px;
+  border-radius: 5px;
+  transition: opacity 0.2s;
+}
+
+.applyButton:hover {
+  opacity: 0.9;
+}
+
+.applyButtonText {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 20px;
+  color: black;
+}
+
+/* Contact Section */
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.contactItem {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.contactItemTop {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.contactIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.contactText {
+  flex: 1;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 20px;
+  color: white;
+  word-break: break-word;
+}
+
+.addressWrapper {
+  flex: 1;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 20px;
+  color: white;
+}
+
+/* TSE Footer */
+.tseFooter {
+  background-color: #004881;
+  border-top: 1px solid white;
+  width: 100%;
+}
+
+.tseInner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 12px 24px;
+}
+
+.tseContent {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.tseLogoWrapper {
+  position: relative;
+  height: 32px;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.tseText {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: white;
+  line-height: 1.5;
+}
+
+.tseLink {
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.tseLink:hover {
+  color: #ffb341;
+}
