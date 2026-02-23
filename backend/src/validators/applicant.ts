@@ -9,6 +9,7 @@ import {
   STATUS_OPTIONS,
 } from "../models/applicant";
 
+// Validator factory helpers keep create/update schemas consistent and reusable.
 const makeIDValidator = () =>
   body("_id")
     .exists()
@@ -181,9 +182,11 @@ const makeIsCompletedValidator = () =>
 // ==========================================================
 
 export const createApplicant = [
+  // Required intake fields.
   makeClientNumberValidator(),
   makeClientNameValidator(),
   makeDateSubmittedValidator(),
+  // Optional profile/metadata fields.
   makeStatusValidator(),
   makeDateOfBirthValidator(),
   makeRaceValidator(),
@@ -197,16 +200,20 @@ export const createApplicant = [
   makeAidRequestedValidator(),
   makeOtherAidRequestedValidator(),
   makeAdditionalCommentsValidator(),
+  // Optional nested structured fields.
   makeTodosValidator(),
   makeNotesValidator(),
   makeIsCompletedValidator(),
 ];
 
 export const updateApplicant = [
+  // Enforce identity consistency for update requests.
   makeIDValidator(),
+  // Required core fields for full-record update.
   makeClientNumberValidator(),
   makeClientNameValidator(),
   makeDateSubmittedValidator(),
+  // Optional profile/metadata fields.
   makeStatusValidator(),
   makeDateOfBirthValidator(),
   makeRaceValidator(),
@@ -220,9 +227,11 @@ export const updateApplicant = [
   makeAidRequestedValidator(),
   makeOtherAidRequestedValidator(),
   makeAdditionalCommentsValidator(),
+  // Optional nested structured fields.
   makeTodosValidator(),
   makeNotesValidator(),
   makeIsCompletedValidator(),
 ];
 
+// Delete requests only require a valid target document id.
 export const removeApplicant = [makeIDValidator()];

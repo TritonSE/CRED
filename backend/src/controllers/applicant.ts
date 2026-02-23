@@ -7,6 +7,9 @@ import validationErrorParser from "../util/validationErrorParser";
 
 import type { RequestHandler } from "express";
 
+/**
+ * Fetch a single applicant by MongoDB id.
+ */
 export const getApplicant: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
 
@@ -39,6 +42,7 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
     const sortBy = typeof sortByParam === "string" ? sortByParam : "clientName";
     const order = typeof orderParam === "string" && orderParam === "asc" ? 1 : -1;
 
+    // Secondary _id sort keeps ordering deterministic when sortBy values tie.
     const sortOptions: Record<string, 1 | -1> = {
       [sortBy]: order,
       _id: order,
@@ -124,6 +128,9 @@ type UpdateApplicantBody = {
   isCompleted?: boolean;
 };
 
+/**
+ * Create a new applicant document from a validated request body.
+ */
 export const createApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
   const {
@@ -195,6 +202,10 @@ export const removeApplicant: RequestHandler = async (req, res, next) => {
   }
 };
 
+/**
+ * Replace an existing applicant record by id.
+ * This endpoint expects a full update payload and optionally checks body `_id` against route `:id`.
+ */
 export const updateApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
   const {

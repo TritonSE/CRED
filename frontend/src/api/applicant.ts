@@ -52,6 +52,10 @@ type ApplicantJSON = {
   isCompleted?: boolean;
 };
 
+/**
+ * Converts a raw API JSON payload into frontend-friendly types.
+ * Date-like strings are normalized to `Date` objects for component consumption.
+ */
 function parseApplicant(applicant: ApplicantJSON): Applicant {
   return {
     _id: applicant._id,
@@ -172,7 +176,7 @@ export async function getAllApplicants(
   options?: GetApplicantsOptions,
 ): Promise<APIResult<Applicant[] | PaginatedResponse<Applicant>>> {
   try {
-    // 1. Construct Query String
+    // Construct query parameters only when they are provided by the caller.
     const params = new URLSearchParams();
     if (options?.page) params.append("page", options.page.toString());
     if (options?.limit) params.append("limit", options.limit.toString());
@@ -185,12 +189,12 @@ export async function getAllApplicants(
     const response = await get(url);
     const json: unknown = await response.json();
 
-    // 2. Handle "All" Response (Array)
+    // When pagination is omitted, backend returns a plain array.
     if (Array.isArray(json)) {
       return { success: true, data: (json as ApplicantJSON[]).map(parseApplicant) };
     }
 
-    // 3. Handle "Paginated" Response (Object with data & meta)
+    // When pagination is provided, backend returns { data, meta }.
     const result = json as {
       data: ApplicantJSON[];
       meta: { total: number; page: number; totalPages: number };

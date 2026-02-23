@@ -2,6 +2,7 @@ import { Model, Schema, model, models } from "mongoose";
 
 import type { InferSchemaType } from "mongoose";
 
+// Allowed values for race-related applicant metadata.
 export const RACE_OPTIONS = [
   "White",
   "Black or African American",
@@ -16,6 +17,7 @@ export const RACE_OPTIONS = [
 
 export const STATUS_OPTIONS = ["Under Review", "Need to Review", "Reviewed"] as const;
 
+// Allowed values for applicant gender identity.
 export const GENDER_OPTIONS = [
   "Male",
   "Female",
@@ -24,6 +26,7 @@ export const GENDER_OPTIONS = [
   "Other",
 ] as const;
 
+// Allowed values describing current housing situation.
 export const HOUSING_STATUS_OPTIONS = [
   "Homeless",
   "At-risk of homelessness",
@@ -33,6 +36,7 @@ export const HOUSING_STATUS_OPTIONS = [
   "Other",
 ] as const;
 
+// Allowed values describing applicant education level.
 export const EDUCATION_OPTIONS = [
   "Less than high school",
   "High school diploma or GED",
@@ -43,6 +47,7 @@ export const EDUCATION_OPTIONS = [
   "Other",
 ] as const;
 
+// Supported aid categories requested by the applicant.
 export const AID_REQUESTED_OPTIONS = [
   "Transitional/Rental Housing Support",
   "Rent Subsidies/Onsite support",
@@ -51,6 +56,7 @@ export const AID_REQUESTED_OPTIONS = [
   "Not Sure/Other",
 ] as const;
 
+// Embedded todo items shown in expanded applicant views.
 const todoSchema = new Schema(
   {
     id: { type: String, required: true },
@@ -60,6 +66,7 @@ const todoSchema = new Schema(
   { _id: false },
 );
 
+// Embedded free-form notes associated with an applicant.
 const noteSchema = new Schema(
   {
     date: { type: String, required: true },
@@ -68,6 +75,10 @@ const noteSchema = new Schema(
   { _id: false },
 );
 
+/**
+ * Core applicant persistence schema used by the API.
+ * Optional fields support progressive intake where partial information may be saved first.
+ */
 const applicantSchema = new Schema(
   {
     clientNumber: { type: String, required: true },
@@ -117,5 +128,6 @@ const applicantSchema = new Schema(
 
 export type Applicant = InferSchemaType<typeof applicantSchema>;
 
+// Reuse existing model in dev/hot-reload environments to avoid OverwriteModelError.
 export default (models.Applicant as Model<Applicant>) ||
   model<Applicant>("Applicant", applicantSchema);
