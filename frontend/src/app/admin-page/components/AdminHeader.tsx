@@ -48,6 +48,7 @@ export const AdminHeader = function AdminHeader({
           placeholder="Search all applications"
           value={searchQuery}
           onChange={(query) => onSearchChange?.(query)}
+          className={styles.searchBar}
         />
       </div>
     </div>
