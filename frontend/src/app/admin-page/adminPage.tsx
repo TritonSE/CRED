@@ -115,6 +115,7 @@ const comData: ApplicationRowData[] = [
 export default function AdminPage() {
   const [newApps, setNewApps] = useState<ApplicationRowData[]>(ipData);
   const [completedApps, setCompletedApps] = useState<ApplicationRowData[]>(comData);
+  const [searchQuery, setSearchQuery] = useState("");
 
   /** Move a row from the "new" table to "completed" */
   const moveToCompleted = (index: number) => {
@@ -132,12 +133,13 @@ export default function AdminPage() {
 
   return (
     <main className={styles.mainContent}>
-      <AdminHeader name="DeQuan" />
+      <AdminHeader name="DeQuan" searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <ApplicationTable
         title="New Applications"
         data={newApps}
         totalApplications={newApps.length}
         onRowMove={moveToCompleted}
+        globalFilter={searchQuery}
       />
       <ApplicationTable
         title="Completed Applications"
@@ -145,6 +147,7 @@ export default function AdminPage() {
         totalApplications={completedApps.length}
         onRowMove={moveToNew}
         isCompleted
+        globalFilter={searchQuery}
       />
     </main>
   );

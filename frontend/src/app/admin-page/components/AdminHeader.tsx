@@ -19,6 +19,8 @@ import styles from "./AdminHeader.module.css";
  */
 export type HeaderProps = {
   name: string;
+  searchQuery?: string;
+  onSearchChange?: (query: string) => void;
 } & React.ComponentProps<"h1">;
 
 /**
@@ -30,6 +32,8 @@ export type HeaderProps = {
  */
 export const AdminHeader = function AdminHeader({
   name,
+  searchQuery,
+  onSearchChange,
 }: HeaderProps & { ref?: React.RefObject<HTMLHeadingElement | null> }) {
   return (
     <div className={styles.flexContainer}>
@@ -40,7 +44,11 @@ export const AdminHeader = function AdminHeader({
 
       {/* Search bar section for filtering applications */}
       <div className={styles.searchColumn}>
-        <Search placeholder="Search all applications" />
+        <Search
+          placeholder="Search all applications"
+          value={searchQuery}
+          onChange={(query) => onSearchChange?.(query)}
+        />
       </div>
     </div>
   );

@@ -25,6 +25,7 @@ import {
   flexRender,
   getCoreRowModel,
   getExpandedRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -74,6 +75,7 @@ export type ApplicationTableProps = {
   onRowMove?: (index: number) => void;
   /** If true, all rows render with their checkbox checked */
   isCompleted?: boolean;
+  globalFilter?: string;
 };
 
 /**
@@ -104,6 +106,7 @@ export function ApplicationTable({
   totalApplications,
   onRowMove,
   isCompleted = false,
+  globalFilter = "",
 }: ApplicationTableProps) {
   // State to track whether the table content is visible
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
@@ -215,10 +218,18 @@ export function ApplicationTable({
     columns,
     state: {
       sorting,
+      globalFilter,
+    },
+    globalFilterFn: (row, columnId, filterValue) => {
+      const clientNameValue = row.getValue("clientName");
+      if (typeof clientNameValue !== "string") return false;
+      const lowerSearch = String(filterValue).toLowerCase();
+      return clientNameValue.toLowerCase().includes(lowerSearch);
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
