@@ -97,6 +97,7 @@ type CreateApplicantBody = {
   phoneNumber?: string;
   housingStatus?: string;
   education?: string;
+  employment?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;
@@ -119,6 +120,7 @@ type UpdateApplicantBody = {
   phoneNumber?: string;
   housingStatus?: string;
   education?: string;
+  employment?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;
@@ -146,6 +148,7 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
     phoneNumber,
     housingStatus,
     education,
+    employment,
     convictionDetails,
     aidRequested,
     otherAidRequested,
@@ -171,6 +174,7 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
       phoneNumber,
       housingStatus,
       education,
+      employment,
       convictionDetails,
       aidRequested,
       otherAidRequested,
@@ -221,6 +225,7 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
     phoneNumber,
     housingStatus,
     education,
+    employment,
     convictionDetails,
     aidRequested,
     otherAidRequested,
@@ -260,6 +265,7 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
         phoneNumber,
         housingStatus,
         education,
+        employment,
         convictionDetails,
         aidRequested,
         otherAidRequested,

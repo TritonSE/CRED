@@ -3,6 +3,7 @@ import { body } from "express-validator";
 import {
   AID_REQUESTED_OPTIONS,
   EDUCATION_OPTIONS,
+  EMPLOYMENT_OPTIONS,
   GENDER_OPTIONS,
   HOUSING_STATUS_OPTIONS,
   RACE_OPTIONS,
@@ -109,6 +110,14 @@ const makeEducationValidator = () =>
     .isIn(EDUCATION_OPTIONS)
     .withMessage("education must be a valid option from the list");
 
+const makeEmploymentValidator = () =>
+  body("employment")
+    .optional()
+    .isString()
+    .bail()
+    .isIn(EMPLOYMENT_OPTIONS)
+    .withMessage("employment must be a valid option from the list");
+
 const makeConvictionDetailsValidator = () =>
   body("convictionDetails").optional().isString().withMessage("convictionDetails must be a string");
 
@@ -196,6 +205,7 @@ export const createApplicant = [
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),
   makeEducationValidator(),
+  makeEmploymentValidator(),
   makeConvictionDetailsValidator(),
   makeAidRequestedValidator(),
   makeOtherAidRequestedValidator(),
@@ -223,6 +233,7 @@ export const updateApplicant = [
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),
   makeEducationValidator(),
+  makeEmploymentValidator(),
   makeConvictionDetailsValidator(),
   makeAidRequestedValidator(),
   makeOtherAidRequestedValidator(),

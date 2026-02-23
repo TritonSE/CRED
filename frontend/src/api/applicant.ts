@@ -20,6 +20,7 @@ export type Applicant = {
   phoneNumber?: string;
   housingStatus?: string;
   education?: string;
+  employment?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;
@@ -43,6 +44,7 @@ type ApplicantJSON = {
   phoneNumber?: string;
   housingStatus?: string;
   education?: string;
+  employment?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;
@@ -71,6 +73,7 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
     phoneNumber: applicant.phoneNumber,
     housingStatus: applicant.housingStatus,
     education: applicant.education,
+    employment: applicant.employment,
     convictionDetails: applicant.convictionDetails,
     aidRequested: applicant.aidRequested,
     otherAidRequested: applicant.otherAidRequested,
@@ -94,6 +97,7 @@ export type CreateApplicantRequest = {
   phoneNumber?: string;
   housingStatus?: string;
   education?: string;
+  employment?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;
@@ -117,6 +121,7 @@ export type UpdateApplicantRequest = {
   phoneNumber?: string;
   housingStatus?: string;
   education?: string;
+  employment?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;

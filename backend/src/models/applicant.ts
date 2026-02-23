@@ -47,6 +47,19 @@ export const EDUCATION_OPTIONS = [
   "Other",
 ] as const;
 
+// Allowed values describing current employment status.
+export const EMPLOYMENT_OPTIONS = [
+  "Employed full-time",
+  "Employed part-time",
+  "Self-employed",
+  "Unemployed and seeking work",
+  "Unemployed and not seeking work",
+  "Student",
+  "Retired",
+  "Unable to work",
+  "Other",
+] as const;
+
 // Supported aid categories requested by the applicant.
 export const AID_REQUESTED_OPTIONS = [
   "Transitional/Rental Housing Support",
@@ -109,6 +122,10 @@ const applicantSchema = new Schema(
     education: {
       type: String,
       enum: EDUCATION_OPTIONS,
+    },
+    employment: {
+      type: String,
+      enum: EMPLOYMENT_OPTIONS,
     },
     convictionDetails: { type: String },
     aidRequested: {
