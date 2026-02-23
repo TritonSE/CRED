@@ -15,6 +15,7 @@ export type Applicant = {
   dateOfBirth?: Date;
   race?: string;
   gender?: string;
+  idPhotoUrl?: string;
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
@@ -37,6 +38,7 @@ type ApplicantJSON = {
   dateOfBirth?: string;
   race?: string;
   gender?: string;
+  idPhotoUrl?: string;
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
@@ -60,6 +62,7 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
     dateOfBirth: applicant.dateOfBirth ? new Date(applicant.dateOfBirth) : undefined,
     race: applicant.race,
     gender: applicant.gender,
+    idPhotoUrl: applicant.idPhotoUrl,
     email: applicant.email,
     phoneNumber: applicant.phoneNumber,
     housingStatus: applicant.housingStatus,
@@ -82,6 +85,7 @@ export type CreateApplicantRequest = {
   dateOfBirth?: Date;
   race?: string;
   gender?: string;
+  idPhotoUrl?: string;
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
@@ -104,6 +108,7 @@ export type UpdateApplicantRequest = {
   dateOfBirth?: Date;
   race?: string;
   gender?: string;
+  idPhotoUrl?: string;
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;

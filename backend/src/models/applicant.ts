@@ -88,6 +88,7 @@ const applicantSchema = new Schema(
       type: String,
       enum: GENDER_OPTIONS,
     },
+    idPhotoUrl: { type: String },
     email: { type: String },
     phoneNumber: { type: String },
     housingStatus: {

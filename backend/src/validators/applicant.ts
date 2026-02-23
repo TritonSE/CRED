@@ -77,6 +77,15 @@ const makeGenderValidator = () =>
     .isIn(GENDER_OPTIONS)
     .withMessage("gender must be a valid option from the list");
 
+const makeIdPhotoUrlValidator = () =>
+  body("idPhotoUrl")
+    .optional()
+    .isString()
+    .withMessage("idPhotoUrl must be a string")
+    .bail()
+    .isURL()
+    .withMessage("idPhotoUrl must be a valid URL");
+
 const makeEmailValidator = () =>
   body("email").optional().isString().withMessage("email must be a string");
 
@@ -179,6 +188,7 @@ export const createApplicant = [
   makeDateOfBirthValidator(),
   makeRaceValidator(),
   makeGenderValidator(),
+  makeIdPhotoUrlValidator(),
   makeEmailValidator(),
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),
@@ -201,6 +211,7 @@ export const updateApplicant = [
   makeDateOfBirthValidator(),
   makeRaceValidator(),
   makeGenderValidator(),
+  makeIdPhotoUrlValidator(),
   makeEmailValidator(),
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),

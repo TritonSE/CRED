@@ -88,6 +88,7 @@ type CreateApplicantBody = {
   dateOfBirth?: Date;
   race?: string;
   gender?: string;
+  idPhotoUrl?: string;
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
@@ -109,6 +110,7 @@ type UpdateApplicantBody = {
   dateOfBirth?: Date;
   race?: string;
   gender?: string;
+  idPhotoUrl?: string;
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
@@ -132,6 +134,7 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
     dateOfBirth,
     race,
     gender,
+    idPhotoUrl,
     email,
     phoneNumber,
     housingStatus,
@@ -156,6 +159,7 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
       dateOfBirth,
       race,
       gender,
+      idPhotoUrl,
       email,
       phoneNumber,
       housingStatus,
@@ -201,6 +205,7 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
     dateOfBirth,
     race,
     gender,
+    idPhotoUrl,
     email,
     phoneNumber,
     housingStatus,
@@ -239,6 +244,7 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
         dateOfBirth,
         race,
         gender,
+        idPhotoUrl,
         email,
         phoneNumber,
         housingStatus,
