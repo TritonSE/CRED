@@ -3,83 +3,118 @@ import { get, handleAPIError, post, put } from "../api/requests";
 import type { APIResult } from "../api/requests";
 
 /**
- * Defines the "shape" of a Applicant object (what fields are present and their types) for
+ * Defines the "shape" of an Applicant object (what fields are present and their types) for
  * frontend components to use.
  */
 export type Applicant = {
   _id: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  raceEthnicity: string;
-  gender: string;
-  cdcrNumber?: string;
-  description?: string;
-  typeOfAid: string[];
-  otherAidDescription?: string;
+  clientNumber: string;
+  clientName: string;
+  dateSubmitted: Date;
   status: string;
-  actionPlan?: string;
+  dateOfBirth?: Date;
+  race?: string;
+  gender?: string;
+  email?: string;
+  phoneNumber?: string;
+  housingStatus?: string;
+  education?: string;
+  convictionDetails?: string;
+  aidRequested?: string[];
+  otherAidRequested?: string;
+  additionalComments?: string;
+  todos?: { id: string; label: string; completed: boolean }[];
+  notes?: { date: string; content: string }[];
+  isCompleted?: boolean;
 };
 
 type ApplicantJSON = {
   _id: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  raceEthnicity: string;
-  gender: string;
-  cdcrNumber?: string;
-  description?: string;
-  typeOfAid: string[];
-  otherAidDescription?: string;
+  clientNumber: string;
+  clientName: string;
+  dateSubmitted: string;
   status: string;
-  actionPlan?: string;
+  dateOfBirth?: string;
+  race?: string;
+  gender?: string;
+  email?: string;
+  phoneNumber?: string;
+  housingStatus?: string;
+  education?: string;
+  convictionDetails?: string;
+  aidRequested?: string[];
+  otherAidRequested?: string;
+  additionalComments?: string;
+  todos?: { id: string; label: string; completed: boolean }[];
+  notes?: { date: string; content: string }[];
+  isCompleted?: boolean;
 };
 
 function parseApplicant(applicant: ApplicantJSON): Applicant {
   return {
     _id: applicant._id,
-    firstName: applicant.firstName,
-    lastName: applicant.lastName,
-    dateOfBirth: new Date(applicant.dateOfBirth),
-    raceEthnicity: applicant.raceEthnicity,
-    gender: applicant.gender,
-    cdcrNumber: applicant.cdcrNumber,
-    description: applicant.description,
-    typeOfAid: applicant.typeOfAid,
-    otherAidDescription: applicant.otherAidDescription,
+    clientNumber: applicant.clientNumber,
+    clientName: applicant.clientName,
+    dateSubmitted: new Date(applicant.dateSubmitted),
     status: applicant.status,
-    actionPlan: applicant.actionPlan,
+    dateOfBirth: applicant.dateOfBirth ? new Date(applicant.dateOfBirth) : undefined,
+    race: applicant.race,
+    gender: applicant.gender,
+    email: applicant.email,
+    phoneNumber: applicant.phoneNumber,
+    housingStatus: applicant.housingStatus,
+    education: applicant.education,
+    convictionDetails: applicant.convictionDetails,
+    aidRequested: applicant.aidRequested,
+    otherAidRequested: applicant.otherAidRequested,
+    additionalComments: applicant.additionalComments,
+    todos: applicant.todos,
+    notes: applicant.notes,
+    isCompleted: applicant.isCompleted,
   };
 }
 
 export type CreateApplicantRequest = {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  raceEthnicity: string;
-  gender: string;
-  cdcrNumber?: string;
-  description?: string;
-  typeOfAid: string[];
-  otherAidDescription?: string;
-  status: string;
-  actionPlan?: string;
+  clientNumber: string;
+  clientName: string;
+  dateSubmitted: Date;
+  status?: string;
+  dateOfBirth?: Date;
+  race?: string;
+  gender?: string;
+  email?: string;
+  phoneNumber?: string;
+  housingStatus?: string;
+  education?: string;
+  convictionDetails?: string;
+  aidRequested?: string[];
+  otherAidRequested?: string;
+  additionalComments?: string;
+  todos?: { id: string; label: string; completed: boolean }[];
+  notes?: { date: string; content: string }[];
+  isCompleted?: boolean;
 };
 
 export type UpdateApplicantRequest = {
   _id: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  raceEthnicity: string;
-  gender: string;
-  cdcrNumber?: string;
-  description?: string;
-  typeOfAid: string[];
-  otherAidDescription?: string;
-  status: string;
-  actionPlan?: string;
+  clientNumber: string;
+  clientName: string;
+  dateSubmitted: Date;
+  status?: string;
+  dateOfBirth?: Date;
+  race?: string;
+  gender?: string;
+  email?: string;
+  phoneNumber?: string;
+  housingStatus?: string;
+  education?: string;
+  convictionDetails?: string;
+  aidRequested?: string[];
+  otherAidRequested?: string;
+  additionalComments?: string;
+  todos?: { id: string; label: string; completed: boolean }[];
+  notes?: { date: string; content: string }[];
+  isCompleted?: boolean;
 };
 
 // --- NEW TYPES FOR PAGINATION ---

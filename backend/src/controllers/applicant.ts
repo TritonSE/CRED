@@ -36,7 +36,7 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
 
     const page = typeof pageParam === "string" ? parseInt(pageParam, 10) : NaN;
     const limit = typeof limitParam === "string" ? parseInt(limitParam, 10) : NaN;
-    const sortBy = typeof sortByParam === "string" ? sortByParam : "firstName";
+    const sortBy = typeof sortByParam === "string" ? sortByParam : "clientName";
     const order = typeof orderParam === "string" && orderParam === "asc" ? 1 : -1;
 
     const sortOptions: Record<string, 1 | -1> = {
@@ -81,65 +81,92 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
 };
 
 type CreateApplicantBody = {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  raceEthnicity: string;
-  gender: string;
-  cdcrNumber?: string;
-  description?: string;
-  typeOfAid: string[];
-  otherAidDescription?: string;
-  status: string;
-  actionPlan?: string;
+  clientNumber: string;
+  clientName: string;
+  dateSubmitted: Date;
+  status?: string;
+  dateOfBirth?: Date;
+  race?: string;
+  gender?: string;
+  email?: string;
+  phoneNumber?: string;
+  housingStatus?: string;
+  education?: string;
+  convictionDetails?: string;
+  aidRequested?: string[];
+  otherAidRequested?: string;
+  additionalComments?: string;
+  todos?: { id: string; label: string; completed: boolean }[];
+  notes?: { date: string; content: string }[];
+  isCompleted?: boolean;
 };
 
 type UpdateApplicantBody = {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  raceEthnicity: string;
-  gender: string;
-  cdcrNumber?: string;
-  description?: string;
-  typeOfAid: string[];
-  otherAidDescription?: string;
-  status: string;
-  actionPlan?: string;
+  clientNumber: string;
+  clientName: string;
+  dateSubmitted: Date;
+  status?: string;
+  dateOfBirth?: Date;
+  race?: string;
+  gender?: string;
+  email?: string;
+  phoneNumber?: string;
+  housingStatus?: string;
+  education?: string;
+  convictionDetails?: string;
+  aidRequested?: string[];
+  otherAidRequested?: string;
+  additionalComments?: string;
+  todos?: { id: string; label: string; completed: boolean }[];
+  notes?: { date: string; content: string }[];
+  isCompleted?: boolean;
 };
 
 export const createApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
-  // Extract applicant fields from request body
   const {
-    firstName,
-    lastName,
-    dateOfBirth,
-    raceEthnicity,
-    gender,
-    cdcrNumber,
-    description,
-    typeOfAid,
-    otherAidDescription,
+    clientNumber,
+    clientName,
+    dateSubmitted,
     status,
-    actionPlan,
+    dateOfBirth,
+    race,
+    gender,
+    email,
+    phoneNumber,
+    housingStatus,
+    education,
+    convictionDetails,
+    aidRequested,
+    otherAidRequested,
+    additionalComments,
+    todos,
+    notes,
+    isCompleted,
   } = req.body as CreateApplicantBody;
 
   try {
     validationErrorParser(errors);
 
     const applicant = await ApplicantModel.create({
-      firstName,
-      lastName,
-      dateOfBirth,
-      raceEthnicity,
-      gender,
-      cdcrNumber,
-      description,
-      typeOfAid,
-      otherAidDescription,
+      clientNumber,
+      clientName,
+      dateSubmitted,
       status,
-      actionPlan,
+      dateOfBirth,
+      race,
+      gender,
+      email,
+      phoneNumber,
+      housingStatus,
+      education,
+      convictionDetails,
+      aidRequested,
+      otherAidRequested,
+      additionalComments,
+      todos,
+      notes,
+      isCompleted,
     });
 
     res.status(201).json(applicant);
@@ -167,17 +194,24 @@ export const removeApplicant: RequestHandler = async (req, res, next) => {
 export const updateApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
   const {
-    firstName,
-    lastName,
-    dateOfBirth,
-    raceEthnicity,
-    gender,
-    cdcrNumber,
-    description,
-    typeOfAid,
-    otherAidDescription,
+    clientNumber,
+    clientName,
+    dateSubmitted,
     status,
-    actionPlan,
+    dateOfBirth,
+    race,
+    gender,
+    email,
+    phoneNumber,
+    housingStatus,
+    education,
+    convictionDetails,
+    aidRequested,
+    otherAidRequested,
+    additionalComments,
+    todos,
+    notes,
+    isCompleted,
     _id,
   } = req.body as UpdateApplicantBody & {
     _id: string;
@@ -195,21 +229,27 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
       throw createHttpError(400, "Applicant ID Mismatch.");
     }
 
-    // Update all fields in the database
     const applicant = await ApplicantModel.findByIdAndUpdate(
       id,
       {
-        firstName,
-        lastName,
-        dateOfBirth,
-        raceEthnicity,
-        gender,
-        cdcrNumber,
-        description,
-        typeOfAid,
-        otherAidDescription,
+        clientNumber,
+        clientName,
+        dateSubmitted,
         status,
-        actionPlan,
+        dateOfBirth,
+        race,
+        gender,
+        email,
+        phoneNumber,
+        housingStatus,
+        education,
+        convictionDetails,
+        aidRequested,
+        otherAidRequested,
+        additionalComments,
+        todos,
+        notes,
+        isCompleted,
       },
       { new: true },
     );
