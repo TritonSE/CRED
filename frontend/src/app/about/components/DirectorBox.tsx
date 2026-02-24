@@ -31,7 +31,7 @@ export const DirectorBox: React.FC<DirectorBoxProps> = ({
 
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.body}>{textBody}</p>
-      <Button className={styles.buttonStyle} label={buttonlabel} />
+      <Button className={styles.buttonstyle} label={buttonlabel} />
     </div>
   );
 };

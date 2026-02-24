@@ -1,7 +1,6 @@
 .mainBox {
   position: relative;
   width: 45%;
-  height: 27rem;
   border-radius: 15px;
   padding: 1rem;
 
@@ -52,19 +51,22 @@
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
-  font-size: 16px;
+  /* font-size: 16px; */
   line-height: 1.5;
-  margin: 1rem 3rem 2rem;
+  margin: 1rem 3rem 3rem;
   color: white;
 }
 
 .buttonstyle {
-  margin: 0 3rem 4rem;
+  margin: 0 3rem 3rem;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1500px) {
   .mainBox {
     margin: 0 auto;
-    width: 90%;
+    width: 80%;
+  }
+  .buttonstyle {
+    margin: 0 3rem 3rem;
   }
 }

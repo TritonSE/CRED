@@ -82,13 +82,13 @@ export default function AboutUsPage() {
               title="You Apply to CRED"
               textBody="Review CRED's programs and see which type of support best fits your current situation. Then, fill out the application form."
             />
-            <img src="Vector.png" alt="arrow" className="vectors" />
+            <Image src="/Vector.png" alt="arrow" className="vectors" width={30} height={30} />
             <OperationsCard
               iconURL="/assess_needs_icon.svg"
               title="We Assess Your Needs"
               textBody="After you submit, CRED's team will review your application and follow up with next steps. We'll contact you if we need more information."
             />
-            <img src="Vector.png" alt="arrow" className="vectors" />
+            <Image src="/Vector.png" alt="arrow" className="vectors" width={30} height={30} />
             <OperationsCard
               iconURL="/client_icon.svg"
               title="You Become a Client!"

@@ -122,12 +122,10 @@
 }
 
 .directorBoxContainer {
-  background-color: #ffffff;
   padding: 7rem 0;
 }
 
 .directorBoxes {
-  height: 400px;
   width: 82%;
   margin: 0 auto;
   display: flex;
@@ -135,12 +133,11 @@
   gap: 7rem;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .directorBoxes {
     flex-direction: column;
     gap: 3rem;
     width: 100%;
-    height: 50rem;
   }
 }
 
