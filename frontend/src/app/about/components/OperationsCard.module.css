@@ -59,7 +59,6 @@
     Arial, sans-serif;
   font-weight: 600;
   text-align: center;
-  margin: 1rem;
   line-height: 150%;
   margin: 0;
 
@@ -110,17 +109,91 @@
   transform: translateY(-2rem);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1340px) {
   .cardContainer {
-    width: 60%;
+    width: 30%;
     height: 17rem;
   }
 
   .cardContainer:hover {
-    height: 21rem;
+    height: 20rem;
   }
 
   .cardTitle {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .cardNumberCircle {
+    width: 6rem;
+    height: 6rem;
+  }
+  .cardContainer:hover .cardNumberCircle {
+    width: 5.7rem;
+    height: 5.7rem;
+  }
+  .cardText {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 1240px) {
+  .cardContainer {
+    width: 30%;
+    height: 17rem;
+  }
+
+  .cardContainer:hover {
+    height: 20rem;
+  }
+
+  .cardTitle {
+    font-size: 1.2rem;
+  }
+
+  .cardText {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .cardNumberCircle {
+    margin: 0.1rem;
+  }
+  .cardNumberCircle:hover {
+    transform: translateY(-0.5rem);
+  }
+  .cardContainer {
+    width: 80%;
+    height: 15rem;
+  }
+
+  .cardContainer:hover {
+    height: 16rem;
+  }
+
+  .cardTitle {
+    font-size: 1.3rem;
+  }
+  .cardText {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .cardContainer:hover {
+    height: 17rem;
+  }
+  .cardText {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .cardTitle {
+    font-size: 1.23rem;
+  }
+
+  .cardContainer:hover {
+    height: 17.5rem;
   }
 }
