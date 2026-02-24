@@ -19,27 +19,27 @@ const makeIDValidator = () =>
     .isMongoId()
     .withMessage("_id must be a MongoDB object ID");
 
-const makeClientNumberValidator = () =>
-  body("clientNumber")
+const makeApplicantNumberValidator = () =>
+  body("applicantNumber")
     .exists()
-    .withMessage("clientNumber is required")
+    .withMessage("applicantNumber is required")
     .bail()
     .isString()
-    .withMessage("clientNumber must be a string")
+    .withMessage("applicantNumber must be a string")
     .bail()
     .notEmpty()
-    .withMessage("clientNumber cannot be empty");
+    .withMessage("applicantNumber cannot be empty");
 
-const makeClientNameValidator = () =>
-  body("clientName")
+const makeApplicantNameValidator = () =>
+  body("applicantName")
     .exists()
-    .withMessage("clientName is required")
+    .withMessage("applicantName is required")
     .bail()
     .isString()
-    .withMessage("clientName must be a string")
+    .withMessage("applicantName must be a string")
     .bail()
     .notEmpty()
-    .withMessage("clientName cannot be empty");
+    .withMessage("applicantName cannot be empty");
 
 const makeDateSubmittedValidator = () =>
   body("dateSubmitted")
@@ -102,21 +102,21 @@ const makeHousingStatusValidator = () =>
     .isIn(HOUSING_STATUS_OPTIONS)
     .withMessage("housingStatus must be a valid option from the list");
 
-const makeEducationValidator = () =>
-  body("education")
+const makeEducationStatusValidator = () =>
+  body("educationStatus")
     .optional()
     .isString()
     .bail()
     .isIn(EDUCATION_OPTIONS)
-    .withMessage("education must be a valid option from the list");
+    .withMessage("educationStatus must be a valid option from the list");
 
-const makeEmploymentValidator = () =>
-  body("employment")
+const makeEmploymentStatusValidator = () =>
+  body("employmentStatus")
     .optional()
     .isString()
     .bail()
     .isIn(EMPLOYMENT_OPTIONS)
-    .withMessage("employment must be a valid option from the list");
+    .withMessage("employmentStatus must be a valid option from the list");
 
 const makeConvictionDetailsValidator = () =>
   body("convictionDetails").optional().isString().withMessage("convictionDetails must be a string");
@@ -192,8 +192,8 @@ const makeIsCompletedValidator = () =>
 
 export const createApplicant = [
   // Required intake fields.
-  makeClientNumberValidator(),
-  makeClientNameValidator(),
+  makeApplicantNumberValidator(),
+  makeApplicantNameValidator(),
   makeDateSubmittedValidator(),
   // Optional profile/metadata fields.
   makeStatusValidator(),
@@ -204,8 +204,8 @@ export const createApplicant = [
   makeEmailValidator(),
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),
-  makeEducationValidator(),
-  makeEmploymentValidator(),
+  makeEducationStatusValidator(),
+  makeEmploymentStatusValidator(),
   makeConvictionDetailsValidator(),
   makeAidRequestedValidator(),
   makeOtherAidRequestedValidator(),
@@ -220,8 +220,8 @@ export const updateApplicant = [
   // Enforce identity consistency for update requests.
   makeIDValidator(),
   // Required core fields for full-record update.
-  makeClientNumberValidator(),
-  makeClientNameValidator(),
+  makeApplicantNumberValidator(),
+  makeApplicantNameValidator(),
   makeDateSubmittedValidator(),
   // Optional profile/metadata fields.
   makeStatusValidator(),
@@ -232,8 +232,8 @@ export const updateApplicant = [
   makeEmailValidator(),
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),
-  makeEducationValidator(),
-  makeEmploymentValidator(),
+  makeEducationStatusValidator(),
+  makeEmploymentStatusValidator(),
   makeConvictionDetailsValidator(),
   makeAidRequestedValidator(),
   makeOtherAidRequestedValidator(),

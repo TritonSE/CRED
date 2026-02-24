@@ -94,8 +94,8 @@ const noteSchema = new Schema(
  */
 const applicantSchema = new Schema(
   {
-    clientNumber: { type: String, required: true },
-    clientName: { type: String, required: true },
+    applicantNumber: { type: String, required: true },
+    applicantName: { type: String, required: true },
     dateSubmitted: { type: Date, required: true },
     status: {
       type: String,
@@ -119,11 +119,11 @@ const applicantSchema = new Schema(
       type: String,
       enum: HOUSING_STATUS_OPTIONS,
     },
-    education: {
+    educationStatus: {
       type: String,
       enum: EDUCATION_OPTIONS,
     },
-    employment: {
+    employmentStatus: {
       type: String,
       enum: EMPLOYMENT_OPTIONS,
     },

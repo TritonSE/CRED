@@ -8,8 +8,8 @@ import type { APIResult } from "../api/requests";
  */
 export type Applicant = {
   _id: string;
-  clientNumber: string;
-  clientName: string;
+  applicantNumber: string;
+  applicantName: string;
   dateSubmitted: Date;
   status: string;
   dateOfBirth?: Date;
@@ -19,8 +19,8 @@ export type Applicant = {
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
-  education?: string;
-  employment?: string;
+  educationStatus?: string;
+  employmentStatus?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;
@@ -32,8 +32,8 @@ export type Applicant = {
 
 type ApplicantJSON = {
   _id: string;
-  clientNumber: string;
-  clientName: string;
+  applicantNumber: string;
+  applicantName: string;
   dateSubmitted: string;
   status: string;
   dateOfBirth?: string;
@@ -43,8 +43,8 @@ type ApplicantJSON = {
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
-  education?: string;
-  employment?: string;
+  educationStatus?: string;
+  employmentStatus?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;
@@ -61,8 +61,8 @@ type ApplicantJSON = {
 function parseApplicant(applicant: ApplicantJSON): Applicant {
   return {
     _id: applicant._id,
-    clientNumber: applicant.clientNumber,
-    clientName: applicant.clientName,
+    applicantNumber: applicant.applicantNumber,
+    applicantName: applicant.applicantName,
     dateSubmitted: new Date(applicant.dateSubmitted),
     status: applicant.status,
     dateOfBirth: applicant.dateOfBirth ? new Date(applicant.dateOfBirth) : undefined,
@@ -72,8 +72,8 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
     email: applicant.email,
     phoneNumber: applicant.phoneNumber,
     housingStatus: applicant.housingStatus,
-    education: applicant.education,
-    employment: applicant.employment,
+    educationStatus: applicant.educationStatus,
+    employmentStatus: applicant.employmentStatus,
     convictionDetails: applicant.convictionDetails,
     aidRequested: applicant.aidRequested,
     otherAidRequested: applicant.otherAidRequested,
@@ -85,8 +85,8 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
 }
 
 export type CreateApplicantRequest = {
-  clientNumber: string;
-  clientName: string;
+  applicantNumber: string;
+  applicantName: string;
   dateSubmitted: Date;
   status?: string;
   dateOfBirth?: Date;
@@ -96,8 +96,8 @@ export type CreateApplicantRequest = {
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
-  education?: string;
-  employment?: string;
+  educationStatus?: string;
+  employmentStatus?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;
@@ -109,8 +109,8 @@ export type CreateApplicantRequest = {
 
 export type UpdateApplicantRequest = {
   _id: string;
-  clientNumber: string;
-  clientName: string;
+  applicantNumber: string;
+  applicantName: string;
   dateSubmitted: Date;
   status?: string;
   dateOfBirth?: Date;
@@ -120,8 +120,8 @@ export type UpdateApplicantRequest = {
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
-  education?: string;
-  employment?: string;
+  educationStatus?: string;
+  employmentStatus?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;

@@ -85,8 +85,8 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
 };
 
 type CreateApplicantBody = {
-  clientNumber: string;
-  clientName: string;
+  applicantNumber: string;
+  applicantName: string;
   dateSubmitted: Date;
   status?: string;
   dateOfBirth?: Date;
@@ -96,8 +96,8 @@ type CreateApplicantBody = {
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
-  education?: string;
-  employment?: string;
+  educationStatus?: string;
+  employmentStatus?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;
@@ -108,8 +108,8 @@ type CreateApplicantBody = {
 };
 
 type UpdateApplicantBody = {
-  clientNumber: string;
-  clientName: string;
+  applicantNumber: string;
+  applicantName: string;
   dateSubmitted: Date;
   status?: string;
   dateOfBirth?: Date;
@@ -119,8 +119,8 @@ type UpdateApplicantBody = {
   email?: string;
   phoneNumber?: string;
   housingStatus?: string;
-  education?: string;
-  employment?: string;
+  educationStatus?: string;
+  employmentStatus?: string;
   convictionDetails?: string;
   aidRequested?: string[];
   otherAidRequested?: string;
@@ -136,8 +136,8 @@ type UpdateApplicantBody = {
 export const createApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
   const {
-    clientNumber,
-    clientName,
+    applicantNumber,
+    applicantName,
     dateSubmitted,
     status,
     dateOfBirth,
@@ -147,8 +147,8 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
     email,
     phoneNumber,
     housingStatus,
-    education,
-    employment,
+    educationStatus,
+    employmentStatus,
     convictionDetails,
     aidRequested,
     otherAidRequested,
@@ -162,8 +162,8 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
     validationErrorParser(errors);
 
     const applicant = await ApplicantModel.create({
-      clientNumber,
-      clientName,
+      applicantNumber,
+      applicantName,
       dateSubmitted,
       status,
       dateOfBirth,
@@ -173,8 +173,8 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
       email,
       phoneNumber,
       housingStatus,
-      education,
-      employment,
+      educationStatus,
+      employmentStatus,
       convictionDetails,
       aidRequested,
       otherAidRequested,
@@ -213,8 +213,8 @@ export const removeApplicant: RequestHandler = async (req, res, next) => {
 export const updateApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
   const {
-    clientNumber,
-    clientName,
+    applicantNumber,
+    applicantName,
     dateSubmitted,
     status,
     dateOfBirth,
@@ -224,8 +224,8 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
     email,
     phoneNumber,
     housingStatus,
-    education,
-    employment,
+    educationStatus,
+    employmentStatus,
     convictionDetails,
     aidRequested,
     otherAidRequested,
@@ -253,8 +253,8 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
     const applicant = await ApplicantModel.findByIdAndUpdate(
       id,
       {
-        clientNumber,
-        clientName,
+        applicantNumber,
+        applicantName,
         dateSubmitted,
         status,
         dateOfBirth,
@@ -264,8 +264,8 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
         email,
         phoneNumber,
         housingStatus,
-        education,
-        employment,
+        educationStatus,
+        employmentStatus,
         convictionDetails,
         aidRequested,
         otherAidRequested,
