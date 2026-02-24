@@ -152,11 +152,22 @@
   margin: 0 auto;
 }
 
+.operate-heading {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #0a326d;
+  margin-bottom: 1.5rem;
+}
+
 .about-operate-content {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   line-height: 150%;
   margin-bottom: 3rem;
+  font-size: 1.3rem;
 }
 
 .operateCards {
@@ -169,4 +180,26 @@
   height: 20%;
   margin: 9rem auto;
   position: relative;
+}
+
+@media (max-width: 900px) {
+  .operate-heading {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  .about-operate-content {
+    text-align: center;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .operateCards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .vectors {
+    margin: 2rem auto;
+    rotate: 90deg;
+  }
 }

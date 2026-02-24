@@ -68,7 +68,7 @@ export default function AboutUsPage() {
 
       <div className="how-we-operate-section">
         <div className="operate-wrapper">
-          <h2 className="about-heading">How We Operate</h2>
+          <h2 className="operate-heading">How We Operate</h2>
           <p className="about-operate-content">
             CRED is unique in being a lived experience expert-based organization serving minorities
             as our main clientele to bridge the barrier gap in services. We support survivors of

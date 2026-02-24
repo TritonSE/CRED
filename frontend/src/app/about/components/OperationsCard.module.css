@@ -109,3 +109,18 @@
   opacity: 1;
   transform: translateY(-2rem);
 }
+
+@media (max-width: 900px) {
+  .cardContainer {
+    width: 60%;
+    height: 17rem;
+  }
+
+  .cardContainer:hover {
+    height: 21rem;
+  }
+
+  .cardTitle {
+    font-size: 1.5rem;
+  }
+}
