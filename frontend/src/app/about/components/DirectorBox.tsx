@@ -20,7 +20,21 @@ export type DirectorBoxProps = {
  * Prevents path traversal and ensures relative URLs
  */
 function isValidBackgroundUrl(url: string): boolean {
-  return url.startsWith("/") && !url.includes("../") && !url.includes("..\\");
+  try {
+    // Decode URL to catch encoded path traversal attempts
+    const decoded = decodeURIComponent(url);
+    // Check for relative paths starting with / and no path traversal
+    return (
+      decoded.startsWith("/") &&
+      !decoded.includes("../") &&
+      !decoded.includes("..\\") &&
+      !decoded.includes("%2e%2e") &&
+      !decoded.includes("%2E%2E")
+    );
+  } catch {
+    // Invalid URL encoding
+    return false;
+  }
 }
 
 export const DirectorBox: React.FC<DirectorBoxProps> = ({
@@ -32,6 +46,10 @@ export const DirectorBox: React.FC<DirectorBoxProps> = ({
 }) => {
   // Validate background URL for security
   const safeBackgroundUrl = isValidBackgroundUrl(backgroundUrl) ? backgroundUrl : "";
+
+  if (!safeBackgroundUrl && process.env.NODE_ENV === "development") {
+    console.warn(`DirectorBox: Invalid backgroundUrl provided: "${backgroundUrl}"`);
+  }
 
   return (
     <div
