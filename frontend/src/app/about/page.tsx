@@ -41,7 +41,13 @@ export default function AboutUsPage() {
             </div>
 
             <div className="about-image-placeholder">
-              <Image src="/OurVisionImage.png" alt="About Us Image" width={400} height={300} />
+              <Image
+                src="/OurVisionImage.png"
+                alt="About Us Image"
+                width={400}
+                height={300}
+                priority
+              />
             </div>
           </div>
         </div>
@@ -84,13 +90,13 @@ export default function AboutUsPage() {
               title="You Apply to CRED"
               textBody="Review CRED's programs and see which type of support best fits your current situation. Then, fill out the application form."
             />
-            <Image src="/Vector.png" alt="arrow" className="vectors" width={30} height={30} />
+            <Image src="/Vector.png" alt="" className="vectors" width={30} height={30} />
             <OperationsCard
               iconURL="/assess_needs_icon.svg"
               title="We Assess Your Needs"
               textBody="After you submit, CRED's team will review your application and follow up with next steps. We'll contact you if we need more information."
             />
-            <Image src="/Vector.png" alt="arrow" className="vectors" width={30} height={30} />
+            <Image src="/Vector.png" alt="" className="vectors" width={30} height={30} />
             <OperationsCard
               iconURL="/client_icon.svg"
               title="You Become a Client!"

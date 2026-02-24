@@ -15,6 +15,14 @@ export type DirectorBoxProps = {
   backgroundUrl: string;
 };
 
+/**
+ * Validates that the URL is safe to use as a background image
+ * Prevents path traversal and ensures relative URLs
+ */
+function isValidBackgroundUrl(url: string): boolean {
+  return url.startsWith("/") && !url.includes("../") && !url.includes("..\\");
+}
+
 export const DirectorBox: React.FC<DirectorBoxProps> = ({
   title,
   textBody,
@@ -22,8 +30,14 @@ export const DirectorBox: React.FC<DirectorBoxProps> = ({
   imageUrl,
   backgroundUrl,
 }) => {
+  // Validate background URL for security
+  const safeBackgroundUrl = isValidBackgroundUrl(backgroundUrl) ? backgroundUrl : "";
+
   return (
-    <div className={styles.mainBox} style={{ backgroundImage: `url(${backgroundUrl})` }}>
+    <div
+      className={styles.mainBox}
+      style={{ backgroundImage: safeBackgroundUrl ? `url(${safeBackgroundUrl})` : undefined }}
+    >
       <Image
         src={imageUrl}
         alt="Director Box Image"

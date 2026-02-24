@@ -74,12 +74,6 @@
   margin: 0 auto;
 }
 
-@media (min-width: 768px) {
-  .about-grid {
-    grid-template-columns: 1.1fr 0.9fr;
-  }
-}
-
 .about-vision-wrapper {
   padding-right: 2rem;
   width: 50%;
@@ -195,7 +189,7 @@
   }
   .vectors {
     margin: 2rem auto;
-    rotate: 90deg;
+    transform: rotate(90deg);
   }
 }
 
