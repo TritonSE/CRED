@@ -21,18 +21,18 @@ export type DirectorBoxProps = {
  */
 function isValidBackgroundUrl(url: string): boolean {
   try {
-    // Decode URL to catch encoded path traversal attempts
+    // Check for encoded path traversal attempts before decoding
+    if (url.includes("%2e%2e") || url.includes("%2E%2E")) {
+      return false;
+    }
+
+    // Decode URL to catch other encoded path traversal attempts
     const decoded = decodeURIComponent(url);
+
     // Check for relative paths starting with / and no path traversal
-    return (
-      decoded.startsWith("/") &&
-      !decoded.includes("../") &&
-      !decoded.includes("..\\") &&
-      !decoded.includes("%2e%2e") &&
-      !decoded.includes("%2E%2E")
-    );
+    return decoded.startsWith("/") && !decoded.includes("../") && !decoded.includes("..\\");
   } catch {
-    // Invalid URL encoding
+    // Invalid URL encoding (URIError)
     return false;
   }
 }
