@@ -39,7 +39,7 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
 
     const page = typeof pageParam === "string" ? parseInt(pageParam, 10) : NaN;
     const limit = typeof limitParam === "string" ? parseInt(limitParam, 10) : NaN;
-    const sortBy = typeof sortByParam === "string" ? sortByParam : "clientName";
+    const sortBy = typeof sortByParam === "string" ? sortByParam : "dateCreated";
     const order = typeof orderParam === "string" && orderParam === "asc" ? 1 : -1;
 
     // Secondary _id sort keeps ordering deterministic when sortBy values tie.
