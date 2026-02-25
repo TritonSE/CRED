@@ -2,12 +2,12 @@
 
 import { ThemeProvider } from "@tritonse/tse-constellation";
 
-import Login from "./components/auth/Login";
+import ForgotPassword from "../components/auth/ForgotPassword";
 
-export default function ExamplePage() {
+export default function ForgotPasswordPage() {
   return (
     <ThemeProvider>
-      <Login />
+      <ForgotPassword />
     </ThemeProvider>
   );
 }
