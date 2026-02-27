@@ -319,9 +319,7 @@ export function ApplicationTable({
                             </td>
                           ))}
                         </tr>
-                        <tr
-                          className={`${styles.expandedDetailRow} ${rowParity}`}
-                        >
+                        <tr className={`${styles.expandedDetailRow} ${rowParity}`}>
                           <td colSpan={columns.length} className={styles.expandedDetailCell}>
                             <div
                               ref={(el) => {
@@ -359,11 +357,8 @@ export function ApplicationTable({
               ) : (
                 <>
                   Showing {startRow}–
-                  {Math.min(
-                    startRow + table.getRowModel().rows.length - 1,
-                    totalCount,
-                  )}{" "}
-                  of {totalCount} applications
+                  {Math.min(startRow + table.getRowModel().rows.length - 1, totalCount)} of{" "}
+                  {totalCount} applications
                 </>
               )}
             </div>

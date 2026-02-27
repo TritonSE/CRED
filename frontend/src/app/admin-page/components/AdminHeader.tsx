@@ -29,7 +29,11 @@ export type HeaderProps = {
  * @param {string} props.name - Admin user's name for personalized greeting
  * @returns {JSX.Element} Header with welcome message and search functionality
  */
-export const AdminHeader = function AdminHeader({ name, searchQuery, onSearchChange }: HeaderProps) {
+export const AdminHeader = function AdminHeader({
+  name,
+  searchQuery,
+  onSearchChange,
+}: HeaderProps) {
   return (
     <div className={styles.flexContainer}>
       {/* Welcome message section */}
