@@ -171,11 +171,12 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
         <div className={styles.notesList}>
           {row.notes?.map((note, index) => (
             <div key={index} className={styles.noteItem}>
-              • New Note ({note.date})
+              • {note.content} ({note.date})
             </div>
-          )) ?? <span>-</span>}
-          <button className={styles.viewMoreButton} aria-label="View more notes">
-            view more
+          ))}
+          <button className={styles.addTodoButton} aria-label="Add a new note">
+            <span className={styles.addTodoPlus}>+</span>
+            <span>Add note</span>
           </button>
         </div>
       </div>
