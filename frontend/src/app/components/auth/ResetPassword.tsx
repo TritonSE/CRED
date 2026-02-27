@@ -40,11 +40,11 @@ function ResetPasswordForm() {
     }
 
     setLoading(true);
-    const err = await confirmPasswordResetWithCode(oobCode, newPassword);
+    const result = await confirmPasswordResetWithCode(oobCode, newPassword);
     setLoading(false);
 
-    if (err) {
-      setError(err);
+    if (!result.ok) {
+      setError(result.message);
       return;
     }
 
@@ -116,7 +116,6 @@ function ResetPasswordForm() {
 
         <form
           onSubmit={(e) => {
-            e.preventDefault();
             void handleSubmit(e);
           }}
           className={styles.form}
@@ -254,7 +253,7 @@ function ResetPasswordForm() {
               className={`${styles.button} ${newPassword && confirmPassword && !loading ? styles.buttonActive : ""}`}
               disabled={loading || !newPassword || !confirmPassword}
             >
-              {loading ? "Setting password…" : "Login"}
+              {loading ? "Setting password…" : "Reset password"}
             </button>
           </div>
         </form>

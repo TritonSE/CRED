@@ -19,11 +19,11 @@ export default function ForgotPassword() {
     setError("");
     setLoading(true);
 
-    const err = await sendPasswordReset(email.trim());
+    const result = await sendPasswordReset(email.trim());
     setLoading(false);
 
-    if (err) {
-      setError(err);
+    if (!result.ok) {
+      setError(result.message);
       return;
     }
 
@@ -47,8 +47,8 @@ export default function ForgotPassword() {
         {submitted ? (
           <>
             <p className={styles.successMessage}>
-              A reset link has been sent to your email. Check your inbox and follow the link to set
-              a new password.
+              If an account exists for that email, a reset link has been sent. Check your inbox and
+              follow the link to set a new password.
             </p>
             <Link href="/" className={styles.backLink}>
               Back to login
@@ -62,7 +62,6 @@ export default function ForgotPassword() {
 
             <form
               onSubmit={(e) => {
-                e.preventDefault();
                 void handleSubmit(e);
               }}
               className={styles.form}

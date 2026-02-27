@@ -2,41 +2,46 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-
-import { login } from "../../../lib/auth";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 
 import styles from "./Login.module.css";
 
+import type { AuthErrorCode } from "@/lib/auth";
+
+import { login } from "@/lib/auth";
+
 export default function Login() {
+  const router = useRouter();
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+  const [hasPassword, setHasPassword] = useState(false);
+  const [errorCode, setErrorCode] = useState<AuthErrorCode | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setErrorCode(null);
+    setErrorMessage("");
     setLoading(true);
 
-    // login() returns Promise<string | null> (error message or null on success)
-
-    const errorMessage = await login(email, password);
+    const result = await login(email, passwordRef.current?.value ?? "");
     setLoading(false);
 
-    if (errorMessage !== null) {
-      setError(errorMessage);
+    if (!result.ok) {
+      setErrorCode(result.code);
+      setErrorMessage(result.message);
       return;
     }
-    // Success: redirect or update app state (e.g. router.push("/dashboard"))
-    console.log("Login successful");
+
+    router.push("/admin");
   };
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.card} ${error ? styles.cardWithError : ""}`}>
-        {/* Logo */}
+      <div className={`${styles.card} ${errorCode ? styles.cardWithError : ""}`}>
         <div className={styles.logoContainer}>
           <Image
             src="/cred_design_logo.png"
@@ -50,7 +55,6 @@ export default function Login() {
 
         <form
           onSubmit={(e) => {
-            e.preventDefault();
             void handleLogin(e);
           }}
           className={styles.form}
@@ -80,12 +84,16 @@ export default function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
+                ref={passwordRef}
+                onChange={() => {
+                  setHasPassword(Boolean(passwordRef.current?.value));
+                  if (errorCode) {
+                    setErrorCode(null);
+                    setErrorMessage("");
+                  }
                 }}
                 placeholder="Enter Input"
-                className={`${styles.input} ${error ? styles.inputError : ""}`}
+                className={`${styles.input} ${errorCode ? styles.inputError : ""}`}
                 required
               />
               <button
@@ -130,24 +138,25 @@ export default function Login() {
                 )}
               </button>
             </div>
-            {error && (
+            {errorCode && (
               <p className={styles.errorMessage}>
                 <span className={styles.errorIcon}>⚠️</span>
-                {error.includes(" or reset password") ? (
+                {errorCode === "INVALID_CREDENTIALS" ? (
                   <>
-                    {error.split(" or ")[0]} or{" "}
+                    {errorMessage} or{" "}
                     <Link
                       href="/forgot-password"
                       className={styles.errorLink}
                       onClick={() => {
-                        setError("");
+                        setErrorCode(null);
+                        setErrorMessage("");
                       }}
                     >
                       reset password
                     </Link>
                   </>
                 ) : (
-                  error
+                  errorMessage
                 )}
               </p>
             )}
@@ -157,9 +166,9 @@ export default function Login() {
             <button
               type="submit"
               className={`${styles.button} ${
-                email && password ? styles.buttonPrimary : styles.buttonDisabled
+                email && hasPassword ? styles.buttonPrimary : styles.buttonDisabled
               }`}
-              disabled={!email || !password || loading}
+              disabled={!email || loading}
             >
               {loading ? "Logging in…" : "Login"}
             </button>

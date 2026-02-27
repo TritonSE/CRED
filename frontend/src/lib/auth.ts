@@ -7,14 +7,24 @@ import {
 
 import { auth } from "./firebase";
 
+export type AuthErrorCode =
+  | "INVALID_CREDENTIALS"
+  | "INVALID_EMAIL"
+  | "EXPIRED_LINK"
+  | "INVALID_LINK"
+  | "WEAK_PASSWORD"
+  | "TOO_MANY_REQUESTS"
+  | "UNKNOWN";
+
+export type AuthResult = { ok: true } | { ok: false; code: AuthErrorCode; message: string };
+
 /**
  * Sign in with email and password via Firebase.
- * Returns an error message string, or null on success.
  */
-export async function login(email: string, password: string): Promise<string | null> {
+export async function login(email: string, password: string): Promise<AuthResult> {
   try {
-    await signInWithEmailAndPassword(auth, email.trim(), password.trim());
-    return null;
+    await signInWithEmailAndPassword(auth, email.trim(), password);
+    return { ok: true };
   } catch (error) {
     if (error instanceof FirebaseError) {
       if (
@@ -22,14 +32,22 @@ export async function login(email: string, password: string): Promise<string | n
         error.code === "auth/wrong-password" ||
         error.code === "auth/user-not-found"
       ) {
-        return "Wrong password. Please try again or reset password.";
+        return {
+          ok: false,
+          code: "INVALID_CREDENTIALS",
+          message: "Wrong password. Please try again",
+        };
       }
       if (error.code === "auth/invalid-email") {
-        return "Please enter a valid email address.";
+        return { ok: false, code: "INVALID_EMAIL", message: "Please enter a valid email address." };
       }
-      return error.message ?? "Something went wrong. Please try again.";
+      return {
+        ok: false,
+        code: "UNKNOWN",
+        message: error.message ?? "Something went wrong. Please try again.",
+      };
     }
-    return "Something went wrong. Please try again.";
+    return { ok: false, code: "UNKNOWN", message: "Something went wrong. Please try again." };
   }
 }
 
@@ -43,56 +61,73 @@ const getActionUrl = () =>
 
 /**
  * Sends a password reset email to the given address via Firebase.
- * Returns an error message string, or null on success.
+ * Always returns success to prevent account enumeration, except for
+ * clearly client-side validation errors.
  */
-export async function sendPasswordReset(email: string): Promise<string | null> {
+export async function sendPasswordReset(email: string): Promise<AuthResult> {
   try {
     const actionCodeSettings = getActionUrl()
       ? { url: getActionUrl(), handleCodeInApp: true }
       : undefined;
     await sendPasswordResetEmail(auth, email.trim(), actionCodeSettings);
-    return null;
+    return { ok: true };
   } catch (error) {
     if (error instanceof FirebaseError) {
-      if (error.code === "auth/user-not-found") {
-        return "No account found with this email.";
-      }
       if (error.code === "auth/invalid-email") {
-        return "Please enter a valid email address.";
+        return { ok: false, code: "INVALID_EMAIL", message: "Please enter a valid email address." };
       }
       if (error.code === "auth/too-many-requests") {
-        return "Too many attempts. Please try again later.";
+        return {
+          ok: false,
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many attempts. Please try again later.",
+        };
       }
-      return error.message ?? "Something went wrong. Please try again.";
+      // For user-not-found and all other cases, return success to prevent enumeration
     }
-    return "Something went wrong. Please try again.";
+    return { ok: true };
   }
 }
 
 /**
  * Completes password reset using the one-time code from the email link.
- * Returns an error message string, or null on success.
  */
 export async function confirmPasswordResetWithCode(
   oobCode: string,
   newPassword: string,
-): Promise<string | null> {
+): Promise<AuthResult> {
   try {
     await confirmPasswordReset(auth, oobCode, newPassword);
-    return null;
+    return { ok: true };
   } catch (error) {
     if (error instanceof FirebaseError) {
       if (error.code === "auth/expired-action-code") {
-        return "This reset link has expired. Please request a new one.";
+        return {
+          ok: false,
+          code: "EXPIRED_LINK",
+          message: "This reset link has expired. Please request a new one.",
+        };
       }
       if (error.code === "auth/invalid-action-code") {
-        return "This reset link is invalid or was already used.";
+        return {
+          ok: false,
+          code: "INVALID_LINK",
+          message: "This reset link is invalid or was already used.",
+        };
       }
       if (error.code === "auth/weak-password") {
-        return "Please choose a stronger password (at least 6 characters).";
+        return {
+          ok: false,
+          code: "WEAK_PASSWORD",
+          message: "Please choose a stronger password (at least 6 characters).",
+        };
       }
-      return error.message ?? "Something went wrong. Please try again.";
+      return {
+        ok: false,
+        code: "UNKNOWN",
+        message: error.message ?? "Something went wrong. Please try again.",
+      };
     }
-    return "Something went wrong. Please try again.";
+    return { ok: false, code: "UNKNOWN", message: "Something went wrong. Please try again." };
   }
 }
