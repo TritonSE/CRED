@@ -35,7 +35,7 @@ export type ExpandedRowContentProps = {
  * @param {ApplicationRowData} props.row - The application data to display
  * @returns {JSX.Element} Expanded content with client details
  */
-export function ExpandedRowContent({ row, onRowMove, rowIndex }: ExpandedRowContentProps) {
+export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
   const [todos, setTodos] = useState(row.todos ?? []);
 
   const toggleTodo = (id: string) => {
@@ -178,17 +178,6 @@ export function ExpandedRowContent({ row, onRowMove, rowIndex }: ExpandedRowCont
             view more
           </button>
         </div>
-
-        <button
-          className={styles.markCompleteButton}
-          onClick={() => {
-            if (rowIndex !== undefined) {
-              onRowMove?.(rowIndex);
-            }
-          }}
-        >
-          Mark as Complete
-        </button>
       </div>
     </div>
   );

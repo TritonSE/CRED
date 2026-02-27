@@ -105,7 +105,7 @@ export function ApplicationTable({
   pageSize = 6,
   totalApplications,
   onRowMove,
-  isCompleted = false,
+  isCompleted,
   globalFilter = "",
 }: ApplicationTableProps) {
   // State to track whether the table content is visible
@@ -165,23 +165,6 @@ export function ApplicationTable({
             className={styles.actionButton}
             onClick={(e) => {
               e.stopPropagation();
-              toggleRowExpanded(row.id);
-              // Toggle visibility logic can be added here
-            }}
-            aria-label="View details"
-          >
-            <Image
-              src={expandedRows[row.id] ? "/eyeWithSlash.svg" : "/eye.svg"}
-              width={24}
-              height={24}
-              alt={expandedRows[row.id] ? "Hide details" : "View details"}
-              className={styles.blueFilter}
-            />
-          </button>
-          <button
-            className={styles.actionButton}
-            onClick={(e) => {
-              e.stopPropagation();
             }}
             aria-label="Expand row"
           >
@@ -193,21 +176,29 @@ export function ApplicationTable({
               className={styles.blueFilter}
             />
           </button>
-          <div className={styles.buttonWrapper}>
-            <input
-              type="checkbox"
-              checked={isCompleted}
-              onChange={(e) => {
-                e.stopPropagation();
-                setExpandedRows((prev) => ({ ...prev, [row.id]: false }));
-                onRowMove?.(row.index);
-              }}
+          {!isCompleted ? (
+            <button
+              className={styles.markCompleteButton}
               onClick={(e) => {
                 e.stopPropagation();
+                onRowMove?.(row.index);
               }}
-              aria-label="Select application"
-            />
-          </div>
+            >
+              <span>✓</span>
+              <span>Complete</span>
+            </button>
+          ) : (
+            <button
+              className={styles.completedButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                onRowMove?.(row.index);
+              }}
+            >
+              <span>✓</span>
+              <span>Completed</span>
+            </button>
+          )}
         </div>
       ),
     },
@@ -351,11 +342,7 @@ export function ApplicationTable({
                               }}
                             >
                               {/* Must render at all times for animation */}
-                              <ExpandedRowContent
-                                row={row.original}
-                                onRowMove={onRowMove}
-                                rowIndex={row.index}
-                              />
+                              <ExpandedRowContent row={row.original} />
                             </div>
                           </td>
                         </tr>
