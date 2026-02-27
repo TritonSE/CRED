@@ -115,7 +115,7 @@
 }
 
 .sortInactive {
-  color: #ffb341;
+  color: rgba(255, 179, 65, 0.4);
 }
 
 /* Table rows */
@@ -132,9 +132,8 @@
   background-color: #f3f3f3;
 }
 
-/* Remove border from last row and from rows before expanded detail */
-.tableRow:last-of-type,
-.tableRow:has(+ .expandedDetailRow) {
+/* Remove border from last row */
+.tableRow:last-of-type {
   border-bottom: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;

@@ -166,13 +166,13 @@ export function ApplicationTable({
             onClick={(e) => {
               e.stopPropagation();
             }}
-            aria-label="Expand row"
+            aria-label="Download application"
           >
             <Image
               src={"/ic_download.svg"}
               width={24}
               height={24}
-              alt={expandedRows[row.id] ? "Collapse" : "Expand"}
+              alt="Download application"
               className={styles.blueFilter}
             />
           </button>
@@ -295,13 +295,12 @@ export function ApplicationTable({
                   let visibleRowIndex = 0;
                   return table.getRowModel().rows.map((row) => {
                     const isExpanded = expandedRows[row.id];
-                    let rowClass = styles.tableRow;
-                    rowClass += " " + (visibleRowIndex % 2 === 0 ? styles.even : styles.odd);
+                    const rowParity = visibleRowIndex % 2 === 0 ? styles.even : styles.odd;
                     visibleRowIndex++;
                     return (
                       <React.Fragment key={row.id}>
                         <tr
-                          className={rowClass}
+                          className={`${styles.tableRow} ${rowParity}`}
                           tabIndex={0}
                           aria-expanded={isExpanded}
                           onClick={() => {
@@ -321,11 +320,7 @@ export function ApplicationTable({
                           ))}
                         </tr>
                         <tr
-                          className={
-                            styles.expandedDetailRow +
-                            " " +
-                            (visibleRowIndex % 2 === 0 ? styles.even : styles.odd)
-                          }
+                          className={`${styles.expandedDetailRow} ${rowParity}`}
                         >
                           <td colSpan={columns.length} className={styles.expandedDetailCell}>
                             <div
@@ -341,8 +336,10 @@ export function ApplicationTable({
                                   : "0px",
                               }}
                             >
-                              {/* Must render at all times for animation */}
-                              <ExpandedRowContent row={row.original} />
+                              {/* Render content only once expanded (and keep it mounted) for animation */}
+                              {(isExpanded || expandedHeights[row.id] !== undefined) && (
+                                <ExpandedRowContent row={row.original} />
+                              )}
                             </div>
                           </td>
                         </tr>
@@ -357,7 +354,18 @@ export function ApplicationTable({
           {/* Pagination */}
           <div className={styles.paginationContainer}>
             <div className={styles.paginationInfo}>
-              Showing {startRow} of {totalCount} applications
+              {totalCount === 0 ? (
+                <>No applications to display</>
+              ) : (
+                <>
+                  Showing {startRow}–
+                  {Math.min(
+                    startRow + table.getRowModel().rows.length - 1,
+                    totalCount,
+                  )}{" "}
+                  of {totalCount} applications
+                </>
+              )}
             </div>
             <div className={styles.paginationControls}>
               <button

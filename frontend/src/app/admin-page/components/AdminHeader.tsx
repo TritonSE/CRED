@@ -9,7 +9,6 @@
  */
 
 import { Search } from "@tritonse/tse-constellation";
-import React from "react";
 
 import styles from "./AdminHeader.module.css";
 
@@ -21,7 +20,7 @@ export type HeaderProps = {
   name: string;
   searchQuery?: string;
   onSearchChange?: (query: string) => void;
-} & React.ComponentProps<"h1">;
+};
 
 /**
  * AdminHeader - Renders the top header section of the admin dashboard
@@ -30,11 +29,7 @@ export type HeaderProps = {
  * @param {string} props.name - Admin user's name for personalized greeting
  * @returns {JSX.Element} Header with welcome message and search functionality
  */
-export const AdminHeader = function AdminHeader({
-  name,
-  searchQuery,
-  onSearchChange,
-}: HeaderProps & { ref?: React.RefObject<HTMLHeadingElement | null> }) {
+export const AdminHeader = function AdminHeader({ name, searchQuery, onSearchChange }: HeaderProps) {
   return (
     <div className={styles.flexContainer}>
       {/* Welcome message section */}

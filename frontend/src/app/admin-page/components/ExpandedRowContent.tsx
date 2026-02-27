@@ -24,8 +24,6 @@ import type { ApplicationRowData } from "./ApplicationTable";
  */
 export type ExpandedRowContentProps = {
   row: ApplicationRowData;
-  onRowMove?: (index: number) => void;
-  rowIndex?: number;
 };
 
 /**
