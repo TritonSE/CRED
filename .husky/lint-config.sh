@@ -16,9 +16,9 @@ fix_command='npm run lint-fix'
 # Escape sequences for formatted output.
 # The tput commands may fail in environments where TERM is not set (e.g. CI).
 # Use || true so that 'sh -e' does not abort on failure.
-format_error="$(tput setaf 3 2> /dev/null)" || true
-format_warn="$(tput setaf 1 2> /dev/null)" || true
-format_clear="$(tput sgr0 2> /dev/null)" || true
+format_error="$(tput setaf 3 2>/dev/null || true)"
+format_warn="$(tput setaf 1 2>/dev/null || true)"
+format_clear="$(tput sgr0 2>/dev/null || true)"
 
 # Return 0 explicitly to indicate that the config was sourced successfully.
 return 0

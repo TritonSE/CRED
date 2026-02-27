@@ -9,7 +9,6 @@
  * @module DetailButton
  */
 import Image from "next/image";
-import React from "react";
 
 /**
  * Props for the DetailButton component
@@ -17,7 +16,7 @@ import React from "react";
  */
 export type ButtonProps = {
   mode: "view" | "hide";
-} & React.ComponentProps<"button">;
+};
 
 /**
  * DetailButton - Renders action icons for table row interactions
@@ -26,9 +25,7 @@ export type ButtonProps = {
  * @param {string} props.mode - "view" shows open eye, "hide" shows eye with slash
  * @returns {JSX.Element} A flex container with three action icons
  */
-export const DetailButton = function DetailButton({
-  mode,
-}: ButtonProps & { ref?: React.RefObject<HTMLButtonElement | null> }) {
+export const DetailButton = function DetailButton({ mode }: ButtonProps) {
   // Determine if details should be hidden based on mode
   const hidden = mode !== "view";
 
