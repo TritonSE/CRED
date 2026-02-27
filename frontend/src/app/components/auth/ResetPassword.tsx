@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 
 import styles from "./ResetPassword.module.css";
-import credLogo from "./cred_design_logo.png";
 
 import { confirmPasswordResetWithCode } from "@/lib/auth";
 
@@ -58,7 +57,7 @@ function ResetPasswordForm() {
         <div className={styles.card}>
           <div className={styles.logoContainer}>
             <Image
-              src={credLogo}
+              src="/cred_design_logo.png"
               alt="CRED Logo"
               width={450}
               height={260}
@@ -84,7 +83,7 @@ function ResetPasswordForm() {
         <div className={styles.cardSuccess}>
           <div className={styles.logoContainer}>
             <Image
-              src={credLogo}
+              src="/cred_design_logo.png"
               alt="CRED Logo"
               width={450}
               height={260}
@@ -106,7 +105,7 @@ function ResetPasswordForm() {
       <div className={styles.card}>
         <div className={styles.logoContainer}>
           <Image
-            src={credLogo}
+            src="/cred_design_logo.png"
             alt="CRED Logo - Community Redevelopment Education Development"
             width={450}
             height={260}

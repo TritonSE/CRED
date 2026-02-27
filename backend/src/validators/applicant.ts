@@ -1,10 +1,10 @@
-import { body } from "express-validator";
+import { body, type ValidationChain } from "express-validator";
 
 import { AID_TYPES, RACE_ETHNICITY_OPTIONS, STATUS_OPTIONS } from "../models/applicant";
 
 const OTHER_OPTION = "Not Sure/Other";
 
-const makeIDValidator = () =>
+const makeIDValidator = (): ValidationChain =>
   body("_id")
     .exists()
     .withMessage("_id is required")
@@ -12,7 +12,7 @@ const makeIDValidator = () =>
     .isMongoId()
     .withMessage("_id must be a MongoDB object ID");
 
-const makeFirstNameValidator = () =>
+const makeFirstNameValidator = (): ValidationChain =>
   body("firstName")
     .exists()
     .withMessage("firstName is required")
@@ -23,7 +23,7 @@ const makeFirstNameValidator = () =>
     .notEmpty()
     .withMessage("firstName cannot be empty");
 
-const makeLastNameValidator = () =>
+const makeLastNameValidator = (): ValidationChain =>
   body("lastName")
     .exists()
     .withMessage("lastName is required")
@@ -34,7 +34,7 @@ const makeLastNameValidator = () =>
     .notEmpty()
     .withMessage("lastName cannot be empty");
 
-const makeDateOfBirthValidator = () =>
+const makeDateOfBirthValidator = (): ValidationChain =>
   body("dateOfBirth")
     .exists()
     .withMessage("dateOfBirth is required")
@@ -42,7 +42,7 @@ const makeDateOfBirthValidator = () =>
     .isISO8601()
     .withMessage("dateOfBirth must be a valid ISO 8601 date string (e.g., YYYY-MM-DD)");
 
-const makeRaceEthnicityValidator = () =>
+const makeRaceEthnicityValidator = (): ValidationChain =>
   body("raceEthnicity")
     .exists()
     .withMessage("raceEthnicity is required")
@@ -53,7 +53,7 @@ const makeRaceEthnicityValidator = () =>
     .isIn(RACE_ETHNICITY_OPTIONS)
     .withMessage("raceEthnicity must be a valid option from the list");
 
-const makeGenderValidator = () =>
+const makeGenderValidator = (): ValidationChain =>
   body("gender")
     .exists()
     .withMessage("gender is required")
@@ -64,13 +64,13 @@ const makeGenderValidator = () =>
     .notEmpty()
     .withMessage("gender cannot be empty");
 
-const makeCdcrNumberValidator = () =>
+const makeCdcrNumberValidator = (): ValidationChain =>
   body("cdcrNumber").optional().isString().withMessage("cdcrNumber must be a string");
 
-const makeDescriptionValidator = () =>
+const makeDescriptionValidator = (): ValidationChain =>
   body("description").optional().isString().withMessage("description must be a string");
 
-const makeTypeOfAidValidator = () =>
+const makeTypeOfAidValidator = (): ValidationChain =>
   body("typeOfAid")
     .exists()
     .withMessage("typeOfAid is required")
@@ -83,7 +83,7 @@ const makeTypeOfAidValidator = () =>
     })
     .withMessage(`typeOfAid must be selected from: ${AID_TYPES.join(", ")}`);
 
-const makeOtherAidDescriptionValidator = () =>
+const makeOtherAidDescriptionValidator = (): ValidationChain =>
   body("otherAidDescription")
     .if((value, { req }) => {
       const selectedAids = (req.body as Record<string, string[]>).typeOfAid ?? [];
@@ -95,7 +95,7 @@ const makeOtherAidDescriptionValidator = () =>
     .withMessage("Description cannot be empty when 'Other' is selected")
     .isString();
 
-const makeStatusValidator = () =>
+const makeStatusValidator = (): ValidationChain =>
   body("status")
     .optional()
     .isString()
@@ -103,7 +103,7 @@ const makeStatusValidator = () =>
     .isIn(STATUS_OPTIONS)
     .withMessage("status must be one of: Under Review, Need to Review, Reviewed");
 
-const makeActionPlanValidator = () =>
+const makeActionPlanValidator = (): ValidationChain =>
   body("actionPlan").optional().isString().withMessage("actionPlan must be a string");
 
 // ==========================================================

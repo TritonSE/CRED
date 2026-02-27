@@ -7,7 +7,6 @@ import { useState } from "react";
 import { login } from "../../../lib/auth";
 
 import styles from "./Login.module.css";
-import credLogo from "./cred_design_logo.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -40,7 +39,7 @@ export default function Login() {
         {/* Logo */}
         <div className={styles.logoContainer}>
           <Image
-            src={credLogo}
+            src="/cred_design_logo.png"
             alt="CRED Logo"
             width={450}
             height={260}

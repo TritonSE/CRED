@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 import styles from "./ForgotPassword.module.css";
-import credLogo from "./cred_design_logo.png";
 
 import { sendPasswordReset } from "@/lib/auth";
 
@@ -36,7 +35,7 @@ export default function ForgotPassword() {
       <div className={styles.card}>
         <div className={styles.logoContainer}>
           <Image
-            src={credLogo}
+            src="/cred_design_logo.png"
             alt="CRED Logo - Community Redevelopment Education Development"
             width={450}
             height={260}
