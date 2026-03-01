@@ -45,18 +45,25 @@
   .leftSection {
     grid-column: 1 / span 5;
     justify-self: start;
+    margin-left: -90px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .leftSection {
+    margin-left: -102px;
   }
 }
 
 @media (min-width: 1280px) {
   .leftSection {
-    margin-left: -40px;
+    margin-left: -118px;
   }
 }
 
 @media (min-width: 1536px) {
   .leftSection {
-    margin-left: -56px;
+    margin-left: -134px;
   }
 }
 
@@ -185,7 +192,7 @@
 
 .applyButtonText {
   font-family: "Lato", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.5;
   font-size: 20px;
   color: black;
