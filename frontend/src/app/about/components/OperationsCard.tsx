@@ -15,7 +15,7 @@ export const OperationsCard: React.FC<OperationsCardProps> = ({ iconURL, title, 
       <div className={styles.cardContent}>
         <div className={styles.cardNumberCircle}>
           <div className={styles.iconWrapper}>
-            <Image src={iconURL} alt="Card Icon" fill />
+            <Image src={iconURL} alt={`${title} icon`} fill />
           </div>
         </div>
         <h2 className={styles.cardTitle}>{title}</h2>
