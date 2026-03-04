@@ -278,7 +278,7 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
         notes,
         isCompleted,
       },
-      { new: true },
+      { new: true, runValidators: true },
     );
 
     if (applicant === null) {

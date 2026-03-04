@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 
 import {
   AID_REQUESTED_OPTIONS,
@@ -18,7 +18,14 @@ const makeIDValidator = () =>
     .bail()
     .isMongoId()
     .withMessage("_id must be a MongoDB object ID");
-
+// Delete requests only require a valid target document id in the URL parameters.
+const makeParamIDValidator = () =>
+  param("id")
+    .exists()
+    .withMessage("id parameter is required")
+    .bail()
+    .isMongoId()
+    .withMessage("id must be a MongoDB object ID");
 const makeApplicantNumberValidator = () =>
   body("applicantNumber")
     .exists()
@@ -218,8 +225,12 @@ const makeNotesValidator = () =>
     .withMessage("notes must be an array of { date: string, content: string }");
 
 const makeIsCompletedValidator = () =>
-  body("isCompleted").optional().isBoolean().withMessage("isCompleted must be a boolean");
-
+  body("isCompleted")
+    .exists()
+    .withMessage("isCompleted is required")
+    .bail()
+    .isBoolean()
+    .withMessage("isCompleted must be a boolean");
 // ==========================================================
 // EXPORTS
 // ==========================================================
@@ -279,5 +290,4 @@ export const updateApplicant = [
   makeIsCompletedValidator(),
 ];
 
-// Delete requests only require a valid target document id.
-export const removeApplicant = [makeIDValidator()];
+export const removeApplicant = [makeParamIDValidator()];
