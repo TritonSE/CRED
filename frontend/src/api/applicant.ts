@@ -12,22 +12,23 @@ export type Applicant = {
   applicantName: string;
   dateSubmitted: Date;
   status: string;
-  dateOfBirth?: Date;
-  race?: string;
-  gender?: string;
-  idPhotoUrl?: string;
-  email?: string;
-  phoneNumber?: string;
+  dateOfBirth: Date;
+  race: string;
+  gender: string;
+  idPhoto: { url: string; name: string };
+  email: string;
+  address: string;
+  phoneNumber: string;
   housingStatus?: string;
   educationStatus?: string;
   employmentStatus?: string;
   convictionDetails?: string;
-  aidRequested?: string[];
+  aidRequested: string[];
   otherAidRequested?: string;
   additionalComments?: string;
   todos?: { id: string; label: string; completed: boolean }[];
   notes?: { date: string; content: string }[];
-  isCompleted?: boolean;
+  isCompleted: boolean;
 };
 
 type ApplicantJSON = {
@@ -36,22 +37,23 @@ type ApplicantJSON = {
   applicantName: string;
   dateSubmitted: string;
   status: string;
-  dateOfBirth?: string;
-  race?: string;
-  gender?: string;
-  idPhotoUrl?: string;
-  email?: string;
-  phoneNumber?: string;
+  dateOfBirth: string;
+  race: string;
+  gender: string;
+  idPhoto: { url: string; name: string };
+  email: string;
+  address: string;
+  phoneNumber: string;
   housingStatus?: string;
   educationStatus?: string;
   employmentStatus?: string;
   convictionDetails?: string;
-  aidRequested?: string[];
+  aidRequested: string[];
   otherAidRequested?: string;
   additionalComments?: string;
   todos?: { id: string; label: string; completed: boolean }[];
   notes?: { date: string; content: string }[];
-  isCompleted?: boolean;
+  isCompleted: boolean;
 };
 
 /**
@@ -65,11 +67,12 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
     applicantName: applicant.applicantName,
     dateSubmitted: new Date(applicant.dateSubmitted),
     status: applicant.status,
-    dateOfBirth: applicant.dateOfBirth ? new Date(applicant.dateOfBirth) : undefined,
+    dateOfBirth: new Date(applicant.dateOfBirth),
     race: applicant.race,
     gender: applicant.gender,
-    idPhotoUrl: applicant.idPhotoUrl,
+    idPhoto: applicant.idPhoto,
     email: applicant.email,
+    address: applicant.address,
     phoneNumber: applicant.phoneNumber,
     housingStatus: applicant.housingStatus,
     educationStatus: applicant.educationStatus,
@@ -87,19 +90,19 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
 export type CreateApplicantRequest = {
   applicantNumber: string;
   applicantName: string;
-  dateSubmitted: Date;
   status?: string;
-  dateOfBirth?: Date;
-  race?: string;
-  gender?: string;
-  idPhotoUrl?: string;
-  email?: string;
-  phoneNumber?: string;
+  dateOfBirth: Date;
+  race: string;
+  gender: string;
+  idPhoto: { url: string; name: string };
+  email: string;
+  address: string;
+  phoneNumber: string;
   housingStatus?: string;
   educationStatus?: string;
   employmentStatus?: string;
   convictionDetails?: string;
-  aidRequested?: string[];
+  aidRequested: string[];
   otherAidRequested?: string;
   additionalComments?: string;
   todos?: { id: string; label: string; completed: boolean }[];
@@ -113,22 +116,23 @@ export type UpdateApplicantRequest = {
   applicantName: string;
   dateSubmitted: Date;
   status?: string;
-  dateOfBirth?: Date;
-  race?: string;
-  gender?: string;
-  idPhotoUrl?: string;
-  email?: string;
-  phoneNumber?: string;
+  dateOfBirth: Date;
+  race: string;
+  gender: string;
+  idPhoto: { url: string; name: string };
+  email: string;
+  address: string;
+  phoneNumber: string;
   housingStatus?: string;
   educationStatus?: string;
   employmentStatus?: string;
   convictionDetails?: string;
-  aidRequested?: string[];
+  aidRequested: string[];
   otherAidRequested?: string;
   additionalComments?: string;
   todos?: { id: string; label: string; completed: boolean }[];
   notes?: { date: string; content: string }[];
-  isCompleted?: boolean;
+  isCompleted: boolean;
 };
 
 // --- NEW TYPES FOR PAGINATION ---

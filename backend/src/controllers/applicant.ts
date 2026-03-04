@@ -87,19 +87,19 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
 type CreateApplicantBody = {
   applicantNumber: string;
   applicantName: string;
-  dateSubmitted: Date;
   status?: string;
-  dateOfBirth?: Date;
-  race?: string;
-  gender?: string;
-  idPhotoUrl?: string;
-  email?: string;
-  phoneNumber?: string;
+  dateOfBirth: Date;
+  race: string;
+  gender: string;
+  idPhoto: { url: string; name: string };
+  email: string;
+  address: string;
+  phoneNumber: string;
   housingStatus?: string;
   educationStatus?: string;
   employmentStatus?: string;
   convictionDetails?: string;
-  aidRequested?: string[];
+  aidRequested: string[];
   otherAidRequested?: string;
   additionalComments?: string;
   todos?: { id: string; label: string; completed: boolean }[];
@@ -112,22 +112,23 @@ type UpdateApplicantBody = {
   applicantName: string;
   dateSubmitted: Date;
   status?: string;
-  dateOfBirth?: Date;
-  race?: string;
-  gender?: string;
-  idPhotoUrl?: string;
-  email?: string;
-  phoneNumber?: string;
+  dateOfBirth: Date;
+  race: string;
+  gender: string;
+  idPhoto: { url: string; name: string };
+  email: string;
+  address: string;
+  phoneNumber: string;
   housingStatus?: string;
   educationStatus?: string;
   employmentStatus?: string;
   convictionDetails?: string;
-  aidRequested?: string[];
+  aidRequested: string[];
   otherAidRequested?: string;
   additionalComments?: string;
   todos?: { id: string; label: string; completed: boolean }[];
   notes?: { date: string; content: string }[];
-  isCompleted?: boolean;
+  isCompleted: boolean;
 };
 
 /**
@@ -138,13 +139,13 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
   const {
     applicantNumber,
     applicantName,
-    dateSubmitted,
     status,
     dateOfBirth,
     race,
     gender,
-    idPhotoUrl,
+    idPhoto,
     email,
+    address,
     phoneNumber,
     housingStatus,
     educationStatus,
@@ -164,13 +165,14 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
     const applicant = await ApplicantModel.create({
       applicantNumber,
       applicantName,
-      dateSubmitted,
+      dateSubmitted: new Date(),
       status,
       dateOfBirth,
       race,
       gender,
-      idPhotoUrl,
+      idPhoto,
       email,
+      address,
       phoneNumber,
       housingStatus,
       educationStatus,
@@ -220,8 +222,9 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
     dateOfBirth,
     race,
     gender,
-    idPhotoUrl,
+    idPhoto,
     email,
+    address,
     phoneNumber,
     housingStatus,
     educationStatus,
@@ -260,8 +263,9 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
         dateOfBirth,
         race,
         gender,
-        idPhotoUrl,
+        idPhoto,
         email,
+        address,
         phoneNumber,
         housingStatus,
         educationStatus,

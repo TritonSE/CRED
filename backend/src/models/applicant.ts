@@ -61,13 +61,7 @@ export const EMPLOYMENT_OPTIONS = [
 ] as const;
 
 // Supported aid categories requested by the applicant.
-export const AID_REQUESTED_OPTIONS = [
-  "Transitional/Rental Housing Support",
-  "Rent Subsidies/Onsite support",
-  "Effective Life skills training",
-  "Workforce Development/Employment",
-  "Not Sure/Other",
-] as const;
+export const AID_REQUESTED_OPTIONS = ["Housing", "Education", "Development"] as const;
 
 // Embedded todo items shown in expanded applicant views.
 const todoSchema = new Schema(
@@ -103,18 +97,24 @@ const applicantSchema = new Schema(
       default: "Need to Review",
       enum: STATUS_OPTIONS,
     },
-    dateOfBirth: { type: Date },
+    dateOfBirth: { type: Date, required: true },
     race: {
       type: String,
       enum: RACE_OPTIONS,
+      required: true,
     },
     gender: {
       type: String,
       enum: GENDER_OPTIONS,
+      required: true,
     },
-    idPhotoUrl: { type: String },
-    email: { type: String },
-    phoneNumber: { type: String },
+    idPhoto: {
+      url: { type: String, required: true },
+      name: { type: String, required: true },
+    },
+    email: { type: String, required: true },
+    address: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
     housingStatus: {
       type: String,
       enum: HOUSING_STATUS_OPTIONS,
@@ -131,12 +131,13 @@ const applicantSchema = new Schema(
     aidRequested: {
       type: [String],
       enum: AID_REQUESTED_OPTIONS,
+      required: true,
     },
     otherAidRequested: { type: String },
     additionalComments: { type: String },
     todos: [todoSchema],
     notes: [noteSchema],
-    isCompleted: { type: Boolean },
+    isCompleted: { type: Boolean, required: true, default: false },
   },
   {
     timestamps: true,

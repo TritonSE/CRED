@@ -59,13 +59,17 @@ const makeStatusValidator = () =>
 
 const makeDateOfBirthValidator = () =>
   body("dateOfBirth")
-    .optional()
+    .exists()
+    .withMessage("dateOfBirth is required")
+    .bail()
     .isISO8601()
     .withMessage("dateOfBirth must be a valid ISO 8601 date string (e.g., YYYY-MM-DD)");
 
 const makeRaceValidator = () =>
   body("race")
-    .optional()
+    .exists()
+    .withMessage("race is required")
+    .bail()
     .isString()
     .bail()
     .isIn(RACE_OPTIONS)
@@ -73,26 +77,54 @@ const makeRaceValidator = () =>
 
 const makeGenderValidator = () =>
   body("gender")
-    .optional()
+    .exists()
+    .withMessage("gender is required")
+    .bail()
     .isString()
     .bail()
     .isIn(GENDER_OPTIONS)
     .withMessage("gender must be a valid option from the list");
 
-const makeIdPhotoUrlValidator = () =>
-  body("idPhotoUrl")
-    .optional()
-    .isString()
-    .withMessage("idPhotoUrl must be a string")
+const makeIdPhotoValidator = () =>
+  body("idPhoto")
+    .exists()
+    .withMessage("idPhoto is required")
     .bail()
-    .isURL()
-    .withMessage("idPhotoUrl must be a valid URL");
+    .isObject()
+    .withMessage("idPhoto must be an object")
+    .bail()
+    .custom(
+      (val: unknown) =>
+        typeof val === "object" &&
+        val !== null &&
+        typeof (val as Record<string, unknown>).url === "string" &&
+        typeof (val as Record<string, unknown>).name === "string",
+    )
+    .withMessage("idPhoto must contain url and name strings");
 
 const makeEmailValidator = () =>
-  body("email").optional().isString().withMessage("email must be a string");
+  body("email")
+    .exists()
+    .withMessage("email is required")
+    .bail()
+    .isString()
+    .withMessage("email must be a string");
+
+const makeAddressValidator = () =>
+  body("address")
+    .exists()
+    .withMessage("address is required")
+    .bail()
+    .isString()
+    .withMessage("address must be a string");
 
 const makePhoneNumberValidator = () =>
-  body("phoneNumber").optional().isString().withMessage("phoneNumber must be a string");
+  body("phoneNumber")
+    .exists()
+    .withMessage("phoneNumber is required")
+    .bail()
+    .isString()
+    .withMessage("phoneNumber must be a string");
 
 const makeHousingStatusValidator = () =>
   body("housingStatus")
@@ -123,7 +155,9 @@ const makeConvictionDetailsValidator = () =>
 
 const makeAidRequestedValidator = () =>
   body("aidRequested")
-    .optional()
+    .exists()
+    .withMessage("aidRequested is required")
+    .bail()
     .isArray()
     .bail()
     .custom((arr: string[] | undefined) => {
@@ -194,14 +228,14 @@ export const createApplicant = [
   // Required intake fields.
   makeApplicantNumberValidator(),
   makeApplicantNameValidator(),
-  makeDateSubmittedValidator(),
   // Optional profile/metadata fields.
   makeStatusValidator(),
   makeDateOfBirthValidator(),
   makeRaceValidator(),
   makeGenderValidator(),
-  makeIdPhotoUrlValidator(),
+  makeIdPhotoValidator(),
   makeEmailValidator(),
+  makeAddressValidator(),
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),
   makeEducationStatusValidator(),
@@ -228,8 +262,9 @@ export const updateApplicant = [
   makeDateOfBirthValidator(),
   makeRaceValidator(),
   makeGenderValidator(),
-  makeIdPhotoUrlValidator(),
+  makeIdPhotoValidator(),
   makeEmailValidator(),
+  makeAddressValidator(),
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),
   makeEducationStatusValidator(),
