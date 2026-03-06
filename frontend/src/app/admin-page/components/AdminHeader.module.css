@@ -8,6 +8,7 @@
 .flexContainer {
   display: flex;
   height: 40px;
+  width: 1121px;
   flex-direction: row;
   justify-content: space-between; /* Pushes header and search to opposite ends */
   align-items: center;

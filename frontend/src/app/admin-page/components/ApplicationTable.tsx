@@ -49,6 +49,11 @@ export type ApplicationRowData = {
   dateOfBirth?: string;
   race?: string;
   gender?: string;
+  housingStatus?: string;
+  education?: string;
+  employment?: string;
+  address?: string;
+  idDocument?: string;
   cdcrNumber?: string;
   email?: string;
   phoneNumber?: string;
@@ -161,21 +166,6 @@ export function ApplicationTable({
       header: "Actions",
       cell: ({ row }) => (
         <div className={styles.actionsCell}>
-          <button
-            className={styles.actionButton}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            aria-label="Download application"
-          >
-            <Image
-              src={"/ic_download.svg"}
-              width={24}
-              height={24}
-              alt="Download application"
-              className={styles.blueFilter}
-            />
-          </button>
           {!isCompleted ? (
             <button
               className={styles.markCompleteButton}
@@ -199,6 +189,21 @@ export function ApplicationTable({
               <span>Completed</span>
             </button>
           )}
+          <button
+            className={styles.actionButton}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            aria-label="Download application"
+          >
+            <Image
+              src={"/ic_download.svg"}
+              width={24}
+              height={24}
+              alt="Download application"
+              className={styles.blueFilter}
+            />
+          </button>
         </div>
       ),
     },

@@ -7,7 +7,7 @@
 /* Main container with horizontal padding to match page layout */
 .tableContainer {
   border-radius: 8px;
-  width: 100%;
+  width: 1121px;
 }
 
 /* Header row containing title and collapse/expand button */
@@ -129,7 +129,7 @@
   background-color: #ffffff;
 }
 .odd {
-  background-color: #f3f3f3;
+  background-color: #ffffff;
 }
 
 /* Remove border from last row */
@@ -237,9 +237,11 @@
 
 .expandedContent {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 0.75fr;
-  gap: 24px;
+  grid-template-columns: 3fr 1.5fr;
+  gap: 0;
   padding: 24px;
+  width: 1121px;
+  height: 825px;
   position: relative;
 }
 
@@ -248,7 +250,7 @@
 }
 
 .expandedDetailRow.even .expandedContent {
-  background-color: #f3f3f3;
+  background-color: #ffffff;
 }
 
 .expandedContent::before {
@@ -261,14 +263,19 @@
   height: 1px;
 }
 
-.expandedSection:not(:last-child):after {
-  content: "";
-  background: #b4b4b4;
-  position: absolute;
-  right: -1.2rem;
-  bottom: 0%;
-  width: 1px;
-  height: 100%;
+.expandedLeftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-right: 24px;
+  border-right: 1px solid #b4b4b4;
+}
+
+.expandedRightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-left: 24px;
 }
 
 .expandedSection {
@@ -276,8 +283,6 @@
   flex-direction: column;
   gap: 12px;
   position: relative;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
 }
 
 .expandedContentWrapper {
@@ -302,12 +307,17 @@
 }
 
 .sectionTitle {
-  color: #004377;
   font-family: var(--font-lato), Lato, sans-serif;
-  font-size: 20px;
   font-weight: 400;
-  margin: 0 0 8px 0;
-  padding-bottom: 4px;
+  font-style: Regular;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  width: 700;
+  height: 22;
+  opacity: 1;
+  color: #004377;
 }
 
 .sectionDivider {
@@ -318,9 +328,28 @@
 /* Profile grid */
 .profileGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 16px;
   margin-bottom: 16px;
+}
+
+.profileItemWide {
+  grid-column: span 2;
+}
+
+.profileGridDivider {
+  width: 700;
+  height: 0px;
+  opacity: 1;
+  border-width: 1px;
+}
+
+.idLink {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 14px;
+  color: #175892;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .contactGrid {
@@ -336,19 +365,25 @@
 }
 
 .profileLabel {
-  font-family: var(--font-lato), Lato, sans-serif;
-  font-size: 16px;
   color: #757880;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
-  letter-spacing: 0px;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  vertical-align: middle;
 }
 
 .profileValue {
   font-family: var(--font-lato), Lato, sans-serif;
-  font-size: 14px;
-  color: #000000;
+  color: #0c2b35;
   font-weight: 400;
-  line-height: 1.5;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  vertical-align: middle;
 }
 
 /* Program details */
@@ -360,18 +395,33 @@
 
 .programSubtitle {
   font-family: var(--font-lato), Lato, sans-serif;
-  font-size: 16px;
   color: #757880;
   font-weight: 400;
-  line-height: 1.5;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  vertical-align: middle;
 }
 
 .programText {
   font-family: var(--font-lato), Lato, sans-serif;
-  font-size: 16px;
   color: #000000;
-  line-height: 1.5;
-  margin: 0;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+
+.aidSubLabel {
+  font-family: var(--font-lato), Lato, sans-serif;
+  color: #000000;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
 }
 
 .aidList {
@@ -440,26 +490,34 @@
 
 .aidText {
   font-family: var(--font-lato), Lato, sans-serif;
+  color: #909090;
+  font-weight: 400;
+  font-style: Regular;
   font-size: 16px;
-  color: #b4b4b4;
+  line-height: 150%;
+  letter-spacing: 0%;
 }
 
 .aidCheckbox:checked + .aidText {
-  color: #000000;
+  color: #000;
 }
 
 .otherAidRequestedBox {
-  background-color: #f3f3f3;
   border-radius: 4px;
   display: flex;
+  width: 700px;
+  height: 56px;
   align-items: center;
   justify-content: center;
+  border-style: solid;
+  border-color: #b4b4b4;
+  border-width: 1px;
 }
 
 .otherAidRequestedText {
   font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
-  color: #7a7a7a;
+  color: #000000;
   font-style: italic;
   line-height: 150%;
   width: 90%;
@@ -562,21 +620,23 @@
 /* Mark complete button */
 .markCompleteButton {
   font-family: var(--font-lato), Lato, sans-serif;
-  background-color: #175892;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 6px 9px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.15s;
-  display: inline-flex;
-  align-items: center;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+
+  width: 111;
+  height: 32;
   gap: 6px;
-  white-space: nowrap;
-  width: 90%;
-  justify-content: center;
+  opacity: 1;
+  border-radius: 8px;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  background: #175892;
+  color: white;
 }
 
 .markCompleteButton:hover {
@@ -585,21 +645,23 @@
 
 .completedButton {
   font-family: var(--font-lato), Lato, sans-serif;
-  background-color: #d9d9d9;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
   color: #484848;
-  border: none;
-  border-radius: 6px;
-  padding: 6px 9px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.15s;
-  display: inline-flex;
-  align-items: center;
+
+  width: 111;
+  height: 32;
   gap: 6px;
-  white-space: nowrap;
-  width: 90%;
-  justify-content: center;
+  opacity: 1;
+  border-radius: 8px;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  background: #d9d9d9;
 }
 
 /* Pagination */
