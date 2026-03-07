@@ -15,7 +15,6 @@ export type Applicant = {
   dateOfBirth: Date;
   race: string;
   gender: string;
-  idPhoto: { url: string; name: string };
   email: string;
   address: string;
   phoneNumber: string;
@@ -40,7 +39,6 @@ type ApplicantJSON = {
   dateOfBirth: string;
   race: string;
   gender: string;
-  idPhoto: { url: string; name: string };
   email: string;
   address: string;
   phoneNumber: string;
@@ -70,7 +68,6 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
     dateOfBirth: new Date(applicant.dateOfBirth),
     race: applicant.race,
     gender: applicant.gender,
-    idPhoto: applicant.idPhoto,
     email: applicant.email,
     address: applicant.address,
     phoneNumber: applicant.phoneNumber,
@@ -94,7 +91,6 @@ export type CreateApplicantRequest = {
   dateOfBirth: Date;
   race: string;
   gender: string;
-  idPhoto: { url: string; name: string };
   email: string;
   address: string;
   phoneNumber: string;
@@ -119,7 +115,6 @@ export type UpdateApplicantRequest = {
   dateOfBirth: Date;
   race: string;
   gender: string;
-  idPhoto: { url: string; name: string };
   email: string;
   address: string;
   phoneNumber: string;

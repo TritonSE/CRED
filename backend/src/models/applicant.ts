@@ -108,10 +108,6 @@ const applicantSchema = new Schema(
       enum: GENDER_OPTIONS,
       required: true,
     },
-    idPhoto: {
-      url: { type: String, required: true },
-      name: { type: String, required: true },
-    },
     email: { type: String, required: true },
     address: { type: String, required: true },
     phoneNumber: { type: String, required: true },

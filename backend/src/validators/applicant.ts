@@ -92,23 +92,6 @@ const makeGenderValidator = () =>
     .isIn(GENDER_OPTIONS)
     .withMessage("gender must be a valid option from the list");
 
-const makeIdPhotoValidator = () =>
-  body("idPhoto")
-    .exists()
-    .withMessage("idPhoto is required")
-    .bail()
-    .isObject()
-    .withMessage("idPhoto must be an object")
-    .bail()
-    .custom(
-      (val: unknown) =>
-        typeof val === "object" &&
-        val !== null &&
-        typeof (val as Record<string, unknown>).url === "string" &&
-        typeof (val as Record<string, unknown>).name === "string",
-    )
-    .withMessage("idPhoto must contain url and name strings");
-
 const makeEmailValidator = () =>
   body("email")
     .exists()
@@ -244,7 +227,6 @@ export const createApplicant = [
   makeDateOfBirthValidator(),
   makeRaceValidator(),
   makeGenderValidator(),
-  makeIdPhotoValidator(),
   makeEmailValidator(),
   makeAddressValidator(),
   makePhoneNumberValidator(),
@@ -273,7 +255,6 @@ export const updateApplicant = [
   makeDateOfBirthValidator(),
   makeRaceValidator(),
   makeGenderValidator(),
-  makeIdPhotoValidator(),
   makeEmailValidator(),
   makeAddressValidator(),
   makePhoneNumberValidator(),
