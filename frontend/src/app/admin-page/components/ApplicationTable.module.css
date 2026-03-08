@@ -76,6 +76,7 @@
   position: relative;
 }
 
+/*
 .tableHeader:not(:first-child):after {
   content: "";
   background: white;
@@ -85,6 +86,7 @@
   height: 86%;
   width: 1px;
 }
+*/
 
 .tableHeader:first-child {
   border-top-left-radius: 10px;
@@ -122,6 +124,7 @@
 .tableRow {
   cursor: pointer;
   transition: background-color 0.15s ease;
+  border-bottom: 1px solid #b4b4b4;
 }
 
 /* Alternate row colors */
@@ -243,6 +246,7 @@
   width: 1121px;
   height: 825px;
   position: relative;
+  border-bottom: 1px solid #b4b4b4;
 }
 
 .expandedDetailRow.odd .expandedContent {
@@ -253,6 +257,8 @@
   background-color: #ffffff;
 }
 
+/* Grey horizontal line before expanded content, now part of the row instead */
+/*
 .expandedContent::before {
   content: "";
   background: #b4b4b4;
@@ -262,6 +268,7 @@
   width: 100%;
   height: 1px;
 }
+*/
 
 .expandedLeftCol {
   display: flex;
@@ -293,6 +300,7 @@
     max-height 1s cubic-bezier(0.42, 0, 0.58, 1) 0s,
     opacity 1s cubic-bezier(0.42, 0, 0.58, 1) 0s;
   will-change: max-height, opacity;
+  border-bottom: 1px solid #b4b4b4;
 }
 
 .expandedContentWrapper.open {
