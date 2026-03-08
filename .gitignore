@@ -131,3 +131,6 @@ dist
 
 # MongoDB Test scripts
 scripts/
+
+# Agent context file
+context.md
