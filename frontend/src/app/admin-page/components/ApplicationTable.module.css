@@ -123,7 +123,9 @@
 /* Table rows */
 .tableRow {
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-bottom-color 0.3s ease;
   border-bottom: 1px solid #b4b4b4;
 }
 
@@ -135,9 +137,12 @@
   background-color: #ffffff;
 }
 
-/* Remove border from last row */
-.tableRow:last-of-type {
-  border-bottom: none;
+/* Remove border from last data row when collapsed.
+   Each data row is followed by an expandedDetailRow <tr>, so the last
+   .tableRow is always the second-to-last <tr> in the tbody.
+   When expanded, keep the border (separates data row from expanded content). */
+.tableRow:nth-last-child(2):not([aria-expanded="true"]) {
+  border-bottom-color: transparent;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -298,9 +303,15 @@
   opacity: 0;
   transition:
     max-height 1s cubic-bezier(0.42, 0, 0.58, 1) 0s,
-    opacity 1s cubic-bezier(0.42, 0, 0.58, 1) 0s;
+    opacity 1s cubic-bezier(0.42, 0, 0.58, 1) 0s,
+    border-bottom-color 0.3s ease;
   will-change: max-height, opacity;
   border-bottom: 1px solid #b4b4b4;
+}
+
+/* Remove bottom border from the last expanded row's wrapper (nothing below it) */
+.expandedDetailRow:last-child .expandedContentWrapper {
+  border-bottom-color: transparent;
 }
 
 .expandedContentWrapper.open {
