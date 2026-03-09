@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from "@tritonse/tse-constellation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { DirectorBox } from "./components/DirectorBox";
 import { OperationsCard } from "./components/OperationsCard";
@@ -9,6 +10,7 @@ import { OperationsCard } from "./components/OperationsCard";
 import "./styles.css";
 
 export default function AboutUsPage() {
+  const router = useRouter();
   return (
     <ThemeProvider>
       <div className="about-page">
@@ -61,6 +63,9 @@ export default function AboutUsPage() {
             buttonlabel="Our Services"
             imageUrl="/Map_Marker.svg"
             backgroundUrl="/What_We_Do_Background.jpg"
+            onButtonClick={() => {
+              router.push("/dashboard");
+            }}
           />
           {/* need to add ref to support us page */}
           <DirectorBox
@@ -69,6 +74,9 @@ export default function AboutUsPage() {
             buttonlabel="Support Us"
             imageUrl="/folder_people.svg"
             backgroundUrl="/Our_Goal_Background.jpg"
+            onButtonClick={() => {
+              router.push("/dashboard");
+            }}
           />
         </div>
       </div>

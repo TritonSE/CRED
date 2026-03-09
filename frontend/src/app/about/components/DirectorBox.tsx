@@ -13,6 +13,7 @@ export type DirectorBoxProps = {
   buttonlabel: string;
   imageUrl: string;
   backgroundUrl: string;
+  onButtonClick?: () => void;
 };
 
 export const DirectorBox: React.FC<DirectorBoxProps> = ({
@@ -21,6 +22,7 @@ export const DirectorBox: React.FC<DirectorBoxProps> = ({
   buttonlabel,
   imageUrl,
   backgroundUrl,
+  onButtonClick,
 }) => {
   return (
     <div className={styles.mainBox} style={{ backgroundImage: `url(${backgroundUrl})` }}>
@@ -34,7 +36,7 @@ export const DirectorBox: React.FC<DirectorBoxProps> = ({
 
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.body}>{textBody}</p>
-      <Button className={styles.buttonstyle} label={buttonlabel} />
+      <Button className={styles.buttonstyle} label={buttonlabel} onClick={onButtonClick} />
     </div>
   );
 };
