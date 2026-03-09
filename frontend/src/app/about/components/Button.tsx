@@ -10,9 +10,10 @@ export const Button = function Button({
   ref,
   label,
   className,
+  ...props
 }: ButtonProps & { ref?: React.RefObject<HTMLButtonElement | null> }) {
   return (
-    <button className={`${styles.button} ${className ?? ""}`} ref={ref} type="button">
+    <button {...props} className={`${styles.button} ${className ?? ""}`} ref={ref} type="button">
       <span className={styles.label}>{label}</span>
     </button>
   );

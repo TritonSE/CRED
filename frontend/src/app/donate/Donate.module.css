@@ -1,0 +1,245 @@
+/* Boldfor donate section */
+.extraBoldText {
+  font-weight: 900;
+  color: #222;
+}
+
+.lessBoldText {
+  font-weight: 500;
+  color: #222;
+}
+
+/* Page */
+.donatePage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ===== Hero Banner ===== */
+.heroBanner {
+  position: relative;
+  width: 100%;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .heroBanner {
+    padding: 80px 120px;
+  }
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 67, 119, 0.8), rgba(30, 115, 190, 0.8));
+  z-index: 1;
+}
+
+.heroImageWrapper {
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.heroImageWrapper img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+@media (min-width: 1024px) {
+  .heroImageWrapper img {
+    object-position: center 12%;
+  }
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 1220px;
+  width: 100%;
+}
+
+.heroTitle {
+  font-family:
+    "SF Pro Display",
+    "SF Pro Text",
+    "SF Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.5;
+  color: white;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroTitle {
+    font-size: 64px;
+  }
+}
+
+.heroSubtitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.5;
+  color: white;
+  margin-top: 8px;
+}
+
+@media (min-width: 768px) {
+  .heroSubtitle {
+    font-size: 24px;
+  }
+}
+
+/* ===== Main Content ===== */
+.mainContent {
+  padding: 56px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+@media (min-width: 768px) {
+  .mainContent {
+    padding: 112px 0px;
+  }
+}
+
+.mainHeading {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.5;
+  color: black;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .mainHeading {
+    font-size: 48px;
+  }
+}
+
+/* Content Row */
+.contentRow {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .contentRow {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  border-radius: 15px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .imageWrapper {
+    width: 538px;
+    height: 375px;
+  }
+}
+
+.contentText {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.5;
+  color: black;
+  max-width: 650px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .contentText {
+    font-size: 24px;
+    padding-left: 80px;
+    margin-right: -30px;
+  }
+}
+
+.contentText p {
+  margin: 0;
+}
+
+.contentText strong {
+  font-weight: 900;
+}
+
+/* Donate Button */
+.donateLink {
+  text-decoration: none;
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+@media (min-width: 1024px) {
+  .donateLink {
+    margin-left: 0;
+  }
+}
+
+.donateButton {
+  background-color: #ffb341;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding: 15px 30px;
+  border-radius: 6.25px;
+  transition: opacity 0.2s;
+}
+
+.donateButton:hover {
+  opacity: 0.9;
+}
+
+.donateButtonText {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.5;
+  color: black;
+  text-align: center;
+  margin: 0;
+}

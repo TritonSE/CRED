@@ -1,0 +1,102 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 70px;
+  background-color: #faf8f6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 56px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
+  width: 100%;
+}
+
+.logoLink {
+  height: 70px;
+  position: relative;
+  width: 170px;
+  margin-left: -16px; /* Move logo further left on small screens */
+}
+
+@media (min-width: 1024px) {
+  .logoLink {
+    margin-left: 30px; /* Reset for large screens */
+  }
+}
+
+.logoImageWrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.navItems {
+  display: flex;
+  gap: 54px;
+  align-items: center;
+  margin-left: 0;
+}
+
+@media (min-width: 1024px) {
+  .navItems {
+    margin-right: 30px; /* Move nav buttons left on full screen */
+  }
+}
+
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.navLabel {
+  font-family: "Lato", sans-serif;
+  line-height: 1.5;
+  font-size: 20px;
+  color: black;
+  text-align: center;
+}
+
+.underline {
+  height: 3px;
+  width: 100%;
+}
+
+.underline.active {
+  background-color: #004881;
+}
+
+.navItem:hover .underline:not(.active) {
+  background-color: #ffb341;
+}
+
+.applyLink {
+  text-decoration: none;
+}
+
+.applyButton {
+  background-color: #ffb341;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 9px 18px;
+  border-radius: 5px;
+  transition: opacity 0.2s;
+}
+
+.applyButton:hover {
+  opacity: 0.9;
+}
+
+.applyButtonText {
+  font-family: "Lato", sans-serif;
+  line-height: 1.5;
+  font-size: 17px;
+  color: black;
+}
