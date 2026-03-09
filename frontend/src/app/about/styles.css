@@ -33,7 +33,6 @@
 }
 
 .about-container {
-  max-width: 1000px;
   margin: 0 auto;
   padding: 0 0.5rem;
   display: flex;
@@ -55,27 +54,13 @@
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
-  font-size: 1.75rem;
+  font-size: 64px;
   font-weight: 700;
   color: #ffffff;
   text-align: center;
-  margin-bottom: 0.75rem;
   margin-top: 0;
+  margin-bottom: 1.5rem;
   line-height: 1.2;
-}
-
-@media (min-width: 480px) {
-  .about-title {
-    font-size: 2.25rem;
-    margin-bottom: 1rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .about-title {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-  }
 }
 
 .about-intro {
@@ -83,23 +68,9 @@
   color: #ffffff;
   text-align: center;
   margin: 0 auto;
-  font-size: 0.9375rem;
+  font-size: 24px;
   line-height: 1.7;
   padding: 0 0.25rem;
-  max-width: 800px;
-}
-
-@media (min-width: 480px) {
-  .about-intro {
-    font-size: 1rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .about-intro {
-    font-size: 1.125rem;
-    padding: 0 1rem;
-  }
 }
 
 /* Vision Section */
@@ -120,7 +91,6 @@
   flex-direction: column;
   gap: 2rem;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -150,17 +120,10 @@
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
-  font-size: 1.75rem;
+  font-size: 48px;
   font-weight: 700;
   color: #0a326d;
-  margin-bottom: 1rem;
-}
-
-@media (min-width: 768px) {
-  .about-heading {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-  }
+  margin-bottom: 1.5rem;
 }
 
 .about-vision-content {
@@ -172,14 +135,8 @@
 .about-vision-content p {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
+  font-size: 20px;
   line-height: 150%;
-  font-size: 1rem;
-}
-
-@media (min-width: 768px) {
-  .about-vision-content p {
-    font-size: 1.3rem;
-  }
 }
 
 .about-image-placeholder {
