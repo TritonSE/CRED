@@ -30,7 +30,8 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 910px;
+  width: 100%;
+  max-width: 960px;
   padding: 0 24px;
 }
 
@@ -59,7 +60,7 @@
 
 .heroButtons {
   display: flex;
-  gap: 26px;
+  gap: 30px;
   margin-top: 40px;
 }
 
@@ -74,12 +75,13 @@
   font-size: 20px;
   line-height: 1.5;
   height: 48px;
-  padding: 0 32px;
+  padding: 12px 24px;
   border-radius: 5px;
   text-decoration: none;
   border: 1px solid #000000;
   cursor: pointer;
   transition: opacity 0.2s;
+  box-sizing: border-box;
 }
 
 .heroBtn:hover {
@@ -89,7 +91,7 @@
 /* --- Mission Section --- */
 .mission {
   padding: 5rem 2rem;
-  background-color: #ffffff;
+  background-color: #faf8f6;
   display: flex;
   justify-content: center;
 }
@@ -149,6 +151,114 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Who We Support Section ===== */
+.support {
+  background: #faf8f6;
+  padding: 100px 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 72px;
+}
+
+.supportHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 1047px;
+  width: 100%;
+}
+
+.supportTitle {
+  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #175892;
+  margin: 0;
+}
+
+.supportSubtitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+  max-width: 1047px;
+}
+
+.supportGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  max-width: 1220px;
+}
+
+.supportRow {
+  display: flex;
+  gap: 96px;
+  width: 100%;
+}
+
+.supportCard {
+  position: relative;
+  flex: 1;
+  width: 562px;
+  height: 296px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #000000;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
+}
+
+.supportCardImage {
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.supportCardOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.supportCardContent {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 36px 60px;
+}
+
+.supportCardTitle {
+  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 130%;
+  letter-spacing: 0%;
+  color: #ffffff;
+  margin: 0;
+}
+
+.supportCardText {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #ffffff;
+  margin: 0;
 }
 
 /* ===== Responsive ===== */
