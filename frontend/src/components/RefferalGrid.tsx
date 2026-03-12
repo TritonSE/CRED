@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 
 import styles from "./RefferalGrid.module.css";
 
@@ -8,8 +9,9 @@ const categories = [
   {
     id: "housing",
     title: "Housing Resources",
-    icon: "/houseIcon.png",
-    shortDesc: null,
+    selectedIcon: "/houseIcon.png",
+    unselectedIcon: "/housingIconUnselected.png",
+    shortDesc: "Emergency shelter, transitional, and permanent housing support",
     services: [
       {
         title: "Emergency Shelter Services",
@@ -32,27 +34,49 @@ const categories = [
   {
     id: "education",
     title: "Education",
-    icon: "/educationIcon.png",
+    selectedIcon: "/educationSelected.png",
+    unselectedIcon: "/educationIcon.png",
     shortDesc: "Economic resources, financial training, and higher education",
     services: [
-      // TODO: Add education services
+      {
+        title: "Economic Resources",
+        desc: "Guidance on budgeting, saving strategies, and accessing community economic development programs to build financial independence.",
+      },
+      {
+        title: "Financial Training",
+        desc: "Comprehensive workshops covering credit management, debt reduction, insurance planning, mortgages, and smart financial decision-making.",
+      },
+      {
+        title: "Higher Education Degrees",
+        desc: "Assistance with college applications, financial aid navigation, scholarship opportunities, and connecting to higher education support services.",
+      },
     ],
   },
   {
     id: "workforce",
     title: "Workforce Development",
-    icon: "/workIcon.png",
+    selectedIcon: "/workSelected.png",
+    unselectedIcon: "/workIcon.png",
     shortDesc: "Vocational training, entrepreneurship & job readiness",
     services: [
-      // TODO: Add workforce development services
+      {
+        title: "Vocational Training",
+        desc: "Access to certified training programs in high-demand fields including healthcare, technology, construction, and skilled trades.",
+      },
+      {
+        title: "Entrepreneurship Resources",
+        desc: "Support for aspiring business owners including business planning, access to microloans, mentorship, and connections to small business development resources.",
+      },
+      {
+        title: "Job Readiness",
+        desc: "Comprehensive preparation including resume writing, interview skills, professional development, and job placement assistance with partner employers.",
+      },
     ],
   },
 ];
 
-// TODO: Replace activeId with useState once Education and Workforce tabs are ready
-const activeId = "housing";
-
 export default function RefferalGrid() {
+  const [activeId, setActiveId] = useState("housing");
   const activeCategory = categories.find((c) => c.id === activeId) ?? categories[0];
 
   return (
@@ -65,15 +89,17 @@ export default function RefferalGrid() {
             <button
               key={category.id}
               className={`${styles.refferalTab} ${isActive ? styles.refferalTabActive : ""}`}
-              disabled
+              onClick={() => {
+                setActiveId(category.id);
+              }}
             >
               <div className={styles.refferalTabHeader}>
                 <Image
-                  src={category.icon}
+                  src={isActive ? category.selectedIcon : category.unselectedIcon}
                   alt={`${category.title} icon`}
                   width={32}
                   height={32}
-                  className={`${styles.refferalTabIcon} ${isActive ? styles.refferalTabIconActive : ""}`}
+                  className={styles.refferalTabIcon}
                 />
                 {!isActive && (
                   <Image

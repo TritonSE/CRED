@@ -3,22 +3,23 @@
   width: 100%;
   max-width: 1220px;
   gap: 32px;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .refferalTabs {
   display: flex;
   flex-direction: column;
+  gap: 16px;
   width: 320px;
   flex-shrink: 0;
 }
 
 .refferalTab {
   padding: 24px;
-  cursor: default;
+  cursor: pointer;
   border-radius: 10px;
-  background: transparent;
-  border: none;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   text-align: left;
   width: 100%;
   position: relative;
@@ -32,6 +33,8 @@
 
 .refferalTabActive {
   background: #175892;
+  border: 1px solid #175892;
+  border-top: 2px solid #175892;
 }
 
 .refferalTabHeader {
@@ -45,13 +48,6 @@
   width: 32px;
   height: 32px;
   object-fit: contain;
-}
-
-.refferalTabIconActive {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
 .refferalTabArrow {
