@@ -261,6 +261,48 @@
   margin: 0;
 }
 
+/* ===== Resource Refferal Section ===== */
+.refferal {
+  background: #faf8f6;
+  padding: 100px 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 72px;
+}
+
+.refferalHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 1047px;
+  width: 100%;
+}
+
+.refferalTitle {
+  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #175892;
+  margin: 0;
+}
+
+.refferalSubtitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+  max-width: 1047px;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .hero {

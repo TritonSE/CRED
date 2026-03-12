@@ -1,0 +1,129 @@
+.refferalGrid {
+  display: flex;
+  width: 100%;
+  max-width: 1220px;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.refferalTabs {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.refferalTab {
+  padding: 24px;
+  cursor: default;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.refferalTab:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.refferalTabActive {
+  background: #175892;
+}
+
+.refferalTabHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.refferalTabIcon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.refferalTabIconActive {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.refferalTabArrow {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.refferalTabTitle {
+  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #175892;
+  margin: 0 0 8px 0;
+}
+
+.refferalTabTitleActive {
+  color: #ffffff;
+}
+
+.refferalTabMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+}
+
+.refferalTabMetaDash {
+  width: 20px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.85);
+  flex-shrink: 0;
+}
+
+.refferalTabDesc {
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: #555555;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.refferalPanel {
+  flex: 1;
+  border: 1.5px solid #175892;
+  border-radius: 12px;
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.refferalService {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.refferalServiceTitle {
+  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #111111;
+  margin: 0;
+}
+
+.refferalServiceDesc {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0;
+}

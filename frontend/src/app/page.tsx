@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import RefferalGrid from "../components/RefferalGrid";
+
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -165,6 +167,19 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/*Resource Refferal*/}
+      <section className={styles.refferal}>
+        <div className={styles.refferalHeader}>
+          <h2 className={styles.refferalTitle}>Types of Aid</h2>
+          <p className={styles.refferalSubtitle}>
+            CRED provides clients with referral services to partner organizations and guides them to
+            choose the programs and resources that best fit their needs.
+          </p>
+        </div>
+
+        <RefferalGrid />
       </section>
     </>
   );
