@@ -56,7 +56,7 @@
   font-weight: 600;
   font-size: 16px;
   color: #175892;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
 }
 
 .activeTab {
@@ -100,8 +100,54 @@
 
 .imageWrapper {
   position: relative;
-  width: 220px;
-  height: 160px;
+  width: 247.94px;
+  height: 221.65px;
+  border-radius: 7.1px;
+  border: 2px solid transparent;
+  transition: none;
+}
+
+.imageWrapper:hover {
+  border-color: #175892;
+}
+
+.logoCard {
+  cursor: pointer;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  width: 1057px;
+  height: 457px;
+  background: #ffffff;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: relative;
+}
+
+.modalTitle {
+  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-weight: 590;
+  font-size: 40px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: var(--secondary-blue-darker, #004377);
+  width: 694px;
+  height: 60px;
+  position: absolute;
+  top: 59px;
+  left: 182px;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .logoName {

@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   max-width: 1220px;
-  gap: 32px;
+  gap: 40px;
   align-items: stretch;
 }
 
@@ -51,8 +51,8 @@
 }
 
 .refferalTabArrow {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
 }
 
@@ -94,9 +94,10 @@
 
 .refferalPanel {
   flex: 1;
-  border: 1.5px solid #175892;
-  border-radius: 12px;
-  padding: 36px 40px;
+  background: #ffffff;
+  border: 2px solid #175892;
+  border-radius: 10px;
+  padding: 48px 42px 2px 42px;
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -105,6 +106,7 @@
 .refferalService {
   display: flex;
   flex-direction: column;
+  width: 835px;
   gap: 8px;
 }
 
@@ -122,4 +124,5 @@
   line-height: 1.6;
   color: #333333;
   margin: 0;
+  width: 751px;
 }
