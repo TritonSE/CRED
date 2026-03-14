@@ -5,6 +5,17 @@ import { useState } from "react";
 
 import styles from "./Collaborator.module.css";
 
+const COLLABORATOR_INFO: Record<string, { description: string; link: string }> = {
+  "Father Joe's Villages": {
+    description:
+      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+    link: "https://my.neighbor.org/get-help/",
+  },
+  "San Diego State University": { description: "", link: "" },
+  "Underground Scholars": { description: "", link: "" },
+  "Alpha Project": { description: "", link: "" },
+};
+
 const collaboratorsData = [
   // --- EDUCATION ---
   { id: 1, name: "San Diego State University", category: "Education", logo: "/sdsuLogo.png" },
@@ -200,9 +211,48 @@ export default function Collaborator() {
               e.stopPropagation();
             }}
           >
+            <button
+              className={styles.modalClose}
+              onClick={() => {
+                setSelectedCollab(null);
+              }}
+            >
+              ✕
+            </button>
             <h2 className={styles.modalTitle}>
               {selectedCollab.name} {selectedCollab.category} Programs
             </h2>
+            {COLLABORATOR_INFO[selectedCollab.name]?.description && (
+              <p className={styles.modalDescription}>
+                {(() => {
+                  const desc = COLLABORATOR_INFO[selectedCollab.name].description;
+                  const name = selectedCollab.name;
+                  if (desc.startsWith(name)) {
+                    return (
+                      <>
+                        <strong>{name}</strong>
+                        {desc.slice(name.length)}
+                      </>
+                    );
+                  }
+                  return desc;
+                })()}
+              </p>
+            )}
+            <div className={styles.modalButtonWrapper}>
+              {COLLABORATOR_INFO[selectedCollab.name]?.link ? (
+                <a
+                  href={COLLABORATOR_INFO[selectedCollab.name].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.learnMoreButton}
+                >
+                  Learn More
+                </a>
+              ) : (
+                <button className={styles.learnMoreButton}>Learn More</button>
+              )}
+            </div>
           </div>
         </div>
       )}
