@@ -28,7 +28,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(249, 203, 114, 0.85); /* Warm yellow/orange tint */
+  background: rgba(249, 203, 114, 0.7); /* Warm yellow/orange tint */
   z-index: 2;
 }
 

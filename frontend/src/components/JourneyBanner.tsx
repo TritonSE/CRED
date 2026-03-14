@@ -9,7 +9,7 @@ export default function JourneyBanner() {
       {/* Background Image and Overlay */}
       <div className={styles.bgWrapper}>
         <Image
-          src="/journey-bg.jpg" /* Replace with your actual background image filename */
+          src="/background.png" /* Replace with your actual background image filename */
           alt="CRED background with lightbulbs"
           fill
           style={{ objectFit: "cover" }}
