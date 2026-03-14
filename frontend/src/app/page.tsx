@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import Collaborator from "../components/Collaborator";
+import JourneyBanner from "../components/JourneyBanner";
 import RefferalGrid from "../components/RefferalGrid";
 
 import styles from "./page.module.css";
@@ -181,6 +183,14 @@ export default function Home() {
 
         <RefferalGrid />
       </section>
+
+      {/* Collaborators Section */}
+      <section className={styles.collaborators}>
+        <Collaborator />
+      </section>
+
+      {/* Journey */}
+      <JourneyBanner />
     </>
   );
 }

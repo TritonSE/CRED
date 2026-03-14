@@ -1,0 +1,114 @@
+.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 64px 24px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  color: #175892;
+  margin: 0 0 16px 0;
+}
+
+.subtitle {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  color: #333333;
+  margin: 0;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1220px;
+  gap: 0;
+}
+
+.tabsContainer {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #175892;
+  transition: all 0.2s ease;
+}
+
+.activeTab {
+  background: #175892;
+  color: #ffffff;
+  border-color: #175892;
+}
+
+.logoPanel {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0 0 12px 12px;
+  padding: 48px;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 56px 24px;
+}
+
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.logoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 220px;
+  height: 160px;
+}
+
+.logoName {
+  font-family: "Lato", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  text-align: center;
+}
