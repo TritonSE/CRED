@@ -31,11 +31,15 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Image from "next/image";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+import { getAllApplicants } from "../../../api/applicant";
 
 import styles from "./ApplicationTable.module.css";
 import { ExpandedRowContent } from "./ExpandedRowContent";
 import { StatusLabel } from "./StatusLabel";
+
+//import type { Applicant, PaginatedResponse } from "../../../api/applicant";
 
 /**
  * Data structure for a single application row
@@ -73,7 +77,7 @@ export type ApplicationRowData = {
  */
 export type ApplicationTableProps = {
   title: string;
-  data: ApplicationRowData[];
+  //data: ApplicationRowData[]; // No longer needed, now using backend data
   pageSize?: number;
   totalApplications?: number;
   /** Called with the row's index in `data` when the checkbox is toggled */
@@ -106,7 +110,7 @@ function SortIndicator({ isSorted }: { isSorted: false | "asc" | "desc" }) {
  */
 export function ApplicationTable({
   title,
-  data,
+  //data, // no longer needed, using data from backend
   pageSize = 6,
   totalApplications,
   onRowMove,
@@ -118,6 +122,9 @@ export function ApplicationTable({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
   const [expandedHeights, setExpandedHeights] = useState<Record<string, number>>({});
+  const [applications, setApplications] = useState<ApplicationRowData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const expandedRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const toggleRowExpanded = (rowId: string) => {
@@ -126,6 +133,44 @@ export function ApplicationTable({
       [rowId]: !prev[rowId],
     }));
   };
+
+  useEffect(() => {
+    async function load() {
+      setIsLoading(true);
+      setError(null);
+      const result = await getAllApplicants(); // no pagination params → get everything
+      console.log(result);
+      if (result.success) {
+        // `result.data` can be either Applicant[] or PaginatedResponse<Applicant>
+        const rows = Array.isArray(result.data) ? result.data : result.data.data;
+
+        // Convert the API shape to the table’s shape
+        const tableRows: ApplicationRowData[] = rows.map((a) => ({
+          clientNumber: a._id, // you may want a different field
+          clientName: `${a.firstName} ${a.lastName}`,
+          dateSubmitted: a.actionPlan ?? "", // placeholder – replace with real field
+          status: a.status as ApplicationRowData["status"], // cast if needed
+          // ---- extended fields for expanded view (optional) ----
+          dateOfBirth: a.dateOfBirth.toISOString().split("T")[0],
+          race: a.raceEthnicity,
+          gender: a.gender,
+          cdcrNumber: a.cdcrNumber,
+          // Add any other properties you expose in ExpandedRowContent
+        }));
+        setApplications(tableRows);
+      } else {
+        setError(
+          typeof result.error === "object" && result.error !== null && "message" in result.error
+            ? String((result.error as { message?: unknown }).message)
+            : typeof result.error === "string"
+              ? result.error
+              : "Failed to load applicants",
+        );
+      }
+      setIsLoading(false);
+    }
+    void load();
+  }, []); // empty deps → run once on mount
 
   // Measure heights of expanded content
   useLayoutEffect(() => {
@@ -209,8 +254,10 @@ export function ApplicationTable({
     },
   ];
 
-  const table = useReactTable({
-    data,
+  const tableData = isLoading || error ? [] : applications;
+
+  const table = useReactTable<ApplicationRowData>({
+    data: tableData,
     columns,
     state: {
       sorting,
@@ -239,9 +286,9 @@ export function ApplicationTable({
     setIsCollapsed(!isCollapsed);
   };
 
-  const totalCount = totalApplications ?? data.length;
+  const totalCount = totalApplications ?? applications.length;
   const currentPage = table.getState().pagination.pageIndex + 1;
-  const totalPages = table.getPageCount();
+  const totalPages = totalCount / 6; //table.getPageCount();
   const startRow = table.getState().pagination.pageIndex * pageSize + 1;
 
   return (
