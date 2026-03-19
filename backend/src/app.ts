@@ -9,17 +9,24 @@ import applicantRoutes from "./routes/applicant";
 
 import type { NextFunction, Request, Response } from "express";
 
+/**
+ * Main Express app entrypoint.
+ * Responsible for middleware setup, route registration, centralized error handling,
+ * and MongoDB-backed server startup.
+ */
 const app = express();
 
 // initializes Express to accept JSON in the request/response body
 app.use(express.json());
 
+// Allow frontend requests from the configured origin.
 app.use(
   cors({
     origin: process.env.FRONTEND_ORIGIN,
   }),
 );
 
+// Mount applicant API routes under /api/applicant.
 app.use("/api/applicant", applicantRoutes);
 
 /**
@@ -40,6 +47,7 @@ app.use((error: unknown, req: Request, res: Response, _next: NextFunction) => {
 });
 
 // Server Startup Logic
+// Connect to MongoDB first; only start listening after a successful DB connection.
 
 mongoose
   .connect(MONGODB_URI)

@@ -18,6 +18,13 @@
   height: 70px;
   position: relative;
   width: 170px;
+  margin-left: -16px; /* Move logo further left on small screens */
+}
+
+@media (min-width: 1024px) {
+  .logoLink {
+    margin-left: 30px; /* Reset for large screens */
+  }
 }
 
 .logoImageWrapper {
@@ -30,6 +37,13 @@
   display: flex;
   gap: 54px;
   align-items: center;
+  margin-left: 0;
+}
+
+@media (min-width: 1024px) {
+  .navItems {
+    margin-right: 30px; /* Move nav buttons left on full screen */
+  }
 }
 
 .navItem {

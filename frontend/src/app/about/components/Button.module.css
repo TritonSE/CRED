@@ -1,0 +1,18 @@
+.button {
+  background-color: #ffb341;
+  border-radius: 4px;
+  padding: 12px 25px;
+  border: none;
+}
+
+.label {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.button:hover {
+  background-color: #ffe8c5;
+}

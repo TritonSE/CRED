@@ -4,15 +4,21 @@ import * as ApplicantController from "../controllers/applicant";
 import * as ApplicantValidator from "../validators/applicant";
 
 /**
- * Define the routes for the router
+ * Applicant REST routes.
+ * Validation middleware runs before controller handlers on write/delete operations.
  */
 const router = express.Router();
 
+// List endpoint with optional pagination/sort query params.
 router.get("/", ApplicantController.getAllApplicants);
 
+// Read a single applicant by document id.
 router.get("/:id", ApplicantController.getApplicant);
+// Create a new applicant record.
 router.post("/", ApplicantValidator.createApplicant, ApplicantController.createApplicant);
+// Full-record update by id.
 router.put("/:id", ApplicantValidator.updateApplicant, ApplicantController.updateApplicant);
+// Delete by id with body/id validation.
 router.delete("/:id", ApplicantValidator.removeApplicant, ApplicantController.removeApplicant);
 
 export default router;
