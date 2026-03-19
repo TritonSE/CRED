@@ -146,15 +146,28 @@ export function ApplicationTable({
 
         // Convert the API shape to the table’s shape
         const tableRows: ApplicationRowData[] = rows.map((a) => ({
-          clientNumber: a._id, // you may want a different field
-          clientName: `${a.firstName} ${a.lastName}`,
-          dateSubmitted: a.actionPlan ?? "", // placeholder – replace with real field
+          clientNumber: a.applicantNumber, // you may want a different field
+          clientName: a.applicantName,
+          dateSubmitted: a.dateSubmitted.toISOString().split("T")[0], // placeholder – replace with real field
           status: a.status as ApplicationRowData["status"], // cast if needed
           // ---- extended fields for expanded view (optional) ----
           dateOfBirth: a.dateOfBirth.toISOString().split("T")[0],
-          race: a.raceEthnicity,
+          race: a.race,
           gender: a.gender,
-          cdcrNumber: a.cdcrNumber,
+          address: a.address,
+          additionalComments: a.additionalComments,
+          aidRequested: a.aidRequested,
+          convictionDetails: a.convictionDetails,
+          educationStatus: a.educationStatus,
+          email: a.email,
+          employmentStatus: a.employmentStatus,
+          housingStatus: a.housingStatus,
+          isCompleted: a.isCompleted,
+          notes: a.notes,
+          otherAidRequested: a.otherAidRequested,
+          phoneNumber: a.phoneNumber,
+          todos: a.todos,
+
           // Add any other properties you expose in ExpandedRowContent
         }));
         setApplications(tableRows);
