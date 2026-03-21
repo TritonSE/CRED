@@ -117,16 +117,28 @@ export function ApplicationTable({
   isCompleted,
   globalFilter = "",
 }: ApplicationTableProps) {
-  // State to track whether the table content is visible
+  // ── UI state ──────────────────────────────────────────────────────────
+  /** Whether the entire table section is collapsed (hidden). */
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  /** Current column sort direction(s). Managed by @tanstack/react-table. */
   const [sorting, setSorting] = useState<SortingState>([]);
+  /** Map of row IDs → whether their expanded detail panel is open. */
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
+  /** Cached pixel heights of each expanded panel (used for CSS transitions). */
   const [expandedHeights, setExpandedHeights] = useState<Record<string, number>>({});
+
+  // ── Data state ───────────────────────────────────────────────────────
+  /** Application rows fetched from the backend API. */
   const [applications, setApplications] = useState<ApplicationRowData[]>([]);
+  /** True while the initial data fetch is in progress. */
   const [isLoading, setIsLoading] = useState(true);
+  /** Holds an error message if the API call fails. */
   const [error, setError] = useState<string | null>(null);
+
+  /** Refs to expanded-row wrapper divs, keyed by row ID, for height measurement. */
   const expandedRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
+  /** Toggle a row's expanded/collapsed state by its unique row ID. */
   const toggleRowExpanded = (rowId: string) => {
     setExpandedRows((prev) => ({
       ...prev,
@@ -134,6 +146,7 @@ export function ApplicationTable({
     }));
   };
 
+  // Fetch all applicants from the backend when the component first mounts.
   useEffect(() => {
     async function load() {
       setIsLoading(true);
@@ -185,7 +198,8 @@ export function ApplicationTable({
     void load();
   }, []); // empty deps → run once on mount
 
-  // Measure heights of expanded content
+  // After the DOM updates, measure the natural height of each expanded panel
+  // so we can animate max-height transitions smoothly.
   useLayoutEffect(() => {
     const heights: Record<string, number> = {};
     Object.entries(expandedRefs.current).forEach(([rowId, wrapper]) => {
@@ -200,6 +214,7 @@ export function ApplicationTable({
     setExpandedHeights(heights);
   }, [expandedRows]);
 
+  // ── Column definitions for @tanstack/react-table ─────────────────────
   const columns: ColumnDef<ApplicationRowData>[] = [
     {
       accessorKey: "clientNumber",
@@ -267,8 +282,11 @@ export function ApplicationTable({
     },
   ];
 
+  // Show an empty table while loading or on error; otherwise use fetched data.
   const tableData = isLoading || error ? [] : applications;
 
+  // Initialise the @tanstack/react-table instance with data, columns,
+  // sorting, filtering, pagination, and row-expansion capabilities.
   const table = useReactTable<ApplicationRowData>({
     data: tableData,
     columns,
@@ -295,13 +313,15 @@ export function ApplicationTable({
     },
   });
 
+  /** Toggle collapse/expand of the whole table section. */
   const handleToggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
 
+  // ── Pagination helpers ───────────────────────────────────────────────
   const totalCount = totalApplications ?? applications.length;
   const currentPage = table.getState().pagination.pageIndex + 1;
-  const totalPages = totalCount / 6; //table.getPageCount();
+  const totalPages = totalCount / 6; // TODO: use table.getPageCount() for dynamic page sizes
   const startRow = table.getState().pagination.pageIndex * pageSize + 1;
 
   return (

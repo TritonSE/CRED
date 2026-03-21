@@ -1,5 +1,14 @@
 /**
- * admin file
+ * AdminPage Component
+ *
+ * Top-level page for the admin dashboard. Manages two application tables:
+ *   1. "New Applications" – submissions that still need review.
+ *   2. "Completed Applications" – submissions that have been reviewed.
+ *
+ * Admins can move rows between the two tables (mark as completed / revert)
+ * and filter both tables with a shared search query.
+ *
+ * @module AdminPage
  */
 "use client";
 
@@ -11,6 +20,7 @@ import { ApplicationTable } from "./components/ApplicationTable";
 
 import type { ApplicationRowData } from "./components/ApplicationTable";
 
+/** Placeholder data for new / in-progress applications. */
 const ipData: ApplicationRowData[] = [
   {
     clientNumber: "#00000000",
@@ -72,6 +82,7 @@ const ipData: ApplicationRowData[] = [
   },
 ];
 
+/** Placeholder data for already-completed (reviewed) applications. */
 const comData: ApplicationRowData[] = [
   {
     clientNumber: "#00000000",
@@ -112,8 +123,10 @@ const comData: ApplicationRowData[] = [
 ];
 
 export default function AdminPage() {
+  // Application lists – "new" holds pending reviews, "completed" holds reviewed ones.
   const [newApps, setNewApps] = useState<ApplicationRowData[]>(ipData);
   const [completedApps, setCompletedApps] = useState<ApplicationRowData[]>(comData);
+  // Shared search query used to filter both tables simultaneously.
   const [searchQuery, setSearchQuery] = useState("");
 
   /** Move a row from the "new" table to "completed" */
@@ -135,14 +148,12 @@ export default function AdminPage() {
       <AdminHeader name="DeQuan" searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <ApplicationTable
         title="New Applications"
-        data={newApps}
         totalApplications={newApps.length}
         onRowMove={moveToCompleted}
         globalFilter={searchQuery}
       />
       <ApplicationTable
         title="Completed Applications"
-        data={completedApps}
         totalApplications={completedApps.length}
         onRowMove={moveToNew}
         isCompleted

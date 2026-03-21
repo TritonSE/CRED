@@ -34,8 +34,11 @@ export type ExpandedRowContentProps = {
  * @returns {JSX.Element} Expanded content with client details
  */
 export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
+  // Copy the row's to-do list into local state so checkboxes can be toggled
+  // without mutating the parent data source.
   const [todos, setTodos] = useState(row.todos ?? []);
 
+  /** Toggle the `completed` flag of a single to-do item by its ID. */
   const toggleTodo = (id: string) => {
     setTodos((prev) =>
       prev.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)),
