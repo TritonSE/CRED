@@ -31,8 +31,8 @@ export type HeaderProps = {
  */
 export const AdminHeader = function AdminHeader({
   name,
-  searchQuery,
-  onSearchChange,
+  searchQuery = "",
+  onSearchChange = () => undefined,
 }: HeaderProps) {
   return (
     <div className={styles.flexContainer}>
@@ -44,9 +44,9 @@ export const AdminHeader = function AdminHeader({
       {/* Search bar section for filtering applications */}
       <div className={styles.searchColumn}>
         <Search
-          placeholder="Search all applications"
+          placeholder="Search by name, client number, status, or date"
           value={searchQuery}
-          onChange={(query) => onSearchChange?.(query)}
+          onChange={onSearchChange}
           className={styles.searchBar}
         />
       </div>

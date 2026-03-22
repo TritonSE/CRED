@@ -8,7 +8,8 @@
 .flexContainer {
   display: flex;
   height: 40px;
-  width: 1121px;
+  width: 100%;
+  max-width: 1121px;
   flex-direction: row;
   justify-content: space-between; /* Pushes header and search to opposite ends */
   align-items: center;
@@ -31,12 +32,13 @@
   font-size: 40px; /* Large size to match Figma design */
   font-weight: 700;
   line-height: 100%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
 }
 
 /* Column containing the search input */
 .searchColumn {
-  width: 552px; /* Fixed width for consistent search bar size */
+  max-width: 552px; /* Max width for consistent search bar size */
+  width: 100%;
   height: 40px;
   align-items: center;
   justify-content: right;

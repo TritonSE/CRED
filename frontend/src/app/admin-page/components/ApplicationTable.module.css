@@ -7,7 +7,8 @@
 /* Main container with horizontal padding to match page layout */
 .tableContainer {
   border-radius: 8px;
-  width: 1121px;
+  width: 100%;
+  max-width: 1121px;
 }
 
 /* Header row containing title and collapse/expand button */
@@ -134,7 +135,7 @@
   background-color: #ffffff;
 }
 .odd {
-  background-color: #ffffff;
+  background-color: #f5f9ff;
 }
 
 /* Remove border from last data row when collapsed.
@@ -248,8 +249,7 @@
   grid-template-columns: 3fr 1.5fr;
   gap: 0;
   padding: 24px;
-  width: 1121px;
-  height: 825px;
+  width: 100%;
   position: relative;
   border-bottom: 1px solid #b4b4b4;
 }
@@ -331,10 +331,10 @@
   font-style: Regular;
   font-size: 20px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   vertical-align: middle;
-  width: 700;
-  height: 22;
+  width: 700px;
+  height: 22px;
   opacity: 1;
   color: #004377;
 }
@@ -357,7 +357,8 @@
 }
 
 .profileGridDivider {
-  width: 700;
+  width: 100%;
+  max-width: 700px;
   height: 0px;
   opacity: 1;
   border-width: 1px;
@@ -390,7 +391,7 @@
   font-style: Regular;
   font-size: 16px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   vertical-align: middle;
 }
 
@@ -401,7 +402,7 @@
   font-style: Regular;
   font-size: 16px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   vertical-align: middle;
 }
 
@@ -419,7 +420,7 @@
   font-style: Regular;
   font-size: 16px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   vertical-align: middle;
 }
 
@@ -430,7 +431,7 @@
   font-style: Regular;
   font-size: 16px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
 }
 
 .aidSubLabel {
@@ -440,7 +441,7 @@
   font-style: Regular;
   font-size: 16px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
 }
 
 .aidList {
@@ -514,7 +515,7 @@
   font-style: Regular;
   font-size: 16px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
 }
 
 .aidCheckbox:checked + .aidText {
@@ -643,10 +644,10 @@
   font-style: Regular;
   font-size: 16px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
 
-  width: 111;
-  height: 32;
+  width: 111px;
+  height: 32px;
   gap: 6px;
   opacity: 1;
   border-radius: 8px;
@@ -668,11 +669,11 @@
   font-style: Regular;
   font-size: 16px;
   line-height: 150%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   color: #484848;
 
-  width: 111;
-  height: 32;
+  width: 111px;
+  height: 32px;
   gap: 6px;
   opacity: 1;
   border-radius: 8px;

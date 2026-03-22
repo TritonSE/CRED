@@ -31,15 +31,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Image from "next/image";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-
-import { getAllApplicants } from "../../../api/applicant";
+import React, { useLayoutEffect, useRef, useState } from "react";
 
 import styles from "./ApplicationTable.module.css";
 import { ExpandedRowContent } from "./ExpandedRowContent";
 import { StatusLabel } from "./StatusLabel";
-
-//import type { Applicant, PaginatedResponse } from "../../../api/applicant";
 
 /**
  * Data structure for a single application row
@@ -73,11 +69,12 @@ export type ApplicationRowData = {
  * Props for the ApplicationTable component
  * @property {string} title - The heading displayed above the table
  * @property {ApplicationRowData[]} data - Array of application records to display
- * @property {number} [pageSize] - Number of rows per page (default: 10)
+ * @property {number} [pageSize] - Number of rows per page (default: 6)
  */
 export type ApplicationTableProps = {
   title: string;
-  //data: ApplicationRowData[]; // No longer needed, now using backend data
+  /** Pre-fetched application rows to display. When provided, no network request is made. */
+  data: ApplicationRowData[];
   pageSize?: number;
   totalApplications?: number;
   /** Called with the row's index in `data` when the checkbox is toggled */
@@ -110,7 +107,7 @@ function SortIndicator({ isSorted }: { isSorted: false | "asc" | "desc" }) {
  */
 export function ApplicationTable({
   title,
-  //data, // no longer needed, using data from backend
+  data,
   pageSize = 6,
   totalApplications,
   onRowMove,
@@ -127,14 +124,6 @@ export function ApplicationTable({
   /** Cached pixel heights of each expanded panel (used for CSS transitions). */
   const [expandedHeights, setExpandedHeights] = useState<Record<string, number>>({});
 
-  // ── Data state ───────────────────────────────────────────────────────
-  /** Application rows fetched from the backend API. */
-  const [applications, setApplications] = useState<ApplicationRowData[]>([]);
-  /** True while the initial data fetch is in progress. */
-  const [isLoading, setIsLoading] = useState(true);
-  /** Holds an error message if the API call fails. */
-  const [error, setError] = useState<string | null>(null);
-
   /** Refs to expanded-row wrapper divs, keyed by row ID, for height measurement. */
   const expandedRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -145,58 +134,6 @@ export function ApplicationTable({
       [rowId]: !prev[rowId],
     }));
   };
-
-  // Fetch all applicants from the backend when the component first mounts.
-  useEffect(() => {
-    async function load() {
-      setIsLoading(true);
-      setError(null);
-      const result = await getAllApplicants(); // no pagination params → get everything
-      console.log(result);
-      if (result.success) {
-        // `result.data` can be either Applicant[] or PaginatedResponse<Applicant>
-        const rows = Array.isArray(result.data) ? result.data : result.data.data;
-
-        // Convert the API shape to the table’s shape
-        const tableRows: ApplicationRowData[] = rows.map((a) => ({
-          clientNumber: a.applicantNumber, // you may want a different field
-          clientName: a.applicantName,
-          dateSubmitted: a.dateSubmitted.toISOString().split("T")[0], // placeholder – replace with real field
-          status: a.status as ApplicationRowData["status"], // cast if needed
-          // ---- extended fields for expanded view (optional) ----
-          dateOfBirth: a.dateOfBirth.toISOString().split("T")[0],
-          race: a.race,
-          gender: a.gender,
-          address: a.address,
-          additionalComments: a.additionalComments,
-          aidRequested: a.aidRequested,
-          convictionDetails: a.convictionDetails,
-          educationStatus: a.educationStatus,
-          email: a.email,
-          employmentStatus: a.employmentStatus,
-          housingStatus: a.housingStatus,
-          isCompleted: a.isCompleted,
-          notes: a.notes,
-          otherAidRequested: a.otherAidRequested,
-          phoneNumber: a.phoneNumber,
-          todos: a.todos,
-
-          // Add any other properties you expose in ExpandedRowContent
-        }));
-        setApplications(tableRows);
-      } else {
-        setError(
-          typeof result.error === "object" && result.error !== null && "message" in result.error
-            ? String((result.error as { message?: unknown }).message)
-            : typeof result.error === "string"
-              ? result.error
-              : "Failed to load applicants",
-        );
-      }
-      setIsLoading(false);
-    }
-    void load();
-  }, []); // empty deps → run once on mount
 
   // After the DOM updates, measure the natural height of each expanded panel
   // so we can animate max-height transitions smoothly.
@@ -282,23 +219,28 @@ export function ApplicationTable({
     },
   ];
 
-  // Show an empty table while loading or on error; otherwise use fetched data.
-  const tableData = isLoading || error ? [] : applications;
-
   // Initialise the @tanstack/react-table instance with data, columns,
   // sorting, filtering, pagination, and row-expansion capabilities.
   const table = useReactTable<ApplicationRowData>({
-    data: tableData,
+    data,
     columns,
     state: {
       sorting,
       globalFilter,
     },
-    globalFilterFn: (row, columnId, filterValue) => {
-      const clientNameValue = row.getValue("clientName");
-      if (typeof clientNameValue !== "string") return false;
-      const lowerSearch = String(filterValue).toLowerCase();
-      return clientNameValue.toLowerCase().includes(lowerSearch);
+    globalFilterFn: (row, _columnId, filterValue) => {
+      const search = String(filterValue).toLowerCase().trim();
+      if (!search) return true;
+      const clientName = String(row.getValue("clientName") ?? "").toLowerCase();
+      const clientNumber = String(row.getValue("clientNumber") ?? "").toLowerCase();
+      const status = String(row.getValue("status") ?? "").toLowerCase();
+      const dateSubmitted = String(row.getValue("dateSubmitted") ?? "").toLowerCase();
+      return (
+        clientName.includes(search) ||
+        clientNumber.includes(search) ||
+        status.includes(search) ||
+        dateSubmitted.includes(search)
+      );
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
@@ -319,9 +261,9 @@ export function ApplicationTable({
   };
 
   // ── Pagination helpers ───────────────────────────────────────────────
-  const totalCount = totalApplications ?? applications.length;
+  const totalCount = totalApplications ?? data.length;
   const currentPage = table.getState().pagination.pageIndex + 1;
-  const totalPages = totalCount / 6; // TODO: use table.getPageCount() for dynamic page sizes
+  const totalPages = Math.ceil(totalCount / pageSize);
   const startRow = table.getState().pagination.pageIndex * pageSize + 1;
 
   return (
@@ -415,7 +357,9 @@ export function ApplicationTable({
                               }`}
                               style={{
                                 maxHeight: isExpanded
-                                  ? `${String(expandedHeights[row.id] || 0)}px`
+                                  ? expandedHeights[row.id] !== undefined
+                                    ? `${String(expandedHeights[row.id])}px`
+                                    : "none"
                                   : "0px",
                               }}
                             >
@@ -437,8 +381,8 @@ export function ApplicationTable({
           {/* Pagination */}
           <div className={styles.paginationContainer}>
             <div className={styles.paginationInfo}>
-              {totalCount === 0 ? (
-                <>No applications to display</>
+              {table.getFilteredRowModel().rows.length === 0 ? (
+                <>No applications found</>
               ) : (
                 <>
                   Showing {startRow}–
@@ -464,14 +408,14 @@ export function ApplicationTable({
                   value={currentPage}
                   onChange={(e) => {
                     const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                    const clamped = Math.max(0, Math.min(page, totalPages - 1));
+                    const clamped = Math.max(0, Math.min(page, Math.max(totalPages, 1) - 1));
                     table.setPageIndex(clamped);
                   }}
                   className={styles.pageInput}
                   min={1}
-                  max={totalPages}
+                  max={Math.max(totalPages, 1)}
                 />{" "}
-                of {totalPages}
+                of {Math.max(totalPages, 1)}
               </span>
               <button
                 className={styles.paginationButton}

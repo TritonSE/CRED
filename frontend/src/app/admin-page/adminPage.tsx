@@ -1,7 +1,8 @@
 /**
  * AdminPage Component
  *
- * Top-level page for the admin dashboard. Manages two application tables:
+ * Top-level page for the admin dashboard. Fetches all applicants once from
+ * the backend, then manages two application tables:
  *   1. "New Applications" – submissions that still need review.
  *   2. "Completed Applications" – submissions that have been reviewed.
  *
@@ -12,122 +13,68 @@
  */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { getAllApplicants } from "../../api/applicant";
 
 import styles from "./adminPage.module.css";
 import { AdminHeader } from "./components/AdminHeader";
 import { ApplicationTable } from "./components/ApplicationTable";
 
 import type { ApplicationRowData } from "./components/ApplicationTable";
+import type { Applicant } from "../../api/applicant";
 
-/** Placeholder data for new / in-progress applications. */
-const ipData: ApplicationRowData[] = [
-  {
-    clientNumber: "#00000000",
-    clientName: "Alice Lan",
-    dateSubmitted: "January 17, 2026",
-    status: "Need to Review",
-    dateOfBirth: "01/23/2025",
-    race: "Asian",
-    gender: "Female",
-    housingStatus: "Renting",
-    education: "High School Diploma",
-    employment: "Part-time",
-    address: "1111 Gilman Drive La Jolla, CA 9292",
-    idDocument: "license.IMG",
-    email: "credclient@gmail.com",
-    phoneNumber: "000 - 000 - 000",
-    convictionDetails:
-      "Lorem ipsum dolor sit amet consectetur. Venenatis eget odio nunc vitae. Quisque commodo aliquam ornare nisl. Sit sit elementum libero varius turpis a felis.",
-    aidRequested: ["Housing", "Education", "Not Sure/Other:"],
-    otherAidRequested:
-      "I need help with managing my monthly income because I am struggling with paying my bills.",
-    additionalComments: "Is there a physical location I can meet with you guys?",
-    todos: [
-      { id: "1", label: "Email response", completed: false },
-      { id: "2", label: "Contact collaborators", completed: false },
-      { id: "3", label: "Assign programs", completed: false },
-    ],
-    notes: [{ date: "01/17/2026", content: "Application created" }],
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Andrea Labbaika",
-    dateSubmitted: "January 15, 2026",
-    status: "Need to Review",
-    dateOfBirth: "03/15/1990",
-    race: "Hispanic",
-    gender: "Female",
-    email: "andrea.l@email.com",
-    phoneNumber: "555 - 123- 4567",
-    todos: [
-      { id: "1", label: "Emailed response?", completed: false },
-      { id: "2", label: "Contacted collaborators?", completed: false },
-    ],
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Alice Lan",
-    dateSubmitted: "January 10, 2026",
-    status: "Under Review",
-    dateOfBirth: "07/22/1985",
-    race: "Asian",
-    gender: "Female",
-    email: "irene.joo@email.com",
-    phoneNumber: "555 - 987- 6543",
-    todos: [
-      { id: "1", label: "Emailed response?", completed: true },
-      { id: "2", label: "Contacted collaborators?", completed: false },
-    ],
-  },
-];
-
-/** Placeholder data for already-completed (reviewed) applications. */
-const comData: ApplicationRowData[] = [
-  {
-    clientNumber: "#00000000",
-    clientName: "Alice Lan",
-    dateSubmitted: "January 17, 2026",
-    status: "Reviewed",
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Andrea Labaikka",
-    dateSubmitted: "January 15, 2026",
-    status: "Reviewed",
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Irene Joo",
-    dateSubmitted: "January 10, 2026",
-    status: "Reviewed",
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Alice Lan",
-    dateSubmitted: "January 17, 2026",
-    status: "Reviewed",
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Andrea Labaikka",
-    dateSubmitted: "January 15, 2026",
-    status: "Reviewed",
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Irene Joo",
-    dateSubmitted: "January 10, 2026",
-    status: "Reviewed",
-  },
-];
+/** Convert a backend Applicant to the frontend ApplicationRowData shape. */
+function toRowData(a: Applicant): ApplicationRowData {
+  return {
+    clientNumber: a.applicantNumber,
+    clientName: a.applicantName,
+    dateSubmitted: a.dateSubmitted.toISOString().split("T")[0],
+    status: a.status as ApplicationRowData["status"],
+    dateOfBirth: a.dateOfBirth.toISOString().split("T")[0],
+    race: a.race,
+    gender: a.gender,
+    address: a.address,
+    additionalComments: a.additionalComments,
+    aidRequested: a.aidRequested,
+    convictionDetails: a.convictionDetails,
+    education: a.educationStatus,
+    email: a.email,
+    employment: a.employmentStatus,
+    housingStatus: a.housingStatus,
+    notes: a.notes,
+    otherAidRequested: a.otherAidRequested,
+    phoneNumber: a.phoneNumber,
+    todos: a.todos,
+  };
+}
 
 export default function AdminPage() {
   // Application lists – "new" holds pending reviews, "completed" holds reviewed ones.
-  const [newApps, setNewApps] = useState<ApplicationRowData[]>(ipData);
-  const [completedApps, setCompletedApps] = useState<ApplicationRowData[]>(comData);
+  const [newApps, setNewApps] = useState<ApplicationRowData[]>([]);
+  const [completedApps, setCompletedApps] = useState<ApplicationRowData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   // Shared search query used to filter both tables simultaneously.
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Fetch all applicants once and split into new/completed lists.
+  useEffect(() => {
+    async function load() {
+      setIsLoading(true);
+      setError(null);
+      const result = await getAllApplicants();
+      if (result.success) {
+        const rows = Array.isArray(result.data) ? result.data : result.data.data;
+        setNewApps(rows.filter((a) => !a.isCompleted).map(toRowData));
+        setCompletedApps(rows.filter((a) => a.isCompleted).map(toRowData));
+      } else {
+        setError(typeof result.error === "string" ? result.error : "Failed to load applicants");
+      }
+      setIsLoading(false);
+    }
+    void load();
+  }, []);
 
   /** Move a row from the "new" table to "completed" */
   const moveToCompleted = (index: number) => {
@@ -143,22 +90,39 @@ export default function AdminPage() {
     setNewApps((prev) => [{ ...row, status: "Need to Review" }, ...prev]);
   };
 
+  if (error) {
+    return (
+      <main className={styles.mainContent}>
+        <AdminHeader name="DeQuan" searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+        <p>Error loading applications: {error}</p>
+      </main>
+    );
+  }
+
   return (
     <main className={styles.mainContent}>
       <AdminHeader name="DeQuan" searchQuery={searchQuery} onSearchChange={setSearchQuery} />
-      <ApplicationTable
-        title="New Applications"
-        totalApplications={newApps.length}
-        onRowMove={moveToCompleted}
-        globalFilter={searchQuery}
-      />
-      <ApplicationTable
-        title="Completed Applications"
-        totalApplications={completedApps.length}
-        onRowMove={moveToNew}
-        isCompleted
-        globalFilter={searchQuery}
-      />
+      {isLoading ? (
+        <p>Loading applications…</p>
+      ) : (
+        <>
+          <ApplicationTable
+            title="New Applications"
+            data={newApps}
+            totalApplications={newApps.length}
+            onRowMove={moveToCompleted}
+            globalFilter={searchQuery}
+          />
+          <ApplicationTable
+            title="Completed Applications"
+            data={completedApps}
+            totalApplications={completedApps.length}
+            onRowMove={moveToNew}
+            isCompleted
+            globalFilter={searchQuery}
+          />
+        </>
+      )}
     </main>
   );
 }

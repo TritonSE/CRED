@@ -2,14 +2,15 @@ import { Lato } from "next/font/google";
 
 import type { Metadata } from "next";
 
+import AdminFooter from "@/components/AdminFooter";
+import AdminNavbar from "@/components/AdminNavbar";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import AdminFooter from "@/components/adminFooter";
-import AdminNavbar from "@/components/adminNavbar";
 
 import "./globals.css";
 
-const admin = true;
+const adminEnv = process.env.NEXT_PUBLIC_ADMIN_RENDER;
+const admin = adminEnv === undefined ? true : adminEnv === "true";
 
 const lato = Lato({
   weight: ["400", "700"],

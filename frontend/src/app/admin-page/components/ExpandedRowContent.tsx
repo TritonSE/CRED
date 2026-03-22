@@ -92,9 +92,9 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
             <div className={styles.profileItem}>
               <span className={styles.profileLabel}>ID</span>
               {row.idDocument ? (
-                <a href="#" className={styles.idLink}>
+                <button type="button" className={styles.idLink}>
                   {row.idDocument}
-                </a>
+                </button>
               ) : (
                 <span className={styles.profileValue}>-</span>
               )}
