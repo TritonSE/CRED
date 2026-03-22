@@ -12,7 +12,7 @@
  */
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import styles from "./adminPage.module.css";
 import { AdminHeader } from "./components/AdminHeader";
@@ -128,6 +128,13 @@ export default function AdminPage() {
   const [completedApps, setCompletedApps] = useState<ApplicationRowData[]>(comData);
   // Shared search query used to filter both tables simultaneously.
   const [searchQuery, setSearchQuery] = useState("");
+  // Incrementing this key triggers both tables to re-fetch from the backend.
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  /** Called by either table after a successful complete/incomplete toggle. */
+  const handleCompleteToggle = useCallback(() => {
+    setRefreshKey((prev) => prev + 1);
+  }, []);
 
   /** Move a row from the "new" table to "completed" */
   const moveToCompleted = (index: number) => {
@@ -151,6 +158,8 @@ export default function AdminPage() {
         totalApplications={newApps.length}
         onRowMove={moveToCompleted}
         globalFilter={searchQuery}
+        refreshKey={refreshKey}
+        onCompleteToggle={handleCompleteToggle}
       />
       <ApplicationTable
         title="Completed Applications"
@@ -158,6 +167,8 @@ export default function AdminPage() {
         onRowMove={moveToNew}
         isCompleted
         globalFilter={searchQuery}
+        refreshKey={refreshKey}
+        onCompleteToggle={handleCompleteToggle}
       />
     </main>
   );

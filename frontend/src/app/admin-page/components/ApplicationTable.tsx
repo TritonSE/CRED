@@ -33,13 +33,13 @@ import {
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { getAllApplicants } from "../../../api/applicant";
+import { getAllApplicants, updateApplicant } from "../../../api/applicant";
 
 import styles from "./ApplicationTable.module.css";
 import { ExpandedRowContent } from "./ExpandedRowContent";
 import { StatusLabel } from "./StatusLabel";
 
-//import type { Applicant, PaginatedResponse } from "../../../api/applicant";
+import type { Applicant } from "../../../api/applicant";
 
 /**
  * Data structure for a single application row
@@ -85,6 +85,10 @@ export type ApplicationTableProps = {
   /** If true, all rows render with their checkbox checked */
   isCompleted?: boolean;
   globalFilter?: string;
+  /** Incrementing this value triggers a re-fetch of applicant data. */
+  refreshKey?: number;
+  /** Called after a successful complete/incomplete toggle so the parent can refresh sibling tables. */
+  onCompleteToggle?: () => void;
 };
 
 /**
@@ -113,9 +117,10 @@ export function ApplicationTable({
   //data, // no longer needed, using data from backend
   pageSize = 6,
   totalApplications,
-  onRowMove,
   isCompleted,
   globalFilter = "",
+  refreshKey = 0,
+  onCompleteToggle,
 }: ApplicationTableProps) {
   // ── UI state ──────────────────────────────────────────────────────────
   /** Whether the entire table section is collapsed (hidden). */
@@ -130,6 +135,8 @@ export function ApplicationTable({
   // ── Data state ───────────────────────────────────────────────────────
   /** Application rows fetched from the backend API. */
   const [applications, setApplications] = useState<ApplicationRowData[]>([]);
+  /** Original Applicant objects from the API (needed for updateApplicant). */
+  const [rawApplicants, setRawApplicants] = useState<Applicant[]>([]);
   /** True while the initial data fetch is in progress. */
   const [isLoading, setIsLoading] = useState(true);
   /** Holds an error message if the API call fails. */
@@ -146,57 +153,96 @@ export function ApplicationTable({
     }));
   };
 
-  // Fetch all applicants from the backend when the component first mounts.
-  useEffect(() => {
-    async function load() {
-      setIsLoading(true);
-      setError(null);
-      const result = await getAllApplicants(); // no pagination params → get everything
-      console.log(result);
-      if (result.success) {
-        // `result.data` can be either Applicant[] or PaginatedResponse<Applicant>
-        const rows = Array.isArray(result.data) ? result.data : result.data.data;
+  /** Convert raw API Applicant objects to table row data and store both. */
+  const processApplicants = (rows: Applicant[]) => {
+    // Filter by isCompleted to show only the relevant rows for this table.
+    const filtered = rows.filter((a) => (isCompleted ? a.isCompleted : !a.isCompleted));
+    setRawApplicants(filtered);
 
-        // Convert the API shape to the table’s shape
-        const tableRows: ApplicationRowData[] = rows.map((a) => ({
-          clientNumber: a.applicantNumber, // you may want a different field
-          clientName: a.applicantName,
-          dateSubmitted: a.dateSubmitted.toISOString().split("T")[0], // placeholder – replace with real field
-          status: a.status as ApplicationRowData["status"], // cast if needed
-          // ---- extended fields for expanded view (optional) ----
-          dateOfBirth: a.dateOfBirth.toISOString().split("T")[0],
-          race: a.race,
-          gender: a.gender,
-          address: a.address,
-          additionalComments: a.additionalComments,
-          aidRequested: a.aidRequested,
-          convictionDetails: a.convictionDetails,
-          educationStatus: a.educationStatus,
-          email: a.email,
-          employmentStatus: a.employmentStatus,
-          housingStatus: a.housingStatus,
-          isCompleted: a.isCompleted,
-          notes: a.notes,
-          otherAidRequested: a.otherAidRequested,
-          phoneNumber: a.phoneNumber,
-          todos: a.todos,
+    const tableRows: ApplicationRowData[] = filtered.map((a) => ({
+      clientNumber: a.applicantNumber,
+      clientName: a.applicantName,
+      dateSubmitted: a.dateSubmitted.toISOString().split("T")[0],
+      status: a.status as ApplicationRowData["status"],
+      dateOfBirth: a.dateOfBirth.toISOString().split("T")[0],
+      race: a.race,
+      gender: a.gender,
+      address: a.address,
+      additionalComments: a.additionalComments,
+      aidRequested: a.aidRequested,
+      convictionDetails: a.convictionDetails,
+      email: a.email,
+      housingStatus: a.housingStatus,
+      notes: a.notes,
+      otherAidRequested: a.otherAidRequested,
+      phoneNumber: a.phoneNumber,
+      todos: a.todos,
+    }));
+    setApplications(tableRows);
+  };
 
-          // Add any other properties you expose in ExpandedRowContent
-        }));
-        setApplications(tableRows);
-      } else {
-        setError(
-          typeof result.error === "object" && result.error !== null && "message" in result.error
-            ? String((result.error as { message?: unknown }).message)
-            : typeof result.error === "string"
-              ? result.error
-              : "Failed to load applicants",
-        );
-      }
-      setIsLoading(false);
+  /** Fetch all applicants from the backend. */
+  const fetchData = async () => {
+    setIsLoading(true);
+    setError(null);
+    const result = await getAllApplicants();
+    if (result.success) {
+      const rows = Array.isArray(result.data) ? result.data : result.data.data;
+      processApplicants(rows);
+    } else {
+      setError(typeof result.error === "string" ? result.error : "Failed to load applicants");
     }
-    void load();
-  }, []); // empty deps → run once on mount
+    setIsLoading(false);
+  };
+
+  // Fetch all applicants from the backend when the component mounts or refreshKey changes.
+  useEffect(() => {
+    void fetchData();
+  }, [refreshKey]); // re-fetch when refreshKey changes
+
+  /**
+   * Toggle `isCompleted` for the applicant at the given row index.
+   * Calls `updateApplicant` to persist the change, then re-fetches.
+   */
+  const handleToggleComplete = async (rowIndex: number) => {
+    const applicant = rawApplicants[rowIndex];
+    if (!applicant) return;
+
+    const newIsCompleted = !applicant.isCompleted;
+    const newStatus = newIsCompleted ? "Reviewed" : "Need to Review";
+
+    const result = await updateApplicant({
+      _id: applicant._id,
+      applicantNumber: applicant.applicantNumber,
+      applicantName: applicant.applicantName,
+      dateSubmitted: applicant.dateSubmitted,
+      status: newStatus,
+      dateOfBirth: applicant.dateOfBirth,
+      race: applicant.race,
+      gender: applicant.gender,
+      email: applicant.email,
+      address: applicant.address,
+      phoneNumber: applicant.phoneNumber,
+      housingStatus: applicant.housingStatus,
+      educationStatus: applicant.educationStatus,
+      employmentStatus: applicant.employmentStatus,
+      convictionDetails: applicant.convictionDetails,
+      aidRequested: applicant.aidRequested,
+      otherAidRequested: applicant.otherAidRequested,
+      additionalComments: applicant.additionalComments,
+      todos: applicant.todos,
+      notes: applicant.notes,
+      isCompleted: newIsCompleted,
+    });
+
+    if (result.success) {
+      // Re-fetch this table and notify parent to refresh sibling tables.
+      await fetchData();
+      onCompleteToggle?.();
+    } else {
+      console.error("Failed to update applicant:", result.error);
+    }
+  };
 
   // After the DOM updates, measure the natural height of each expanded panel
   // so we can animate max-height transitions smoothly.
@@ -244,7 +290,7 @@ export function ApplicationTable({
               className={styles.markCompleteButton}
               onClick={(e) => {
                 e.stopPropagation();
-                onRowMove?.(row.index);
+                void handleToggleComplete(row.index);
               }}
             >
               <span>✓</span>
@@ -255,7 +301,7 @@ export function ApplicationTable({
               className={styles.completedButton}
               onClick={(e) => {
                 e.stopPropagation();
-                onRowMove?.(row.index);
+                void handleToggleComplete(row.index);
               }}
             >
               <span>✓</span>
