@@ -365,10 +365,11 @@ export function ApplicationTable({
   };
 
   // ── Pagination helpers ───────────────────────────────────────────────
-  const totalCount = totalApplications ?? applications.length;
+  const totalFilteredRows = table.getFilteredRowModel().rows.length;
+  const totalCount = totalApplications ?? totalFilteredRows;
   const currentPage = table.getState().pagination.pageIndex + 1;
-  const totalPages = totalCount / 6; // TODO: use table.getPageCount() for dynamic page sizes
-  const startRow = table.getState().pagination.pageIndex * pageSize + 1;
+  const totalPages = table.getPageCount();
+  const startRow = totalCount === 0 ? 0 : table.getState().pagination.pageIndex * pageSize + 1;
 
   return (
     <div className={styles.tableContainer}>
@@ -489,7 +490,7 @@ export function ApplicationTable({
                 <>
                   Showing {startRow}–
                   {Math.min(startRow + table.getRowModel().rows.length - 1, totalCount)} of{" "}
-                  {totalCount} applications
+                  {totalFilteredRows} applications
                 </>
               )}
             </div>

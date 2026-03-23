@@ -132,7 +132,7 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
                 <span className={styles.aidText}>Education</span>
               </label>
               <label key="workforce-development" className={styles.aidItem}>
-                {row.aidRequested?.includes("Workforce Development/Employment") ? (
+                {row.aidRequested?.includes("Development") ? (
                   <input type="checkbox" checked readOnly className={styles.aidCheckbox} />
                 ) : (
                   <input type="checkbox" readOnly className={styles.aidCheckbox} />
