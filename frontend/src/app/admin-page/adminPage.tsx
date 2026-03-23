@@ -19,108 +19,8 @@ import { AdminHeader } from "./components/AdminHeader";
 import { ApplicationTable } from "./components/ApplicationTable";
 
 import type { ApplicationRowData } from "./components/ApplicationTable";
-
-/** Placeholder data for new / in-progress applications. */
-const ipData: ApplicationRowData[] = [
-  {
-    clientNumber: "#00000000",
-    clientName: "Alice Lan",
-    dateSubmitted: "January 17, 2026",
-    status: "Need to Review",
-    dateOfBirth: "01/23/2025",
-    race: "Asian",
-    gender: "Female",
-    housingStatus: "Renting",
-    education: "High School Diploma",
-    employment: "Part-time",
-    address: "1111 Gilman Drive La Jolla, CA 9292",
-    idDocument: "license.IMG",
-    email: "credclient@gmail.com",
-    phoneNumber: "000 - 000 - 000",
-    convictionDetails:
-      "Lorem ipsum dolor sit amet consectetur. Venenatis eget odio nunc vitae. Quisque commodo aliquam ornare nisl. Sit sit elementum libero varius turpis a felis.",
-    aidRequested: ["Housing", "Education", "Not Sure/Other:"],
-    otherAidRequested:
-      "I need help with managing my monthly income because I am struggling with paying my bills.",
-    additionalComments: "Is there a physical location I can meet with you guys?",
-    todos: [
-      { id: "1", label: "Email response", completed: false },
-      { id: "2", label: "Contact collaborators", completed: false },
-      { id: "3", label: "Assign programs", completed: false },
-    ],
-    notes: [{ date: "01/17/2026", content: "Application created" }],
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Andrea Labbaika",
-    dateSubmitted: "January 15, 2026",
-    status: "Need to Review",
-    dateOfBirth: "03/15/1990",
-    race: "Hispanic",
-    gender: "Female",
-    email: "andrea.l@email.com",
-    phoneNumber: "555 - 123- 4567",
-    todos: [
-      { id: "1", label: "Emailed response?", completed: false },
-      { id: "2", label: "Contacted collaborators?", completed: false },
-    ],
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Alice Lan",
-    dateSubmitted: "January 10, 2026",
-    status: "Under Review",
-    dateOfBirth: "07/22/1985",
-    race: "Asian",
-    gender: "Female",
-    email: "irene.joo@email.com",
-    phoneNumber: "555 - 987- 6543",
-    todos: [
-      { id: "1", label: "Emailed response?", completed: true },
-      { id: "2", label: "Contacted collaborators?", completed: false },
-    ],
-  },
-];
-
-/** Placeholder data for already-completed (reviewed) applications. */
-const comData: ApplicationRowData[] = [
-  {
-    clientNumber: "#00000000",
-    clientName: "Alice Lan",
-    dateSubmitted: "January 17, 2026",
-    status: "Reviewed",
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Andrea Labaikka",
-    dateSubmitted: "January 15, 2026",
-    status: "Reviewed",
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Irene Joo",
-    dateSubmitted: "January 10, 2026",
-    status: "Reviewed",
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Alice Lan",
-    dateSubmitted: "January 17, 2026",
-    status: "Reviewed",
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Andrea Labaikka",
-    dateSubmitted: "January 15, 2026",
-    status: "Reviewed",
-  },
-  {
-    clientNumber: "#00000000",
-    clientName: "Irene Joo",
-    dateSubmitted: "January 10, 2026",
-    status: "Reviewed",
-  },
-];
+const ipData: ApplicationRowData[] = [];
+const comData: ApplicationRowData[] = [];
 
 export default function AdminPage() {
   // Application lists – "new" holds pending reviews, "completed" holds reviewed ones.
@@ -155,7 +55,6 @@ export default function AdminPage() {
       <AdminHeader name="DeQuan" searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <ApplicationTable
         title="New Applications"
-        totalApplications={newApps.length}
         onRowMove={moveToCompleted}
         globalFilter={searchQuery}
         refreshKey={refreshKey}
@@ -163,7 +62,6 @@ export default function AdminPage() {
       />
       <ApplicationTable
         title="Completed Applications"
-        totalApplications={completedApps.length}
         onRowMove={moveToNew}
         isCompleted
         globalFilter={searchQuery}
