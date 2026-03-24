@@ -293,7 +293,9 @@ export function ApplicationTable({
                 void handleToggleComplete(row.index);
               }}
             >
-              <span>✓</span>
+              <span>
+                <Image src="/admin_checkmark_light.svg" alt="Checkmark" width={20} height={20} />
+              </span>
               <span>Complete</span>
             </button>
           ) : (
@@ -304,7 +306,9 @@ export function ApplicationTable({
                 void handleToggleComplete(row.index);
               }}
             >
-              <span>✓</span>
+              <span>
+                <Image src="/admin_checkmark_dark.svg" alt="Checkmark" width={20} height={20} />
+              </span>
               <span>Completed</span>
             </button>
           )}
