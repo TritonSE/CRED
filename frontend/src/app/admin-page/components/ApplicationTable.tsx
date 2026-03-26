@@ -80,8 +80,6 @@ export type ApplicationTableProps = {
   //data: ApplicationRowData[]; // No longer needed, now using backend data
   pageSize?: number;
   totalApplications?: number;
-  /** Called with the row's index in `data` when the checkbox is toggled */
-  onRowMove?: (index: number) => void;
   /** If true, all rows render with their checkbox checked */
   isCompleted?: boolean;
   globalFilter?: string;
@@ -162,9 +160,11 @@ export function ApplicationTable({
     const tableRows: ApplicationRowData[] = filtered.map((a) => ({
       clientNumber: a.applicantNumber,
       clientName: a.applicantName,
-      dateSubmitted: a.dateSubmitted.toISOString().split("T")[0],
+      dateSubmitted: a.dateSubmitted.toLocaleDateString("en-CA"),
       status: a.status as ApplicationRowData["status"],
-      dateOfBirth: a.dateOfBirth.toISOString().split("T")[0],
+      dateOfBirth: a.dateOfBirth.toLocaleDateString("en-CA"),
+      education: a.educationStatus,
+      employment: a.employmentStatus,
       race: a.race,
       gender: a.gender,
       address: a.address,
