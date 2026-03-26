@@ -240,6 +240,10 @@ export function ApplicationTable({
       await fetchData();
       onCompleteToggle?.();
     } else {
+      alert(
+        "Failed to update application status. Please try again. Error: " +
+          (typeof result.error === "string" ? result.error : "Unknown error"),
+      );
       console.error("Failed to update applicant:", result.error);
     }
   };
