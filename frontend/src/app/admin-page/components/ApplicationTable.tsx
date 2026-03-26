@@ -114,7 +114,6 @@ export function ApplicationTable({
   title,
   //data, // no longer needed, using data from backend
   pageSize = 6,
-  totalApplications,
   isCompleted,
   globalFilter = "",
   refreshKey = 0,
@@ -130,6 +129,7 @@ export function ApplicationTable({
   /** Cached pixel heights of each expanded panel (used for CSS transitions). */
   const [expandedHeights, setExpandedHeights] = useState<Record<string, number>>({});
 
+  // TODO: move the processApplicants method to adminPage to avoid duplicating it in both tables, and just pass the processed ApplicationRowData to this component. That way this component is only responsible for presentation and interaction, and not data transformation.
   // ── Data state ───────────────────────────────────────────────────────
   /** Application rows fetched from the backend API. */
   const [applications, setApplications] = useState<ApplicationRowData[]>([]);
@@ -374,7 +374,7 @@ export function ApplicationTable({
 
   // ── Pagination helpers ───────────────────────────────────────────────
   const totalFilteredRows = table.getFilteredRowModel().rows.length;
-  const totalCount = totalApplications ?? totalFilteredRows;
+  const totalCount = totalFilteredRows;
   const currentPage = table.getState().pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
   const startRow = totalCount === 0 ? 0 : table.getState().pagination.pageIndex * pageSize + 1;
