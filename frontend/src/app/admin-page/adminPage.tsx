@@ -51,23 +51,25 @@ export default function AdminPage() {
   };
 
   return (
-    <main className={styles.mainContent}>
-      <AdminHeader name="DeQuan" searchQuery={searchQuery} onSearchChange={setSearchQuery} />
-      <ApplicationTable
-        title="New Applications"
-        onRowMove={moveToCompleted}
-        globalFilter={searchQuery}
-        refreshKey={refreshKey}
-        onCompleteToggle={handleCompleteToggle}
-      />
-      <ApplicationTable
-        title="Completed Applications"
-        onRowMove={moveToNew}
-        isCompleted
-        globalFilter={searchQuery}
-        refreshKey={refreshKey}
-        onCompleteToggle={handleCompleteToggle}
-      />
-    </main>
+    <div className={styles.scrollViewport}>
+      <main className={styles.mainContent}>
+        <AdminHeader name="DeQuan" searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+        <ApplicationTable
+          title="New Applications"
+          onRowMove={moveToCompleted}
+          globalFilter={searchQuery}
+          refreshKey={refreshKey}
+          onCompleteToggle={handleCompleteToggle}
+        />
+        <ApplicationTable
+          title="Completed Applications"
+          onRowMove={moveToNew}
+          isCompleted
+          globalFilter={searchQuery}
+          refreshKey={refreshKey}
+          onCompleteToggle={handleCompleteToggle}
+        />
+      </main>
+    </div>
   );
 }

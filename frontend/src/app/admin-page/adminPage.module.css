@@ -1,3 +1,9 @@
+.scrollViewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
 .mainContent {
   padding-top: 5rem;
   padding-left: 15%; /* TODO: figure out a better way to do this and line up the table */
@@ -5,4 +11,6 @@
   margin: 0 auto;
   background-color: #faf8f6;
   min-height: 100vh;
+  width: max-content;
+  min-width: 1121px;
 }
