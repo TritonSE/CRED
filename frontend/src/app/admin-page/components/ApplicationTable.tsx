@@ -69,6 +69,8 @@ export type ApplicationRowData = {
   notes?: { date: string; content: string }[];
 };
 
+export type TodoItem = NonNullable<ApplicationRowData["todos"]>[number];
+
 /**
  * Props for the ApplicationTable component
  * @property {string} title - The heading displayed above the table
@@ -133,6 +135,8 @@ export function ApplicationTable({
   // ── Data state ───────────────────────────────────────────────────────
   /** Application rows fetched from the backend API. */
   const [applications, setApplications] = useState<ApplicationRowData[]>([]);
+  /** Persisted to-do state keyed by client number so collapse/expand keeps checkbox state. */
+  const [todosByClient, setTodosByClient] = useState<Record<string, TodoItem[]>>({});
   /** Original Applicant objects from the API (needed for updateApplicant). */
   const [rawApplicants, setRawApplicants] = useState<Applicant[]>([]);
   /** True while the initial data fetch is in progress. */
@@ -199,6 +203,97 @@ export function ApplicationTable({
   useEffect(() => {
     void fetchData();
   }, [refreshKey]); // re-fetch when refreshKey changes
+
+  // Seed persisted to-do state for each client from backend data exactly once per client.
+  useEffect(() => {
+    setTodosByClient((prev) => {
+      const next = { ...prev };
+      applications.forEach((app) => {
+        next[app.clientNumber] ??= app.todos ?? [];
+      });
+      return next;
+    });
+  }, [applications]);
+
+  /**
+   * Toggle a to-do item for a specific client and persist the change to backend.
+   * Uses optimistic UI update, then rolls back if the API call fails.
+   */
+  const handleToggleTodo = async (clientNumber: string, todoId: string) => {
+    const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
+    if (!applicant) return;
+
+    const previousTodos = todosByClient[clientNumber] ?? applicant.todos ?? [];
+    const updatedTodos = previousTodos.map((todo) =>
+      todo.id === todoId ? { ...todo, completed: !todo.completed } : todo,
+    );
+
+    // Optimistic update so the checkbox responds immediately.
+    setTodosByClient((prev) => ({
+      ...prev,
+      [clientNumber]: updatedTodos,
+    }));
+
+    const result = await updateApplicant({
+      _id: applicant._id,
+      applicantNumber: applicant.applicantNumber,
+      applicantName: applicant.applicantName,
+      dateSubmitted: applicant.dateSubmitted,
+      status: applicant.status,
+      dateOfBirth: applicant.dateOfBirth,
+      race: applicant.race,
+      gender: applicant.gender,
+      email: applicant.email,
+      address: applicant.address,
+      phoneNumber: applicant.phoneNumber,
+      housingStatus: applicant.housingStatus,
+      educationStatus: applicant.educationStatus,
+      employmentStatus: applicant.employmentStatus,
+      convictionDetails: applicant.convictionDetails,
+      aidRequested: applicant.aidRequested,
+      otherAidRequested: applicant.otherAidRequested,
+      additionalComments: applicant.additionalComments,
+      todos: updatedTodos,
+      notes: applicant.notes,
+      isCompleted: applicant.isCompleted,
+    });
+
+    if (!result.success) {
+      // Revert optimistic UI update if persistence fails.
+      setTodosByClient((prev) => ({
+        ...prev,
+        [clientNumber]: previousTodos,
+      }));
+      alert(
+        "Failed to update to-do status. Please try again. Error: " +
+          (typeof result.error === "string" ? result.error : "Unknown error"),
+      );
+      console.error("Failed to update applicant todos:", result.error);
+      return;
+    }
+
+    // Keep local applicant snapshots consistent with the persisted todos.
+    setRawApplicants((prev) =>
+      prev.map((a) =>
+        a.applicantNumber === clientNumber
+          ? {
+              ...a,
+              todos: updatedTodos,
+            }
+          : a,
+      ),
+    );
+    setApplications((prev) =>
+      prev.map((a) =>
+        a.clientNumber === clientNumber
+          ? {
+              ...a,
+              todos: updatedTodos,
+            }
+          : a,
+      ),
+    );
+  };
 
   /**
    * Toggle `isCompleted` for the applicant at the given row index.
@@ -432,15 +527,18 @@ export function ApplicationTable({
               </thead>
               <tbody>
                 {(() => {
-                  let visibleRowIndex = 0;
                   return table.getRowModel().rows.map((row) => {
                     const isExpanded = expandedRows[row.id];
-                    const rowParity = visibleRowIndex % 2 === 0 ? styles.even : styles.odd;
-                    visibleRowIndex++;
+                    const clientNumber = row.original.clientNumber;
+                    const persistedTodos = todosByClient[clientNumber] ?? row.original.todos ?? [];
+                    const rowWithPersistedTodos: ApplicationRowData = {
+                      ...row.original,
+                      todos: persistedTodos,
+                    };
                     return (
                       <React.Fragment key={row.id}>
                         <tr
-                          className={`${styles.tableRow} ${rowParity}`}
+                          className={styles.tableRow}
                           tabIndex={0}
                           aria-expanded={isExpanded}
                           onClick={() => {
@@ -459,7 +557,7 @@ export function ApplicationTable({
                             </td>
                           ))}
                         </tr>
-                        <tr className={`${styles.expandedDetailRow} ${rowParity}`}>
+                        <tr className={styles.expandedDetailRow}>
                           <td colSpan={columns.length} className={styles.expandedDetailCell}>
                             <div
                               ref={(el) => {
@@ -476,7 +574,13 @@ export function ApplicationTable({
                             >
                               {/* Render content only once expanded (and keep it mounted) for animation */}
                               {(isExpanded || expandedHeights[row.id] !== undefined) && (
-                                <ExpandedRowContent row={row.original} />
+                                <ExpandedRowContent
+                                  row={rowWithPersistedTodos}
+                                  todos={persistedTodos}
+                                  onToggleTodo={(todoId) => {
+                                    void handleToggleTodo(clientNumber, todoId);
+                                  }}
+                                />
                               )}
                             </div>
                           </td>

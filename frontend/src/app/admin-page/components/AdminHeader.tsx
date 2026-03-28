@@ -31,7 +31,7 @@ export type HeaderProps = {
  */
 export const AdminHeader = function AdminHeader({
   name,
-  searchQuery,
+  searchQuery = "",
   onSearchChange,
 }: HeaderProps) {
   return (

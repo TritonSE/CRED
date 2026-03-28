@@ -13,17 +13,17 @@
  */
 "use client";
 
-import { useState } from "react";
+import styles from "./ExpandedRowContent.module.css";
 
-import styles from "./ApplicationTable.module.css";
-
-import type { ApplicationRowData } from "./ApplicationTable";
+import type { ApplicationRowData, TodoItem } from "./ApplicationTable";
 
 /**
  * Props for the ExpandedRowContent component
  */
 export type ExpandedRowContentProps = {
   row: ApplicationRowData;
+  todos?: TodoItem[];
+  onToggleTodo?: (id: string) => void;
 };
 
 /**
@@ -33,18 +33,11 @@ export type ExpandedRowContentProps = {
  * @param {ApplicationRowData} props.row - The application data to display
  * @returns {JSX.Element} Expanded content with client details
  */
-export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
-  // Copy the row's to-do list into local state so checkboxes can be toggled
-  // without mutating the parent data source.
-  const [todos, setTodos] = useState(row.todos ?? []);
-
-  /** Toggle the `completed` flag of a single to-do item by its ID. */
-  const toggleTodo = (id: string) => {
-    setTodos((prev) =>
-      prev.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)),
-    );
-  };
-
+export function ExpandedRowContent({
+  row,
+  todos = row.todos ?? [],
+  onToggleTodo,
+}: ExpandedRowContentProps) {
   return (
     <div className={styles.expandedContent}>
       {/* Left Column: Client Profile + Program Needs */}
@@ -191,7 +184,7 @@ export function ExpandedRowContent({ row }: ExpandedRowContentProps) {
                     type="checkbox"
                     checked={todo.completed}
                     onChange={() => {
-                      toggleTodo(todo.id);
+                      onToggleTodo?.(todo.id);
                     }}
                     className={styles.checkbox}
                   />

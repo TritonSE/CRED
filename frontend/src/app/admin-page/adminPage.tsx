@@ -18,14 +18,7 @@ import styles from "./adminPage.module.css";
 import { AdminHeader } from "./components/AdminHeader";
 import { ApplicationTable } from "./components/ApplicationTable";
 
-import type { ApplicationRowData } from "./components/ApplicationTable";
-const ipData: ApplicationRowData[] = [];
-const comData: ApplicationRowData[] = [];
-
 export default function AdminPage() {
-  // Application lists – "new" holds pending reviews, "completed" holds reviewed ones.
-  const [newApps, setNewApps] = useState<ApplicationRowData[]>(ipData);
-  const [completedApps, setCompletedApps] = useState<ApplicationRowData[]>(comData);
   // Shared search query used to filter both tables simultaneously.
   const [searchQuery, setSearchQuery] = useState("");
   // Incrementing this key triggers both tables to re-fetch from the backend.
@@ -36,34 +29,19 @@ export default function AdminPage() {
     setRefreshKey((prev) => prev + 1);
   }, []);
 
-  /** Move a row from the "new" table to "completed" */
-  const moveToCompleted = (index: number) => {
-    const row = newApps[index];
-    setNewApps((prev) => prev.filter((_, i) => i !== index));
-    setCompletedApps((prev) => [{ ...row, status: "Reviewed" }, ...prev]);
-  };
-
-  /** Move a row from the "completed" table back to "new" */
-  const moveToNew = (index: number) => {
-    const row = completedApps[index];
-    setCompletedApps((prev) => prev.filter((_, i) => i !== index));
-    setNewApps((prev) => [{ ...row, status: "Need to Review" }, ...prev]);
-  };
-
   return (
     <div className={styles.scrollViewport}>
       <main className={styles.mainContent}>
+        {/* TODO: Replace hardcoded name with actual logged-in admin's name once auth is set up. */}
         <AdminHeader name="DeQuan" searchQuery={searchQuery} onSearchChange={setSearchQuery} />
         <ApplicationTable
           title="New Applications"
-          onRowMove={moveToCompleted}
           globalFilter={searchQuery}
           refreshKey={refreshKey}
           onCompleteToggle={handleCompleteToggle}
         />
         <ApplicationTable
           title="Completed Applications"
-          onRowMove={moveToNew}
           isCompleted
           globalFilter={searchQuery}
           refreshKey={refreshKey}
