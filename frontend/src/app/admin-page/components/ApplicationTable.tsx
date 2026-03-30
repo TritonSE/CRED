@@ -123,7 +123,7 @@ export function ApplicationTable({
 }: ApplicationTableProps) {
   // ── UI state ──────────────────────────────────────────────────────────
   /** Whether the entire table section is collapsed (hidden). */
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   /** Current column sort direction(s). Managed by @tanstack/react-table. */
   const [sorting, setSorting] = useState<SortingState>([]);
   /** Map of row IDs → whether their expanded detail panel is open. */
