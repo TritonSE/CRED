@@ -40,7 +40,7 @@
   line-height: 150%;
   letter-spacing: 0%;
   vertical-align: middle;
-  width: 700px;
+  width: 100%;
   height: 22px;
   opacity: 1;
   color: #004377;
@@ -63,7 +63,7 @@
 }
 
 .profileGridDivider {
-  width: 700px;
+  width: 100%;
   height: 0px;
   opacity: 1;
   border-width: 1px;
@@ -229,7 +229,7 @@
 .otherAidRequestedBox {
   border-radius: 4px;
   display: flex;
-  width: 700px;
+  width: 100%;
   height: 56px;
   align-items: center;
   justify-content: center;
