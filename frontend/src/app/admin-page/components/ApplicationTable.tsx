@@ -33,7 +33,7 @@ import {
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { getAllApplicants, updateApplicant } from "../../../api/applicant";
+import { updateApplicant } from "../../../api/applicant";
 
 import styles from "./ApplicationTable.module.css";
 import { ExpandedRowContent } from "./ExpandedRowContent";
@@ -79,15 +79,17 @@ export type TodoItem = NonNullable<ApplicationRowData["todos"]>[number];
  */
 export type ApplicationTableProps = {
   title: string;
-  //data: ApplicationRowData[]; // No longer needed, now using backend data
   pageSize?: number;
-  totalApplications?: number;
   /** If true, all rows render with their checkbox checked */
   isCompleted?: boolean;
   globalFilter?: string;
-  /** Incrementing this value triggers a re-fetch of applicant data. */
-  refreshKey?: number;
-  /** Called after a successful complete/incomplete toggle so the parent can refresh sibling tables. */
+  /** Pre-filtered applicant data passed from the parent. */
+  applicantData: Applicant[];
+  /** True while the parent is fetching data. */
+  isLoading?: boolean;
+  /** Error message from the parent fetch, if any. */
+  error?: string | null;
+  /** Called after a successful complete/incomplete toggle so the parent can refresh. */
   onCompleteToggle?: () => void;
 };
 
@@ -114,11 +116,12 @@ function SortIndicator({ isSorted }: { isSorted: false | "asc" | "desc" }) {
  */
 export function ApplicationTable({
   title,
-  //data, // no longer needed, using data from backend
   pageSize = 6,
   isCompleted,
   globalFilter = "",
-  refreshKey = 0,
+  applicantData,
+  isLoading: isLoadingProp = false,
+  error: errorProp = null,
   onCompleteToggle,
 }: ApplicationTableProps) {
   // ── UI state ──────────────────────────────────────────────────────────
@@ -131,18 +134,13 @@ export function ApplicationTable({
   /** Cached pixel heights of each expanded panel (used for CSS transitions). */
   const [expandedHeights, setExpandedHeights] = useState<Record<string, number>>({});
 
-  // TODO: move the processApplicants method to adminPage to avoid duplicating it in both tables, and just pass the processed ApplicationRowData to this component. That way this component is only responsible for presentation and interaction, and not data transformation.
   // ── Data state ───────────────────────────────────────────────────────
-  /** Application rows fetched from the backend API. */
+  /** Application rows derived from parent-provided applicant data. */
   const [applications, setApplications] = useState<ApplicationRowData[]>([]);
   /** Persisted to-do state keyed by client number so collapse/expand keeps checkbox state. */
   const [todosByClient, setTodosByClient] = useState<Record<string, TodoItem[]>>({});
-  /** Original Applicant objects from the API (needed for updateApplicant). */
+  /** Applicant objects from the parent (needed for updateApplicant). */
   const [rawApplicants, setRawApplicants] = useState<Applicant[]>([]);
-  /** True while the initial data fetch is in progress. */
-  const [isLoading, setIsLoading] = useState(true);
-  /** Holds an error message if the API call fails. */
-  const [error, setError] = useState<string | null>(null);
 
   /** Refs to expanded-row wrapper divs, keyed by row ID, for height measurement. */
   const expandedRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -155,13 +153,11 @@ export function ApplicationTable({
     }));
   };
 
-  /** Convert raw API Applicant objects to table row data and store both. */
+  /** Convert raw API Applicant objects to table row data. */
   const processApplicants = (rows: Applicant[]) => {
-    // Filter by isCompleted to show only the relevant rows for this table.
-    const filtered = rows.filter((a) => (isCompleted ? a.isCompleted : !a.isCompleted));
-    setRawApplicants(filtered);
+    setRawApplicants(rows);
 
-    const tableRows: ApplicationRowData[] = filtered.map((a) => ({
+    const tableRows: ApplicationRowData[] = rows.map((a) => ({
       clientNumber: a.applicantNumber,
       clientName: a.applicantName,
       dateSubmitted: a.dateSubmitted.toLocaleDateString("en-CA"),
@@ -185,24 +181,10 @@ export function ApplicationTable({
     setApplications(tableRows);
   };
 
-  /** Fetch all applicants from the backend. */
-  const fetchData = async () => {
-    setIsLoading(true);
-    setError(null);
-    const result = await getAllApplicants();
-    if (result.success) {
-      const rows = Array.isArray(result.data) ? result.data : result.data.data;
-      processApplicants(rows);
-    } else {
-      setError(typeof result.error === "string" ? result.error : "Failed to load applicants");
-    }
-    setIsLoading(false);
-  };
-
-  // Fetch all applicants from the backend when the component mounts or refreshKey changes.
+  // Process applicant data whenever the parent provides new data.
   useEffect(() => {
-    void fetchData();
-  }, [refreshKey]); // re-fetch when refreshKey changes
+    processApplicants(applicantData);
+  }, [applicantData]);
 
   // Seed persisted to-do state for each client from backend data exactly once per client.
   useEffect(() => {
@@ -331,8 +313,7 @@ export function ApplicationTable({
     });
 
     if (result.success) {
-      // Re-fetch this table and notify parent to refresh sibling tables.
-      await fetchData();
+      // Notify parent to re-fetch all applicant data.
       onCompleteToggle?.();
     } else {
       alert(
@@ -431,8 +412,8 @@ export function ApplicationTable({
     },
   ];
 
-  // Show an empty table while loading or on error; otherwise use fetched data.
-  const tableData = isLoading || error ? [] : applications;
+  // Show an empty table while loading or on error; otherwise use processed data.
+  const tableData = isLoadingProp || errorProp ? [] : applications;
 
   // Initialise the @tanstack/react-table instance with data, columns,
   // sorting, filtering, pagination, and row-expansion capabilities.
