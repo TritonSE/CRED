@@ -93,7 +93,7 @@
   color: #757880;
   font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
-  font-style: Regular;
+  font-style: normal;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0%;
@@ -104,7 +104,7 @@
   font-family: var(--font-lato), Lato, sans-serif;
   color: #0c2b35;
   font-weight: 400;
-  font-style: Regular;
+  font-style: normal;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0%;
@@ -121,7 +121,7 @@
   font-family: var(--font-lato), Lato, sans-serif;
   color: #757880;
   font-weight: 400;
-  font-style: Regular;
+  font-style: normal;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0%;
@@ -132,7 +132,7 @@
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   font-weight: 400;
-  font-style: Regular;
+  font-style: normal;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0%;
@@ -142,7 +142,7 @@
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   font-weight: 400;
-  font-style: Regular;
+  font-style: normal;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0%;
@@ -216,7 +216,7 @@
   font-family: var(--font-lato), Lato, sans-serif;
   color: #909090;
   font-weight: 400;
-  font-style: Regular;
+  font-style: normal;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0%;
