@@ -203,17 +203,17 @@ export function ExpandedRowContent({
         {/* Notes/History Log */}
         <div className={styles.expandedSection}>
           <h4 className={styles.sectionTitle}>Notes/History Log</h4>
-          <div className={styles.notesList}>
+          <ul className={styles.notesList}>
             {row.notes?.map((note, index) => (
-              <div key={index} className={styles.noteItem}>
-                • {note.content} ({note.date})
-              </div>
+              <li key={index} className={styles.noteItem}>
+                {note.content} ({note.date})
+              </li>
             ))}
-            <button className={styles.addTodoButton} aria-label="Add a new note">
-              <span className={styles.addTodoPlus}>+</span>
-              <span>Add note</span>
-            </button>
-          </div>
+          </ul>
+          <button className={styles.addTodoButton} aria-label="Add a new note">
+            <span className={styles.addTodoPlus}>+</span>
+            <span>Add note</span>
+          </button>
         </div>
       </div>
     </div>
