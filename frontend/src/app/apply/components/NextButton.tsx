@@ -2,8 +2,22 @@ import React from "react";
 
 import styles from "./NextButton.module.css";
 
-export const NextButton = function NextButton() {
-  // need button handler
+export type NextButtonProps = {
+  disabled?: boolean;
+  isComplete?: boolean;
+};
 
-  return <button className={styles.nextbutton}>Next</button>;
+export const NextButton = function NextButton({
+  disabled = false,
+  isComplete = false,
+}: NextButtonProps) {
+  return (
+    <button
+      type="button"
+      className={`${styles.nextbutton} ${isComplete ? styles.nextbuttonComplete : ""}`}
+      disabled={disabled}
+    >
+      Next
+    </button>
+  );
 };

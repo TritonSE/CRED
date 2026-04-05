@@ -2,6 +2,8 @@
 
 import { ThemeProvider } from "@tritonse/tse-constellation";
 
+import { YourProfileForm } from "./components/YourProfileForm";
+
 // import BackButton from "./components/BackButton";
 // import NextButton from "./components/NextButton";
 // import CDCRAlert from "./components/CDCRAlert";
@@ -22,11 +24,9 @@ export default function ApplyPage() {
         </div>
       </div>
 
-      <div className="page-title-banner">
-        <p>Insert Form</p>
+      <div className="apply-form-section">
+        <YourProfileForm />
       </div>
-
-      <div className="form-space">{/* add form components here */}</div>
     </ThemeProvider>
   );
 }
