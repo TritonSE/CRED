@@ -59,29 +59,31 @@ export function ExpandedRowContent({
               <span className={styles.profileValue}>{row.dateOfBirth ?? "-"}</span>
             </div>
             <div className={styles.profileItem}>
-              <span className={styles.profileLabel}>Race</span>
-              <span className={styles.profileValue}>{row.race ?? "-"}</span>
-            </div>
-            <div className={styles.profileItem}>
               <span className={styles.profileLabel}>Gender</span>
               <span className={styles.profileValue}>{row.gender ?? "-"}</span>
             </div>
-            <div className={styles.profileItem}>
-              <span className={styles.profileLabel}>Housing Status</span>
-              <span className={styles.profileValue}>{row.housingStatus ?? "-"}</span>
-            </div>
-            <div className={styles.profileItem}>
-              <span className={styles.profileLabel}>Education</span>
-              <span className={styles.profileValue}>{row.education ?? "-"}</span>
-            </div>
-            <div className={styles.profileItem}>
-              <span className={styles.profileLabel}>Employment</span>
-              <span className={styles.profileValue}>{row.employment ?? "-"}</span>
+            <div className={`${styles.profileItem} ${styles.profileItemWide}`}>
+              <span className={styles.profileLabel}>Race</span>
+              <span className={styles.profileValue}>{row.race ?? "-"}</span>
             </div>
             <div className={`${styles.profileItem} ${styles.profileItemWide}`}>
               <span className={styles.profileLabel}>Address</span>
               <span className={styles.profileValue}>{row.address ?? "-"}</span>
             </div>
+            <div className={`${styles.profileItem} ${styles.profileItemWide}`}>
+              <span className={styles.profileLabel}>Employment</span>
+              <span className={styles.profileValue}>{row.employment ?? "-"}</span>
+            </div>
+            <div className={`${styles.profileItem} ${styles.profileItemWide}`}>
+              <span className={styles.profileLabel}>Housing Status</span>
+              <span className={styles.profileValue}>{row.housingStatus ?? "-"}</span>
+            </div>
+            <div className={`${styles.profileItem} ${styles.profileItemWide}`}>
+              <span className={styles.profileLabel}>Education</span>
+              <span className={styles.profileValue}>{row.education ?? "-"}</span>
+            </div>
+
+            {/*}
             <div className={styles.profileItem}>
               <span className={styles.profileLabel}>ID</span>
               {row.idDocument ? (
@@ -92,6 +94,7 @@ export function ExpandedRowContent({
                 <span className={styles.profileValue}>-</span>
               )}
             </div>
+            {*/}
           </div>
         </div>
 
