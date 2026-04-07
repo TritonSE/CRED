@@ -21,6 +21,7 @@ import { getAllApplicants } from "../../api/applicant";
 import styles from "./adminPage.module.css";
 import { AdminHeader } from "./components/AdminHeader";
 import { ApplicationTable } from "./components/ApplicationTable";
+import { SuccessAlert } from "./components/SuccessAlert";
 
 import type { Applicant } from "../../api/applicant";
 
@@ -81,6 +82,7 @@ export default function AdminPage() {
           error={error}
           onCompleteToggle={handleCompleteToggle}
         />
+        <SuccessAlert message="Successfully marked application as completed!" />
       </main>
     </div>
   );
