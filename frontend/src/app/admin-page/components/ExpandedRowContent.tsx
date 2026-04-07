@@ -38,6 +38,17 @@ export function ExpandedRowContent({
   todos = row.todos ?? [],
   onToggleTodo,
 }: ExpandedRowContentProps) {
+  let aidRequestedString = "";
+  if (row.aidRequested) {
+    aidRequestedString += row.aidRequested[0];
+    for (let i = 1; i < row.aidRequested.length; ++i) {
+      aidRequestedString += ", " + row.aidRequested[i];
+    }
+    if (row.otherAidRequested) {
+      aidRequestedString += row.otherAidRequested;
+    }
+  }
+
   return (
     <div className={styles.expandedContent}>
       {/* Left Column: Client Profile + Program Needs */}
@@ -109,6 +120,8 @@ export function ExpandedRowContent({
             <p className={styles.programText}>{row.convictionDetails ?? "-"}</p>
 
             <span className={styles.programSubtitle}>Type of Aid Requested</span>
+            <span className={styles.aidDetails}>{aidRequestedString}</span>
+            {/*}
             <span className={styles.aidSubLabel}>Housing, Education, Not Sure/Other:</span>
             <div className={styles.aidList}>
               <label key="housing" className={styles.aidItem}>
@@ -149,6 +162,7 @@ export function ExpandedRowContent({
                 </div>
               )}
             </div>
+            {*/}
 
             <span className={styles.programSubtitle}>Additional Comments/Questions</span>
             <div className={styles.commentsBox}>
