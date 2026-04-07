@@ -7,44 +7,47 @@ import styles from "./Collaborator.module.css";
 
 const collaboratorsData = [
   // --- EDUCATION ---
-  { id: 1, name: "San Diego State University", category: "Education", logo: "/sdsu.png" },
-  { id: 2, name: "Father Joe's Villages", category: "Education", logo: "/father-joes.png" },
-  { id: 3, name: "Underground Scholars", category: "Education", logo: "/underground-scholars.png" },
-  { id: 4, name: "Alpha Project", category: "Education", logo: "/alpha-project.png" },
-  { id: 5, name: "San Diego State University", category: "Education", logo: "/sdsu.png" },
-  { id: 6, name: "Father Joe's Villages", category: "Education", logo: "/father-joes.png" },
-  { id: 7, name: "Underground Scholars", category: "Education", logo: "/underground-scholars.png" },
-  { id: 8, name: "Alpha Project", category: "Education", logo: "/alpha-project.png" },
-
-  // --- DEVELOPMENT ---
-  { id: 9, name: "Father Joe's Villages", category: "Development", logo: "/father-joes.png" },
+  { id: 1, name: "City Scholars", category: "Education", logo: "/san_diego_city_scholars.png" },
+  { id: 2, name: "Underground Scholars", category: "Education", logo: "/underground_scholars.png" },
+  { id: 3, name: "Project Rebound - SDSU", category: "Education", logo: "/rebound_sdsu.png" },
   {
-    id: 10,
-    name: "Underground Scholars",
-    category: "Development",
-    logo: "/underground-scholars.png",
+    id: 4,
+    name: "Project Rebound - CSUSM",
+    category: "Education",
+    logo: "/rebound_san_marcos.png",
   },
-  { id: 11, name: "San Diego State University", category: "Development", logo: "/sdsu.png" },
-  { id: 12, name: "Alpha Project", category: "Development", logo: "/alpha-project.png" },
-  { id: 13, name: "Father Joe's Villages", category: "Development", logo: "/father-joes.png" },
   {
-    id: 14,
-    name: "Underground Scholars",
-    category: "Development",
-    logo: "/underground-scholars.png",
+    id: 5,
+    name: "Project Rebound - Cal State",
+    category: "Education",
+    logo: "/rebound_cal_state.png",
   },
-  { id: 15, name: "San Diego State University", category: "Development", logo: "/sdsu.png" },
-  { id: 16, name: "Alpha Project", category: "Development", logo: "/alpha-project.png" },
+  { id: 6, name: "Rising Scholars", category: "Education", logo: "/rising_scholars.png" },
+  { id: 7, name: "Five Keys", category: "Education", logo: "/five_keys.png" },
 
   // --- HOUSING ---
-  { id: 17, name: "Alpha Project", category: "Housing", logo: "/alpha-project.png" },
-  { id: 18, name: "San Diego State University", category: "Housing", logo: "/sdsu.png" },
-  { id: 19, name: "Father Joe's Villages", category: "Housing", logo: "/father-joes.png" },
-  { id: 20, name: "Underground Scholars", category: "Housing", logo: "/underground-scholars.png" },
-  { id: 21, name: "Alpha Project", category: "Housing", logo: "/alpha-project.png" },
-  { id: 22, name: "San Diego State University", category: "Housing", logo: "/sdsu.png" },
-  { id: 23, name: "Father Joe's Villages", category: "Housing", logo: "/father-joes.png" },
-  { id: 24, name: "Underground Scholars", category: "Housing", logo: "/underground-scholars.png" },
+  { id: 9, name: "Father Joe's Villages", category: "Housing", logo: "/fjv.png" },
+  {
+    id: 10,
+    name: "Alpha Project",
+    category: "Housing",
+    logo: "/alpha.png",
+  },
+  { id: 11, name: "Catholic Charities", category: "Housing", logo: "/catholic_charities.png" },
+  { id: 13, name: "Second Chance", category: "Housing", logo: "/second_chance.png" },
+  { id: 14, name: "Anti-Recidivism Coalition", category: "Housing", logo: "/arc.png" },
+
+  // --- DEVELOPMENT ---
+  { id: 17, name: "Five Keys", category: "Development", logo: "/five_keys.png" },
+  {
+    id: 18,
+    name: "SD Workforce Partnership",
+    category: "Development",
+    logo: "/san_diego_workforce_partnership.png",
+  },
+  { id: 19, name: "Second Chance", category: "Development", logo: "/second_chance.png" },
+  { id: 20, name: "Defy Ventures", category: "Development", logo: "/defy_ventures.png" },
+  { id: 21, name: "Anti-Recidivism Coalition", category: "Development", logo: "/arc.png" },
 ];
 
 export default function Collaborator() {
@@ -108,7 +111,7 @@ export default function Collaborator() {
     }
   };
 
-  const tabs = ["Education", "Development", "Housing"];
+  const tabs = ["Education", "Housing", "Development"];
 
   return (
     <div className={styles.sectionContainer}>
