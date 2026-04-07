@@ -13,6 +13,8 @@
  */
 "use client";
 
+import Image from "next/image";
+
 import styles from "./ExpandedRowContent.module.css";
 
 import type { ApplicationRowData, TodoItem } from "./ApplicationTable";
@@ -210,7 +212,9 @@ export function ExpandedRowContent({
               ))}
             </div>
             <button className={styles.addTodoButton} aria-label="Add a new to-do item">
-              <span className={styles.addTodoPlus}>+</span>
+              <span className={styles.addTodoPlus}>
+                <Image src="/plus.svg" alt="add" width={14} height={14} />
+              </span>
               <span>Add To-do</span>
             </button>
           </div>
@@ -228,7 +232,9 @@ export function ExpandedRowContent({
             ))}
           </ul>
           <button className={styles.addTodoButton} aria-label="Add a new note">
-            <span className={styles.addTodoPlus}>+</span>
+            <span className={styles.addTodoPlus}>
+              <Image src="/plus.svg" alt="add" width={14} height={14} />
+            </span>
             <span>Add note</span>
           </button>
         </div>
