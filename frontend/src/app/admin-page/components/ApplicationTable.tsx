@@ -91,6 +91,8 @@ export type ApplicationTableProps = {
   error?: string | null;
   /** Called after a successful complete/incomplete toggle so the parent can refresh. */
   onCompleteToggle?: () => void;
+  /** Optional setter to trigger the success alert in the parent after toggling complete. */
+  setSuccessAlert?: (show: boolean) => void;
 };
 
 /**
@@ -123,6 +125,7 @@ export function ApplicationTable({
   isLoading: isLoadingProp = false,
   error: errorProp = null,
   onCompleteToggle,
+  setSuccessAlert,
 }: ApplicationTableProps) {
   // ── UI state ──────────────────────────────────────────────────────────
   /** Whether the entire table section is collapsed (hidden). */
@@ -315,6 +318,7 @@ export function ApplicationTable({
     if (result.success) {
       // Notify parent to re-fetch all applicant data.
       onCompleteToggle?.();
+      setSuccessAlert?.(true);
     } else {
       alert(
         "Failed to update application status. Please try again. Error: " +

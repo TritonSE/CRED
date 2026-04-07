@@ -33,6 +33,7 @@ export default function AdminPage() {
   const [allApplicants, setAllApplicants] = useState<Applicant[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const fetchApplicants = useCallback(async () => {
     setIsLoading(true);
@@ -72,6 +73,7 @@ export default function AdminPage() {
           isLoading={isLoading}
           error={error}
           onCompleteToggle={handleCompleteToggle}
+          setSuccessAlert={setShowSuccessAlert}
         />
         <ApplicationTable
           title="Completed Applications"
@@ -81,9 +83,17 @@ export default function AdminPage() {
           isLoading={isLoading}
           error={error}
           onCompleteToggle={handleCompleteToggle}
+          setSuccessAlert={setShowSuccessAlert}
         />
-        <SuccessAlert message="Successfully marked application as completed!" />
       </main>
+      {showSuccessAlert && (
+        <SuccessAlert
+          message="Application status updated successfully!"
+          onClose={() => {
+            setShowSuccessAlert(false);
+          }}
+        />
+      )}
     </div>
   );
 }
