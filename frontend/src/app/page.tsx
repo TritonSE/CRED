@@ -34,17 +34,10 @@ export default function Home() {
             Stability, and Brighter Futures
           </h1>
           <p className={styles.heroSubtitle}>
-            We are dedicated to guiding underserved individuals towards economic stability and
-            self-sufficiency through education, employment, and case support in San Diego.
+            C.R.E.D. is a reintegration and economic development organization focused on bridging
+            the gap between incarceration and independence through practical support, workforce
+            development, and mentorship.
           </p>
-          <div className={styles.heroButtons}>
-            <Link href="/apply" className={styles.heroBtn}>
-              Become a CRED Client
-            </Link>
-            <Link href="/contact" className={styles.heroBtn}>
-              Contact Us
-            </Link>
-          </div>
         </div>
       </section>
 
