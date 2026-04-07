@@ -29,14 +29,16 @@ export default function Home() {
         {/* Content */}
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>
-            Supporting Community,
+            Supporting Community, Stability,
             <br />
-            Stability, and Brighter Futures
+            and Brighter Futures
           </h1>
           <p className={styles.heroSubtitle}>
             C.R.E.D. is a reintegration and economic development organization focused on bridging
-            the gap between incarceration and independence through practical support, workforce
-            development, and mentorship.
+            the gap between
+            <br />
+            incarceration and independence through practical support, workforce development, and
+            mentorship.
           </p>
         </div>
       </section>
