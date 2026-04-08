@@ -70,7 +70,7 @@ export default function Login() {
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
-              placeholder="Enter Input"
+              placeholder="Enter Email"
               className={styles.input}
               required
             />
@@ -92,7 +92,7 @@ export default function Login() {
                     setErrorMessage("");
                   }
                 }}
-                placeholder="Enter Input"
+                placeholder="Enter Password"
                 className={`${styles.input} ${errorCode ? styles.inputError : ""}`}
                 required
               />
