@@ -14,6 +14,8 @@ function toggleSetMember(set: Set<string>, value: string, checked: boolean): Set
   return next;
 }
 
+// we should also add a popup where it says invalid date if the user has entered
+// something that doesn't match the format
 function isValidMmDdYyyy(s: string): boolean {
   const t = s.trim();
   if (!t) {
@@ -137,6 +139,7 @@ export const YourProfileForm = function YourProfileForm() {
                     placeholder="MM/DD/YYYY"
                     value={dateOfBirth}
                     onChange={(e) => {
+                      // here we should add error indicators
                       setDateOfBirth(e.target.value);
                     }}
                   />
