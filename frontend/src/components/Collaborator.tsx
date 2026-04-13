@@ -18,47 +18,57 @@ const COLLABORATOR_INFO: Record<string, { description: string; link: string }> =
 
 const collaboratorsData = [
   // --- EDUCATION ---
-  { id: 1, name: "City Scholars", category: "Education", logo: "/san_diego_city_scholars.png" },
-  { id: 2, name: "Underground Scholars", category: "Education", logo: "/underground_scholars.png" },
-  { id: 3, name: "Project Rebound - SDSU", category: "Education", logo: "/rebound_sdsu.png" },
+  {
+    id: 1,
+    name: "City Scholars",
+    category: "Education",
+    logo: "/home/san_diego_city_scholars.png",
+  },
+  {
+    id: 2,
+    name: "Underground Scholars",
+    category: "Education",
+    logo: "/home/underground_scholars.png",
+  },
+  { id: 3, name: "Project Rebound - SDSU", category: "Education", logo: "/home/rebound_sdsu.png" },
   {
     id: 4,
     name: "Project Rebound - CSUSM",
     category: "Education",
-    logo: "/rebound_san_marcos.png",
+    logo: "/home/rebound_san_marcos.png",
   },
   {
     id: 5,
     name: "Project Rebound - Cal State",
     category: "Education",
-    logo: "/rebound_cal_state.png",
+    logo: "/home/rebound_cal_state.png",
   },
-  { id: 6, name: "Rising Scholars", category: "Education", logo: "/rising_scholars.png" },
-  { id: 7, name: "Five Keys", category: "Education", logo: "/five_keys.png" },
+  { id: 6, name: "Rising Scholars", category: "Education", logo: "/home/rising_scholars.png" },
+  { id: 7, name: "Five Keys", category: "Education", logo: "/home/five_keys.png" },
 
   // --- HOUSING ---
-  { id: 9, name: "Father Joe's Villages", category: "Housing", logo: "/fjv.png" },
+  { id: 9, name: "Father Joe's Villages", category: "Housing", logo: "/home/fjv.png" },
   {
     id: 10,
     name: "Alpha Project",
     category: "Housing",
-    logo: "/alpha.png",
+    logo: "/home/alpha.png",
   },
-  { id: 11, name: "Catholic Charities", category: "Housing", logo: "/catholic_charities.png" },
-  { id: 13, name: "Second Chance", category: "Housing", logo: "/second_chance.png" },
-  { id: 14, name: "Anti-Recidivism Coalition", category: "Housing", logo: "/arc.png" },
+  { id: 11, name: "Catholic Charities", category: "Housing", logo: "/home/catholic_charities.png" },
+  { id: 13, name: "Second Chance", category: "Housing", logo: "/home/second_chance.png" },
+  { id: 14, name: "Anti-Recidivism Coalition", category: "Housing", logo: "/home/arc.png" },
 
   // --- DEVELOPMENT ---
-  { id: 17, name: "Five Keys", category: "Development", logo: "/five_keys.png" },
+  { id: 17, name: "Five Keys", category: "Development", logo: "/home/five_keys.png" },
   {
     id: 18,
     name: "SD Workforce Partnership",
     category: "Development",
-    logo: "/san_diego_workforce_partnership.png",
+    logo: "/home/san_diego_workforce_partnership.png",
   },
-  { id: 19, name: "Second Chance", category: "Development", logo: "/second_chance.png" },
-  { id: 20, name: "Defy Ventures", category: "Development", logo: "/defy_ventures.png" },
-  { id: 21, name: "Anti-Recidivism Coalition", category: "Development", logo: "/arc.png" },
+  { id: 19, name: "Second Chance", category: "Development", logo: "/home/second_chance.png" },
+  { id: 20, name: "Defy Ventures", category: "Development", logo: "/home/defy_ventures.png" },
+  { id: 21, name: "Anti-Recidivism Coalition", category: "Development", logo: "/home/arc.png" },
 ];
 
 export default function Collaborator() {

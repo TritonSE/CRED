@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Collaborator from "../components/Collaborator";
+import Foundations from "../components/Foundations";
 import JourneyBanner from "../components/JourneyBanner";
 import RefferalGrid from "../components/RefferalGrid";
 
@@ -15,7 +16,7 @@ export default function Home() {
         {/* Background Image */}
         <div className={styles.heroBg}>
           <Image
-            src="/home-page-banner.jpg"
+            src="/home/home-page-banner.jpg"
             alt="Hands coming together in community support"
             fill
             className="object-cover"
@@ -63,7 +64,7 @@ export default function Home() {
           {/* Right Side: Image */}
           <div className={styles.missionImageWrapper}>
             <Image
-              src="/mission-image.png"
+              src="/home/mission-image.png"
               alt="Two people embracing in support"
               fill
               style={{ objectFit: "cover" }}
@@ -71,6 +72,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Foundations Section */}
+      <Foundations />
 
       {/* Who We Support Section */}
       <section className={styles.support}>
@@ -90,7 +94,7 @@ export default function Home() {
           <div className={styles.supportRow}>
             <div className={styles.supportCard}>
               <Image
-                src="/undeserved-communities-pic.jpg"
+                src="/home/undeserved-communities-pic.jpg"
                 alt="Underserved communities"
                 fill
                 className={styles.supportCardImage}
@@ -108,7 +112,7 @@ export default function Home() {
 
             <div className={styles.supportCard}>
               <Image
-                src="/formerly-incarcerated-indiv-pic.jpg"
+                src="/home/formerly-incarcerated-indiv-pic.jpg"
                 alt="Formerly incarcerated individuals"
                 fill
                 className={styles.supportCardImage}
@@ -129,7 +133,7 @@ export default function Home() {
           <div className={styles.supportRow}>
             <div className={styles.supportCard}>
               <Image
-                src="/youth-pic.jpg"
+                src="/home/youth-pic.jpg"
                 alt="Transitional age youth"
                 fill
                 className={styles.supportCardImage}
@@ -147,7 +151,7 @@ export default function Home() {
 
             <div className={styles.supportCard}>
               <Image
-                src="/family-pic.jpg"
+                src="/home/family-pic.jpg"
                 alt="Low-income families"
                 fill
                 className={styles.supportCardImage}

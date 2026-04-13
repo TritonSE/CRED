@@ -9,8 +9,8 @@ const categories = [
   {
     id: "housing",
     title: "Housing Resources",
-    selectedIcon: "/houseIcon.png",
-    unselectedIcon: "/housingIconUnselected.png",
+    selectedIcon: "/home/houseIcon.png",
+    unselectedIcon: "/home/housingIconUnselected.png",
     shortDesc: "Emergency shelter, transitional, and permanent housing support",
     services: [
       {
@@ -34,8 +34,8 @@ const categories = [
   {
     id: "education",
     title: "Education",
-    selectedIcon: "/educationSelected.png",
-    unselectedIcon: "/educationIcon.png",
+    selectedIcon: "/home/educationSelected.png",
+    unselectedIcon: "/home/educationIcon.png",
     shortDesc: "Economic resources, financial training, and higher education",
     services: [
       {
@@ -55,8 +55,8 @@ const categories = [
   {
     id: "workforce",
     title: "Workforce Development",
-    selectedIcon: "/workSelected.png",
-    unselectedIcon: "/workIcon.png",
+    selectedIcon: "/home/workSelected.png",
+    unselectedIcon: "/home/workIcon.png",
     shortDesc: "Vocational training, entrepreneurship & job readiness",
     services: [
       {
@@ -103,7 +103,7 @@ export default function RefferalGrid() {
                 />
                 {!isActive && (
                   <Image
-                    src="/ArrowRight.png"
+                    src="/home/ArrowRight.png"
                     alt="arrow right"
                     width={16}
                     height={16}
