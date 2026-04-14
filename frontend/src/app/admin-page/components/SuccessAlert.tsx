@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import styles from "./SuccessAlert.module.css";
 
@@ -8,24 +8,46 @@ type SuccessAlertProps = {
   onClose?: () => void;
 };
 
+const AUTO_DISMISS_DELAY = 2000;
+const FADE_DURATION = 300;
+
 export function SuccessAlert({ message, onClose }: SuccessAlertProps) {
   const [visible, setVisible] = useState(true);
+  const [closing, setClosing] = useState(false);
+  const mountedRef = useRef(true);
 
-  const handleClose = () => {
-    setVisible(false);
-    if (onClose) onClose();
+  useEffect(() => {
+    mountedRef.current = true;
+    const timer = window.setTimeout(() => {
+      triggerClose();
+    }, AUTO_DISMISS_DELAY);
+
+    return () => {
+      mountedRef.current = false;
+      window.clearTimeout(timer);
+    };
+  }, []);
+
+  const triggerClose = () => {
+    if (closing) return;
+
+    setClosing(true);
+    window.setTimeout(() => {
+      if (mountedRef.current) {
+        setVisible(false);
+      }
+      if (onClose) onClose();
+    }, FADE_DURATION);
   };
 
   if (!visible) return null;
 
   return (
-    <div className={styles.container}>
-      {/*<div className={styles.left}>*/}
+    <div className={`${styles.container} ${closing ? styles.closing : ""}`}>
       <Image src="/green_check.svg" alt="success" width={20} height={20} />
       <span className={styles.message}>{message}</span>
-      {/*</div>*/}
 
-      <button onClick={handleClose} className={styles.closeButton}>
+      <button onClick={triggerClose} className={styles.closeButton}>
         <Image src="/cross.svg" alt="close" width={13} height={13} />
       </button>
     </div>

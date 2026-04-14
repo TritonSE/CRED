@@ -14,6 +14,14 @@
   align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   animation: slideIn 0.3s ease-out;
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out;
+}
+
+.closing {
+  opacity: 0;
+  transform: translateY(16px);
 }
 
 @keyframes slideIn {
