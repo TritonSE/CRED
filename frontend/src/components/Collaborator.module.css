@@ -12,17 +12,17 @@
 }
 
 .title {
-  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 700;
-  font-size: 44px;
+  font-size: 48px;
   color: #175892;
   margin: 0 0 16px 0;
 }
 
 .subtitle {
   font-family: "Lato", sans-serif;
-  font-size: 16px;
-  color: #333333;
+  font-size: 20px;
+  color: #000000;
   margin: 0;
 }
 
@@ -52,7 +52,7 @@
   border: 1px solid #e5e7eb;
   border-bottom: none;
   border-radius: 12px 12px 0 0;
-  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 16px;
   color: #175892;
@@ -164,7 +164,7 @@
 }
 
 .modalTitle {
-  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 590;
   font-size: 40px;
   line-height: 150%;
@@ -181,7 +181,7 @@
 .modalDescription {
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 150%;
   letter-spacing: 0%;
   text-align: center;
@@ -222,9 +222,9 @@
 
 .logoName {
   font-family: "Lato", sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
-  color: #333333;
+  color: #000000;
   margin: 0;
   text-align: center;
 }
