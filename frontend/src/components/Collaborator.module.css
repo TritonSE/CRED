@@ -103,16 +103,22 @@
   width: 247.94px;
   height: 221.65px;
   border-radius: 7.1px;
-  border: 2px solid transparent;
-  transition: none;
 }
 
-.imageWrapper:hover {
+.logoCard:hover {
   border-color: #175892;
 }
 
 .logoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
   cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 12px;
+  transition: border-color 0.2s ease;
 }
 
 .modalOverlay {
