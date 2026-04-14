@@ -1,18 +1,23 @@
 import Image from "next/image";
 import React from "react";
 
-import styles from "./NeedInterestsForm.module.css";
+import styles from "./NeedsInterestsForm.module.css";
 
 export type NeedInterestsFormProps = {};
 
 export const NeedInterestsForm = function NeedInterestsForm(props: NeedInterestsFormProps) {
   const [context, setContext] = React.useState<string>("");
   const [aid, setAid] = React.useState<string[]>([]);
+  const [otherNeed, setOtherNeed] = React.useState<string>("");
 
   const toggleAid = (value: string) => {
-    setAid((prev) =>
-      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value],
-    );
+    setAid((prev) => {
+      const next = prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value];
+      if (value === "Other/Not Sure" && prev.includes(value)) {
+        setOtherNeed("");
+      }
+      return next;
+    });
   };
 
   return (
@@ -44,6 +49,65 @@ export const NeedInterestsForm = function NeedInterestsForm(props: NeedInterests
 
       <div>
         <p>What type of aid do you need? (Select as many as you would like)*</p>
+        <label>
+          <input
+            type="checkbox"
+            name="Housing"
+            value="Housing"
+            checked={aid.includes("Housing")}
+            onChange={() => {
+              toggleAid("Housing");
+            }}
+          />
+          Housing
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="Education"
+            value="Education"
+            checked={aid.includes("Education")}
+            onChange={() => {
+              toggleAid("Education");
+            }}
+          />
+          Education
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="Development"
+            value="Development"
+            checked={aid.includes("Development")}
+            onChange={() => {
+              toggleAid("Development");
+            }}
+          />
+          Development
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="Other/Not Sure"
+            value="Other/Not Sure"
+            checked={aid.includes("Other/Not Sure")}
+            onChange={() => {
+              toggleAid("Other/Not Sure");
+            }}
+          />
+          Other / Not Sure
+        </label>
+        {aid.includes("Other/Not Sure") && (
+          <input
+            type="text"
+            placeholder="Enter your custom need"
+            name="otherNeed"
+            value={otherNeed}
+            onChange={(e) => {
+              setOtherNeed(e.target.value);
+            }}
+          />
+        )}
       </div>
     </div>
   );
