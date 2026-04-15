@@ -14,7 +14,7 @@
  */
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { getAllApplicants } from "../../api/applicant";
 
@@ -22,8 +22,14 @@ import styles from "./adminPage.module.css";
 import { AdminHeader } from "./components/AdminHeader";
 import { ApplicationTable } from "./components/ApplicationTable";
 import { SuccessAlert } from "./components/SuccessAlert";
+import alertStyles from "./components/SuccessAlert.module.css";
 
 import type { Applicant } from "../../api/applicant";
+
+type SuccessAlertItem = {
+  id: string;
+  message: string;
+};
 
 export default function AdminPage() {
   // Shared search query used to filter both tables simultaneously.
@@ -33,7 +39,7 @@ export default function AdminPage() {
   const [allApplicants, setAllApplicants] = useState<Applicant[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [successAlerts, setSuccessAlerts] = useState<SuccessAlertItem[]>([]);
 
   const fetchApplicants = useCallback(async () => {
     setIsLoading(true);
@@ -57,6 +63,54 @@ export default function AdminPage() {
     void fetchApplicants();
   }, [fetchApplicants]);
 
+  const alertRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const previousAlertPositions = useRef<Record<string, DOMRect | undefined>>({});
+
+  useLayoutEffect(() => {
+    const nextPositions: Record<string, DOMRect> = {};
+
+    Object.entries(alertRefs.current).forEach(([id, element]) => {
+      if (element) {
+        nextPositions[id] = element.getBoundingClientRect();
+      }
+    });
+
+    Object.entries(nextPositions).forEach(([id, nextRect]) => {
+      const previousRect = previousAlertPositions.current[id];
+      if (!previousRect) return;
+
+      const deltaY = previousRect.top - nextRect.top;
+      if (!deltaY) return;
+
+      const element = alertRefs.current[id];
+      if (!element) return;
+
+      element.style.transform = "translateY(" + deltaY.toString() + "px)";
+      element.style.transition = "transform 0s";
+
+      requestAnimationFrame(() => {
+        if (!element) return;
+        element.style.transition = "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
+        element.style.transform = "translateY(0)";
+      });
+    });
+
+    previousAlertPositions.current = nextPositions;
+  }, [successAlerts]);
+
+  const addSuccessAlert = useCallback((message: string) => {
+    setSuccessAlerts((prev) => [
+      { id: Date.now().toString() + "-" + Math.random().toString(36).slice(2), message },
+      ...prev,
+    ]);
+  }, []);
+
+  const removeSuccessAlert = useCallback((id: string) => {
+    setSuccessAlerts((prev) => prev.filter((alert) => alert.id !== id));
+    alertRefs.current[id] = null;
+    previousAlertPositions.current[id] = undefined;
+  }, []);
+
   // Filter once, pass down.
   const newApplicants = allApplicants.filter((a) => !a.isCompleted);
   const completedApplicants = allApplicants.filter((a) => a.isCompleted);
@@ -73,7 +127,7 @@ export default function AdminPage() {
           isLoading={isLoading}
           error={error}
           onCompleteToggle={handleCompleteToggle}
-          setSuccessAlert={setShowSuccessAlert}
+          setSuccessAlert={addSuccessAlert}
         />
         <ApplicationTable
           title="Completed Applications"
@@ -83,16 +137,32 @@ export default function AdminPage() {
           isLoading={isLoading}
           error={error}
           onCompleteToggle={handleCompleteToggle}
-          setSuccessAlert={setShowSuccessAlert}
+          setSuccessAlert={addSuccessAlert}
         />
       </main>
-      {showSuccessAlert && (
-        <SuccessAlert
-          message="Application status updated successfully!"
-          onClose={() => {
-            setShowSuccessAlert(false);
-          }}
-        />
+      {successAlerts.length > 0 && (
+        <div className={alertStyles.stack}>
+          {successAlerts.map((alert) => (
+            <div
+              key={alert.id}
+              className={alertStyles.stackItem}
+              ref={(node) => {
+                if (node) {
+                  alertRefs.current[alert.id] = node;
+                } else {
+                  alertRefs.current[alert.id] = null;
+                }
+              }}
+            >
+              <SuccessAlert
+                message={alert.message}
+                onClose={() => {
+                  removeSuccessAlert(alert.id);
+                }}
+              />
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

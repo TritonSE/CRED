@@ -91,8 +91,8 @@ export type ApplicationTableProps = {
   error?: string | null;
   /** Called after a successful complete/incomplete toggle so the parent can refresh. */
   onCompleteToggle?: () => void;
-  /** Optional setter to trigger the success alert in the parent after toggling complete. */
-  setSuccessAlert?: (show: boolean) => void;
+  /** Optional callback to show a new status update notification. */
+  setSuccessAlert?: (message: string) => void;
 };
 
 /**
@@ -318,7 +318,7 @@ export function ApplicationTable({
     if (result.success) {
       // Notify parent to re-fetch all applicant data.
       onCompleteToggle?.();
-      setSuccessAlert?.(true);
+      setSuccessAlert?.("Application status updated successfully!");
     } else {
       alert(
         "Failed to update application status. Please try again. Error: " +
