@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { DirectorBox } from "./components/DirectorBox";
 import { OperationsCard } from "./components/OperationsCard";
 
-import "./styles.module.css";
+import "./styles.css";
 
 export default function AboutUsPage() {
   const router = useRouter();

@@ -10,7 +10,7 @@ import { YourProfileForm } from "./components/YourProfileForm";
 // import NextButton from "./components/NextButton";
 // import CDCRAlert from "./components/CDCRAlert";
 
-import "./styles.module.css";
+import "./styles.css";
 
 export default function ApplyPage() {
   const [step, setStep] = React.useState(1);
