@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React, { useMemo, useState } from "react";
 
 import { NextButton } from "./NextButton";
@@ -36,7 +35,11 @@ function isValidMmDdYyyy(s: string): boolean {
   return d.getFullYear() === year && d.getMonth() === month - 1 && d.getDate() === day;
 }
 
-export const YourProfileForm = function YourProfileForm() {
+type YourProfileFormProps = {
+  onNext: () => void;
+};
+
+export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileFormProps) {
   const [fullName, setFullName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [gender, setGender] = useState("");
@@ -48,8 +51,6 @@ export const YourProfileForm = function YourProfileForm() {
   const [educationOther, setEducationOther] = useState("");
   const [housing, setHousing] = useState("");
   const [housingOther, setHousingOther] = useState("");
-
-  const router = useRouter();
 
   const isFormValid = useMemo(() => {
     const nameOk = fullName.trim().length > 0;
@@ -440,13 +441,7 @@ export const YourProfileForm = function YourProfileForm() {
             </div>
 
             <div className={styles.formFooter}>
-              <NextButton
-                disabled={!isFormValid}
-                isComplete={isFormValid}
-                onClick={() => {
-                  router.push("/NeedsInterestForm");
-                }}
-              />
+              <NextButton disabled={!isFormValid} isComplete={isFormValid} onClick={onNext} />
             </div>
           </div>
         </div>

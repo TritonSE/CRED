@@ -1,7 +1,9 @@
 "use client";
 
 import { ThemeProvider } from "@tritonse/tse-constellation";
+import React from "react";
 
+import { NeedInterestsForm } from "./components/NeedInterestsForm";
 import { YourProfileForm } from "./components/YourProfileForm";
 
 // import BackButton from "./components/BackButton";
@@ -11,6 +13,8 @@ import { YourProfileForm } from "./components/YourProfileForm";
 import "./styles.module.css";
 
 export default function ApplyPage() {
+  const [step, setStep] = React.useState(1);
+
   return (
     <ThemeProvider>
       {/* page title section */}
@@ -25,7 +29,14 @@ export default function ApplyPage() {
       </div>
 
       <div className="apply-form-section">
-        <YourProfileForm />
+        {step === 1 && (
+          <YourProfileForm
+            onNext={() => {
+              setStep(2);
+            }}
+          />
+        )}
+        {step === 2 && <NeedInterestsForm />}
       </div>
     </ThemeProvider>
   );
