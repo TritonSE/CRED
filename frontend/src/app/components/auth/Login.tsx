@@ -140,11 +140,9 @@ export default function Login() {
             {errorCode && (
               <p className={styles.errorMessage}>
                 <span className={styles.errorIcon}>⚠️</span>
-                {errorCode === "INVALID_CREDENTIALS" ? (
-                  "Please contact administrator to resolve forgotten password"
-                ) : (
-                  errorMessage
-                )}
+                {errorCode === "INVALID_CREDENTIALS"
+                  ? "Please contact administrator to resolve forgotten password"
+                  : errorMessage}
               </p>
             )}
           </div>
