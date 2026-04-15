@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
@@ -41,7 +40,7 @@ export default function Login() {
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.card} ${errorCode ? styles.cardWithError : ""}`}>
+      <div className={styles.card}>
         <div className={styles.logoContainer}>
           <Image
             src="/cred_design_logo.png"
@@ -142,19 +141,7 @@ export default function Login() {
               <p className={styles.errorMessage}>
                 <span className={styles.errorIcon}>⚠️</span>
                 {errorCode === "INVALID_CREDENTIALS" ? (
-                  <>
-                    {errorMessage} or{" "}
-                    <Link
-                      href="/forgot-password"
-                      className={styles.errorLink}
-                      onClick={() => {
-                        setErrorCode(null);
-                        setErrorMessage("");
-                      }}
-                    >
-                      reset password
-                    </Link>
-                  </>
+                  "Please contact administrator to resolve forgotten password"
                 ) : (
                   errorMessage
                 )}

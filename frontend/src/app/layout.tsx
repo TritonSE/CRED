@@ -2,8 +2,7 @@ import { Lato } from "next/font/google";
 
 import type { Metadata } from "next";
 
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+import AppShell from "@/components/AppShell";
 
 import "./globals.css";
 
@@ -27,11 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lato.variable} antialiased overflow-x-hidden`}>
-        <div className="min-h-screen w-full bg-[#faf8f6] flex flex-col overflow-x-hidden">
-          <Navbar />
-          <main className="flex-1 pt-[70px]">{children}</main>
-          <Footer />
-        </div>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
