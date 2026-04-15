@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useMemo, useState } from "react";
 
 import { NextButton } from "./NextButton";
@@ -47,6 +48,8 @@ export const YourProfileForm = function YourProfileForm() {
   const [educationOther, setEducationOther] = useState("");
   const [housing, setHousing] = useState("");
   const [housingOther, setHousingOther] = useState("");
+
+  const router = useRouter();
 
   const isFormValid = useMemo(() => {
     const nameOk = fullName.trim().length > 0;
@@ -437,7 +440,13 @@ export const YourProfileForm = function YourProfileForm() {
             </div>
 
             <div className={styles.formFooter}>
-              <NextButton disabled={!isFormValid} isComplete={isFormValid} />
+              <NextButton
+                disabled={!isFormValid}
+                isComplete={isFormValid}
+                onClick={() => {
+                  router.push("/NeedsInterestForm");
+                }}
+              />
             </div>
           </div>
         </div>

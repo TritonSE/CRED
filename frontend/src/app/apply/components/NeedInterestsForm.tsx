@@ -3,9 +3,7 @@ import React from "react";
 
 import styles from "./NeedsInterestsForm.module.css";
 
-export type NeedInterestsFormProps = {};
-
-export const NeedInterestsForm = function NeedInterestsForm(props: NeedInterestsFormProps) {
+export const NeedInterestsForm = function NeedInterestsForm() {
   const [context, setContext] = React.useState<string>("");
   const [aid, setAid] = React.useState<string[]>([]);
   const [otherNeed, setOtherNeed] = React.useState<string>("");
