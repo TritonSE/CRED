@@ -8,7 +8,7 @@ type SuccessAlertProps = {
   onClose?: () => void;
 };
 
-const AUTO_DISMISS_DELAY = 2000;
+const AUTO_DISMISS_DELAY = 5000;
 const FADE_DURATION = 300;
 
 export function SuccessAlert({ message, onClose }: SuccessAlertProps) {
