@@ -71,6 +71,24 @@ export type ApplicationRowData = {
 
 export type TodoItem = NonNullable<ApplicationRowData["todos"]>[number];
 
+/** Valid applicant status values accepted from the API. */
+const STATUS_VALUES: readonly ApplicationRowData["status"][] = [
+  "Reviewed",
+  "Need to Review",
+  "Under Review",
+];
+
+/**
+ * Narrow a raw status string to a known value. Falls back to "Need to Review"
+ * (the backend default) if the API returns something unexpected, so the UI
+ * can't crash on bad data.
+ */
+function parseStatus(raw: string): ApplicationRowData["status"] {
+  return (STATUS_VALUES as readonly string[]).includes(raw)
+    ? (raw as ApplicationRowData["status"])
+    : "Need to Review";
+}
+
 /**
  * Props for the ApplicationTable component
  * @property {string} title - The heading displayed above the table
@@ -164,7 +182,7 @@ export function ApplicationTable({
       clientNumber: a.applicantNumber,
       clientName: a.applicantName,
       dateSubmitted: a.dateSubmitted.toLocaleDateString("en-CA"),
-      status: a.status as ApplicationRowData["status"],
+      status: parseStatus(a.status),
       dateOfBirth: a.dateOfBirth.toLocaleDateString("en-CA"),
       education: a.educationStatus,
       employment: a.employmentStatus,
