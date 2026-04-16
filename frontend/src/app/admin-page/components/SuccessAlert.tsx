@@ -16,18 +16,6 @@ export function SuccessAlert({ message, onClose }: SuccessAlertProps) {
   const [closing, setClosing] = useState(false);
   const mountedRef = useRef(true);
 
-  useEffect(() => {
-    mountedRef.current = true;
-    const timer = window.setTimeout(() => {
-      triggerClose();
-    }, AUTO_DISMISS_DELAY);
-
-    return () => {
-      mountedRef.current = false;
-      window.clearTimeout(timer);
-    };
-  }, []);
-
   const triggerClose = () => {
     if (closing) return;
 
@@ -39,6 +27,18 @@ export function SuccessAlert({ message, onClose }: SuccessAlertProps) {
       if (onClose) onClose();
     }, FADE_DURATION);
   };
+
+  useEffect(() => {
+    mountedRef.current = true;
+    const timer = window.setTimeout(() => {
+      triggerClose();
+    }, AUTO_DISMISS_DELAY);
+
+    return () => {
+      mountedRef.current = false;
+      window.clearTimeout(timer);
+    };
+  }, []);
 
   if (!visible) return null;
 
