@@ -131,3 +131,6 @@ dist
 
 # MongoDB Test scripts
 scripts/
+
+# macOS system files
+.DS_Store
