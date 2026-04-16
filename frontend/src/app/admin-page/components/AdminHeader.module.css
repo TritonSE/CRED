@@ -30,9 +30,11 @@
   margin: 0;
   color: #004377; /* CRED brand primary blue */
   font-size: 40px; /* Large size to match Figma design */
-  font-weight: 700;
-  line-height: 100%;
-  letter-spacing: 0;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: Semi Bold;
+  letter-spacing: 0%;
 }
 
 /* Column containing the search input */

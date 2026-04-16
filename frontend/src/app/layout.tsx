@@ -1,4 +1,4 @@
-import { Lato } from "next/font/google";
+import { Inter, Lato } from "next/font/google";
 
 import type { Metadata } from "next";
 
@@ -17,6 +17,12 @@ const lato = Lato({
   variable: "--font-lato",
 });
 
+const inter = Inter({
+  weight: ["600"],
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
 export const metadata: Metadata = {
   title: "CRED - Community Resources for Empowerment and Development",
   description:
@@ -30,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} antialiased overflow-x-hidden`}>
+      <body className={`${lato.variable} ${inter.variable} antialiased overflow-x-hidden`}>
         <div className="min-h-screen w-full bg-[#faf8f6] flex flex-col overflow-x-hidden">
           {admin ? <AdminNavbar /> : <Navbar />}
           <main className="flex-1 pt-[70px]">{children}</main>
