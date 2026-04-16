@@ -1,6 +1,6 @@
-import { get, handleAPIError, post, put } from "../api/requests";
+import { get, handleAPIError, post, put } from "./requests";
 
-import type { APIResult } from "../api/requests";
+import type { APIResult } from "./requests";
 
 /**
  * Defines the "shape" of an Applicant object (what fields are present and their types) for

@@ -1,8 +1,8 @@
 import { Lato } from "next/font/google";
 
-import type { Metadata } from "next";
+import AppShell from "../components/AppShell";
 
-import AppShell from "@/components/AppShell";
+import type { Metadata } from "next";
 
 import "./globals.css";
 

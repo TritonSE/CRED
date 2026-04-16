@@ -4,11 +4,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
+import { login } from "../../../lib/auth";
+
 import styles from "./Login.module.css";
 
-import type { AuthErrorCode } from "@/lib/auth";
-
-import { login } from "@/lib/auth";
+import type { AuthErrorCode } from "../../../lib/auth";
 
 export default function Login() {
   const router = useRouter();
@@ -153,7 +153,7 @@ export default function Login() {
               className={`${styles.button} ${
                 email && hasPassword ? styles.buttonPrimary : styles.buttonDisabled
               }`}
-              disabled={!email || loading}
+              disabled={!email || !hasPassword || loading}
             >
               {loading ? "Logging in…" : "Login"}
             </button>

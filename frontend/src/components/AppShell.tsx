@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation";
 
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -11,7 +11,8 @@ type AppShellProps = {
 
 export default function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
-  const showNavbar = pathname !== "/";
+  // Hide the navbar on the login screen so it renders as a standalone page.
+  const showNavbar = pathname !== "/login";
 
   return (
     <div className="min-h-screen w-full bg-[#faf8f6] flex flex-col overflow-x-hidden">
