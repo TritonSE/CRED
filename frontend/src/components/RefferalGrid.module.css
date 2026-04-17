@@ -97,10 +97,11 @@
   flex: 1;
   background: #ffffff;
   border-radius: 10px;
-  padding: 48px 42px 2px 42px;
+  padding: 42px;
   display: flex;
   flex-direction: column;
   gap: 28px;
+  justify-content: center; /* ← add this */
   box-shadow: 0px 5px 10px 0px #00000026;
 }
 

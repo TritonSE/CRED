@@ -7,69 +7,81 @@ import styles from "./RefferalGrid.module.css";
 
 const categories = [
   {
-    id: "housing",
-    title: "Housing Resources",
-    selectedIcon: "/home/houseIcon.png",
-    unselectedIcon: "/home/housingIconUnselected.png",
-    shortDesc: "Emergency shelter, transitional, and permanent housing support",
-    services: [
-      {
-        title: "Emergency Shelter Services",
-        desc: "Immediate access to safe, temporary shelter for individuals and families experiencing homelessness or housing crises.",
-      },
-      {
-        title: "Transitional Housing Programs",
-        desc: "Short to medium-term housing solutions with supportive services to help clients transition to permanent housing.",
-      },
-      {
-        title: "Permanent Supportive Housing",
-        desc: "Long-term housing assistance combined with ongoing case management and support services for sustainable stability.",
-      },
-      {
-        title: "Housing Application Assistance",
-        desc: "Various housing options and guidance through the application process for affordable housing programs, subsidies, and rental assistance.",
-      },
-    ],
-  },
-  {
     id: "education",
     title: "Education",
     selectedIcon: "/home/educationSelected.png",
     unselectedIcon: "/home/educationIcon.png",
-    shortDesc: "Economic resources, financial training, and higher education",
+    shortDesc: "College and Academic Programs",
     services: [
       {
-        title: "Economic Resources",
-        desc: "Guidance on budgeting, saving strategies, and accessing community economic development programs to build financial independence.",
+        title: "Admissions & Enrollment Support",
+        desc: "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
       },
       {
-        title: "Financial Training",
-        desc: "Comprehensive workshops covering credit management, debt reduction, insurance planning, mortgages, and smart financial decision-making.",
+        title: "In-custody Courses",
+        desc: "Credit-bearing college classes taught inside jails and prisons, so students can begin earning credentials before release.",
       },
       {
-        title: "Higher Education Degrees",
-        desc: "Assistance with college applications, financial aid navigation, scholarship opportunities, and connecting to higher education support services.",
+        title: "Academic Advising & Tutoring",
+        desc: "On-campus support, dedicated study spaces, and peer mentorship from others with shared experiences.",
+      },
+      {
+        title: "Transfer & Graduate Pathways",
+        desc: "Advising for students moving from community college to four-year universities or graduate programs.",
+      },
+      {
+        title: "Basic Needs Support",
+        desc: "Emergency funds, food assistance, transportation, and laptop access to remove barriers for success.",
       },
     ],
   },
   {
-    id: "workforce",
-    title: "Workforce Development",
-    selectedIcon: "/home/workSelected.png",
-    unselectedIcon: "/home/workIcon.png",
-    shortDesc: "Vocational training, entrepreneurship & job readiness",
+    id: "housing",
+    title: "Housing",
+    selectedIcon: "/home/houseIcon.png",
+    unselectedIcon: "/home/housingIconUnselected.png",
+    shortDesc: "Shelter and Stable Housing",
     services: [
       {
-        title: "Vocational Training",
-        desc: "Access to certified training programs in high-demand fields including healthcare, technology, construction, and skilled trades.",
+        title: "Emergency Shelter & Bridge Housing",
+        desc: "Safe, low-barrier shelter with meals, basic needs, and case management while a longer-term housing plan is developed.",
+      },
+      {
+        title: "Transitional Housing",
+        desc: "Short to medium-term housing in supportive environments with counseling, life skills, and addiction treatment services.",
+      },
+      {
+        title: "Rapid Rehousing",
+        desc: "Rental assistance, security deposits, and landlord advocacy to move people quickly from homelessness into permanent housing.",
+      },
+      {
+        title: "Permanent Supportive Housing",
+        desc: "Long-term affordable housing combined with on-site mental health, substance use, and benefits support for those with complex needs.",
+      },
+    ],
+  },
+  {
+    id: "development",
+    title: "Development",
+    selectedIcon: "/home/workSelected.png",
+    unselectedIcon: "/home/workIcon.png",
+    shortDesc: "Jobs, Training, and Entrepreneurship",
+    services: [
+      {
+        title: "Job Readiness Training",
+        desc: "Resume writing, interview coaching, soft skills development, and professional attire, typically delivered in structured multi-week programs.",
       },
       {
         title: "Entrepreneurship Resources",
         desc: "Support for aspiring business owners including business planning, access to microloans, mentorship, and connections to small business development resources.",
       },
       {
-        title: "Job Readiness",
-        desc: "Comprehensive preparation including resume writing, interview skills, professional development, and job placement assistance with partner employers.",
+        title: "Vocational & Career Technical Training",
+        desc: "Certified programs in high-demand fields including culinary arts, construction, retail, logistics, healthcare, and more.",
+      },
+      {
+        title: "Employer Connections",
+        desc: "Direct partnerships with fair-chance employers committed to hiring people with records, plus in-facility job centers up to six months before release.",
       },
     ],
   },
@@ -121,7 +133,7 @@ export default function RefferalGrid() {
               {isActive ? (
                 <div className={styles.refferalTabMeta}>
                   <div className={styles.refferalTabMetaDash} />
-                  <span>{category.services.length} services available</span>
+                  <span>{category.services.length} Resources Available</span>
                 </div>
               ) : (
                 <p className={styles.refferalTabDesc}>{category.shortDesc}</p>
