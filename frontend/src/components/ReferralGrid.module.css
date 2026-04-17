@@ -167,11 +167,11 @@
 
 /* Stack tabs vertically on phone screens */
 @media (max-width: 480px) {
-  .refferalTabs {
+  .referralTabs {
     flex-direction: column;
   }
 
-  .refferalTab {
+  .referralTab {
     width: 100%;
   }
 }
