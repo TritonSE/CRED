@@ -99,27 +99,6 @@
   border-color: #ef4444;
 }
 
-.forgotPasswordContainer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 4px;
-}
-
-.forgotPasswordLink {
-  font-size: 12px;
-  color: #6b7280;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  padding: 0;
-}
-
-.forgotPasswordLink:hover {
-  color: #374151;
-  text-decoration: underline;
-}
-
 .errorMessage {
   display: flex;
   align-items: center;
