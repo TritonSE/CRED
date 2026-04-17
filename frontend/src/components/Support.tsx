@@ -21,7 +21,7 @@ export default function Support() {
         <div className={styles.supportRow}>
           <div className={styles.supportCard}>
             <Image
-              src="/home/undeserved-communities-pic.jpg"
+              src="/home/underserved-communities-pic.jpg"
               alt="Underserved communities"
               fill
               className={styles.supportCardImage}

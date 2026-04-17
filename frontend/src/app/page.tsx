@@ -3,7 +3,7 @@ import Foundations from "../components/Foundations";
 import Hero from "../components/Hero";
 import JourneyBanner from "../components/JourneyBanner";
 import Mission from "../components/Mission";
-import RefferalSection from "../components/RefferalSection";
+import ReferralSection from "../components/ReferralSection";
 import Support from "../components/Support";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <Mission />
       <Foundations />
       <Support />
-      <RefferalSection />
+      <ReferralSection />
       <Collaborator />
       <JourneyBanner />
     </>

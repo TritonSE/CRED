@@ -1,4 +1,4 @@
-.refferalGrid {
+.referralGrid {
   display: flex;
   width: 100%;
   max-width: 1220px;
@@ -7,13 +7,13 @@
 }
 
 /* Wrapper so the panel can be absolutely positioned to match tabs height */
-.refferalPanelWrapper {
+.referralPanelWrapper {
   flex: 1;
   min-width: 0;
   position: relative;
 }
 
-.refferalTabs {
+.referralTabs {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -21,7 +21,7 @@
   flex-shrink: 0;
 }
 
-.refferalTab {
+.referralTab {
   flex: 1;
   padding: clamp(16px, 1.8vw, 24px);
   cursor: pointer;
@@ -35,37 +35,37 @@
   box-shadow: 0px 5px 10px 0px #00000026;
 }
 
-.refferalTab:disabled {
+.referralTab:disabled {
   cursor: default;
   opacity: 1;
 }
 
-.refferalTabActive {
+.referralTabActive {
   background: #175892;
   border: 1px solid #175892;
   border-top: 2px solid #175892;
 }
 
-.refferalTabHeader {
+.referralTabHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 12px;
 }
 
-.refferalTabIcon {
+.referralTabIcon {
   width: 32px;
   height: 32px;
   object-fit: contain;
 }
 
-.refferalTabArrow {
+.referralTabArrow {
   width: 20px;
   height: 20px;
   object-fit: contain;
 }
 
-.refferalTabTitle {
+.referralTabTitle {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-size: clamp(16px, 1.4vw, 20px);
@@ -73,11 +73,11 @@
   margin: 0 0 8px 0;
 }
 
-.refferalTabTitleActive {
+.referralTabTitleActive {
   color: #ffffff;
 }
 
-.refferalTabMeta {
+.referralTabMeta {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -86,14 +86,14 @@
   font-size: 14px;
 }
 
-.refferalTabMetaDash {
+.referralTabMetaDash {
   width: 20px;
   height: 2px;
   background: rgba(255, 255, 255, 0.85);
   flex-shrink: 0;
 }
 
-.refferalTabDesc {
+.referralTabDesc {
   font-family: "Lato", sans-serif;
   font-size: clamp(13px, 1.1vw, 16px);
   color: #000000;
@@ -101,7 +101,7 @@
   line-height: 1.5;
 }
 
-.refferalPanel {
+.referralPanel {
   position: absolute;
   inset: 0;
   background: #ffffff;
@@ -114,14 +114,14 @@
   overflow: hidden;
 }
 
-.refferalService {
+.referralService {
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 8px;
 }
 
-.refferalServiceTitle {
+.referralServiceTitle {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-size: clamp(16px, 1.5vw, 22px);
@@ -129,7 +129,7 @@
   margin: 0;
 }
 
-.refferalServiceDesc {
+.referralServiceDesc {
   font-family: "Lato", sans-serif;
   font-size: clamp(14px, 1.1vw, 16px);
   line-height: 1.6;
@@ -140,25 +140,25 @@
 
 /* Stack tabs on top of panel on narrower screens */
 @media (max-width: 900px) {
-  .refferalGrid {
+  .referralGrid {
     flex-direction: column;
   }
 
-  .refferalTabs {
+  .referralTabs {
     flex-direction: row;
     width: 100%;
   }
 
-  .refferalTab {
+  .referralTab {
     flex: 1;
   }
 
-  .refferalPanelWrapper {
+  .referralPanelWrapper {
     position: static;
     min-height: 400px;
   }
 
-  .refferalPanel {
+  .referralPanel {
     position: static;
     overflow: visible;
   }

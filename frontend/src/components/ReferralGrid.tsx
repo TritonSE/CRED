@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import styles from "./RefferalGrid.module.css";
+import styles from "./ReferralGrid.module.css";
 
 const categories = [
   {
@@ -87,31 +87,31 @@ const categories = [
   },
 ];
 
-export default function RefferalGrid() {
+export default function ReferralGrid() {
   const [activeId, setActiveId] = useState("housing");
   const activeCategory = categories.find((c) => c.id === activeId) ?? categories[0];
 
   return (
-    <div className={styles.refferalGrid}>
+    <div className={styles.referralGrid}>
       {/* Left: Category tab buttons */}
-      <div className={styles.refferalTabs}>
+      <div className={styles.referralTabs}>
         {categories.map((category) => {
           const isActive = category.id === activeId;
           return (
             <button
               key={category.id}
-              className={`${styles.refferalTab} ${isActive ? styles.refferalTabActive : ""}`}
+              className={`${styles.referralTab} ${isActive ? styles.referralTabActive : ""}`}
               onClick={() => {
                 setActiveId(category.id);
               }}
             >
-              <div className={styles.refferalTabHeader}>
+              <div className={styles.referralTabHeader}>
                 <Image
                   src={isActive ? category.selectedIcon : category.unselectedIcon}
                   alt={`${category.title} icon`}
                   width={32}
                   height={32}
-                  className={styles.refferalTabIcon}
+                  className={styles.referralTabIcon}
                 />
                 {!isActive && (
                   <Image
@@ -119,24 +119,24 @@ export default function RefferalGrid() {
                     alt="arrow right"
                     width={16}
                     height={16}
-                    className={styles.refferalTabArrow}
+                    className={styles.referralTabArrow}
                   />
                 )}
               </div>
 
               <p
-                className={`${styles.refferalTabTitle} ${isActive ? styles.refferalTabTitleActive : ""}`}
+                className={`${styles.referralTabTitle} ${isActive ? styles.referralTabTitleActive : ""}`}
               >
                 {category.title}
               </p>
 
               {isActive ? (
-                <div className={styles.refferalTabMeta}>
-                  <div className={styles.refferalTabMetaDash} />
+                <div className={styles.referralTabMeta}>
+                  <div className={styles.referralTabMetaDash} />
                   <span>{category.services.length} Resources Available</span>
                 </div>
               ) : (
-                <p className={styles.refferalTabDesc}>{category.shortDesc}</p>
+                <p className={styles.referralTabDesc}>{category.shortDesc}</p>
               )}
             </button>
           );
@@ -144,12 +144,12 @@ export default function RefferalGrid() {
       </div>
 
       {/* Right: Services panel */}
-      <div className={styles.refferalPanelWrapper}>
-        <div className={styles.refferalPanel}>
+      <div className={styles.referralPanelWrapper}>
+        <div className={styles.referralPanel}>
           {activeCategory.services.map((service, index) => (
-            <div key={index} className={styles.refferalService}>
-              <h3 className={styles.refferalServiceTitle}>{service.title}</h3>
-              <p className={styles.refferalServiceDesc}>{service.desc}</p>
+            <div key={index} className={styles.referralService}>
+              <h3 className={styles.referralServiceTitle}>{service.title}</h3>
+              <p className={styles.referralServiceDesc}>{service.desc}</p>
             </div>
           ))}
         </div>
