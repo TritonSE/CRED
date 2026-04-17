@@ -144,13 +144,15 @@ export default function RefferalGrid() {
       </div>
 
       {/* Right: Services panel */}
-      <div className={styles.refferalPanel}>
-        {activeCategory.services.map((service, index) => (
-          <div key={index} className={styles.refferalService}>
-            <h3 className={styles.refferalServiceTitle}>{service.title}</h3>
-            <p className={styles.refferalServiceDesc}>{service.desc}</p>
-          </div>
-        ))}
+      <div className={styles.refferalPanelWrapper}>
+        <div className={styles.refferalPanel}>
+          {activeCategory.services.map((service, index) => (
+            <div key={index} className={styles.refferalService}>
+              <h3 className={styles.refferalServiceTitle}>{service.title}</h3>
+              <p className={styles.refferalServiceDesc}>{service.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
