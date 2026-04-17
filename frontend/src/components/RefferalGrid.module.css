@@ -151,6 +151,7 @@
 
   .refferalTab {
     flex: 1;
+    min-width: 0;
   }
 
   .refferalPanelWrapper {
@@ -161,5 +162,16 @@
   .refferalPanel {
     position: static;
     overflow: visible;
+  }
+}
+
+/* Stack tabs vertically on phone screens */
+@media (max-width: 480px) {
+  .refferalTabs {
+    flex-direction: column;
+  }
+
+  .refferalTab {
+    width: 100%;
   }
 }
