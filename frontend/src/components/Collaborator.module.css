@@ -40,6 +40,14 @@
   gap: 16px;
 }
 
+/* Stack tabs vertically on phone screens */
+@media (max-width: 480px) {
+  .tabsContainer {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
 .tab {
   flex: 1;
   display: flex;
