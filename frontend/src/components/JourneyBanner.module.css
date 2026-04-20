@@ -1,7 +1,7 @@
 .section {
   position: relative;
   width: 100%;
-  min-height: 350px; /* Gives the banner substantial height */
+  min-height: clamp(350px, 40vw, 480px); /* Responsive height scaling to 480px */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,20 +16,23 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  overflow: hidden;
 }
 
-/* The yellow/orange overlay. 
-  If your raw image is already yellow, you can delete this class! 
-  If your image is black and white/normal, this creates the tint from your screenshot.
-*/
+.bgImage {
+  object-fit: cover;
+  object-position: 60% 85%;
+}
+
 .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(249, 203, 114, 0.7); /* Warm yellow/orange tint */
+  background: #ffcb7d; /* Warm yellow/orange tint */
   z-index: 2;
+  opacity: 0.85;
 }
 
 /* Content layout */
@@ -38,54 +41,60 @@
   z-index: 3; /* Keeps text above the background/overlay */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   width: 100%;
-  max-width: 1220px;
-  padding: 64px 24px;
-  gap: 32px;
-}
-
-@media (min-width: 900px) {
-  .contentContainer {
-    flex-direction: row;
-    align-items: center;
-  }
+  max-width: 1440px;
+  padding: clamp(64px, 11vw, 160px) 24px;
+  gap: clamp(24px, 4vw, 48px);
 }
 
 /* Text styles */
 .textContent {
-  max-width: 650px;
+  max-width: 720px; /* Constrains subtitle exactly to the width of the main title */
 }
 
 .title {
-  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 700;
-  font-size: 40px;
-  color: #175892; /* The CRED Blue */
-  margin: 0 0 16px 0;
+  font-size: 48px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #004377;
+  margin: 0;
 }
 
 .subtitle {
   font-family: "Lato", sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
-  color: #111111;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #000000;
   margin: 0;
 }
 
 /* Button styles */
 .buttonContainer {
   flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .button {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 277px;
+  min-height: 50px;
+  gap: 10px;
   background: #175892;
   color: #ffffff;
-  padding: 16px 32px;
-  border-radius: 4px;
+  border-radius: 5px;
   font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
   font-weight: 600;
   font-size: 16px;

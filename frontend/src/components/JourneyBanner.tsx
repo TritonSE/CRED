@@ -9,10 +9,10 @@ export default function JourneyBanner() {
       {/* Background Image and Overlay */}
       <div className={styles.bgWrapper}>
         <Image
-          src="/background.png" /* Replace with your actual background image filename */
+          src="/home/JourneyImage.jpg"
           alt="CRED background with lightbulbs"
           fill
-          style={{ objectFit: "cover" }}
+          className={styles.bgImage}
           quality={90}
         />
         {/* The yellow/orange tint overlay */}
