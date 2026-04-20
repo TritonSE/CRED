@@ -24,6 +24,8 @@ export default function Support() {
               src="/home/underserved-communities-pic.jpg"
               alt="Underserved communities"
               fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              unoptimized={true}
               className={styles.supportCardImage}
             />
             <div className={styles.supportCardOverlay} />
@@ -42,6 +44,8 @@ export default function Support() {
               src="/home/formerly-incarcerated-indiv-pic.jpg"
               alt="Formerly incarcerated individuals"
               fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              unoptimized={true}
               className={styles.supportCardImage}
             />
             <div className={styles.supportCardOverlay} />
@@ -63,6 +67,8 @@ export default function Support() {
               src="/home/youth-pic.jpg"
               alt="Transitional age youth"
               fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              unoptimized={true}
               className={styles.supportCardImage}
             />
             <div className={styles.supportCardOverlay} />
@@ -81,6 +87,8 @@ export default function Support() {
               src="/home/family-pic.jpg"
               alt="Low-income families"
               fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              unoptimized={true}
               className={styles.supportCardImage}
             />
             <div className={styles.supportCardOverlay} />

@@ -171,8 +171,16 @@ export default function Collaborator() {
               <div
                 key={collab.id}
                 className={styles.logoCard}
+                role="button"
+                tabIndex={0}
                 onClick={() => {
                   setSelectedCollab({ name: collab.name, category: collab.category });
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelectedCollab({ name: collab.name, category: collab.category });
+                  }
                 }}
               >
                 <div className={styles.imageWrapper}>
@@ -180,6 +188,8 @@ export default function Collaborator() {
                     src={collab.logo}
                     alt={`${collab.name} logo`}
                     fill
+                    sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw"
+                    unoptimized={true}
                     style={{ objectFit: "contain" }}
                   />
                 </div>

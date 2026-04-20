@@ -12,6 +12,8 @@ export default function JourneyBanner() {
           src="/home/JourneyImage.jpg"
           alt="CRED background with lightbulbs"
           fill
+          sizes="100vw"
+          unoptimized={true}
           className={styles.bgImage}
           quality={90}
         />

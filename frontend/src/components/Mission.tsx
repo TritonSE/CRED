@@ -27,6 +27,8 @@ export default function Mission() {
             src="/home/mission-image.png"
             alt="Two people embracing in support"
             fill
+            sizes="(max-width: 900px) 100vw, 50vw"
+            unoptimized={true}
             style={{ objectFit: "cover" }}
           />
         </div>

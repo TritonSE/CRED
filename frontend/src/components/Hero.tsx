@@ -11,6 +11,8 @@ export default function Hero() {
           src="/home/home-page-banner.jpg"
           alt="Hands coming together in community support"
           fill
+          sizes="100vw"
+          unoptimized={true}
           className="object-cover"
           priority
         />
