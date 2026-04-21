@@ -29,7 +29,7 @@
 
 .formInner {
   width: 100%;
-  max-width: 846px;
+  max-width: 854px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -84,9 +84,18 @@
 .fieldTop,
 .fieldMiddle {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  width: 100%;
+  flex-wrap: nowrap;
+  gap: 54px;
+  width: 854px;
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .fieldTop,
+  .fieldMiddle {
+    flex-wrap: wrap;
+    width: 100%;
+  }
 }
 
 .shortField {
@@ -100,7 +109,7 @@
 
 .fullWidthField {
   width: 100%;
-  max-width: 846px;
+  max-width: 854px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -125,6 +134,7 @@
 }
 
 .fieldSection .shortField input[type="text"],
+.fieldSection .shortField input[type="date"],
 .fieldSection .fullWidthField input[type="text"] {
   border: 1px solid #5a5a5a;
   border-radius: 8px;
@@ -135,8 +145,8 @@
   background-color: #ffffff;
   color: #222222;
   padding: 0 20px 0 29px;
-  height: 58px;
-  line-height: 58px;
+  height: 50px;
+  line-height: 50px;
 }
 
 .fieldSection .shortField select {
@@ -150,9 +160,9 @@
   color: #7e7e7e;
   width: 400px;
   max-width: 100%;
-  height: 58px;
+  height: 50px;
   padding: 0 52px 0 29px;
-  line-height: 58px;
+  line-height: 50px;
   display: block;
   white-space: nowrap;
   text-overflow: clip;
@@ -167,7 +177,7 @@
 
 .fieldSection .fullWidthField input[type="text"] {
   width: 100%;
-  max-width: 846px;
+  max-width: 854px;
   color: #7e7e7e;
 }
 
@@ -191,7 +201,7 @@
 .selectPlaceholder {
   font-size: 16px;
   font-weight: 400;
-  line-height: 58px;
+  line-height: 50px;
 }
 
 .fieldSection .shortField select.selectPlaceholder {
@@ -214,12 +224,68 @@
 }
 
 .dateInputWrap {
+  position: relative;
   width: 400px;
   max-width: 100%;
 }
 
 .dateInputWrap input {
   width: 100%;
+  padding-right: 52px;
+}
+
+.dateInputEmpty input[type="date"]::-webkit-datetime-edit,
+.dateInputEmpty input[type="date"]::-webkit-datetime-edit-text,
+.dateInputEmpty input[type="date"]::-webkit-datetime-edit-month-field,
+.dateInputEmpty input[type="date"]::-webkit-datetime-edit-day-field,
+.dateInputEmpty input[type="date"]::-webkit-datetime-edit-year-field {
+  color: transparent;
+}
+
+.datePlaceholder {
+  position: absolute;
+  left: 29px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #7e7e7e;
+  pointer-events: none;
+}
+.calendarButton {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #7e7e7e;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Make type=date display look like MM/DD/YYYY in grey on WebKit */
+.dateInputWrap input[type="date"]::-webkit-datetime-edit {
+  color: #7e7e7e;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.dateInputWrap input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+/* hide native picker icon but keep native picker */
+.dateInputWrap input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
 }
 
 .questionBlock {
@@ -227,7 +293,7 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  max-width: 846px;
+  max-width: 854px;
 }
 
 .optionRow,
@@ -241,7 +307,8 @@
   background: #ffffff;
   cursor: pointer;
   box-sizing: border-box;
-  width: 100%;
+  width: 854px;
+  max-width: 100%;
   transition: none;
 }
 
@@ -266,10 +333,47 @@
 .otherRow input[type="checkbox"] {
   width: 22px;
   height: 22px;
-  border: 1.5px solid #8e8e8e;
+  border: 1.5px solid #5a5a5a;
   border-radius: 5px;
   position: relative;
   background: #ffffff;
+}
+
+.optionRow input[type="checkbox"],
+.otherRow input[type="checkbox"],
+.optionRow input[type="radio"],
+.otherRow input[type="radio"] {
+  position: relative;
+}
+
+.optionRow input[type="checkbox"]::before,
+.otherRow input[type="checkbox"]::before,
+.optionRow input[type="radio"]::before,
+.otherRow input[type="radio"]::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 179, 65, 0);
+  pointer-events: none;
+}
+
+.optionRow input[type="checkbox"]:hover::before,
+.otherRow input[type="checkbox"]:hover::before,
+.optionRow input[type="radio"]:hover::before,
+.otherRow input[type="radio"]:hover::before {
+  background: rgba(255, 179, 65, 0.1);
+}
+
+.optionRow input[type="checkbox"]:active::before,
+.otherRow input[type="checkbox"]:active::before,
+.optionRow input[type="radio"]:active::before,
+.otherRow input[type="radio"]:active::before {
+  background: rgba(255, 179, 65, 0.2);
 }
 
 .optionRow input[type="checkbox"]:hover,
@@ -304,10 +408,107 @@
 .otherRow input[type="radio"] {
   width: 22px;
   height: 22px;
-  border: 1.5px solid #8e8e8e;
+  border: 1.5px solid #5a5a5a;
   border-radius: 50%;
   position: relative;
   background: #ffffff;
+}
+
+.customSelect {
+  position: relative;
+  width: 400px;
+  max-width: 100%;
+}
+
+.selectTrigger {
+  width: 400px;
+  max-width: 100%;
+  height: 50px;
+  border: 1px solid #5a5a5a;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0 29px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 10px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #7e7e7e;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.selectValue {
+  width: 356px;
+  height: 24px;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  flex: 1;
+}
+
+.chevron {
+  width: 20px;
+  height: 10px;
+  position: absolute;
+  right: 22px; /* Balanced with the 29px left padding */
+  left: auto; /* Remove the previous fixed left position */
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8' fill='none'%3E%3Cpath d='M1 1.5L7 6.5L13 1.5' stroke='%235A5A5A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.selectMenu {
+  position: absolute;
+  top: calc(50px + 4px);
+  left: 0;
+  width: 400px;
+  max-width: 100%;
+  height: 208px;
+  background: #ffffff;
+  border: 1px solid #5a5a5a;
+  border-radius: 8px;
+  padding: 0;
+  overflow: auto;
+  z-index: 20;
+  box-sizing: border-box;
+}
+
+.selectOption {
+  width: 400px;
+  max-width: 100%;
+  height: 52px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: none;
+  border-left: 2px solid transparent;
+  text-align: left;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000000;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.selectOption:hover {
+  background: #f4f4f4;
+  border-left-color: #000000;
 }
 
 .optionRow input[type="radio"]:hover,
@@ -369,7 +570,15 @@
 }
 
 .inlineText:focus {
-  border-bottom-color: #ffb341;
+  border-bottom-color: #5a5a5a;
+}
+
+.inlineTextInactive {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.inlineTextActive {
+  color: rgba(0, 0, 0, 1);
 }
 
 .formFooter {
@@ -380,5 +589,5 @@
   margin-top: 0;
   padding-top: 0;
   width: 100%;
-  max-width: 846px;
+  max-width: 854px;
 }

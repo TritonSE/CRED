@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { NextButton } from "./NextButton";
 import styles from "./YourProfileForm.module.css";
@@ -12,27 +12,6 @@ function toggleSetMember(set: Set<string>, value: string, checked: boolean): Set
     next.delete(value);
   }
   return next;
-}
-
-// we should also add a popup where it says invalid date if the user has entered
-// something that doesn't match the format
-function isValidMmDdYyyy(s: string): boolean {
-  const t = s.trim();
-  if (!t) {
-    return false;
-  }
-  const match = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(t);
-  if (!match) {
-    return false;
-  }
-  const month = Number(match[1]);
-  const day = Number(match[2]);
-  const year = Number(match[3]);
-  if (month < 1 || month > 12 || day < 1 || day > 31 || year < 1900 || year > 2100) {
-    return false;
-  }
-  const d = new Date(year, month - 1, day);
-  return d.getFullYear() === year && d.getMonth() === month - 1 && d.getDate() === day;
 }
 
 type YourProfileFormProps = {
@@ -54,7 +33,7 @@ export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileF
 
   const isFormValid = useMemo(() => {
     const nameOk = fullName.trim().length > 0;
-    const dobOk = isValidMmDdYyyy(dateOfBirth);
+    const dobOk = dateOfBirth.trim().length > 0;
     const genderOk = gender.length > 0;
     const ethnicityOk = ethnicity.length > 0;
     const addressOk = address.trim().length > 0;
@@ -89,6 +68,55 @@ export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileF
     housingOther,
   ]);
 
+  type SelectOption = { value: string; label: string };
+
+  const genderOptions: SelectOption[] = [
+    { value: "male", label: "Male" },
+    { value: "female", label: "Female" },
+    { value: "other", label: "Other" },
+    { value: "prefer", label: "Prefer not to say" },
+  ];
+
+  const ethnicityOptions: SelectOption[] = [
+    { value: "mena", label: "Middle Eastern or North African" },
+    { value: "naan", label: "Native American or Alaska Native" },
+    { value: "nhpi", label: "Native Hawaiian or Pacific Islander" },
+    { value: "other", label: "Other" },
+  ];
+
+  const [isGenderOpen, setIsGenderOpen] = useState(false);
+  const [isEthnicityOpen, setIsEthnicityOpen] = useState(false);
+  const genderWrapRef = useRef<HTMLDivElement | null>(null);
+  const ethnicityWrapRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Node | null;
+      if (
+        isGenderOpen &&
+        genderWrapRef.current &&
+        target &&
+        !genderWrapRef.current.contains(target)
+      ) {
+        setIsGenderOpen(false);
+      }
+      if (
+        isEthnicityOpen &&
+        ethnicityWrapRef.current &&
+        target &&
+        !ethnicityWrapRef.current.contains(target)
+      ) {
+        setIsEthnicityOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, [isGenderOpen, isEthnicityOpen]);
+
+  const dobRef = useRef<HTMLInputElement | null>(null);
+
   return (
     <div className={styles.formBlock}>
       <div className={styles.content}>
@@ -120,7 +148,6 @@ export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileF
                 </h4>
                 <input
                   type="text"
-                  placeholder="Enter Input"
                   name="fullName"
                   autoComplete="name"
                   value={fullName}
@@ -134,19 +161,53 @@ export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileF
                 <h4>
                   Date of Birth<span className={styles.required}>*</span>
                 </h4>
-                <div className={styles.dateInputWrap}>
+                <div
+                  className={`${styles.dateInputWrap} ${dateOfBirth === "" ? styles.dateInputEmpty : ""}`}
+                >
+                  {dateOfBirth === "" ? (
+                    <span className={styles.datePlaceholder} aria-hidden="true">
+                      MM/DD/YYYY
+                    </span>
+                  ) : null}
                   <input
-                    type="text"
+                    ref={dobRef}
+                    type="date"
                     name="dateOfBirth"
-                    inputMode="numeric"
                     autoComplete="bday"
-                    placeholder="MM/DD/YYYY"
                     value={dateOfBirth}
                     onChange={(e) => {
-                      // here we should add error indicators
                       setDateOfBirth(e.target.value);
                     }}
                   />
+                  <button
+                    type="button"
+                    className={styles.calendarButton}
+                    aria-label="Open calendar"
+                    onClick={() => {
+                      const el = dobRef.current;
+                      if (!el) return;
+                      const anyEl = el as unknown as { showPicker?: () => void };
+                      if (typeof anyEl.showPicker === "function") anyEl.showPicker();
+                      else el.focus();
+                    }}
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M7 2V4M17 2V4M4 8H20M5 5H19C20.1046 5 21 5.89543 21 7V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V7C3 5.89543 3.89543 5 5 5Z"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -156,41 +217,87 @@ export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileF
                 <h4>
                   Gender<span className={styles.required}>*</span>
                 </h4>
-                <select
-                  name="gender"
-                  value={gender}
-                  className={gender === "" ? styles.selectPlaceholder : undefined}
-                  onChange={(e) => {
-                    setGender(e.target.value);
-                  }}
-                >
-                  <option value="" disabled hidden>
-                    Select an option
-                  </option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                  <option value="prefer">Prefer not to say</option>
-                </select>
+                <div className={styles.customSelect} ref={genderWrapRef}>
+                  <button
+                    type="button"
+                    className={`${styles.selectTrigger} ${gender === "" ? styles.selectPlaceholder : ""}`}
+                    aria-haspopup="listbox"
+                    aria-expanded={isGenderOpen}
+                    onClick={() => {
+                      setIsGenderOpen((v) => !v);
+                    }}
+                  >
+                    <span className={styles.selectValue}>
+                      {gender === ""
+                        ? "Select an option"
+                        : (genderOptions.find((o) => o.value === gender)?.label ??
+                          "Select an option")}
+                    </span>
+                    <span className={styles.chevron} aria-hidden="true" />
+                  </button>
+                  {isGenderOpen ? (
+                    <div className={styles.selectMenu} role="listbox">
+                      {genderOptions.map((opt) => (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          className={styles.selectOption}
+                          role="option"
+                          aria-selected={gender === opt.value}
+                          onClick={() => {
+                            setGender(opt.value);
+                            setIsGenderOpen(false);
+                          }}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               </div>
               <div className={`${styles.ethnicityBlock} ${styles.shortField}`}>
                 <h4>
                   Race/Ethnicity<span className={styles.required}>*</span>
                 </h4>
-                <select
-                  name="ethnicity"
-                  value={ethnicity}
-                  className={ethnicity === "" ? styles.selectPlaceholder : undefined}
-                  onChange={(e) => {
-                    setEthnicity(e.target.value);
-                  }}
-                >
-                  <option value="">Select an option</option>
-                  <option value="mena">Middle Eastern or North African</option>
-                  <option value="naan">Native American or Alaska Native</option>
-                  <option value="nhpi">Native Hawaiian or Pacific Islander</option>
-                  <option value="other">Other</option>
-                </select>
+                <div className={styles.customSelect} ref={ethnicityWrapRef}>
+                  <button
+                    type="button"
+                    className={`${styles.selectTrigger} ${ethnicity === "" ? styles.selectPlaceholder : ""}`}
+                    aria-haspopup="listbox"
+                    aria-expanded={isEthnicityOpen}
+                    onClick={() => {
+                      setIsEthnicityOpen((v) => !v);
+                    }}
+                  >
+                    <span className={styles.selectValue}>
+                      {ethnicity === ""
+                        ? "Select an option"
+                        : (ethnicityOptions.find((o) => o.value === ethnicity)?.label ??
+                          "Select an option")}
+                    </span>
+                    <span className={styles.chevron} aria-hidden="true" />
+                  </button>
+                  {isEthnicityOpen ? (
+                    <div className={styles.selectMenu} role="listbox">
+                      {ethnicityOptions.map((opt) => (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          className={styles.selectOption}
+                          role="option"
+                          aria-selected={ethnicity === opt.value}
+                          onClick={() => {
+                            setEthnicity(opt.value);
+                            setIsEthnicityOpen(false);
+                          }}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
 
@@ -278,7 +385,11 @@ export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileF
                 <span className={styles.labelText}>Other/Not Sure:</span>
                 <input
                   type="text"
-                  className={styles.inlineText}
+                  className={`${styles.inlineText} ${
+                    employmentOther.trim().length > 0
+                      ? styles.inlineTextActive
+                      : styles.inlineTextInactive
+                  }`}
                   name="employmentOther"
                   value={employmentOther}
                   onChange={(e) => {
@@ -354,7 +465,11 @@ export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileF
                 <span className={styles.labelText}>Other/Not Sure:</span>
                 <input
                   type="text"
-                  className={styles.inlineText}
+                  className={`${styles.inlineText} ${
+                    educationOther.trim().length > 0
+                      ? styles.inlineTextActive
+                      : styles.inlineTextInactive
+                  }`}
                   name="educationOther"
                   value={educationOther}
                   onChange={(e) => {
@@ -430,7 +545,11 @@ export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileF
                 <span className={styles.labelText}>Other/Not Sure:</span>
                 <input
                   type="text"
-                  className={styles.inlineText}
+                  className={`${styles.inlineText} ${
+                    housingOther.trim().length > 0
+                      ? styles.inlineTextActive
+                      : styles.inlineTextInactive
+                  }`}
                   name="housingOther"
                   value={housingOther}
                   onChange={(e) => {
@@ -441,7 +560,14 @@ export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileF
             </div>
 
             <div className={styles.formFooter}>
-              <NextButton disabled={!isFormValid} isComplete={isFormValid} onClick={onNext} />
+              <NextButton
+                disabled={!isFormValid}
+                isComplete={isFormValid}
+                onClick={() => {
+                  if (!isFormValid) return;
+                  onNext();
+                }}
+              />
             </div>
           </div>
         </div>
