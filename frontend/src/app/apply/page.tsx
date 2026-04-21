@@ -3,6 +3,7 @@
 import { ThemeProvider } from "@tritonse/tse-constellation";
 import React, { useEffect } from "react";
 
+import { ContactForm } from "./components/ContactForm";
 import { NeedInterestsForm } from "./components/NeedInterestsForm";
 import { YourProfileForm } from "./components/YourProfileForm";
 
@@ -47,7 +48,7 @@ export default function ApplyPage() {
 
         {step === 2 && <NeedInterestsForm onNext={handleNext} onBack={handleBack} />}
 
-        {/* step === 3 && <NextForm onBack={handleBack} /> */}
+        {step === 3 && <ContactForm onBack={handleBack} />}
       </div>
     </ThemeProvider>
   );

@@ -141,7 +141,14 @@ export const NeedInterestsForm = function NeedInterestsForm({ onBack, onNext }: 
         <div className={styles.footer}>
           <div className={styles.buttonGroup}>
             <BackButton onClick={onBack} />
-            <NextButton isComplete={isFormValid} disabled={!isFormValid} onClick={onNext} />
+            <NextButton
+              disabled={!isFormValid}
+              isComplete={isFormValid}
+              onClick={() => {
+                if (!isFormValid) return;
+                onNext();
+              }}
+            />
           </div>
         </div>
       </div>
