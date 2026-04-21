@@ -26,8 +26,8 @@ export default function Hero() {
         <h1 className={styles.heroTitle}>Supporting Community, Stability, and Brighter Futures</h1>
         <p className={styles.heroSubtitle}>
           CRED is a reintegration and economic development organization focused on bridging the gap
-          between incarceration and independence through practical support, workforce development,
-          and mentorship.
+          between economic independence, incarceration and stability through practical support,
+          workforce development, and mentorship.
         </p>
       </div>
     </section>

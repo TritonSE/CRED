@@ -10,7 +10,7 @@
   max-width: 1200px;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: clamp(32px, 6vw, 96px);
 }
@@ -58,10 +58,9 @@
 }
 
 .missionImageWrapper {
-  flex: 1;
+  flex: 0 0 38%;
   position: relative;
-  width: 100%;
-  min-height: 300px;
+  height: 320px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
