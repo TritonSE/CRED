@@ -1,7 +1,7 @@
 "use client";
 
 import { ThemeProvider } from "@tritonse/tse-constellation";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { NeedInterestsForm } from "./components/NeedInterestsForm";
 import { YourProfileForm } from "./components/YourProfileForm";
@@ -15,9 +15,23 @@ import "./styles.css";
 export default function ApplyPage() {
   const [step, setStep] = React.useState(1);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth", // Use "instant" if you don't want the sliding animation
+    });
+  }, [step]);
+
+  const handleNext = () => {
+    setStep((prev) => prev + 1);
+  };
+  const handleBack = () => {
+    setStep((prev) => prev - 1);
+  };
+
   return (
     <ThemeProvider>
-      {/* page title section */}
       <div className="apply-top-section">
         <div className="apply-container">
           <h1 className="apply-title">Join Cred Today</h1>
@@ -29,14 +43,11 @@ export default function ApplyPage() {
       </div>
 
       <div className="apply-form-section">
-        {step === 1 && (
-          <YourProfileForm
-            onNext={() => {
-              setStep(2);
-            }}
-          />
-        )}
-        {step === 2 && <NeedInterestsForm />}
+        {step === 1 && <YourProfileForm onNext={handleNext} />}
+
+        {step === 2 && <NeedInterestsForm onNext={handleNext} onBack={handleBack} />}
+
+        {/* step === 3 && <NextForm onBack={handleBack} /> */}
       </div>
     </ThemeProvider>
   );
