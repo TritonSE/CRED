@@ -1,7 +1,9 @@
 import Image from "next/image";
 import React from "react";
 
+import { BackButton } from "./BackButton";
 import styles from "./ContactForm.module.css";
+import { NextButton } from "./NextButton";
 
 type Props = {
   onBack: () => void;
@@ -32,6 +34,20 @@ export const ContactForm = function ContactForm({ onBack, onNext }: Props) {
           <p className={styles.contactIntro}>
             Please provide your preferred contact details so we can follow up with you.
           </p>
+        </div>
+
+        <div className={styles.footer}>
+          <div className={styles.buttonGroup}>
+            <BackButton onClick={onBack} />
+            <NextButton
+              disabled={!isFormValid}
+              isComplete={isFormValid}
+              onClick={() => {
+                if (!isFormValid) return;
+                onNext();
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,46 @@
+.formOuter {
+  width: 981px;
+  height: 867px;
+  margin: 0 auto;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
+}
+
+.formInner {
+  width: 853px;
+  height: 738px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.formContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  margin-top: auto;
+}
+
+.buttonGroup {
+  display: flex;
+  width: 236px;
+  justify-content: space-between;
+}
+
+.progressBarThree {
+  margin-bottom: 20px;
+  margin: 0 auto;
+}

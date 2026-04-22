@@ -127,6 +127,7 @@
   width: 854px;
   max-width: 100%;
   transition: none;
+  margin: 0 0 10px;
 }
 
 .optionRow:hover,
@@ -209,4 +210,31 @@
   border-width: 0 2px 2px 0;
   transform: translate(-50%, -50%) rotate(45deg);
   box-sizing: border-box;
+}
+
+.inlineText {
+  flex: 1;
+  min-width: 80px;
+  border: none;
+  border-bottom: 1px solid #5a5a5a;
+  border-radius: 0;
+  padding: 4px 0;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: var(--font-lato), Lato, sans-serif;
+  outline: none;
+  background: transparent;
+  color: #7e7e7e;
+}
+
+.inlineText:focus {
+  border-bottom-color: #5a5a5a;
+}
+
+.inlineTextInactive {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.inlineTextActive {
+  color: rgba(0, 0, 0, 1);
 }
