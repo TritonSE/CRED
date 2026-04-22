@@ -19,13 +19,15 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.1",
     "express-validator": "^7.3.1",
+    "http-errors": "^2.0.1",
     "mongoose": "^8.8.3",
-    "nodemailer": "^7.0.13"
+    "nodemailer": "^8.0.5"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.0",
-    "@types/nodemailer": "^6.4.23",
+    "@types/http-errors": "^2.0.5",
+    "@types/nodemailer": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",
     "eslint": "^8.57.1",
