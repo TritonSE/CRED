@@ -1,0 +1,71 @@
+.mainBox {
+  position: relative;
+  width: 45%;
+  border-radius: 15px;
+  padding: 1rem;
+
+  opacity: 1;
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+  box-shadow: 0px 5px 10px 0px #00000026;
+}
+
+.mainBox::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  border-radius: inherit;
+
+  pointer-events: none;
+}
+
+.mainBox > * {
+  position: relative;
+  z-index: 1; /* keep text/button/image on top */
+}
+
+.imageSpace {
+  width: 72px;
+  height: 72px;
+  margin: 3rem 3rem 0;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 590;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  margin: 1rem 3rem 2rem;
+  color: white;
+}
+
+.body {
+  height: 20%;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  line-height: 1.5;
+  margin: 1rem 3rem 3rem;
+  color: white;
+}
+
+.buttonstyle {
+  margin: 0 3rem 3rem;
+}
+
+@media (max-width: 1500px) {
+  .mainBox {
+    margin: 0 auto;
+    width: 80%;
+  }
+  .buttonstyle {
+    margin: 0 3rem 2rem;
+  }
+}
