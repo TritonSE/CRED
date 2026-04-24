@@ -1,6 +1,5 @@
 import { Inter, Lato } from "next/font/google";
 
-// import AppShell from "../components/AppShell";
 import LayoutShell from "../components/LayoutShell";
 
 import type { Metadata } from "next";
