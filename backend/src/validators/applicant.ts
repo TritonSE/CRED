@@ -184,7 +184,7 @@ const makeTodosValidator = (): ValidationChain =>
           typeof item === "object" &&
           item !== null &&
           "id" in item &&
-          typeof (item as { id: unknown }).id === "string" &&
+          typeof item.id === "string" &&
           "label" in item &&
           typeof (item as { label: unknown }).label === "string" &&
           "completed" in item &&
@@ -205,7 +205,7 @@ const makeNotesValidator = (): ValidationChain =>
           typeof item === "object" &&
           item !== null &&
           "date" in item &&
-          typeof (item as { date: unknown }).date === "string" &&
+          typeof item.date === "string" &&
           "content" in item &&
           typeof (item as { content: unknown }).content === "string",
       );
