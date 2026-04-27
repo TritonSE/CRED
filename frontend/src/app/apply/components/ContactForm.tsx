@@ -11,11 +11,11 @@ type Props = {
 };
 
 export const ContactForm = function ContactForm({ onBack, onNext }: Props) {
-  const [email, setEmail] = React.useState<string>("");
-  const [phone, setPhone] = React.useState<string>("");
-  const [commentsQuestions, setCommentsQuestions] = React.useState<string>("");
+  // const [email, setEmail] = React.useState<string>("");
+  // const [phone, setPhone] = React.useState<string>("");
+  // const [commentsQuestions, setCommentsQuestions] = React.useState<string>("");
 
-  const isFormValid = email.length > 0 || phone.length > 0;
+  // const isFormValid = email.length > 0 || phone.length > 0;
 
   return (
     <div className={styles.formOuter}>
@@ -40,10 +40,10 @@ export const ContactForm = function ContactForm({ onBack, onNext }: Props) {
           <div className={styles.buttonGroup}>
             <BackButton onClick={onBack} />
             <NextButton
-              disabled={!isFormValid}
-              isComplete={isFormValid}
+              // disabled={!isFormValid}
+              // isComplete={isFormValid}
               onClick={() => {
-                if (!isFormValid) return;
+                // if (!isFormValid) return;
                 onNext();
               }}
             />

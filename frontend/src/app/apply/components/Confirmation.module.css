@@ -1,0 +1,185 @@
+.formOuter {
+  width: 981px;
+  height: 867px;
+  margin: 0 auto;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
+}
+
+.formInner {
+  width: 853px;
+  height: 738px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Section 1 */
+.sectionOne {
+  width: 815px;
+  height: 192px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.successCircle {
+  width: 100px;
+  height: 100px;
+  background-color: #14ae5c33;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.successTitle {
+  width: 815px;
+  height: 72px;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #000000;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Section 2 */
+.sectionTwo {
+  width: 815px;
+  height: 216px;
+  background: #f9fafb;
+  border-radius: 20px;
+  padding: 30px 50px; /* 50px left padding */
+  display: flex;
+  align-items: center;
+}
+
+.sectionTwoInner {
+  width: 713px;
+  height: 156px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.subHeading {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: #000000;
+  margin: 0;
+}
+
+.stepList {
+  width: 713px;
+  height: 108px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stepNumberContainer {
+  width: 26px;
+  height: 26px;
+  border: 1px solid #296eb4;
+  background: #eff6ff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.stepNumber {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #175892;
+}
+
+.stepText {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+  margin: 0;
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+/* Section 3 */
+.sectionThree {
+  width: 820px;
+  height: 198px;
+  background: #eff6ff;
+  border: 1px solid #bddbff;
+  border-radius: 20px;
+  /* Left padding 50px to align text with Section 2's text */
+  padding: 30px 53px 30px 50px;
+  display: flex;
+  align-items: center;
+}
+
+.detailsContent {
+  width: 490px;
+  height: 138px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+}
+
+.labelLight {
+  width: 206px;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #000000;
+}
+
+.labelBold {
+  width: 115px;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+}
+
+.dynamicValue {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  color: #000000;
+  padding-left: 8px;
+}
+
+.emailUpdateText {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  color: #000000;
+  margin: 0;
+}
+
+/* Section 4 */
+.footer {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+}

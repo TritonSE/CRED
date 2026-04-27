@@ -1,8 +1,10 @@
 "use client";
 
 import { ThemeProvider } from "@tritonse/tse-constellation";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
+import { Confirmation } from "./components/ Confirmation";
 import { ContactForm } from "./components/ContactForm";
 import { NeedInterestsForm } from "./components/NeedInterestsForm";
 import { YourProfileForm } from "./components/YourProfileForm";
@@ -15,6 +17,7 @@ import "./styles.css";
 
 export default function ApplyPage() {
   const [step, setStep] = React.useState(1);
+  const router = useRouter();
 
   useEffect(() => {
     window.scrollTo({
@@ -29,6 +32,9 @@ export default function ApplyPage() {
   };
   const handleBack = () => {
     setStep((prev) => prev - 1);
+  };
+  const handleHome = () => {
+    router.push("/about");
   };
 
   return (
@@ -45,10 +51,9 @@ export default function ApplyPage() {
 
       <div className="apply-form-section">
         {step === 1 && <YourProfileForm onNext={handleNext} />}
-
         {step === 2 && <NeedInterestsForm onNext={handleNext} onBack={handleBack} />}
-
-        {step === 3 && <ContactForm onBack={handleBack} />}
+        {step === 3 && <ContactForm onBack={handleBack} onNext={handleNext} />}
+        {step === 4 && <Confirmation onNext={handleHome} />}
       </div>
     </ThemeProvider>
   );
