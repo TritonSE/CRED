@@ -230,7 +230,7 @@
 }
 
 .textarea {
-  min-height: 160px;
+  min-height: 58px;
   border-radius: 10px;
   border: 1px solid #5a5a5a;
   padding: 16px 18px;
@@ -239,7 +239,8 @@
   font-size: 16px;
   color: black;
   background: white;
-  resize: vertical;
+  resize: none;
+  overflow: hidden;
 }
 
 .textarea::placeholder {
@@ -291,6 +292,7 @@
 .primaryButton:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+  background: #cbced4;
 }
 
 .formHint {

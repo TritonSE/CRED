@@ -118,9 +118,23 @@ export default function ContactForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const hasErrors = useMemo(() => Object.keys(errors).length > 0, [errors]);
+  const isReadyToSubmit = useMemo(() => {
+    return (
+      values.fullName.trim().length > 0 &&
+      values.email.trim().length > 0 &&
+      isValidEmail(values.email.trim()) &&
+      values.subject.trim().length > 0 &&
+      values.message.trim().length > 0
+    );
+  }, [values.email, values.fullName, values.message, values.subject]);
 
   const onChange = (field: keyof ContactFormValues) => {
     return (e: import("react").ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      if (field === "message" && e.target instanceof HTMLTextAreaElement) {
+        e.target.style.height = "0px";
+        e.target.style.height = `${e.target.scrollHeight.toString()}px`;
+      }
+
       const nextValues = { ...values, [field]: e.target.value };
       setValues(nextValues);
       if (errors[field]) {
@@ -178,7 +192,7 @@ export default function ContactForm() {
                   id="fullName"
                   name="fullName"
                   type="text"
-                  placeholder="John Doe"
+                  placeholder=""
                   value={values.fullName}
                   onChange={onChange("fullName")}
                   className={styles.input}
@@ -201,7 +215,7 @@ export default function ContactForm() {
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="johndoe@gmail.com"
+                  placeholder="Email Address"
                   value={values.email}
                   onChange={onChange("email")}
                   className={styles.input}
@@ -225,7 +239,7 @@ export default function ContactForm() {
                 id="subject"
                 name="subject"
                 type="text"
-                placeholder="Application Support"
+                placeholder="Describe your reason for contact (Program Inquiry, Application Support, Partnership Opportunities, Donations)."
                 value={values.subject}
                 onChange={onChange("subject")}
                 className={styles.input}
@@ -247,10 +261,11 @@ export default function ContactForm() {
               <textarea
                 id="message"
                 name="message"
-                placeholder="I'm looking for support with job and training applications..."
+                placeholder=""
                 value={values.message}
                 onChange={onChange("message")}
                 className={styles.textarea}
+                rows={1}
                 aria-invalid={Boolean(errors.message)}
                 aria-describedby={errors.message ? "message-error" : undefined}
                 required
@@ -263,7 +278,11 @@ export default function ContactForm() {
             </div>
 
             <div className={styles.formActions}>
-              <button type="submit" className={styles.primaryButton} disabled={isSubmitting}>
+              <button
+                type="submit"
+                className={styles.primaryButton}
+                disabled={!isReadyToSubmit || isSubmitting}
+              >
                 {isSubmitting ? "Sending..." : "Submit"}
               </button>
             </div>
@@ -283,7 +302,7 @@ export default function ContactForm() {
         </div>
       )}
 
-      <NeedImmediateAssistance />
+      {isSubmitted ? <NeedImmediateAssistance /> : null}
     </div>
   );
 }
