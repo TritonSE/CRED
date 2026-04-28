@@ -30,11 +30,16 @@ function isValidEmail(email: string): boolean {
 function validate(values: ContactFormValues): ContactFormErrors {
   const errors: ContactFormErrors = {};
 
-  if (!values.fullName.trim()) errors.fullName = "Full name is required.";
-  if (!values.email.trim()) errors.email = "Email is required.";
-  else if (!isValidEmail(values.email)) errors.email = "Enter a valid email address.";
-  if (!values.subject.trim()) errors.subject = "Subject is required.";
-  if (!values.message.trim()) errors.message = "Message is required.";
+  const fullName = values.fullName.trim();
+  const email = values.email.trim();
+  const subject = values.subject.trim();
+  const message = values.message.trim();
+
+  if (!fullName) errors.fullName = "Full name is required.";
+  if (!email) errors.email = "Email is required.";
+  else if (!isValidEmail(email)) errors.email = "Enter a valid email address.";
+  if (!subject) errors.subject = "Subject is required.";
+  if (!message) errors.message = "Message is required.";
 
   return errors;
 }
@@ -117,7 +122,7 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const hasErrors = useMemo(() => Object.keys(errors).length > 0, [errors]);
+  const hasErrors = useMemo(() => Object.values(errors).some(Boolean), [errors]);
   const isReadyToSubmit = useMemo(() => {
     return (
       values.fullName.trim().length > 0 &&
@@ -147,7 +152,14 @@ export default function ContactForm() {
     e.preventDefault();
     setSubmitError(null);
 
-    const nextErrors = validate(values);
+    const normalizedValues: ContactFormValues = {
+      fullName: values.fullName.trim(),
+      email: values.email.trim(),
+      subject: values.subject.trim(),
+      message: values.message.trim(),
+    };
+
+    const nextErrors = validate(normalizedValues);
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) {
@@ -156,7 +168,7 @@ export default function ContactForm() {
 
     setIsSubmitting(true);
     try {
-      const result = await sendContactMessage(values);
+      const result = await sendContactMessage(normalizedValues);
       if (!result.success) {
         setSubmitError(result.error);
         return;

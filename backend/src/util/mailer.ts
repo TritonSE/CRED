@@ -11,7 +11,8 @@ type ContactEmailInput = {
 function requireEnv(name: string): string {
   const value = process.env[name];
   if (!value) {
-    throw createHttpError(500, `Missing required env var: ${name}`);
+    console.error(`Missing required env var: ${name}`);
+    throw createHttpError(500, "Email service is not configured.");
   }
   return value;
 }
