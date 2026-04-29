@@ -63,8 +63,9 @@ function SuccessCard() {
       <div className={styles.successContent}>
         <h2 className={styles.successTitle}>Your Form Has Been Submitted!</h2>
         <p className={styles.successText}>
-          Thank you for contacting us. Your message has been received, and we&apos;ll be in touch
-          shortly.
+          Thank you for contacting us. Your message has been
+          <br />
+          successfully received, and we&apos;ll be in touch shortly.
         </p>
         <Link href="/" className={styles.primaryButton}>
           Back to Home
