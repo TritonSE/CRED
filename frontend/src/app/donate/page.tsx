@@ -20,7 +20,7 @@ export default function DonatePage() {
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>Your Contribution Counts</h1>
           <p className={styles.heroSubtitle}>
-            Reducing recidivism, mass incarceration, homelessness, and poverty by investing in
+            We help reduce recidivism, mass incarceration, homelessness, and poverty by investing in
             people.
           </p>
         </div>
@@ -29,7 +29,7 @@ export default function DonatePage() {
       {/* Main Content */}
       <section className={styles.mainContent}>
         <h2 className={styles.mainHeading}>
-          We believe in uplifting the most vulnerable members of our community.
+          We Believe in Uplifting the Most Vulnerable Members of Our Community.{" "}
         </h2>
 
         <div className={styles.contentRow}>
@@ -49,7 +49,7 @@ export default function DonatePage() {
               empower our clients to break the cycles they are trapped in.
             </p>
             <p className={styles.lessBoldText}>
-              <span className={styles.extraBoldText}>But we can&apos;t do it alone</span>. By
+              <span className={styles.extraBoldText}>But we can&apos;t do it alone</span>.By
               contributing to CRED, you&apos;re investing in a future where these individuals have
               the support, skills, and opportunities they need to thrive.
             </p>
