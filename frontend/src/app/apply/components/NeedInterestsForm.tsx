@@ -15,7 +15,7 @@ export const NeedInterestsForm = function NeedInterestsForm({ onBack, onNext }: 
   const [aid, setAid] = React.useState<string[]>([]);
   const [otherNeed, setOtherNeed] = React.useState<string>("");
 
-  const isFormValid = aid.length > 0;
+  const isFormValid = aid.length > 0 && (!aid.includes("other") || otherNeed.trim().length > 0);
 
   return (
     <div className={styles.formOuter}>
