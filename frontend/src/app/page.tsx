@@ -1,11 +1,21 @@
+import Collaborator from "../components/Collaborator";
+import Foundations from "../components/Foundations";
+import Hero from "../components/Hero";
+import JourneyBanner from "../components/JourneyBanner";
+import Mission from "../components/Mission";
+import ReferralSection from "../components/ReferralSection";
+import Support from "../components/Support";
+
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold text-center mb-8">Welcome to CRED</h1>
-      <p className="text-lg text-center max-w-3xl mx-auto">
-        Our mission is to disrupt the cycles of recidivism, mass incarceration, homelessness, and
-        poverty by helping people find their way to self-sufficiency.
-      </p>
-    </div>
+    <>
+      <Hero />
+      <Mission />
+      <Foundations />
+      <Support />
+      <ReferralSection />
+      <Collaborator />
+      <JourneyBanner />
+    </>
   );
 }

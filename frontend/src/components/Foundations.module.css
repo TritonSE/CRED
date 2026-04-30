@@ -1,0 +1,146 @@
+/* ===== Foundations Section ===== */
+.foundations {
+  background: #faf8f6;
+  padding: 100px 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 72px;
+}
+
+/* Section Title */
+.title {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #175892;
+  margin: 0;
+}
+
+/* Card Grid Container */
+.cardGrid {
+  display: flex;
+  justify-content: center;
+  gap: 38px;
+  width: 100%;
+  max-width: 1222px;
+}
+
+/* Individual Card */
+.card {
+  flex: 1;
+  max-width: 277px;
+  min-height: 364px;
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0px 5px 10px 0px #00000026;
+  transition: background-color 0.1s ease;
+}
+
+.card:hover {
+  background-color: #ebf5fd;
+}
+
+/* Icon */
+.cardIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #004377;
+}
+
+.cardIcon svg {
+  width: 40px;
+  height: 40px;
+}
+
+/* Card Title */
+.cardTitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #004377;
+  margin: 0;
+}
+
+/* Card Description */
+.cardDescription {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1280px) {
+  .foundations {
+    padding: 80px 60px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .foundations {
+    padding: 60px 40px;
+    gap: 48px;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .cardGrid {
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+
+  .card {
+    flex: 1 1 calc(50% - 28px);
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .foundations {
+    padding: 48px 24px;
+    gap: 36px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .cardGrid {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .card {
+    flex: none;
+    width: 100%;
+    max-width: 340px;
+    min-height: auto;
+    padding: 36px 20px;
+  }
+
+  .cardDescription {
+    font-size: 18px;
+  }
+}

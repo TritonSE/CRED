@@ -132,6 +132,7 @@ dist
 # MongoDB Test scripts
 scripts/
 
-# macOS system files
-.DS_Store
+# Agent context file
+context.md
+
 .vercel

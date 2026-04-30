@@ -1,0 +1,125 @@
+/* ===== Who We Support Section ===== */
+.support {
+  background: #faf8f6;
+  padding: clamp(48px, 7vw, 100px) clamp(24px, 6vw, 110px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(36px, 5vw, 72px);
+}
+
+.supportHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 1047px;
+  width: 100%;
+}
+
+.supportTitle {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 3.5vw, 48px);
+  line-height: 150%;
+  text-align: center;
+  color: #175892;
+  margin: 0;
+}
+
+.supportSubtitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 1.6vw, 24px);
+  line-height: 150%;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+  max-width: 1047px;
+}
+
+.supportGrid {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3.5vw, 48px);
+  width: 100%;
+  max-width: 1220px;
+}
+
+.supportRow {
+  display: flex;
+  gap: clamp(24px, 5vw, 96px);
+  width: 100%;
+}
+
+.supportCard {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: clamp(200px, 22vw, 296px);
+  border-radius: 15px;
+  overflow: hidden;
+  background: #000000;
+  box-shadow: 0px 5px 10px 0px #00000026;
+}
+
+.supportCardImage {
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.supportCardOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.supportCardContent {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: clamp(16px, 3vw, 36px) clamp(20px, 4vw, 60px);
+}
+
+.supportCardTitle {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: clamp(22px, 2.8vw, 40px);
+  line-height: 130%;
+  color: #ffffff;
+  margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.supportCardText {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: clamp(12px, 1.1vw, 16px);
+  line-height: 150%;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Stack cards into a single column on narrower screens */
+@media (max-width: 900px) {
+  .supportRow {
+    flex-direction: column;
+  }
+
+  .supportCard {
+    min-height: 220px;
+  }
+
+  .supportCardTitle {
+    font-size: clamp(22px, 4vw, 32px);
+  }
+
+  .supportCardText {
+    font-size: 14px;
+  }
+}
