@@ -357,6 +357,7 @@
 
 .successContent .primaryButton {
   margin-top: 10px;
+  min-width: 220px;
 }
 
 @media (min-width: 1024px) {
@@ -402,6 +403,16 @@
   flex-direction: column;
   gap: 12px;
   margin-top: 18px;
+}
+
+@media (min-width: 1024px) {
+  .assistanceList {
+    margin-top: 24px;
+  }
+
+  .assistanceItemPhone {
+    margin-top: 8px;
+  }
 }
 
 .assistanceItem {
