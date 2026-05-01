@@ -10,8 +10,10 @@ import {
   STATUS_OPTIONS,
 } from "../models/applicant";
 
+import type { ValidationChain } from "express-validator";
+
 // Validator factory helpers keep create/update schemas consistent and reusable.
-const makeIDValidator = () =>
+const makeIDValidator = (): ValidationChain =>
   body("_id")
     .exists()
     .withMessage("_id is required")
@@ -19,14 +21,14 @@ const makeIDValidator = () =>
     .isMongoId()
     .withMessage("_id must be a MongoDB object ID");
 // Delete requests only require a valid target document id in the URL parameters.
-const makeParamIDValidator = () =>
+const makeParamIDValidator = (): ValidationChain =>
   param("id")
     .exists()
     .withMessage("id parameter is required")
     .bail()
     .isMongoId()
     .withMessage("id must be a MongoDB object ID");
-const makeApplicantNumberValidator = () =>
+const makeApplicantNumberValidator = (): ValidationChain =>
   body("applicantNumber")
     .exists()
     .withMessage("applicantNumber is required")
@@ -37,7 +39,7 @@ const makeApplicantNumberValidator = () =>
     .notEmpty()
     .withMessage("applicantNumber cannot be empty");
 
-const makeApplicantNameValidator = () =>
+const makeApplicantNameValidator = (): ValidationChain =>
   body("applicantName")
     .exists()
     .withMessage("applicantName is required")
@@ -48,7 +50,7 @@ const makeApplicantNameValidator = () =>
     .notEmpty()
     .withMessage("applicantName cannot be empty");
 
-const makeDateSubmittedValidator = () =>
+const makeDateSubmittedValidator = (): ValidationChain =>
   body("dateSubmitted")
     .exists()
     .withMessage("dateSubmitted is required")
@@ -56,7 +58,7 @@ const makeDateSubmittedValidator = () =>
     .isISO8601()
     .withMessage("dateSubmitted must be a valid ISO 8601 date string (e.g., YYYY-MM-DD)");
 
-const makeStatusValidator = () =>
+const makeStatusValidator = (): ValidationChain =>
   body("status")
     .optional()
     .isString()
@@ -64,7 +66,7 @@ const makeStatusValidator = () =>
     .isIn(STATUS_OPTIONS)
     .withMessage("status must be one of: Under Review, Need to Review, Reviewed");
 
-const makeDateOfBirthValidator = () =>
+const makeDateOfBirthValidator = (): ValidationChain =>
   body("dateOfBirth")
     .exists()
     .withMessage("dateOfBirth is required")
@@ -72,7 +74,7 @@ const makeDateOfBirthValidator = () =>
     .isISO8601()
     .withMessage("dateOfBirth must be a valid ISO 8601 date string (e.g., YYYY-MM-DD)");
 
-const makeRaceValidator = () =>
+const makeRaceValidator = (): ValidationChain =>
   body("race")
     .exists()
     .withMessage("race is required")
@@ -82,7 +84,7 @@ const makeRaceValidator = () =>
     .isIn(RACE_OPTIONS)
     .withMessage("race must be a valid option from the list");
 
-const makeGenderValidator = () =>
+const makeGenderValidator = (): ValidationChain =>
   body("gender")
     .exists()
     .withMessage("gender is required")
@@ -92,7 +94,7 @@ const makeGenderValidator = () =>
     .isIn(GENDER_OPTIONS)
     .withMessage("gender must be a valid option from the list");
 
-const makeEmailValidator = () =>
+const makeEmailValidator = (): ValidationChain =>
   body("email")
     .exists()
     .withMessage("email is required")
@@ -100,7 +102,7 @@ const makeEmailValidator = () =>
     .isString()
     .withMessage("email must be a string");
 
-const makeAddressValidator = () =>
+const makeAddressValidator = (): ValidationChain =>
   body("address")
     .exists()
     .withMessage("address is required")
@@ -108,7 +110,7 @@ const makeAddressValidator = () =>
     .isString()
     .withMessage("address must be a string");
 
-const makePhoneNumberValidator = () =>
+const makePhoneNumberValidator = (): ValidationChain =>
   body("phoneNumber")
     .exists()
     .withMessage("phoneNumber is required")
@@ -116,7 +118,7 @@ const makePhoneNumberValidator = () =>
     .isString()
     .withMessage("phoneNumber must be a string");
 
-const makeHousingStatusValidator = () =>
+const makeHousingStatusValidator = (): ValidationChain =>
   body("housingStatus")
     .optional()
     .isString()
@@ -124,7 +126,7 @@ const makeHousingStatusValidator = () =>
     .isIn(HOUSING_STATUS_OPTIONS)
     .withMessage("housingStatus must be a valid option from the list");
 
-const makeEducationStatusValidator = () =>
+const makeEducationStatusValidator = (): ValidationChain =>
   body("educationStatus")
     .optional()
     .isString()
@@ -132,7 +134,7 @@ const makeEducationStatusValidator = () =>
     .isIn(EDUCATION_OPTIONS)
     .withMessage("educationStatus must be a valid option from the list");
 
-const makeEmploymentStatusValidator = () =>
+const makeEmploymentStatusValidator = (): ValidationChain =>
   body("employmentStatus")
     .optional()
     .isString()
@@ -140,10 +142,10 @@ const makeEmploymentStatusValidator = () =>
     .isIn(EMPLOYMENT_OPTIONS)
     .withMessage("employmentStatus must be a valid option from the list");
 
-const makeConvictionDetailsValidator = () =>
+const makeConvictionDetailsValidator = (): ValidationChain =>
   body("convictionDetails").optional().isString().withMessage("convictionDetails must be a string");
 
-const makeAidRequestedValidator = () =>
+const makeAidRequestedValidator = (): ValidationChain =>
   body("aidRequested")
     .exists()
     .withMessage("aidRequested is required")
@@ -158,16 +160,16 @@ const makeAidRequestedValidator = () =>
     })
     .withMessage(`aidRequested must be selected from: ${AID_REQUESTED_OPTIONS.join(", ")}`);
 
-const makeOtherAidRequestedValidator = () =>
+const makeOtherAidRequestedValidator = (): ValidationChain =>
   body("otherAidRequested").optional().isString().withMessage("otherAidRequested must be a string");
 
-const makeAdditionalCommentsValidator = () =>
+const makeAdditionalCommentsValidator = (): ValidationChain =>
   body("additionalComments")
     .optional()
     .isString()
     .withMessage("additionalComments must be a string");
 
-const makeTodosValidator = () =>
+const makeTodosValidator = (): ValidationChain =>
   body("todos")
     .optional()
     .isArray()
@@ -179,7 +181,7 @@ const makeTodosValidator = () =>
           typeof item === "object" &&
           item !== null &&
           "id" in item &&
-          typeof (item as { id: unknown }).id === "string" &&
+          typeof item.id === "string" &&
           "label" in item &&
           typeof (item as { label: unknown }).label === "string" &&
           "completed" in item &&
@@ -188,7 +190,7 @@ const makeTodosValidator = () =>
     })
     .withMessage("todos must be an array of { id: string, label: string, completed: boolean }");
 
-const makeNotesValidator = () =>
+const makeNotesValidator = (): ValidationChain =>
   body("notes")
     .optional()
     .isArray()
@@ -200,14 +202,14 @@ const makeNotesValidator = () =>
           typeof item === "object" &&
           item !== null &&
           "date" in item &&
-          typeof (item as { date: unknown }).date === "string" &&
+          typeof item.date === "string" &&
           "content" in item &&
           typeof (item as { content: unknown }).content === "string",
       );
     })
     .withMessage("notes must be an array of { date: string, content: string }");
 
-const makeIsCompletedValidator = () =>
+const makeIsCompletedValidator = (): ValidationChain =>
   body("isCompleted")
     .exists()
     .withMessage("isCompleted is required")

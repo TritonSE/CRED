@@ -1,0 +1,109 @@
+.section {
+  position: relative;
+  width: 100%;
+  min-height: clamp(350px, 40vw, 480px); /* Responsive height scaling to 480px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background setup */
+.bgWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: 60% 85%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffcb7d; /* Warm yellow/orange tint */
+  z-index: 2;
+  opacity: 0.85;
+}
+
+/* Content layout */
+.contentContainer {
+  position: relative;
+  z-index: 3; /* Keeps text above the background/overlay */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 1440px;
+  padding: clamp(64px, 11vw, 160px) 24px;
+  gap: clamp(24px, 4vw, 48px);
+}
+
+/* Text styles */
+.textContent {
+  max-width: 720px; /* Constrains subtitle exactly to the width of the main title */
+}
+
+.title {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #004377;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}
+
+/* Button styles */
+.buttonContainer {
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 277px;
+  min-height: 50px;
+  gap: 10px;
+  background: #175892;
+  color: #ffffff;
+  border-radius: 5px;
+  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.button:hover {
+  background: #11426e;
+}

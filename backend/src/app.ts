@@ -49,17 +49,19 @@ app.use((error: unknown, req: Request, res: Response, _next: NextFunction) => {
   res.status(statusCode).json({ error: errorMessage });
 });
 
-// Server Startup Logic
-// Connect to MongoDB first; only start listening after a successful DB connection.
-
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => {
-    console.info("Connected to MongoDB (Cred_DB)!");
-    app.listen(port, () => {
-      console.info(`Server running on ${port}.`);
-    });
-  })
-  .catch(console.error);
+// Local dev only: connect to MongoDB and start the Express server.
+// On Vercel (VERCEL=1), backend/src/api/index.ts imports `app` and exports it
+// as a serverless handler — we must NOT call listen() in that environment.
+if (!process.env.VERCEL) {
+  mongoose
+    .connect(MONGODB_URI)
+    .then(() => {
+      console.info("Connected to MongoDB (Cred_DB)!");
+      app.listen(port, () => {
+        console.info(`Server running on ${port}.`);
+      });
+    })
+    .catch(console.error);
+}
 
 export default app;

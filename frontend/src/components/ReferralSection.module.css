@@ -1,0 +1,39 @@
+/* ===== Resource Referral Section ===== */
+.referral {
+  background: #faf8f6;
+  padding: clamp(48px, 7vw, 100px) clamp(24px, 6vw, 110px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(36px, 5vw, 72px);
+}
+
+.referralHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 1047px;
+  width: 100%;
+}
+
+.referralTitle {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 3.5vw, 48px);
+  line-height: 150%;
+  text-align: center;
+  color: #175892;
+  margin: 0;
+}
+
+.referralSubtitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 150%;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+  max-width: 1047px;
+}
