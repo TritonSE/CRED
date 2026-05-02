@@ -51,9 +51,7 @@
 }
 
 .about-title {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 64px;
   font-weight: 700;
   color: #ffffff;
@@ -71,6 +69,13 @@
   font-size: 24px;
   line-height: 1.7;
   padding: 0 0.25rem;
+  max-width: 90%;
+}
+
+@media (min-width: 1024px) {
+  .about-intro {
+    max-width: 71.3%;
+  }
 }
 
 /* Vision Section */
@@ -82,7 +87,13 @@
 
 @media (min-width: 768px) {
   .about-vision-section {
-    padding: 6rem 2rem;
+    padding: 6rem 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-vision-section {
+    padding: 100px 110px;
   }
 }
 
@@ -97,10 +108,16 @@
 @media (min-width: 768px) {
   .about-grid {
     flex-direction: row;
+    align-items: center;
+    gap: 48px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-grid {
     justify-content: space-between;
-    align-items: stretch;
-    gap: 3%;
-    width: 86%;
+    gap: 96px;
   }
 }
 
@@ -111,15 +128,30 @@
 
 @media (min-width: 768px) {
   .about-vision-wrapper {
-    width: 50%;
-    padding-right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 29px;
+    flex: 1 0 0;
+    width: auto;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .about-vision-wrapper .about-heading {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-vision-wrapper {
+    max-width: 500px;
   }
 }
 
 .about-heading {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 48px;
   font-weight: 700;
   color: #0a326d;
@@ -135,7 +167,7 @@
 .about-vision-content p {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 150%;
 }
 
@@ -145,27 +177,23 @@
 
 @media (min-width: 768px) {
   .about-image-placeholder {
-    width: 50%;
-    min-height: 0;
+    width: 350px;
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-image-placeholder {
+    width: 550px;
   }
 }
 
 .about-image-placeholder img {
   width: 100%;
   height: auto;
-  max-width: 100%;
+  aspect-ratio: 79 / 53;
   object-fit: cover;
   border-radius: 12px;
-}
-
-@media (min-width: 768px) {
-  .about-image-placeholder img {
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    object-fit: cover;
-    object-position: center;
-  }
 }
 
 .directorBoxContainer {
@@ -173,7 +201,7 @@
 }
 
 .directorBoxes {
-  width: 82%;
+  width: 90%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -200,9 +228,7 @@
 }
 
 .operate-heading {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 3rem;
   font-weight: 700;
   color: #0a326d;

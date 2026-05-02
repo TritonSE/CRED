@@ -39,18 +39,14 @@
 .title {
   font-size: 40px;
   font-weight: 590;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 1rem 3rem 2rem;
   color: white;
 }
 
 .body {
   height: 20%;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.5;
   margin: 1rem 3rem 3rem;
   color: white;
