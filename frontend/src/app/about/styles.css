@@ -188,8 +188,10 @@
   }
 }
 
+/* How We Operate Section */
+
 .how-we-operate-section {
-  background-color: #ffffff;
+  background-color: #f9f9f9;
   padding: 6rem 2rem;
 }
 
@@ -207,6 +209,7 @@
   font-weight: 700;
   color: #0a326d;
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .about-operate-content {
@@ -215,6 +218,7 @@
   line-height: 150%;
   margin-bottom: 3rem;
   font-size: 1.3rem;
+  text-align: center;
 }
 
 .operateCards {
@@ -227,11 +231,15 @@
   height: 20%;
   margin: 9rem auto;
   position: relative;
+  filter: brightness(0) saturate(100%) invert(14%) sepia(60%) saturate(900%) hue-rotate(196deg)
+    brightness(90%) contrast(110%);
 }
 
 @media (max-width: 1340px) {
   .vectors {
     margin: 8rem 1rem;
+    filter: brightness(0) saturate(100%) invert(14%) sepia(60%) saturate(900%) hue-rotate(196deg)
+      brightness(90%) contrast(110%);
   }
 }
 
@@ -248,11 +256,9 @@
 
 @media (max-width: 900px) {
   .operate-heading {
-    text-align: center;
     font-size: 2.5rem;
   }
   .about-operate-content {
-    text-align: center;
     font-size: 1rem;
   }
 }
