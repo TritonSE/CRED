@@ -8,7 +8,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className={styles.heroBg}>
         <Image
-          src="/home/home-page-banner.jpg"
+          src="/home/HomepageHero.jpg"
           alt="Hands coming together in community support"
           fill
           sizes="100vw"
