@@ -63,6 +63,7 @@
 
 .about-intro {
   font-family: var(--font-lato), Lato, sans-serif;
+  font-weight: 700;
   color: #ffffff;
   text-align: center;
   margin: 0 auto;
@@ -230,7 +231,7 @@
 }
 
 .operate-heading {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 3rem;
   font-weight: 700;
   color: #0a326d;
