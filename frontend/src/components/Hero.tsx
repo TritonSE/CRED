@@ -9,11 +9,11 @@ export default function Hero() {
       <div className={styles.heroBg}>
         <Image
           src="/home/HomepageHero.jpg"
-          alt="Hands coming together in community support"
+          alt="Image of buildings with CRED hero branding on top"
           fill
-          sizes="100vw"
+          sizes="100vw 713px"
           unoptimized={true}
-          className="object-cover"
+          className={styles.objectCover}
           priority
         />
       </div>
