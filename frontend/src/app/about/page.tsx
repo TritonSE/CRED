@@ -81,28 +81,27 @@ export default function AboutUsPage() {
         <div className="operate-wrapper">
           <h2 className="operate-heading">How We Operate</h2>
           <p className="about-operate-content">
-            CRED is unique in being a lived experience expert-based organization serving minorities
-            as our main clientele to bridge the barrier gap in services. We support survivors of
-            systemic injustice and misplacement due to recidivism, homelessness, domestic violence,
-            gang violence, and human trafficking.
+            CRED is unique in serving minorities to bridge the barrier gap in services and
+            knowledge. We want our clients to find the right types of resources to be
+            self-sufficient empower their communities.
           </p>
 
           <div className="operateCards">
             <OperationsCard
               iconURL="/apply_icon.svg"
-              title="You Apply to CRED"
+              title="Step 1: You Apply to CRED"
               textBody="Review CRED's programs and see which type of support best fits your current situation. Then, fill out the application form."
             />
             <Image src="/Vector.png" alt="arrow" className="vectors" width={30} height={30} />
             <OperationsCard
               iconURL="/assess_needs_icon.svg"
-              title="We Assess Your Needs"
+              title="Step 2: We Assess Your Needs"
               textBody="After you submit, CRED's team will review your application and follow up with next steps. We'll contact you if we need more information."
             />
             <Image src="/Vector.png" alt="arrow" className="vectors" width={30} height={30} />
             <OperationsCard
               iconURL="/client_icon.svg"
-              title="You Become a Client!"
+              title="Step 3: You Become a Client!"
               textBody="Our clients have moved on to find stability and build better lives through entrepreneurship and life skill development."
             />
           </div>
