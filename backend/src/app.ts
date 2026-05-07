@@ -32,15 +32,17 @@ app.use("/api/applicant", applicantRoutes);
 /**
  * Error handler; all errors thrown by server are handled here.
  */
-app.use((error: unknown, req: Request, res: Response, _next: NextFunction) => {
+app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
   let statusCode = 500;
   let errorMessage = "An error has occurred.";
 
   if (isHttpError(error)) {
     statusCode = error.status;
     errorMessage = error.message;
-  } else if (error instanceof Error) {
-    errorMessage = error.message;
+  } else {
+    // Log internal errors server-side but return a generic message so we
+    // don't leak schema details, stack traces, or driver errors to clients.
+    console.error(error);
   }
 
   res.status(statusCode).json({ error: errorMessage });
