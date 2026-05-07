@@ -100,7 +100,10 @@ const makeEmailValidator = (): ValidationChain =>
     .withMessage("email is required")
     .bail()
     .isString()
-    .withMessage("email must be a string");
+    .withMessage("email must be a string")
+    .bail()
+    .isEmail()
+    .withMessage("email must be a valid email address");
 
 const makeAddressValidator = (): ValidationChain =>
   body("address")
