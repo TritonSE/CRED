@@ -5,17 +5,32 @@ import { BackButton } from "./BackButton";
 import styles from "./ContactForm.module.css";
 import { NextButton } from "./NextButton";
 
-type Props = {
-  onBack: () => void;
-  onNext: () => void;
+export type ContactData = {
+  email: string;
+  phone: string;
+  commentsQuestions: string;
 };
 
-export const ContactForm = function ContactForm({ onBack, onNext }: Props) {
-  const [email, setEmail] = React.useState<string>("");
-  const [phone, setPhone] = React.useState<string>("");
-  const [commentsQuestions, setCommentsQuestions] = React.useState<string>("");
+type Props = {
+  initialData: ContactData;
+  onBack: (data: ContactData) => void;
+  onNext: (data: ContactData) => void;
+  isSubmitting?: boolean;
+};
 
-  const isFormValid = email.length > 0 && phone.length > 0;
+export const ContactForm = function ContactForm({
+  initialData,
+  onBack,
+  onNext,
+  isSubmitting = false,
+}: Props) {
+  const [email, setEmail] = React.useState<string>(initialData.email);
+  const [phone, setPhone] = React.useState<string>(initialData.phone);
+  const [commentsQuestions, setCommentsQuestions] = React.useState<string>(
+    initialData.commentsQuestions,
+  );
+
+  const isFormValid = email.length > 0 && phone.length > 0 && !isSubmitting;
 
   return (
     <div className={styles.formOuter}>
@@ -82,13 +97,18 @@ export const ContactForm = function ContactForm({ onBack, onNext }: Props) {
 
         <div className={styles.footer}>
           <div className={styles.buttonGroup}>
-            <BackButton onClick={onBack} />
+            <BackButton
+              disabled={isSubmitting}
+              onClick={() => {
+                onBack({ email, phone, commentsQuestions });
+              }}
+            />
             <NextButton
               disabled={!isFormValid}
               isComplete={isFormValid}
               onClick={() => {
                 if (!isFormValid) return;
-                onNext();
+                onNext({ email, phone, commentsQuestions });
               }}
             />
           </div>

@@ -115,14 +115,17 @@ const applicantSchema = new Schema(
       type: String,
       enum: HOUSING_STATUS_OPTIONS,
     },
+    otherHousingStatus: { type: String },
     educationStatus: {
-      type: String,
+      type: [String],
       enum: EDUCATION_OPTIONS,
     },
+    otherEducationStatus: { type: String },
     employmentStatus: {
-      type: String,
+      type: [String],
       enum: EMPLOYMENT_OPTIONS,
     },
+    otherEmploymentStatus: { type: String },
     convictionDetails: { type: String },
     aidRequested: {
       type: [String],

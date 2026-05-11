@@ -14,22 +14,40 @@ function toggleSetMember(set: Set<string>, value: string, checked: boolean): Set
   return next;
 }
 
-type YourProfileFormProps = {
-  onNext: () => void;
+export type ProfileData = {
+  fullName: string;
+  dateOfBirth: string;
+  gender: string;
+  ethnicity: string;
+  address: string;
+  employment: Set<string>;
+  employmentOther: string;
+  education: Set<string>;
+  educationOther: string;
+  housing: string;
+  housingOther: string;
 };
 
-export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileFormProps) {
-  const [fullName, setFullName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [gender, setGender] = useState("");
-  const [ethnicity, setEthnicity] = useState("");
-  const [address, setAddress] = useState("");
-  const [employment, setEmployment] = useState<Set<string>>(new Set());
-  const [employmentOther, setEmploymentOther] = useState("");
-  const [education, setEducation] = useState<Set<string>>(new Set());
-  const [educationOther, setEducationOther] = useState("");
-  const [housing, setHousing] = useState("");
-  const [housingOther, setHousingOther] = useState("");
+type YourProfileFormProps = {
+  initialData: ProfileData;
+  onNext: (data: ProfileData) => void;
+};
+
+export const YourProfileForm = function YourProfileForm({
+  initialData,
+  onNext,
+}: YourProfileFormProps) {
+  const [fullName, setFullName] = useState(initialData.fullName);
+  const [dateOfBirth, setDateOfBirth] = useState(initialData.dateOfBirth);
+  const [gender, setGender] = useState(initialData.gender);
+  const [ethnicity, setEthnicity] = useState(initialData.ethnicity);
+  const [address, setAddress] = useState(initialData.address);
+  const [employment, setEmployment] = useState<Set<string>>(initialData.employment);
+  const [employmentOther, setEmploymentOther] = useState(initialData.employmentOther);
+  const [education, setEducation] = useState<Set<string>>(initialData.education);
+  const [educationOther, setEducationOther] = useState(initialData.educationOther);
+  const [housing, setHousing] = useState(initialData.housing);
+  const [housingOther, setHousingOther] = useState(initialData.housingOther);
 
   const isFormValid = useMemo(() => {
     const nameOk = fullName.trim().length > 0;
@@ -565,7 +583,19 @@ export const YourProfileForm = function YourProfileForm({ onNext }: YourProfileF
                 isComplete={isFormValid}
                 onClick={() => {
                   if (!isFormValid) return;
-                  onNext();
+                  onNext({
+                    fullName,
+                    dateOfBirth,
+                    gender,
+                    ethnicity,
+                    address,
+                    employment,
+                    employmentOther,
+                    education,
+                    educationOther,
+                    housing,
+                    housingOther,
+                  });
                 }}
               />
             </div>

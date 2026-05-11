@@ -124,21 +124,49 @@ const makeHousingStatusValidator = () =>
     .isIn(HOUSING_STATUS_OPTIONS)
     .withMessage("housingStatus must be a valid option from the list");
 
+const makeOtherHousingStatusValidator = () =>
+  body("otherHousingStatus")
+    .optional()
+    .isString()
+    .withMessage("otherHousingStatus must be a string");
+
 const makeEducationStatusValidator = () =>
   body("educationStatus")
     .optional()
-    .isString()
+    .isArray()
     .bail()
-    .isIn(EDUCATION_OPTIONS)
-    .withMessage("educationStatus must be a valid option from the list");
+    .custom((arr: string[] | undefined) => {
+      if (!Array.isArray(arr)) return true;
+      return arr.every((item) =>
+        EDUCATION_OPTIONS.includes(item as (typeof EDUCATION_OPTIONS)[number]),
+      );
+    })
+    .withMessage(`educationStatus must be selected from: ${EDUCATION_OPTIONS.join(", ")}`);
+
+const makeOtherEducationStatusValidator = () =>
+  body("otherEducationStatus")
+    .optional()
+    .isString()
+    .withMessage("otherEducationStatus must be a string");
 
 const makeEmploymentStatusValidator = () =>
   body("employmentStatus")
     .optional()
-    .isString()
+    .isArray()
     .bail()
-    .isIn(EMPLOYMENT_OPTIONS)
-    .withMessage("employmentStatus must be a valid option from the list");
+    .custom((arr: string[] | undefined) => {
+      if (!Array.isArray(arr)) return true;
+      return arr.every((item) =>
+        EMPLOYMENT_OPTIONS.includes(item as (typeof EMPLOYMENT_OPTIONS)[number]),
+      );
+    })
+    .withMessage(`employmentStatus must be selected from: ${EMPLOYMENT_OPTIONS.join(", ")}`);
+
+const makeOtherEmploymentStatusValidator = () =>
+  body("otherEmploymentStatus")
+    .optional()
+    .isString()
+    .withMessage("otherEmploymentStatus must be a string");
 
 const makeConvictionDetailsValidator = () =>
   body("convictionDetails").optional().isString().withMessage("convictionDetails must be a string");
@@ -231,8 +259,11 @@ export const createApplicant = [
   makeAddressValidator(),
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),
+  makeOtherHousingStatusValidator(),
   makeEducationStatusValidator(),
+  makeOtherEducationStatusValidator(),
   makeEmploymentStatusValidator(),
+  makeOtherEmploymentStatusValidator(),
   makeConvictionDetailsValidator(),
   makeAidRequestedValidator(),
   makeOtherAidRequestedValidator(),
@@ -259,8 +290,11 @@ export const updateApplicant = [
   makeAddressValidator(),
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),
+  makeOtherHousingStatusValidator(),
   makeEducationStatusValidator(),
+  makeOtherEducationStatusValidator(),
   makeEmploymentStatusValidator(),
+  makeOtherEmploymentStatusValidator(),
   makeConvictionDetailsValidator(),
   makeAidRequestedValidator(),
   makeOtherAidRequestedValidator(),

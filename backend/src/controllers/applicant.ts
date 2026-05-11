@@ -95,8 +95,11 @@ type CreateApplicantBody = {
   address: string;
   phoneNumber: string;
   housingStatus?: string;
-  educationStatus?: string;
-  employmentStatus?: string;
+  otherHousingStatus?: string;
+  educationStatus?: string[];
+  otherEducationStatus?: string;
+  employmentStatus?: string[];
+  otherEmploymentStatus?: string;
   convictionDetails?: string;
   aidRequested: string[];
   otherAidRequested?: string;
@@ -118,8 +121,11 @@ type UpdateApplicantBody = {
   address: string;
   phoneNumber: string;
   housingStatus?: string;
-  educationStatus?: string;
-  employmentStatus?: string;
+  otherHousingStatus?: string;
+  educationStatus?: string[];
+  otherEducationStatus?: string;
+  employmentStatus?: string[];
+  otherEmploymentStatus?: string;
   convictionDetails?: string;
   aidRequested: string[];
   otherAidRequested?: string;
@@ -145,8 +151,11 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
     address,
     phoneNumber,
     housingStatus,
+    otherHousingStatus,
     educationStatus,
+    otherEducationStatus,
     employmentStatus,
+    otherEmploymentStatus,
     convictionDetails,
     aidRequested,
     otherAidRequested,
@@ -171,8 +180,11 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
       address,
       phoneNumber,
       housingStatus,
+      otherHousingStatus,
       educationStatus,
+      otherEducationStatus,
       employmentStatus,
+      otherEmploymentStatus,
       convictionDetails,
       aidRequested,
       otherAidRequested,
@@ -222,8 +234,11 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
     address,
     phoneNumber,
     housingStatus,
+    otherHousingStatus,
     educationStatus,
+    otherEducationStatus,
     employmentStatus,
+    otherEmploymentStatus,
     convictionDetails,
     aidRequested,
     otherAidRequested,
@@ -262,8 +277,11 @@ export const updateApplicant: RequestHandler = async (req, res, next) => {
         address,
         phoneNumber,
         housingStatus,
+        otherHousingStatus,
         educationStatus,
+        otherEducationStatus,
         employmentStatus,
+        otherEmploymentStatus,
         convictionDetails,
         aidRequested,
         otherAidRequested,

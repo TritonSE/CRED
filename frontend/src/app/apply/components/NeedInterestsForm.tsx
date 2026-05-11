@@ -5,15 +5,26 @@ import { BackButton } from "./BackButton";
 import styles from "./NeedsInterestsForm.module.css";
 import { NextButton } from "./NextButton";
 
-type Props = {
-  onBack: () => void;
-  onNext: () => void;
+export type NeedsData = {
+  context: string;
+  aid: string[];
+  otherNeed: string;
 };
 
-export const NeedInterestsForm = function NeedInterestsForm({ onBack, onNext }: Props) {
-  const [context, setContext] = React.useState<string>("");
-  const [aid, setAid] = React.useState<string[]>([]);
-  const [otherNeed, setOtherNeed] = React.useState<string>("");
+type Props = {
+  initialData: NeedsData;
+  onBack: (data: NeedsData) => void;
+  onNext: (data: NeedsData) => void;
+};
+
+export const NeedInterestsForm = function NeedInterestsForm({
+  initialData,
+  onBack,
+  onNext,
+}: Props) {
+  const [context, setContext] = React.useState<string>(initialData.context);
+  const [aid, setAid] = React.useState<string[]>(initialData.aid);
+  const [otherNeed, setOtherNeed] = React.useState<string>(initialData.otherNeed);
 
   const isFormValid = aid.length > 0 && (!aid.includes("other") || otherNeed.trim().length > 0);
 
@@ -140,13 +151,17 @@ export const NeedInterestsForm = function NeedInterestsForm({ onBack, onNext }: 
 
         <div className={styles.footer}>
           <div className={styles.buttonGroup}>
-            <BackButton onClick={onBack} />
+            <BackButton
+              onClick={() => {
+                onBack({ context, aid, otherNeed });
+              }}
+            />
             <NextButton
               disabled={!isFormValid}
               isComplete={isFormValid}
               onClick={() => {
                 if (!isFormValid) return;
-                onNext();
+                onNext({ context, aid, otherNeed });
               }}
             />
           </div>
