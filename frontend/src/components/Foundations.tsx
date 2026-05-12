@@ -16,13 +16,7 @@ const foundationsData = [
     icon: "/home/reintegrationIcon.png",
   },
   {
-    title: (
-      <>
-        Economic
-        <br />
-        <span style={{ fontSize: "16px", fontWeight: 400 }}>(Development)</span>
-      </>
-    ),
+    title: "Economic Development",
     description:
       "Providing access to workforce opportunities, financial growth, and entrepreneurship.",
     icon: "/home/economicIcon.png",

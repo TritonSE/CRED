@@ -9,7 +9,7 @@ export default function JourneyBanner() {
       {/* Background Image and Overlay */}
       <div className={styles.bgWrapper}>
         <Image
-          src="/home/JourneyImage.jpg"
+          src="/home/journey_banner_image.jpg"
           alt="CRED background with lightbulbs"
           fill
           sizes="100vw"
@@ -34,7 +34,7 @@ export default function JourneyBanner() {
         <div className={styles.buttonContainer}>
           {/* Assuming you have an /apply or /application route */}
           <Link href="/apply" className={styles.button}>
-            Start Application
+            Apply Now
           </Link>
         </div>
       </div>

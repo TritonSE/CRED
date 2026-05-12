@@ -140,10 +140,11 @@ export default function Collaborator() {
   return (
     <div className={styles.sectionContainer}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Discover Our Collaborators</h2>
+        <h2 className={styles.title}>Types of Aid and Partner Programs</h2>
         <p className={styles.subtitle}>
-          We are grateful to partner with these organizations to fit our clients to the resources
-          and programs they need.
+          We connect you with education, housing, development, entrepreneurship, and re-entry
+          resources for your specific needs. Discover our full list of San Diego-based partners and
+          explore the types of resources we offer. Select each partner to learn more.
         </p>
       </div>
 

@@ -30,7 +30,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #ffcb7d; /* Warm yellow/orange tint */
+  background: linear-gradient(90deg, #004377 0%, rgba(30, 115, 190, 0.8) 100%);
+
   z-index: 2;
   opacity: 0.85;
 }
@@ -61,7 +62,7 @@
   font-size: 48px;
   line-height: 150%;
   letter-spacing: 0%;
-  color: #004377;
+  color: #ffffff;
   margin: 0;
 }
 
@@ -72,7 +73,7 @@
   line-height: 150%;
   letter-spacing: 0%;
   text-align: center;
-  color: #000000;
+  color: #ffffff;
   margin: 0;
 }
 
@@ -92,12 +93,12 @@
   max-width: 277px;
   min-height: 50px;
   gap: 10px;
-  background: #175892;
-  color: #ffffff;
+  background: #ffb341;
+  color: #000000;
   border-radius: 5px;
-  font-family: -apple-system, "SF Pro Display", "SF Pro", system-ui, sans-serif;
-  font-weight: 600;
-  font-size: 16px;
+  font-family: var(--font-lato), sans-serif;
+  font-weight: 400;
+  font-size: 18px;
   text-decoration: none;
   transition:
     background-color 0.2s ease,
@@ -105,5 +106,5 @@
 }
 
 .button:hover {
-  background: #11426e;
+  background: #ffb950;
 }
