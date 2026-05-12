@@ -30,7 +30,7 @@ export default function DonatePage() {
       {/* Main Content */}
       <section className={styles.mainContent}>
         <h2 className={styles.mainHeading}>
-          We believe in uplifting the most vulnerable members of our community.
+          We Believe in Uplifting the Most Vulnerable Members of Our Community.
         </h2>
 
         <div className={styles.contentRow}>

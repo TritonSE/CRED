@@ -197,10 +197,10 @@
 
 .mainHeading {
   font-family: "Lato", sans-serif;
-  font-weight: 700;
+  font-weight: 900;
+  color: #004377;
   font-size: 24px;
-  line-height: 1.4;
-  color: black;
+  line-height: 1.2;
   margin: 0;
 }
 
@@ -213,7 +213,7 @@
 @media (min-width: 768px) {
   .mainHeading {
     font-size: 36px;
-    line-height: 1.5;
+    line-height: 1.2;
   }
 }
 

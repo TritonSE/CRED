@@ -30,14 +30,10 @@ export default function AboutUsPage() {
               <h2 className="about-heading">Our Vision</h2>
               <div className="about-vision-content">
                 <p>
-                  We seek to address systemic issues that impact our communities, including racial
-                  inequality, economic disparities, and barriers to higher education and employment
-                  opportunities.
-                </p>
-                <p>
-                  Through education, interpersonal development of life skills and lived experience
-                  mentorship, CRED&apos;s empowerment and healing centered engagement ensures
-                  clients success.
+                  Our vision is to restore and realign communities by addressing the root causes of
+                  incarceration. Through education, life skills development, and mentorship grounded
+                  in lived experience, CRED creates pathways for sustainable success and
+                  generational impact.
                 </p>
               </div>
             </div>

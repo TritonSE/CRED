@@ -98,7 +98,8 @@
   .about-grid {
     flex-direction: row;
     justify-content: space-between;
-    align-items: stretch;
+    /* Changed from stretch to center for vertical alignment */
+    align-items: center;
     gap: 3%;
     width: 86%;
   }
