@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
-import styles from "./Contact.module.css";
+import { sendContactMessage } from "../../api/contact";
 
-import { sendContactMessage } from "@/api/contact";
+import styles from "./Contact.module.css";
 
 type ContactFormValues = {
   fullName: string;
@@ -149,7 +149,7 @@ export default function ContactForm() {
     };
   };
 
-  const onSubmit = async (e: import("react").FormEvent) => {
+  const onSubmit = async (e: import("react").SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitError(null);
 

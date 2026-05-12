@@ -13,7 +13,11 @@ const makeFullNameValidator = () =>
     .withMessage("fullName cannot be empty")
     .bail()
     .isLength({ max: 100 })
-    .withMessage("fullName must be at most 100 characters");
+    .withMessage("fullName must be at most 100 characters")
+    .bail()
+    .not()
+    .matches(/[\r\n]/)
+    .withMessage("fullName must not contain newline characters");
 
 const makeEmailValidator = () =>
   body("email")

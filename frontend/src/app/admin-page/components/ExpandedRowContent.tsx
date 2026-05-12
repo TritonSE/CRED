@@ -40,16 +40,9 @@ export function ExpandedRowContent({
   todos = row.todos ?? [],
   onToggleTodo,
 }: ExpandedRowContentProps) {
-  let aidRequestedString = "";
-  if (row.aidRequested) {
-    aidRequestedString += row.aidRequested[0];
-    for (let i = 1; i < row.aidRequested.length; ++i) {
-      aidRequestedString += ", " + row.aidRequested[i];
-    }
-    if (row.otherAidRequested) {
-      aidRequestedString += row.otherAidRequested;
-    }
-  }
+  const aidRequestedString = [...(row.aidRequested ?? []), row.otherAidRequested]
+    .filter((item): item is string => Boolean(item))
+    .join(", ");
 
   return (
     <div className={styles.expandedContent}>
