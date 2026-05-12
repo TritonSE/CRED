@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 import { MONGODB_URI, port } from "./config";
 import applicantRoutes from "./routes/applicant";
+import contactRoutes from "./routes/contact";
 
 import type { NextFunction, Request, Response } from "express";
 
@@ -28,6 +29,8 @@ app.use(
 
 // Mount applicant API routes under /api/applicant.
 app.use("/api/applicant", applicantRoutes);
+// Mount contact form email route under /api/contact.
+app.use("/api/contact", contactRoutes);
 
 /**
  * Error handler; all errors thrown by server are handled here.
