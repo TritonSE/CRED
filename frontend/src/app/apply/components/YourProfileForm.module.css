@@ -453,6 +453,7 @@
   white-space: nowrap;
   display: block;
   flex: 1;
+  font-size: inherit;
 }
 
 .chevron {
@@ -486,7 +487,7 @@
 }
 
 .selectOption {
-  width: 400px;
+  width: 100%;
   max-width: 100%;
   height: 52px;
   padding: 14px 20px;
@@ -590,4 +591,67 @@
   padding-top: 0;
   width: 100%;
   max-width: 854px;
+}
+
+@media (max-width: 600px) {
+  .heading h2 {
+    font-size: 30px;
+    margin-top: 20px;
+  }
+  .headingSubtitle {
+    font-size: 14px;
+  }
+  .fieldSection h4 {
+    font-size: 14px;
+    margin-bottom: 0px;
+  }
+
+  .fieldSection .shortField {
+    height: 60px;
+  }
+
+  .datePlaceholder {
+    font-size: 14px;
+    left: 16px;
+  }
+
+  .fieldSection .shortField input[type="text"],
+  .fieldSection .shortField input[type="date"],
+  .fieldSection .fullWidthField input[type="text"],
+  .fieldSection .shortField select,
+  .customSelect .selectTrigger {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #5a5a5a;
+    border-radius: 8px;
+    padding: 10px 12px 10px 15px;
+    font-size: 14px;
+    gap: 5px;
+  }
+  .selectOption {
+    width: 331px;
+    height: 48px;
+    padding: 10px 15px;
+    font-size: 14px;
+    line-height: 28px;
+  }
+  .fieldMiddle .optionRow,
+  .fieldMiddle .otherRow {
+    width: 100%;
+    max-width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    align-items: center;
+  }
+
+  .optionRow span,
+  .labelText {
+    font-size: 14px;
+  }
+
+  .fieldSection .fullWidthField input::placeholder,
+  .fieldSection .shortField input::placeholder {
+    font-size: 14px;
+  }
 }
