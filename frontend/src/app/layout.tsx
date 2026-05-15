@@ -1,6 +1,6 @@
-import { Lato } from "next/font/google";
+import { Inter, Lato } from "next/font/google";
 
-import AppShell from "../components/AppShell";
+import LayoutShell from "../components/LayoutShell";
 
 import type { Metadata } from "next";
 
@@ -10,6 +10,12 @@ const lato = Lato({
   weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-lato",
+});
+
+const inter = Inter({
+  weight: ["600"],
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -25,8 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} antialiased overflow-x-hidden`}>
-        <AppShell>{children}</AppShell>
+      <body className={`${lato.variable} ${inter.variable} antialiased overflow-x-hidden`}>
+        <div className="min-h-screen w-full bg-[#faf8f6] flex flex-col overflow-x-hidden">
+          <LayoutShell>{children}</LayoutShell>
+        </div>
       </body>
     </html>
   );

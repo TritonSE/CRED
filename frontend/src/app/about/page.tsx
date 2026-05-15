@@ -42,8 +42,8 @@ export default function AboutUsPage() {
               <Image
                 src="/OurVisionImage.png"
                 alt="Illustration accompanying the Our Vision section"
-                width={400}
-                height={300}
+                width={550}
+                height={369}
               />
             </div>
           </div>
@@ -52,18 +52,18 @@ export default function AboutUsPage() {
 
       <div className="directorBoxContainer">
         <div className="directorBoxes">
-          {/* need to add ref to our services page */}
+          {/* need to add ref to Types of Aid page */}
           <DirectorBox
             title="What We Do"
             textBody="We empower individuals to thrive by offering clients financial literacy training, comprehensive re-entry services, job opportunities, and a path to entrepreneurship."
-            buttonlabel="Our Services"
+            buttonlabel="Types of Aid"
             imageUrl="/Map_Marker.svg"
             backgroundUrl="/What_We_Do_Background.jpg"
             onButtonClick={() => {
-              router.push("/dashboard");
+              router.push("/");
             }}
           />
-          {/* need to add ref to support us page */}
+          {/* need to add ref to Donate page */}
           <DirectorBox
             title="Our Goal"
             textBody="CRED's main goal is to provide case management support along with interpersonal skill training support so our clients can thrive as self-sufficient individuals."
@@ -71,7 +71,7 @@ export default function AboutUsPage() {
             imageUrl="/folder_people.svg"
             backgroundUrl="/Our_Goal_Background.jpg"
             onButtonClick={() => {
-              router.push("/dashboard");
+              router.push("/donate");
             }}
           />
         </div>
@@ -92,13 +92,13 @@ export default function AboutUsPage() {
               title="Step 1: You Apply to CRED"
               textBody="Review CRED's programs and see which type of support best fits your current situation. Then, fill out the application form."
             />
-            <Image src="/Vector.png" alt="arrow" className="vectors" width={30} height={30} />
+            <Image src="/Vector.png" alt="arrow" className="vectors" width={30} height={78} />
             <OperationsCard
               iconURL="/assess_needs_icon.svg"
               title="Step 2: We Assess Your Needs"
               textBody="After you submit, CRED's team will review your application and follow up with next steps. We'll contact you if we need more information."
             />
-            <Image src="/Vector.png" alt="arrow" className="vectors" width={30} height={30} />
+            <Image src="/Vector.png" alt="arrow" className="vectors" width={30} height={78} />
             <OperationsCard
               iconURL="/client_icon.svg"
               title="Step 3: You Become a Client!"

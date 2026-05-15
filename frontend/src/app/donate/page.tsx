@@ -21,7 +21,7 @@ export default function DonatePage() {
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>Your Contribution Counts</h1>
           <p className={styles.heroSubtitle}>
-            Reducing recidivism, mass incarceration, homelessness, and poverty by investing in
+            We help reduce recidivism, mass incarceration, homelessness, and poverty by investing in
             people.
           </p>
         </div>
