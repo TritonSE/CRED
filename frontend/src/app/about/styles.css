@@ -4,37 +4,29 @@
 
 .about-top-section {
   position: relative;
-  min-height: 180px;
-  height: 260px;
   display: flex;
   align-items: center;
 
-  background: linear-gradient(to right, #004377, rgba(30, 115, 190, 0.8)), url("/BannerPic.jpg");
+  background:
+    linear-gradient(to right, rgba(0, 67, 119, 0.85), rgba(30, 115, 190, 0.85)),
+    url("/BannerPic.jpg");
 
   background-size: cover;
-  background-position: center 40%;
+  background-position: center bottom;
   background-repeat: no-repeat;
 
-  padding: 1.5rem 1rem;
+  padding: 60px 24px;
   overflow: hidden;
-}
-
-@media (min-width: 480px) {
-  .about-top-section {
-    height: 280px;
-  }
 }
 
 @media (min-width: 768px) {
   .about-top-section {
-    height: 300px;
-    padding: 0 2rem;
+    padding: 60px 120px;
   }
 }
 
 .about-container {
   margin: 0 auto;
-  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,23 +36,22 @@
   width: 100%;
 }
 
-@media (min-width: 768px) {
-  .about-container {
-    padding: 0 1rem;
-  }
-}
-
 .about-title {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
-  font-size: 64px;
+  font-family: "Inter" sans-serif;
+  font-size: 32px;
+  font-style: normal;
   font-weight: 700;
   color: #ffffff;
   text-align: center;
   margin-top: 0;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .about-title {
+    font-size: 64px;
+  }
 }
 
 .about-intro {
@@ -68,9 +59,17 @@
   color: #ffffff;
   text-align: center;
   margin: 0 auto;
-  font-size: 24px;
-  line-height: 1.7;
-  padding: 0 0.25rem;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 0;
+  max-width: 1027px;
+}
+
+@media (min-width: 768px) {
+  .about-intro {
+    font-size: 24px;
+  }
 }
 
 /* Vision Section */
@@ -118,13 +117,17 @@
 }
 
 .about-heading {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
-  font-size: 48px;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
   font-weight: 700;
-  color: #0a326d;
+  color: #004377;
   margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .about-heading {
+    font-size: 48px;
+  }
 }
 
 .about-vision-content {
@@ -136,31 +139,38 @@
 .about-vision-content p {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
-  font-size: 20px;
-  line-height: 150%;
-}
-
-.about-image-placeholder {
-  width: 100%;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 @media (min-width: 768px) {
-  .about-image-placeholder {
-    width: 50%;
+  .about-vision-content p {
+    font-size: 24px;
+  }
+}
+
+.about-image {
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .about-image {
+    width: 100%;
     min-height: 0;
   }
 }
 
-.about-image-placeholder img {
+.about-image img {
   width: 100%;
   height: auto;
   max-width: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 9px;
 }
 
 @media (min-width: 768px) {
-  .about-image-placeholder img {
+  .about-image img {
     width: 100%;
     height: 100%;
     max-width: none;
@@ -170,96 +180,132 @@
 }
 
 .directorBoxContainer {
-  padding: 7rem 0;
+  padding: 48px 36px;
+  background-color: #faf8f6;
+}
+
+@media (min-width: 768px) {
+  .directorBoxContainer {
+    padding: 100px 0;
+  }
 }
 
 .directorBoxes {
-  width: 82%;
+  width: 90%;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  gap: 6rem;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 768px) {
   .directorBoxes {
-    flex-direction: column;
-    gap: 3rem;
-    width: 100%;
+    width: 86%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .directorBoxes {
+    flex-direction: row;
+    gap: 6rem;
   }
 }
 
 /* How We Operate Section */
 
 .how-we-operate-section {
-  background-color: #f9f9f9;
-  padding: 6rem 2rem;
+  background-color: #faf8f6;
+  padding: 48px 36px;
+}
+
+@media (min-width: 768px) {
+  .how-we-operate-section {
+    padding: 100px 0;
+  }
 }
 
 .operate-wrapper {
   gap: 3rem;
-  width: 85%;
+  width: 90%;
   margin: 0 auto;
 }
 
+@media (min-width: 768px) {
+  .operate-wrapper {
+    width: 86%;
+  }
+}
+
 .operate-heading {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
-  font-size: 3rem;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
   font-weight: 700;
-  color: #0a326d;
+  color: #004377;
   margin-bottom: 1.5rem;
-  text-align: center;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .operate-heading {
+    font-size: 48px;
+  }
 }
 
 .about-operate-content {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
-  line-height: 150%;
+  line-height: 1.5;
   margin-bottom: 3rem;
-  font-size: 1.3rem;
-  text-align: center;
+  font-size: 14px;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .about-operate-content {
+    font-size: 24px;
+  }
 }
 
 .operateCards {
   display: flex;
   justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
   margin: 0 auto;
 }
 
-.vectors {
-  height: 20%;
-  margin: 9rem auto;
-  position: relative;
-  filter: brightness(0) saturate(100%) invert(14%) sepia(60%) saturate(900%) hue-rotate(196deg)
-    brightness(90%) contrast(110%);
+@media (min-width: 1200px) {
+  .operateCards {
+    gap: 0;
+  }
 }
 
-@media (max-width: 1340px) {
-  .vectors {
-    margin: 8rem 1rem;
-    filter: brightness(0) saturate(100%) invert(14%) sepia(60%) saturate(900%) hue-rotate(196deg)
-      brightness(90%) contrast(110%);
-  }
+.vectors {
+  height: auto;
+  width: 39px;
+  align-self: center;
+  filter: brightness(0) saturate(100%) invert(14%) sepia(60%) saturate(900%) hue-rotate(196deg)
+    brightness(90%) contrast(110%);
 }
 
 @media (max-width: 1100px) {
   .operateCards {
     flex-direction: column;
-    align-items: center;
+    gap: 16px;
   }
   .vectors {
-    margin: 2rem auto;
-    rotate: 90deg;
+    display: none;
   }
 }
 
-@media (max-width: 900px) {
-  .operate-heading {
-    font-size: 2.5rem;
-  }
-  .about-operate-content {
-    font-size: 1rem;
+@media (max-width: 767px) {
+  .about-header-content,
+  .about-grid,
+  .directorBoxes,
+  .operate-wrapper {
+    width: 100% !important;
+    max-width: 330px !important;
+    margin: 0 auto !important;
   }
 }

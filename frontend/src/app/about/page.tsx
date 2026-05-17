@@ -19,7 +19,8 @@ export default function AboutUsPage() {
             <h1 className="about-title">We Are CRED</h1>
             <p className="about-intro">
               CRED provides individualized services for system-impacted individuals, low-income
-              families, and transitional age youth seeking stability and self-sufficiency.
+              families, and transitional age youth in San Diego seeking stability and
+              self-sufficiency.
             </p>
           </div>
         </div>
@@ -38,9 +39,9 @@ export default function AboutUsPage() {
               </div>
             </div>
 
-            <div className="about-image-placeholder">
+            <div className="about-image">
               <Image
-                src="/OurVisionImage.png"
+                src="/OurVision.png"
                 alt="Illustration accompanying the Our Vision section"
                 width={550}
                 height={369}
