@@ -50,7 +50,7 @@ export default function DonatePage() {
               empower our clients to break the cycles they are trapped in.
             </p>
             <p className={styles.lessBoldText}>
-              <span className={styles.extraBoldText}>But we can&apos;t do it alone</span>. By
+              <span className={styles.extraBoldText}>But we can&apos;t do it alone.</span> By
               contributing to CRED, you&apos;re investing in a future where these individuals have
               the support, skills, and opportunities they need to thrive.
             </p>

@@ -1,12 +1,12 @@
 /* Bold for donate section */
 .extraBoldText {
-  font-weight: 900;
-  color: #222;
+  font-weight: 700;
+  color: black;
 }
 
 .lessBoldText {
-  font-weight: 500;
-  color: #222;
+  font-weight: 400;
+  color: black;
 }
 
 /* Page */
@@ -20,7 +20,7 @@
 .heroBanner {
   position: relative;
   width: 100%;
-  padding: 60px 20px;
+  padding: 60px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,19 +87,10 @@
 }
 
 .heroTitle {
-  font-family:
-    "SF Pro Display",
-    "SF Pro Text",
-    "SF Pro",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 700;
-  font-size: 28px;
-  line-height: 1.3;
+  font-size: 32px;
+  line-height: 1.5;
   color: white;
   margin: 0;
 }
@@ -108,7 +99,7 @@
 @media (min-width: 480px) {
   .heroTitle {
     font-size: 34px;
-    line-height: 1.4;
+    line-height: 1.5;
   }
 }
 
@@ -130,10 +121,11 @@
 .heroSubtitle {
   font-family: "Lato", sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
   color: white;
-  margin-top: 8px;
+  margin: 8px auto 0;
+  max-width: 304px;
 }
 
 @media (min-width: 480px) {
@@ -145,18 +137,21 @@
 @media (min-width: 768px) {
   .heroSubtitle {
     font-size: 20px;
+    font-weight: 400;
+    max-width: none;
   }
 }
 
 @media (min-width: 1024px) {
   .heroSubtitle {
     font-size: 24px;
+    font-weight: 400;
   }
 }
 
 /* ===== Main Content ===== */
 .mainContent {
-  padding: 40px 20px;
+  padding: 48px 36px;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -164,7 +159,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 36px;
+  gap: 16px;
 }
 
 @media (min-width: 480px) {
@@ -196,11 +191,11 @@
 }
 
 .mainHeading {
-  font-family: "Lato", sans-serif;
-  font-weight: 900;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
   color: #004377;
   font-size: 24px;
-  line-height: 1.2;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -213,7 +208,7 @@
 @media (min-width: 768px) {
   .mainHeading {
     font-size: 36px;
-    line-height: 1.2;
+    line-height: 1.5;
   }
 }
 
@@ -227,7 +222,7 @@
 .contentRow {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 32px;
   width: 100%;
 }
 
@@ -242,15 +237,17 @@
 .imageWrapper {
   position: relative;
   width: 100%;
-  height: 220px;
-  border-radius: 12px;
+  aspect-ratio: 1036 / 696;
+  border-radius: 15px;
   overflow: hidden;
   flex-shrink: 0;
+  order: 2;
 }
 
 @media (min-width: 480px) {
   .imageWrapper {
     height: 260px;
+    aspect-ratio: auto;
   }
 }
 
@@ -267,6 +264,8 @@
   .imageWrapper {
     width: 480px;
     height: 375px;
+    aspect-ratio: auto;
+    order: 1;
   }
 }
 
@@ -279,14 +278,15 @@
 .contentText {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   font-family: "Lato", sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 1.6;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
   color: black;
   width: 100%;
   box-sizing: border-box;
+  order: 1;
 }
 
 @media (min-width: 480px) {
@@ -298,7 +298,7 @@
 
 @media (min-width: 768px) {
   .contentText {
-    font-size: 20px;
+    font-size: 18px;
     gap: 24px;
   }
 }
@@ -306,15 +306,16 @@
 /* Desktop — side-by-side, shift left with padding */
 @media (min-width: 1024px) {
   .contentText {
-    font-size: 22px;
+    font-size: 20px;
     padding-left: 48px;
     max-width: 620px;
+    order: 2;
   }
 }
 
 @media (min-width: 1200px) {
   .contentText {
-    font-size: 24px;
+    font-size: 20px;
     padding-left: 80px;
   }
 }
@@ -339,9 +340,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 52px;
+  height: 48px;
   padding: 12px 24px;
-  border-radius: 6px;
+  border-radius: 5px;
   transition: opacity 0.2s;
 }
 
@@ -360,7 +361,7 @@
 .donateButtonText {
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   color: black;
   text-align: center;
