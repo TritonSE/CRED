@@ -66,14 +66,17 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Stack on narrow laptops */
+/* Stack on narrow screens */
 @media (max-width: 900px) {
   .missionContainer {
     flex-direction: column;
+    align-items: stretch;
     gap: 32px;
   }
 
   .missionImageWrapper {
-    display: none;
+    flex: none;
+    width: 100%;
+    height: clamp(220px, 50vw, 320px);
   }
 }
