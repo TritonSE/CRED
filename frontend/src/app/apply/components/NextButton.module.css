@@ -1,5 +1,5 @@
 .nextbutton {
-  min-width: 113px;
+  width: 113px;
   height: 48px;
   padding: 0 20px;
   box-sizing: border-box;
@@ -40,4 +40,12 @@
 .nextbutton:focus-visible:not(.nextbuttonComplete) {
   outline: 2px solid #ffb341;
   outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .nextbutton {
+    width: 100px;
+    height: 45px;
+    font-size: 16px;
+  }
 }

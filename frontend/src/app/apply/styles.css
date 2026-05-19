@@ -77,3 +77,12 @@
   justify-content: center;
   align-items: flex-start;
 }
+
+@media (max-width: 600px) {
+  .apply-title {
+    font-size: 30px;
+  }
+  .apply-intro {
+    font-size: 15px;
+  }
+}
