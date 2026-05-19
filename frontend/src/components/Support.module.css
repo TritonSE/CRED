@@ -56,6 +56,7 @@
   position: relative;
   flex: 1;
   min-width: 0;
+  height: 25rem;
   min-height: clamp(200px, 22vw, 296px);
   border-radius: 15px;
   overflow: hidden;
@@ -89,11 +90,12 @@
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: clamp(22px, 2.8vw, 40px);
-  line-height: 130%;
+  line-height: 150%;
   color: #ffffff;
   margin: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  padding-top: 2rem;
 }
 
 .supportCardText {

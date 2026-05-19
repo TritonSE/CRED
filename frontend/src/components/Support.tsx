@@ -30,6 +30,7 @@ export default function Support() {
             />
             <div className={styles.supportCardOverlay} />
             <div className={styles.supportCardContent}>
+              <Image src="/home/heads.svg" alt="heads" width={72} height={72} />
               <h3 className={styles.supportCardTitle}>Underserved Communities</h3>
               <p className={styles.supportCardText}>
                 We partner with communities of color, LGBTQ+ individuals, and more to provide
@@ -50,6 +51,7 @@ export default function Support() {
             />
             <div className={styles.supportCardOverlay} />
             <div className={styles.supportCardContent}>
+              <Image src="/home/handshake.svg" alt="handshake" width={72} height={72} />
               <h3 className={styles.supportCardTitle}>Formerly Incarcerated Individuals</h3>
               <p className={styles.supportCardText}>
                 CRED provides access to comprehensive reentry programs, helping formerly
@@ -73,6 +75,7 @@ export default function Support() {
             />
             <div className={styles.supportCardOverlay} />
             <div className={styles.supportCardContent}>
+              <Image src="/home/people.svg" alt="people" width={72} height={72} />
               <h3 className={styles.supportCardTitle}>Transitional Age Youth</h3>
               <p className={styles.supportCardText}>
                 CRED provides elective life skills training, using the CRED approach to empower
@@ -93,6 +96,7 @@ export default function Support() {
             />
             <div className={styles.supportCardOverlay} />
             <div className={styles.supportCardContent}>
+              <Image src="/home/houses.svg" alt="houses" width={72} height={72} />
               <h3 className={styles.supportCardTitle}>Low-Income Families</h3>
               <p className={styles.supportCardText}>
                 We support members of low-income communities through family-centered case management
