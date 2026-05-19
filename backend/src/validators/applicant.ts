@@ -248,7 +248,6 @@ const makeIsCompletedValidator = () =>
 
 export const createApplicant = [
   // Required intake fields.
-  makeApplicantNumberValidator(),
   makeApplicantNameValidator(),
   // Optional profile/metadata fields.
   makeStatusValidator(),

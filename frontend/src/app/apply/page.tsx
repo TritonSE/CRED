@@ -82,8 +82,6 @@ export default function ApplyPage() {
     setContactData(data);
     setSubmitting(true);
 
-    const applicantNumber = "CF-" + Math.floor(10000000 + Math.random() * 90000000).toString();
-
     const mapGender = (g: string) => {
       if (g === "male") return "Male";
       if (g === "female") return "Female";
@@ -142,7 +140,6 @@ export default function ApplyPage() {
     }
 
     const req: CreateApplicantRequest = {
-      applicantNumber,
       applicantName: profileData.fullName,
       dateOfBirth: new Date(profileData.dateOfBirth),
       race: mapEthnicity(profileData.ethnicity),
@@ -189,7 +186,7 @@ export default function ApplyPage() {
           }).format(dateObj);
 
         setSubmissionResult({
-          clientId: res.data?.applicantNumber || applicantNumber,
+          clientId: res.data?.applicantNumber || "Pending",
           dateSubmitted: dateSubmittedStr,
         });
         setStep(4);

@@ -94,7 +94,7 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
 }
 
 export type CreateApplicantRequest = {
-  applicantNumber: string;
+  applicantNumber?: string;
   applicantName: string;
   status?: string;
   dateOfBirth: Date;

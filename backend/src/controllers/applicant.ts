@@ -85,7 +85,7 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
 };
 
 type CreateApplicantBody = {
-  applicantNumber: string;
+  applicantNumber?: string;
   applicantName: string;
   status?: string;
   dateOfBirth: Date;
@@ -141,7 +141,6 @@ type UpdateApplicantBody = {
 export const createApplicant: RequestHandler = async (req, res, next) => {
   const errors = validationResult(req);
   const {
-    applicantNumber,
     applicantName,
     status,
     dateOfBirth,
@@ -169,7 +168,6 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
     validationErrorParser(errors);
 
     const applicant = await ApplicantModel.create({
-      applicantNumber,
       applicantName,
       dateSubmitted: new Date(),
       status,

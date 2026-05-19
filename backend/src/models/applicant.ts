@@ -1,4 +1,4 @@
-import { Model, Schema, model, models } from "mongoose";
+import { Document, Model, Schema, model, models } from "mongoose";
 
 import type { InferSchemaType } from "mongoose";
 
@@ -82,6 +82,14 @@ const noteSchema = new Schema(
   { _id: false },
 );
 
+const counterSchema = new Schema({
+  _id: { type: String, required: true },
+  seq: { type: Number, default: 0 },
+});
+
+const Counter =
+  (models.Counter as Model<{ _id: string; seq: number }>) || model("Counter", counterSchema);
+
 /**
  * Core applicant persistence schema used by the API.
  * Optional fields support progressive intake where partial information may be saved first.
@@ -144,6 +152,20 @@ const applicantSchema = new Schema(
 );
 
 export type Applicant = InferSchemaType<typeof applicantSchema>;
+
+applicantSchema.pre("validate", async function (this: Document & Applicant, next) {
+  if (this.isNew && !this.applicantNumber) {
+    const counter = await Counter.findOneAndUpdate(
+      { _id: "applicantNumber" },
+      { $inc: { seq: 1 } },
+      { new: true, upsert: true },
+    );
+    if (counter) {
+      this.applicantNumber = `CF-${counter.seq.toString().padStart(8, "0")}`;
+    }
+  }
+  next();
+});
 
 // Reuse existing model in dev/hot-reload environments to avoid OverwriteModelError.
 export default (models.Applicant as Model<Applicant>) ||
