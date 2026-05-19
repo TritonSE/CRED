@@ -210,7 +210,7 @@ export const YourProfileForm = function YourProfileForm({
                     }}
                   >
                     <svg
-                      width="20"
+                      width="15"
                       height="20"
                       viewBox="0 0 24 24"
                       fill="none"
