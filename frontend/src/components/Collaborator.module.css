@@ -35,16 +35,47 @@
 
 .contentWrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
   max-width: 1220px;
-  gap: 0;
+  gap: 3rem;
 }
 
 .tabsContainer {
   display: flex;
+  flex-direction: column;
+  width: 30rem;
+}
+
+.tabTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.tabName {
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: Bold;
+  line-height: 150%;
+  letter-spacing: 0%;
+  display: inline-block;
   width: 100%;
-  gap: 16px;
+  text-align: left;
+}
+
+.tabDescription {
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 13px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  display: inline-block;
+  width: 100%;
+  text-align: left;
 }
 
 /* Stack tabs vertically on phone screens */
@@ -56,42 +87,46 @@
 }
 
 .tab {
-  flex: 1;
+  width: 100%;
+  height: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   padding: 16px;
   cursor: pointer;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-bottom: none;
-  border-radius: 12px 12px 0 0;
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: clamp(14px, 1.2vw, 16px);
   color: #175892;
   transition: all 0.1s ease;
+  border-top: 2px solid #004377;
+}
+
+.tab:first-child {
+  border-top: none;
 }
 
 .activeTab {
-  background: #175892;
+  background: #004377;
   color: #ffffff;
-  border-color: #175892;
+  border-color: #004377;
+  border-bottom: none;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.activeTab + .tab {
+  border-top: none;
 }
 
 .logoPanel {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 0 0 12px 12px;
-  padding: clamp(24px, 3.5vw, 48px);
   width: 100%;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 56px 24px;
+  gap: 24px 24px;
 }
 
 @media (min-width: 600px) {
@@ -116,6 +151,7 @@
   border-radius: 10px;
   padding: 12px;
   transition: border-color 0.2s ease;
+  background-color: #ffffff;
 }
 
 .logoCard:hover {

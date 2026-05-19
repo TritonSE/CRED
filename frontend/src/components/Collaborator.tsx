@@ -85,8 +85,8 @@ export default function Collaborator() {
     if (tabName === "Education") {
       return (
         <svg
-          width="20"
-          height="20"
+          width="52"
+          height="52"
           viewBox="0 0 24 24"
           fill="none"
           stroke={color}
@@ -102,8 +102,8 @@ export default function Collaborator() {
     if (tabName === "Development") {
       return (
         <svg
-          width="20"
-          height="20"
+          width="52"
+          height="52"
           viewBox="0 0 24 24"
           fill="none"
           stroke={color}
@@ -119,8 +119,8 @@ export default function Collaborator() {
     if (tabName === "Housing") {
       return (
         <svg
-          width="20"
-          height="20"
+          width="52"
+          height="52"
           viewBox="0 0 24 24"
           fill="none"
           stroke={color}
@@ -135,7 +135,11 @@ export default function Collaborator() {
     }
   };
 
-  const tabs = ["Education", "Housing", "Development"];
+  const tabs = {
+    Education: "Select a partner to view services",
+    Housing: "Transitional and Permanent",
+    Development: "Jobs, Training, Entrepreneurship",
+  };
 
   return (
     <div className={styles.sectionContainer}>
@@ -151,7 +155,7 @@ export default function Collaborator() {
       <div className={styles.contentWrapper}>
         {/* Separated Tabs */}
         <div className={styles.tabsContainer}>
-          {tabs.map((tab) => (
+          {Object.entries(tabs).map(([tab, description]) => (
             <button
               key={tab}
               className={`${styles.tab} ${activeTab === tab ? styles.activeTab : ""}`}
@@ -160,7 +164,10 @@ export default function Collaborator() {
               }}
             >
               {getIcon(tab, activeTab === tab)}
-              {tab}
+              <div className={styles.tabTextContainer}>
+                <span className={styles.tabName}>{tab}</span>
+                <span className={styles.tabDescription}>{description}</span>
+              </div>
             </button>
           ))}
         </div>
