@@ -27,3 +27,13 @@
   outline: 2px solid #ffb341;
   outline-offset: 2px;
 }
+
+@media (max-width: 600px) {
+  .backbutton {
+    width: 100px;
+    height: 48px;
+    font-size: 20px;
+    border-radius: 4px;
+    padding: 12px 24px 12px 24px;
+  }
+}

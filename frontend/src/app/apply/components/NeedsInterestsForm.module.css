@@ -1,13 +1,19 @@
 .formOuter {
-  width: 981px;
-  height: 867px;
+  width: 100%;
+  max-width: 982px;
   margin: 0 auto;
-  background: #ffffff;
+}
+
+.progressCenter {
   display: flex;
   justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-  border-radius: 20px;
+  width: 100%;
+}
+
+.progressBarTwo {
+  width: 245px;
+  height: 30px;
+  object-fit: contain;
 }
 
 .formInner {
@@ -16,35 +22,35 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 50px;
   box-sizing: border-box;
 }
 
 .formContent {
-  flex: 1;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 64px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+  box-sizing: border-box;
 }
 
 .footer {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 10px;
+  margin-top: 0;
+  padding-top: 0;
   width: 100%;
-  height: 48px;
-  margin-top: auto;
+  max-width: 854px;
 }
 
 .buttonGroup {
   display: flex;
   width: 236px;
   justify-content: space-between;
-}
-
-.progressBarTwo {
-  margin-bottom: 20px;
-  margin: 0 auto;
 }
 
 .needsTitle {
@@ -105,7 +111,6 @@
   color: #ff0000;
 }
 
-/* okay im conufused */
 .optionRow span,
 .otherRow span {
   font-family: var(--font-lato), Lato, sans-serif;
@@ -241,9 +246,16 @@
   color: rgba(0, 0, 0, 1);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .needsTitle {
     font-size: 30px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .needsTitle {
+    font-size: 25px;
     margin-top: 20px;
   }
 
@@ -277,5 +289,9 @@
 
   .textField::placeholder {
     font-size: 14px;
+  }
+
+  .buttonGroup {
+    width: 210px;
   }
 }

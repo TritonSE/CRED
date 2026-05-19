@@ -588,9 +588,6 @@
 }
 
 @media (max-width: 1000px) {
-  .heading h2 {
-    margin-top: 20px;
-  }
   .fieldTop,
   .fieldMiddle,
   .formInner {
@@ -660,7 +657,7 @@
   .fieldMiddle .optionRow,
   .fieldMiddle .otherRow {
     width: 100%;
-    height: 48px;
+    height: 58px;
     border-radius: 8px;
     padding: 10px 15px;
     align-items: center;

@@ -30,8 +30,8 @@ export const NeedInterestsForm = function NeedInterestsForm({
 
   return (
     <div className={styles.formOuter}>
-      <div className={styles.formInner}>
-        <div className={styles.formContent}>
+      <div className={styles.formContent}>
+        <div className={styles.progressCenter}>
           <Image
             className={styles.progressBarTwo}
             src="/Progress-Bar-Two.png"
@@ -40,7 +40,9 @@ export const NeedInterestsForm = function NeedInterestsForm({
             height={30}
             priority
           />
+        </div>
 
+        <div className={styles.formInner}>
           <h2 className={styles.needsTitle}>Your Needs & Program Interests</h2>
           <p className={styles.needsIntro}>
             This helps CRED connect you with the programs and services best suited to your needs.

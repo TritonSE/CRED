@@ -34,8 +34,8 @@ export const ContactForm = function ContactForm({
 
   return (
     <div className={styles.formOuter}>
-      <div className={styles.formInner}>
-        <div className={styles.formContent}>
+      <div className={styles.formContent}>
+        <div className={styles.progressCenter}>
           <Image
             className={styles.progressBarThree}
             src="/Progress-Bar-Three.png"
@@ -44,7 +44,8 @@ export const ContactForm = function ContactForm({
             height={30}
             priority
           />
-
+        </div>
+        <div className={styles.formInner}>
           <h2 className={styles.contactTitle}>Your Contact Information</h2>
           <p className={styles.contactIntro}>
             Please provide your preferred contact details so we can follow up with you.
