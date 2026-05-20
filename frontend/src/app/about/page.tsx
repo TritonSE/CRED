@@ -43,8 +43,8 @@ export default function AboutUsPage() {
               <Image
                 src="/OurVision.png"
                 alt="Illustration accompanying the Our Vision section"
-                width={550}
-                height={369}
+                width={500}
+                height={335}
               />
             </div>
           </div>
