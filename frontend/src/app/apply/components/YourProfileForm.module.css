@@ -551,7 +551,7 @@
 
 .inlineText {
   flex: 1;
-  min-width: 80px;
+  width: 100%;
   border: none;
   border-bottom: 1px solid #5a5a5a;
   border-radius: 0;
