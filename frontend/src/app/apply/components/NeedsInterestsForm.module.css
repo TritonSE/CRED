@@ -48,9 +48,10 @@
 }
 
 .buttonGroup {
+  justify-content: right;
   display: flex;
   width: 236px;
-  justify-content: space-between;
+  gap: 10px;
 }
 
 .needsTitle {
@@ -246,52 +247,4 @@
   color: rgba(0, 0, 0, 1);
 }
 
-@media (max-width: 1000px) {
-  .needsTitle {
-    font-size: 30px;
-    margin-top: 20px;
-  }
-}
-
-@media (max-width: 600px) {
-  .needsTitle {
-    font-size: 25px;
-    margin-top: 20px;
-  }
-
-  .needsIntro,
-  .needsText {
-    font-size: 14px;
-  }
-
-  .textField {
-    height: 48px;
-    border-radius: 8px;
-    padding: 10px 12px 10px 15px;
-    font-size: 14px;
-  }
-
-  .optionRow,
-  .otherRow {
-    width: 100%;
-    max-width: 100%;
-    height: 48px;
-    border-radius: 8px;
-    padding: 10px 15px;
-    align-items: center;
-  }
-
-  .optionRow span,
-  .otherRow span,
-  .inlineText {
-    font-size: 14px;
-  }
-
-  .textField::placeholder {
-    font-size: 14px;
-  }
-
-  .buttonGroup {
-    width: 210px;
-  }
-}
+/* change to mobile designs */

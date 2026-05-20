@@ -208,7 +208,7 @@ export default function ApplyPage() {
     <ThemeProvider>
       <div className="apply-top-section">
         <div className="apply-container">
-          <h1 className="apply-title">Join Cred Today</h1>
+          <h1 className="apply-title">Join CRED Today</h1>
           <p className="apply-intro">
             Your journey to self-sufficiency starts here. We empower you with the tools to thrive,
             not just survive.
