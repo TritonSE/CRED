@@ -6,8 +6,8 @@
 
 .content {
   background: #ffffff;
-  border-radius: 20px;
   padding: 64px;
+  border-radius: 20px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
@@ -223,7 +223,6 @@
 
 .dateInputWrap {
   position: relative;
-  /* width: 400px; */
   max-width: 100%;
 }
 
@@ -612,4 +611,62 @@
   }
 }
 
-/* screen size of 403 px */
+/* screen size of 402 px */
+@media (max-width: 402px) {
+  .formBlock {
+    width: 370px;
+    height: 1755.1199951171875px;
+  }
+  .progressBar {
+    width: 123.4800033569336px;
+    height: 15.119999885559082px;
+  }
+  .heading h2 {
+    font-size: 24px;
+    line-height: 150%;
+  }
+  .headingSubtitle {
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .content {
+    padding: 40px 20px;
+  }
+  .formInner {
+    gap: 37px;
+  }
+  .formFooter {
+    display: none;
+  }
+  .fieldTop h4,
+  .fieldMiddle h4 {
+    font-size: 14px;
+  }
+  .fieldTop .shortField {
+    height: 77px;
+    gap: 8px;
+  }
+  .fieldTop .shortField input[type="text"],
+  .fieldTop .shortField input[type="date"],
+  .fieldMiddle .shortField button {
+    height: 48px;
+    font-size: 14px;
+    padding: 10px 12px;
+    gap: 175px;
+    border: 1px solid #d1d5db;
+  }
+  .datePlaceholder {
+    font-size: 14px;
+    color: #9ca3af;
+    left: 0px;
+    padding: 10px 12px;
+  }
+  .calendarButton svg {
+    height: 16px;
+    width: 16px;
+    color: #909090;
+  }
+  .selectMenu {
+    height: 400%;
+  }
+}

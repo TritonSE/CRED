@@ -138,18 +138,18 @@ export const YourProfileForm = function YourProfileForm({
   return (
     <div className={styles.formBlock}>
       <div className={styles.content}>
-        <div className={styles.progressCenter}>
-          <Image
-            src="/Progress-Bar-One.svg"
-            alt="Application progress: step 1 of 3"
-            width={245}
-            height={30}
-            className={styles.progressBar}
-            priority
-          />
-        </div>
-
         <div className={styles.formInner}>
+          <div className={styles.progressCenter}>
+            <Image
+              src="/Progress-Bar-One.svg"
+              alt="Application progress: step 1 of 3"
+              width={245}
+              height={30}
+              className={styles.progressBar}
+              priority
+            />
+          </div>
+
           <div className={styles.heading}>
             <h2>Your Profile</h2>
             <p className={styles.headingSubtitle}>
@@ -167,6 +167,7 @@ export const YourProfileForm = function YourProfileForm({
                 <input
                   type="text"
                   name="fullName"
+                  placeholder="Full Name"
                   autoComplete="name"
                   value={fullName}
                   onChange={(e) => {
