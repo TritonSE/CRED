@@ -4,16 +4,48 @@ import Image from "next/image";
 import { useState } from "react";
 
 import styles from "./Collaborator.module.css";
+import { CollaboratorPopup } from "./CollaboratorPopup";
 
-const COLLABORATOR_INFO: Record<string, { description: string; link: string }> = {
+const COLLABORATOR_INFO: Record<
+  string,
+  { image?: string; titles: [string]; description: [string]; link: string }
+> = {
   "Father Joe's Villages": {
-    description:
+    titles: [
       "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+    ],
+    description: [
+      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+    ],
     link: "https://my.neighbor.org/get-help/",
   },
-  "San Diego State University": { description: "", link: "" },
-  "Underground Scholars": { description: "", link: "" },
-  "Alpha Project": { description: "", link: "" },
+  "San Diego State University": {
+    titles: [
+      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+    ],
+    description: [
+      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+    ],
+    link: "https://my.neighbor.org/get-help/",
+  },
+  "Underground Scholars": {
+    titles: [
+      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+    ],
+    description: [
+      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+    ],
+    link: "https://my.neighbor.org/get-help/",
+  },
+  "Alpha Project": {
+    titles: [
+      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+    ],
+    description: [
+      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+    ],
+    link: "https://my.neighbor.org/get-help/",
+  },
 };
 
 const collaboratorsData = [
@@ -207,8 +239,19 @@ export default function Collaborator() {
           </div>
         </div>
       </div>
-
-      {/* Overlay Component Goes Here */}
+      {selectedCollab && (
+        <CollaboratorPopup
+          image="/home/san_diego_city_scholars.png"
+          name="City Scholars"
+          program="San Diego City College"
+          link="https://google.com"
+          titles={["1", "2"]}
+          description={["1", "2"]}
+          onClose={() => {
+            setSelectedCollab(null);
+          }}
+        />
+      )}
     </div>
   );
 }
