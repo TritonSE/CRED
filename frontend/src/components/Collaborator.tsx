@@ -8,43 +8,24 @@ import { CollaboratorPopup } from "./CollaboratorPopup";
 
 const COLLABORATOR_INFO: Record<
   string,
-  { image?: string; titles: [string]; description: [string]; link: string }
+  { image: string; titles: string[]; description: string[]; link: string; program: string }
 > = {
-  "Father Joe's Villages": {
+  "City Scholars": {
     titles: [
-      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+      "Admissions and Enrollment Support",
+      "In-custody Courses",
+      "Academic Advising and Tutoring",
+      "Basic Needs Support",
     ],
+    program: "San Diego City College",
     description: [
-      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
+      "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+      "College classes taught inside jails and prisons, so students can begin earning credits before release.",
+      "On-campus support, dedicated study spaces, and peer mentorship from others with shared experiences.",
+      "Emergency funds, food assistance, transportation, and laptop access to remove barriers for success.",
     ],
-    link: "https://my.neighbor.org/get-help/",
-  },
-  "San Diego State University": {
-    titles: [
-      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
-    ],
-    description: [
-      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
-    ],
-    link: "https://my.neighbor.org/get-help/",
-  },
-  "Underground Scholars": {
-    titles: [
-      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
-    ],
-    description: [
-      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
-    ],
-    link: "https://my.neighbor.org/get-help/",
-  },
-  "Alpha Project": {
-    titles: [
-      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
-    ],
-    description: [
-      "Father Joe's Villages provides emergency shelter, transitional housing, and permanent supportive housing for individuals and families experiencing homelessness in San Diego. These programs offer safe housing alongside supportive services such as case management, healthcare, employment support, and housing navigation to help residents regain stability and move toward long-term independence. The best way to access these resources, is to visit Father Joe's Villages in person.",
-    ],
-    link: "https://my.neighbor.org/get-help/",
+    link: "https://www.sdcity.edu/students/services/city-scholars.aspx",
+    image: "/home/san_diego_city_scholars.png",
   },
 };
 
@@ -239,14 +220,15 @@ export default function Collaborator() {
           </div>
         </div>
       </div>
-      {selectedCollab && (
+      {/* The selected collab name is the name of the program, e.g. not San Diego City College, but City Scholar's */}
+      {selectedCollab && COLLABORATOR_INFO[selectedCollab.name] && (
         <CollaboratorPopup
-          image="/home/san_diego_city_scholars.png"
-          name="City Scholars"
-          program="San Diego City College"
-          link="https://google.com"
-          titles={["1", "2"]}
-          description={["1", "2"]}
+          image={COLLABORATOR_INFO[selectedCollab.name].image}
+          name={selectedCollab.name}
+          program={COLLABORATOR_INFO[selectedCollab.name].program}
+          link={COLLABORATOR_INFO[selectedCollab.name].link}
+          titles={COLLABORATOR_INFO[selectedCollab.name].titles}
+          description={COLLABORATOR_INFO[selectedCollab.name].description}
           onClose={() => {
             setSelectedCollab(null);
           }}

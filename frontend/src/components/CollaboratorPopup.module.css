@@ -11,7 +11,7 @@
 
 .modal {
   width: 100%;
-  max-width: 1057px;
+  max-width: 782px;
   background: #ffffff;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
@@ -20,7 +20,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: clamp(16px, 24px, 32px) clamp(12px, 32px, 50px) clamp(16px, 24px, 32px);
+  padding: clamp(16px, 32px, 32px) clamp(12px, 32px, 50px) clamp(16px, 32px, 32px);
   gap: clamp(20px, 3vw, 37px);
   box-sizing: border-box;
 }
@@ -49,7 +49,7 @@
 
 .modalInfoWrapper {
   line-height: normal;
-  padding: 0px 0px 0px 16px;
+  padding: 0px 0px 0px 16.5px;
 }
 
 .modalTitle {
@@ -91,6 +91,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-top: calc(12px - clamp(20px, 3vw, 37px));
 }
 
 .learnMoreButton {
@@ -120,4 +121,38 @@
   color: #000000;
   margin: 0;
   text-align: center;
+}
+
+.descriptionTitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #000000;
+}
+
+.descriptionDetail {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #000000;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 12px, 14px);
+  width: 100%;
+  margin-top: calc(12px - clamp(20px, 3vw, 37px));
+}
+
+.description > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

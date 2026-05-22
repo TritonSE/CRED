@@ -16,11 +16,17 @@ export function CollaboratorPopup({
   image,
   name,
   program,
+  titles,
   description,
   link,
   onClose,
 }: CollaboratorPopupProps) {
-  const desc = description[0];
+  const data = titles.map((title, i) => (
+    <div key={i}>
+      <h2 className={styles.descriptionTitle}>{title}</h2>
+      <p className={styles.descriptionDetail}>{description[i]}</p>
+    </div>
+  ));
 
   return (
     <div
@@ -50,21 +56,7 @@ export function CollaboratorPopup({
             <Image src="/home/close.svg" width={30} height={30} alt="close button"></Image>
           </div>
         </div>
-        {description && (
-          <p className={styles.modalDescription}>
-            {(() => {
-              if (description[0].startsWith(name)) {
-                return (
-                  <>
-                    <strong>{name}</strong>
-                    {description[0].slice(name.length)}
-                  </>
-                );
-              }
-              return desc;
-            })()}
-          </p>
-        )}
+        {description?.length === titles.length && <div className={styles.description}>{data}</div>}
         <div className={styles.modalButtonWrapper}>
           {link ? (
             <a
