@@ -88,6 +88,10 @@
   margin: 0;
 }
 
+.cardWrapper {
+  width: 100%;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 1280px) {
   .foundations {
