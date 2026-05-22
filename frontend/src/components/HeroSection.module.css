@@ -1,29 +1,42 @@
-/* ===== Hero Section ===== */
-.hero {
+/* Shared hero/hero-banner styles used across pages. */
+.root {
   position: relative;
   width: 100%;
-  height: clamp(450px, 55vw, 713px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-bottom: 1px solid transparent;
 }
 
-.heroBg {
+.tall {
+  height: clamp(450px, 55vw, 713px);
+}
+
+.banner {
+  min-height: 280px;
+  padding: 80px 24px;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .banner {
+    padding: 80px 120px;
+  }
+}
+
+.bg {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-.heroOverlay {
+.overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, #175892 -7.8%, rgba(23, 88, 146, 0) 105.01%);
 }
 
-.heroContent {
+.content {
   position: relative;
   z-index: 2;
   display: flex;
@@ -31,26 +44,30 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 1128px;
-  padding: 0 clamp(16px, 4vw, 48px);
+  max-width: 1120px;
+  padding: 0 clamp(16px, 4vw, 56px);
 }
 
-.heroTitle {
+.title {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-size: clamp(32px, 4.5vw, 64px);
   line-height: 150%;
   color: #ffffff;
-  text-align: center;
   margin: 0;
+  max-width: 30ch;
 }
 
-.heroSubtitle {
+.subtitle {
   font-family: "Lato", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: clamp(16px, 1.8vw, 24px);
   line-height: 150%;
   color: #ffffff;
-  text-align: center;
-  margin: 24px 0 0 0;
+  margin: 16px 0 0 0;
+  max-width: 80ch;
+}
+
+.subtitleBold {
+  font-weight: 700;
 }

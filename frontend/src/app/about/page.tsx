@@ -9,20 +9,24 @@ import { OperationsCard } from "./components/OperationsCard";
 
 import "./styles.css";
 
+import HeroSection from "@/components/HeroSection";
+
 export default function AboutUsPage() {
   const router = useRouter();
   return (
     <ThemeProvider>
       <div className="about-page">
-        <div className="about-top-section">
-          <div className="about-container">
-            <h1 className="about-title">We Are CRED</h1>
-            <p className="about-intro">
-              CRED provides individualized services for system-impacted individuals, low-income
-              families, and transitional age youth seeking stability and self-sufficiency.
-            </p>
-          </div>
-        </div>
+        <HeroSection
+          className="about-hero"
+          variant="banner"
+          imageSrc="/BannerPic.jpg"
+          imageAlt=""
+          imageClassName="about-hero-image"
+          title="We Are CRED"
+          subtitle="CRED provides individualized services for system-impacted individuals, low-income families, and transitional age youth seeking stability and self-sufficiency."
+          overlayGradient="linear-gradient(to right, #004377, rgba(30, 115, 190, 0.8))"
+          priority
+        />
 
         <div className="about-vision-section">
           <div className="about-grid">

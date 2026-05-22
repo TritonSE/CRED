@@ -16,15 +16,15 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { getAllApplicants } from "../../api/applicant";
-
 import styles from "./adminPage.module.css";
 import { AdminHeader } from "./components/AdminHeader";
 import { ApplicationTable } from "./components/ApplicationTable";
 import { SuccessAlert } from "./components/SuccessAlert";
 import alertStyles from "./components/SuccessAlert.module.css";
 
-import type { Applicant } from "../../api/applicant";
+import type { Applicant } from "@/api/applicant";
+
+import { getAllApplicants } from "@/api/applicant";
 
 type SuccessAlertItem = {
   id: string;
@@ -46,8 +46,7 @@ export default function AdminPage() {
     setError(null);
     const result = await getAllApplicants();
     if (result.success) {
-      const data = Array.isArray(result.data) ? result.data : result.data.data;
-      setAllApplicants(data);
+      setAllApplicants(result.data.data);
     } else {
       setError(typeof result.error === "string" ? result.error : "Failed to load applicants");
     }
