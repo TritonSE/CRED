@@ -603,6 +603,28 @@ export const YourProfileForm = function YourProfileForm({
           </div>
         </div>
       </div>
+      <div className={styles.formFooterMobile}>
+        <NextButton
+          disabled={!isFormValid}
+          isComplete={isFormValid}
+          onClick={() => {
+            if (!isFormValid) return;
+            onNext({
+              fullName,
+              dateOfBirth,
+              gender,
+              ethnicity,
+              address,
+              employment,
+              employmentOther,
+              education,
+              educationOther,
+              housing,
+              housingOther,
+            });
+          }}
+        />
+      </div>
     </div>
   );
 };

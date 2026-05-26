@@ -64,7 +64,7 @@ export const NeedInterestsForm = function NeedInterestsForm({
 
           <div className={styles.questionBlock}>
             <p className={styles.needsText}>
-              What type of aid do you need?
+              What type of aid do you need? (Select all that apply)
               <span className={styles.required}>*</span>
             </p>
 
@@ -167,6 +167,23 @@ export const NeedInterestsForm = function NeedInterestsForm({
               }}
             />
           </div>
+        </div>
+      </div>
+      <div className={styles.footerMobile}>
+        <div className={styles.buttonGroup}>
+          <BackButton
+            onClick={() => {
+              onBack({ context, aid, otherNeed });
+            }}
+          />
+          <NextButton
+            disabled={!isFormValid}
+            isComplete={isFormValid}
+            onClick={() => {
+              if (!isFormValid) return;
+              onNext({ context, aid, otherNeed });
+            }}
+          />
         </div>
       </div>
     </div>

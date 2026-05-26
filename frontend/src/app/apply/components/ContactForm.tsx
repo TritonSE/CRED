@@ -18,19 +18,14 @@ type Props = {
   isSubmitting?: boolean;
 };
 
-export const ContactForm = function ContactForm({
-  initialData,
-  onBack,
-  onNext,
-  isSubmitting = false,
-}: Props) {
+export const ContactForm = function ContactForm({ initialData, onBack, onNext }: Props) {
   const [email, setEmail] = React.useState<string>(initialData.email);
   const [phone, setPhone] = React.useState<string>(initialData.phone);
   const [commentsQuestions, setCommentsQuestions] = React.useState<string>(
     initialData.commentsQuestions,
   );
 
-  const isFormValid = email.length > 0 && phone.length > 0 && !isSubmitting;
+  const isFormValid = email.length > 0 && phone.length > 0;
 
   return (
     <div className={styles.formOuter}>
@@ -47,6 +42,7 @@ export const ContactForm = function ContactForm({
         </div>
         <div className={styles.formInner}>
           <h2 className={styles.contactTitle}>Your Contact Information</h2>
+          <h2 className={styles.contactTitleMobile}>Contact Information</h2>
           <p className={styles.contactIntro}>
             Please provide your preferred contact details so we can follow up with you.
           </p>
@@ -99,7 +95,7 @@ export const ContactForm = function ContactForm({
         <div className={styles.footer}>
           <div className={styles.buttonGroup}>
             <BackButton
-              disabled={isSubmitting}
+              disabled={!isFormValid}
               onClick={() => {
                 onBack({ email, phone, commentsQuestions });
               }}
@@ -107,12 +103,32 @@ export const ContactForm = function ContactForm({
             <NextButton
               disabled={!isFormValid}
               isComplete={isFormValid}
+              submitting={true}
               onClick={() => {
                 if (!isFormValid) return;
                 onNext({ email, phone, commentsQuestions });
               }}
             />
           </div>
+        </div>
+      </div>
+      <div className={styles.footerMobile}>
+        <div className={styles.buttonGroup}>
+          <BackButton
+            disabled={!isFormValid}
+            onClick={() => {
+              onBack({ email, phone, commentsQuestions });
+            }}
+          />
+          <NextButton
+            disabled={!isFormValid}
+            isComplete={isFormValid}
+            submitting={true}
+            onClick={() => {
+              if (!isFormValid) return;
+              onNext({ email, phone, commentsQuestions });
+            }}
+          />
         </div>
       </div>
     </div>
