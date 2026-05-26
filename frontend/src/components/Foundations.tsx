@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { FoundationCard } from "./FoundationCard";
 import styles from "./Foundations.module.css";
 

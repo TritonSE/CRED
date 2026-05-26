@@ -6,91 +6,374 @@ import { useState } from "react";
 import styles from "./Collaborator.module.css";
 import { CollaboratorPopup } from "./CollaboratorPopup";
 
-const COLLABORATOR_INFO: Record<
-  string,
-  { image: string; titles: string[]; description: string[]; link: string; program: string }
-> = {
-  "City Scholars": {
-    titles: [
-      "Admissions and Enrollment Support",
-      "In-custody Courses",
-      "Academic Advising and Tutoring",
-      "Basic Needs Support",
-    ],
-    program: "San Diego City College",
-    description: [
-      "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
-      "College classes taught inside jails and prisons, so students can begin earning credits before release.",
-      "On-campus support, dedicated study spaces, and peer mentorship from others with shared experiences.",
-      "Emergency funds, food assistance, transportation, and laptop access to remove barriers for success.",
-    ],
-    link: "https://www.sdcity.edu/students/services/city-scholars.aspx",
-    image: "/home/san_diego_city_scholars.png",
-  },
+type CollabPopupData = {
+  titles: string[];
+  program: string;
+  description: string[];
+  link: string;
 };
 
-const collaboratorsData = [
+type CollabData = {
+  id: number;
+  name: string;
+  category: "Education" | "Housing" | "Development";
+  logo: string;
+  data: CollabPopupData;
+};
+
+const collaboratorsData: CollabData[] = [
   // --- EDUCATION ---
   {
     id: 1,
     name: "City Scholars",
     category: "Education",
     logo: "/home/san_diego_city_scholars.png",
+    data: {
+      titles: [
+        "Admissions and Enrollment Support",
+        "In-custody Courses",
+        "Academic Advising and Tutoring",
+        "Basic Needs Support",
+      ],
+      program: "San Diego City College",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "College classes taught inside jails and prisons, so students can begin earning credits before release.",
+        "On-campus support, dedicated study spaces, and peer mentorship from others with shared experiences.",
+        "Emergency funds, food assistance, transportation, and laptop access to remove barriers for success.",
+      ],
+      link: "https://www.sdcity.edu/students/services/city-scholars.aspx",
+    },
   },
   {
     id: 2,
     name: "Underground Scholars",
     category: "Education",
     logo: "/home/underground_scholars.png",
+    data: {
+      titles: ["Peer Mentorship", "Academic Support", "Community Building"],
+      program: "UC San Diego",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "Tutoring, study groups, and academic advising tailored to system-impacted students.",
+        "Regular events, workshops, and social gatherings to build a supportive network.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
   },
-  { id: 3, name: "Project Rebound - SDSU", category: "Education", logo: "/home/rebound_sdsu.png" },
+  {
+    id: 3,
+    name: "Project Rebound - SDSU",
+    category: "Education",
+    logo: "/home/rebound_sdsu.png",
+    data: {
+      titles: [
+        "Admissions and Enrollment Support",
+        "Academic Advising and Tutoring",
+        "Transfer and Graduate Pathways",
+      ],
+      program: "San Diego State University",
+      description: [
+        "Assistance with university applications, financial aid, and navigating the enrollment process.",
+        "Dedicated academic counselors and peer tutors for formerly incarcerated students.",
+        "Advising for students moving from community college to four-year universities or graduate programs.",
+      ],
+      link: "https://rebound.sdsu.edu",
+    },
+  },
   {
     id: 4,
     name: "Project Rebound - CSUSM",
     category: "Education",
     logo: "/home/rebound_san_marcos.png",
+    data: {
+      titles: ["Enrollment Guidance", "Campus Integration"],
+      program: "California State University - San Marcos",
+      description: [
+        "Help with admissions, financial aid, and course selection for system-impacted students.",
+        "Support services to help formerly incarcerated students thrive in the university environment.",
+      ],
+      link: "https://www.csusm.edu/projectrebound/index.html",
+    },
   },
   {
     id: 5,
-    name: "Project Rebound - Cal State",
+    name: "Project Rebound",
     category: "Education",
     logo: "/home/rebound_cal_state.png",
+    data: {
+      titles: ["Statewide Network", "Scholarships and Financial Aid", "Basic Needs Support"],
+      program: "California State University Campuses",
+      description: [
+        "Access to Project Rebound programs across all Cal State campuses.",
+        "Dedicated funding opportunities for formerly incarcerated students.",
+        "Emergency funds, food assistance, and housing referrals.",
+      ],
+      link: "https://www.calstate.edu/impact-of-the-csu/student-success/project-rebound",
+    },
   },
-  { id: 6, name: "Rising Scholars", category: "Education", logo: "/home/rising_scholars.png" },
-  { id: 7, name: "Five Keys", category: "Education", logo: "/home/five_keys.png" },
+  {
+    id: 6,
+    name: "Rising Scholars",
+    category: "Education",
+    logo: "/home/rising_scholars.png",
+    data: {
+      titles: ["In-Custody Education", "Transition Support", "Academic Advising"],
+      program: "Palomar College",
+      description: [
+        "College courses offered inside correctional facilities through Palomar College.",
+        "Assistance transitioning from incarceration to campus-based education.",
+        "Dedicated counseling and advising for justice-impacted students.",
+      ],
+      link: "https://www.palomar.edu/risingscholars/",
+    },
+  },
 
   // --- HOUSING ---
-  { id: 9, name: "Father Joe's Villages", category: "Housing", logo: "/home/fjv.png" },
   {
-    id: 10,
+    id: 7,
+    name: "Father Joe's Villages",
+    category: "Housing",
+    logo: "/home/fjv.png",
+    data: {
+      titles: [
+        "Emergency Shelter & Bridge Housing",
+        "Transitional Housing",
+        "Permanent Supportive Housing",
+      ],
+      program: "1501 Imperial Ave. San Diego, CA 92101",
+      description: [
+        "Safe, low-barrier shelter with meals, basic needs, and case management while a longer-term housing plan is developed.",
+        "Short to medium-term housing in supportive environments with counseling, life skills, addiction treatment, and more.",
+        "Long-term affordable housing combined with on-site mental health and substance use support.",
+      ],
+      link: "https://my.neighbor.org/",
+    },
+  },
+  {
+    id: 8,
     name: "Alpha Project",
     category: "Housing",
     logo: "/home/alpha.png",
+    data: {
+      titles: ["Emergency Shelter", "Rapid Re-Housing", "Permanent Supportive Housing"],
+      program: "3737 Fifth Ave, Suite 203, San Diego, CA 92103",
+      description: [
+        "Operates multiple emergency shelters (including 16th & Newton) providing beds, food, and services for over 500 individuals.",
+        "Provides rental assistance, security deposits, and housing navigation for families and individuals.",
+        "Manages housing units for individuals with chronic illnesses or disabilities, including Alpha Square and Alpha Lofts for veterans.",
+      ],
+      link: "https://alphaproject.org",
+    },
   },
-  { id: 11, name: "Catholic Charities", category: "Housing", logo: "/home/catholic_charities.png" },
-  { id: 13, name: "Second Chance", category: "Housing", logo: "/home/second_chance.png" },
-  { id: 14, name: "Anti-Recidivism Coalition", category: "Housing", logo: "/home/arc.png" },
-
-  // --- DEVELOPMENT ---
-  { id: 17, name: "Five Keys", category: "Development", logo: "/home/five_keys.png" },
   {
-    id: 18,
+    id: 9,
+    name: "Catholic Charities",
+    category: "Housing",
+    logo: "/home/catholic_charities.png",
+    data: {
+      titles: ["Housing Assistance", "Case Management", "Basic Needs"],
+      program: "Locations Across San Diego and Imperial Counties",
+      description: [
+        "Emergency and transitional housing programs for individuals and families in need.",
+        "Comprehensive case management to address barriers to stability and self-sufficiency.",
+        "Food, clothing, and essential supplies for individuals experiencing hardship.",
+      ],
+      link: "https://ccdsd.org",
+    },
+  },
+  {
+    id: 10,
+    name: "Five Keys",
+    category: "Development",
+    logo: "/home/five_keys.png",
+    data: {
+      titles: ["Vocational Training", "High School Diploma & GED", "Career Readiness"],
+      program: "Online and locations across California",
+      description: [
+        "Certified programs in high-demand fields including culinary arts, construction, and healthcare.",
+        "Accredited charter school programs available inside correctional facilities.",
+        "Job skills training, resume building, and interview preparation.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
+  },
+  {
+    id: 11,
     name: "SD Workforce Partnership",
     category: "Development",
     logo: "/home/san_diego_workforce_partnership.png",
+    data: {
+      titles: ["Job Placement Services", "Skills Training", "Career Counseling"],
+      program: "Multiple career center locations across San Diego",
+      description: [
+        "Direct connections to employers committed to hiring justice-impacted individuals.",
+        "Industry-specific training programs in technology, healthcare, and skilled trades.",
+        "One-on-one guidance to identify career paths and develop professional skills.",
+      ],
+      link: "https://workforce.org",
+    },
   },
-  { id: 19, name: "Second Chance", category: "Development", logo: "/home/second_chance.png" },
-  { id: 20, name: "Defy Ventures", category: "Development", logo: "/home/defy_ventures.png" },
-  { id: 21, name: "Anti-Recidivism Coalition", category: "Development", logo: "/home/arc.png" },
+
+  // TODO: Finish before tuesday: Done with SD Workforce Partnership going top down then left right.
+  {
+    id: 12,
+    name: "Second Chance",
+    category: "Development",
+    logo: "/home/second_chance.png",
+    data: {
+      titles: ["Peer Mentorship", "Academic Support", "Community Building"],
+      program: "UC San Diego",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "Tutoring, study groups, and academic advising tailored to system-impacted students.",
+        "Regular events, workshops, and social gatherings to build a supportive network.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
+  },
+  {
+    id: 13,
+    name: "Defy Ventures",
+    category: "Development",
+    logo: "/home/defy_ventures.png",
+    data: {
+      titles: ["Peer Mentorship", "Academic Support", "Community Building"],
+      program: "UC San Diego",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "Tutoring, study groups, and academic advising tailored to system-impacted students.",
+        "Regular events, workshops, and social gatherings to build a supportive network.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
+  },
+  {
+    id: 14,
+    name: "Anti-Recidivism Coalition",
+    category: "Development",
+    logo: "/home/arc.png",
+    data: {
+      titles: ["Peer Mentorship", "Academic Support", "Community Building"],
+      program: "UC San Diego",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "Tutoring, study groups, and academic advising tailored to system-impacted students.",
+        "Regular events, workshops, and social gatherings to build a supportive network.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
+  },
+  {
+    id: 15,
+    name: "Anti-Recidivism Coalition",
+    category: "Development",
+    logo: "/home/arc.png",
+    data: {
+      titles: ["Peer Mentorship", "Academic Support", "Community Building"],
+      program: "UC San Diego",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "Tutoring, study groups, and academic advising tailored to system-impacted students.",
+        "Regular events, workshops, and social gatherings to build a supportive network.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
+  },
+  {
+    id: 16,
+    name: "Anti-Recidivism Coalition",
+    category: "Development",
+    logo: "/home/arc.png",
+    data: {
+      titles: ["Peer Mentorship", "Academic Support", "Community Building"],
+      program: "UC San Diego",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "Tutoring, study groups, and academic advising tailored to system-impacted students.",
+        "Regular events, workshops, and social gatherings to build a supportive network.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
+  },
+  {
+    id: 17,
+    name: "Anti-Recidivism Coalition",
+    category: "Development",
+    logo: "/home/arc.png",
+    data: {
+      titles: ["Peer Mentorship", "Academic Support", "Community Building"],
+      program: "UC San Diego",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "Tutoring, study groups, and academic advising tailored to system-impacted students.",
+        "Regular events, workshops, and social gatherings to build a supportive network.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
+  },
+  {
+    id: 18,
+    name: "Anti-Recidivism Coalition",
+    category: "Development",
+    logo: "/home/arc.png",
+    data: {
+      titles: ["Peer Mentorship", "Academic Support", "Community Building"],
+      program: "UC San Diego",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "Tutoring, study groups, and academic advising tailored to system-impacted students.",
+        "Regular events, workshops, and social gatherings to build a supportive network.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
+  },
+  {
+    id: 19,
+    name: "Anti-Recidivism Coalition",
+    category: "Development",
+    logo: "/home/arc.png",
+    data: {
+      titles: ["Peer Mentorship", "Academic Support", "Community Building"],
+      program: "UC San Diego",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "Tutoring, study groups, and academic advising tailored to system-impacted students.",
+        "Regular events, workshops, and social gatherings to build a supportive network.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
+  },
+  {
+    id: 20,
+    name: "Anti-Recidivism Coalition",
+    category: "Development",
+    logo: "/home/arc.png",
+    data: {
+      titles: ["Peer Mentorship", "Academic Support", "Community Building"],
+      program: "UC San Diego",
+      description: [
+        "Guidance navigating college applications, financial aid, and enrollment processes, including specialized pathways for justice-impacted students.",
+        "Tutoring, study groups, and academic advising tailored to system-impacted students.",
+        "Regular events, workshops, and social gatherings to build a supportive network.",
+      ],
+      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+    },
+  },
 ];
+
+function getCollab(id: number) {
+  return collaboratorsData.find((c) => c.id === id);
+}
 
 export default function Collaborator() {
   const [activeTab, setActiveTab] = useState("Education");
-  const [selectedCollab, setSelectedCollab] = useState<{ name: string; category: string } | null>(
+  const [selectedCollab, setSelectedCollab] = useState<{ id: number; category: string } | null>(
     null,
   );
 
   const filteredCollaborators = collaboratorsData.filter((collab) => collab.category === activeTab);
+  const selectedCollabData = selectedCollab ? getCollab(selectedCollab.id) : null;
 
   const getIcon = (tabName: string, isActive: boolean) => {
     const color = isActive ? "#ffffff" : "#175892";
@@ -195,12 +478,12 @@ export default function Collaborator() {
                 role="button"
                 tabIndex={0}
                 onClick={() => {
-                  setSelectedCollab({ name: collab.name, category: collab.category });
+                  setSelectedCollab({ id: collab.id, category: collab.category });
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    setSelectedCollab({ name: collab.name, category: collab.category });
+                    setSelectedCollab({ id: collab.id, category: collab.category });
                   }
                 }}
               >
@@ -221,14 +504,14 @@ export default function Collaborator() {
         </div>
       </div>
       {/* The selected collab name is the name of the program, e.g. not San Diego City College, but City Scholar's */}
-      {selectedCollab && COLLABORATOR_INFO[selectedCollab.name] && (
+      {selectedCollabData && (
         <CollaboratorPopup
-          image={COLLABORATOR_INFO[selectedCollab.name].image}
-          name={selectedCollab.name}
-          program={COLLABORATOR_INFO[selectedCollab.name].program}
-          link={COLLABORATOR_INFO[selectedCollab.name].link}
-          titles={COLLABORATOR_INFO[selectedCollab.name].titles}
-          description={COLLABORATOR_INFO[selectedCollab.name].description}
+          image={selectedCollabData.logo}
+          name={selectedCollabData.name}
+          program={selectedCollabData.data.program}
+          link={selectedCollabData.data.link}
+          titles={selectedCollabData.data.titles}
+          description={selectedCollabData.data.description}
           onClose={() => {
             setSelectedCollab(null);
           }}
