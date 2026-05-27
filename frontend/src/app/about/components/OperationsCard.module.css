@@ -88,6 +88,7 @@
     padding: 0;
     gap: 0;
     cursor: pointer;
+    box-shadow: none;
   }
 
   .cardHeader {

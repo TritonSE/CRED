@@ -120,7 +120,7 @@
 
 .heroSubtitle {
   font-family: "Lato", sans-serif;
-  font-weight: 700;
+  font-weight: 300;
   font-size: 16px;
   line-height: 1.5;
   color: white;
@@ -229,7 +229,7 @@
 @media (min-width: 1024px) {
   .contentRow {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 0;
   }
 }
@@ -271,7 +271,7 @@
 
 @media (min-width: 1200px) {
   .imageWrapper {
-    width: 538px;
+    width: 566px;
   }
 }
 
@@ -307,8 +307,8 @@
 @media (min-width: 1024px) {
   .contentText {
     font-size: 20px;
-    padding-left: 48px;
-    max-width: 620px;
+    padding-left: 64px;
+    max-width: 665px;
     order: 2;
   }
 }
@@ -316,7 +316,7 @@
 @media (min-width: 1200px) {
   .contentText {
     font-size: 20px;
-    padding-left: 80px;
+    padding-left: 110px;
   }
 }
 
@@ -333,6 +333,12 @@
   text-decoration: none;
   align-self: flex-start;
   margin-top: 8px;
+}
+
+@media (min-width: 1024px) {
+  .donateLink {
+    margin-top: auto;
+  }
 }
 
 .donateButton {
