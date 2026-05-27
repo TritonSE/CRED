@@ -21,9 +21,12 @@ import { getAllApplicants } from "../../api/applicant";
 import styles from "./adminPage.module.css";
 import { AdminHeader } from "./components/AdminHeader";
 import { ApplicationTable } from "./components/ApplicationTable";
+import { FilterSearchTab } from "./components/FilterSearchTab";
 import { SuccessAlert } from "./components/SuccessAlert";
 import alertStyles from "./components/SuccessAlert.module.css";
+import { MOCK_APPLICANTS } from "./mockApplicants";
 
+import type { DashboardTab } from "./components/FilterSearchTab";
 import type { Applicant } from "../../api/applicant";
 
 type SuccessAlertItem = {
@@ -34,12 +37,18 @@ type SuccessAlertItem = {
 export default function AdminPage() {
   // Shared search query used to filter both tables simultaneously.
   const [searchQuery, setSearchQuery] = useState("");
+  // Active filter tab — drives which table(s) are visible.
+  const [activeTab, setActiveTab] = useState<DashboardTab>("All");
 
   // All applicants fetched from the backend (single source of truth).
   const [allApplicants, setAllApplicants] = useState<Applicant[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [successAlerts, setSuccessAlerts] = useState<SuccessAlertItem[]>([]);
+  // True when the dashboard is rendering offline mock data instead of live API
+  // results. Triggered only in development after a failed fetch so designers/
+  // developers can preview the V2 layout without a running backend.
+  const [isUsingMockData, setIsUsingMockData] = useState(false);
 
   const fetchApplicants = useCallback(async () => {
     setIsLoading(true);
@@ -48,6 +57,14 @@ export default function AdminPage() {
     if (result.success) {
       const data = Array.isArray(result.data) ? result.data : result.data.data;
       setAllApplicants(data);
+      setIsUsingMockData(false);
+    } else if (process.env.NODE_ENV === "development") {
+      console.warn(
+        "[admin-page] Backend fetch failed; falling back to MOCK_APPLICANTS for local preview.",
+        result.error,
+      );
+      setAllApplicants(MOCK_APPLICANTS);
+      setIsUsingMockData(true);
     } else {
       setError(typeof result.error === "string" ? result.error : "Failed to load applicants");
     }
@@ -58,10 +75,25 @@ export default function AdminPage() {
     void fetchApplicants();
   }, [fetchApplicants]);
 
-  /** Called by either table after a successful complete/incomplete toggle. */
+  /**
+   * Called by either table after a successful complete/incomplete toggle.
+   * In mock mode the parent already received the mutation via
+   * `onMockApplicantChange`, so skip the re-fetch which would clobber it.
+   */
   const handleCompleteToggle = useCallback(() => {
+    if (isUsingMockData) return;
     void fetchApplicants();
-  }, [fetchApplicants]);
+  }, [fetchApplicants, isUsingMockData]);
+
+  /**
+   * Mock-mode mutation channel. Replaces the matching applicant in the
+   * single-source-of-truth `allApplicants` so the derived New / Completed
+   * splits re-filter correctly (rows move between tables on Mark Complete,
+   * status pills update when to-dos are toggled, etc.).
+   */
+  const handleMockApplicantChange = useCallback((updated: Applicant) => {
+    setAllApplicants((prev) => prev.map((a) => (a._id === updated._id ? updated : a)));
+  }, []);
 
   const alertRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const previousAlertPositions = useRef<Record<string, DOMRect | undefined>>({});
@@ -115,30 +147,47 @@ export default function AdminPage() {
   const newApplicants = allApplicants.filter((a) => !a.isCompleted);
   const completedApplicants = allApplicants.filter((a) => a.isCompleted);
 
+  const showNew = activeTab === "All" || activeTab === "New";
+  const showCompleted = activeTab === "All" || activeTab === "Completed";
+
   return (
     <div className={styles.scrollViewport}>
       <main className={styles.mainContent}>
         {/* TODO: Replace hardcoded name with actual logged-in admin's name once auth is set up. */}
-        <AdminHeader name="DeQuan" searchQuery={searchQuery} onSearchChange={setSearchQuery} />
-        <ApplicationTable
-          title="New Applications"
-          globalFilter={searchQuery}
-          applicantData={newApplicants}
-          isLoading={isLoading}
-          error={error}
-          onCompleteToggle={handleCompleteToggle}
-          setSuccessAlert={addSuccessAlert}
+        <AdminHeader name="DeQuan" />
+        <FilterSearchTab
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
         />
-        <ApplicationTable
-          title="Completed Applications"
-          isCompleted
-          globalFilter={searchQuery}
-          applicantData={completedApplicants}
-          isLoading={isLoading}
-          error={error}
-          onCompleteToggle={handleCompleteToggle}
-          setSuccessAlert={addSuccessAlert}
-        />
+        {showNew && (
+          <ApplicationTable
+            title="New Applications"
+            globalFilter={searchQuery}
+            applicantData={newApplicants}
+            isLoading={isLoading}
+            error={error}
+            onCompleteToggle={handleCompleteToggle}
+            setSuccessAlert={addSuccessAlert}
+            mockMode={isUsingMockData}
+            onMockApplicantChange={handleMockApplicantChange}
+          />
+        )}
+        {showCompleted && (
+          <ApplicationTable
+            title="Completed Applications"
+            isCompleted
+            globalFilter={searchQuery}
+            applicantData={completedApplicants}
+            isLoading={isLoading}
+            error={error}
+            onCompleteToggle={handleCompleteToggle}
+            setSuccessAlert={addSuccessAlert}
+            mockMode={isUsingMockData}
+            onMockApplicantChange={handleMockApplicantChange}
+          />
+        )}
       </main>
       {successAlerts.length > 0 && (
         <div className={alertStyles.stack}>

@@ -35,10 +35,12 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { updateApplicant } from "../../../api/applicant";
 
+import { ApplicantPDF } from "./ApplicantPDF";
 import styles from "./ApplicationTable.module.css";
 import { ExpandedRowContent } from "./ExpandedRowContent";
 import { StatusLabel } from "./StatusLabel";
 
+import type { ApplicantEditPatch } from "./ExpandedRowContent";
 import type { Applicant } from "../../../api/applicant";
 
 /**
@@ -90,6 +92,29 @@ function parseStatus(raw: string): ApplicationRowData["status"] {
 }
 
 /**
+ * Derive the pill status the dashboard should display.
+ *
+ * Some legacy applicants in the database have `isCompleted: true` but never
+ * had their `status` field upgraded past the default `"Need to Review"`. The
+ * pill is the user-facing summary of where the row sits in the review
+ * lifecycle, so we treat `isCompleted` as the source of truth for the
+ * "Reviewed" terminal state and only fall back to the stored `status` field
+ * when the row isn't completed yet. This guarantees rows shown in the
+ * Completed Applications table render the green "Reviewed" pill.
+ */
+function deriveDisplayStatus(
+  rawStatus: string,
+  applicantIsCompleted: boolean,
+): ApplicationRowData["status"] {
+  if (applicantIsCompleted) return "Reviewed";
+  const parsed = parseStatus(rawStatus);
+  // Edge case: if the row is no longer completed but the stored status is
+  // still "Reviewed" (e.g. a fresh Mark-Incomplete that hasn't round-tripped
+  // through a status fix), fall back to "Need to Review".
+  return parsed === "Reviewed" ? "Need to Review" : parsed;
+}
+
+/**
  * Props for the ApplicationTable component
  * @property {string} title - The heading displayed above the table
  * @property {ApplicationRowData[]} data - Array of application records to display
@@ -111,6 +136,21 @@ export type ApplicationTableProps = {
   onCompleteToggle?: () => void;
   /** Optional callback to show a new status update notification. */
   setSuccessAlert?: (message: string) => void;
+  /**
+   * When true, mutations (to-do toggle, mark complete) are persisted only to
+   * local component state and the `updateApplicant` API call is skipped.
+   * Used by `adminPage` when the dashboard is rendering MOCK_APPLICANTS so
+   * UI mutations don't flicker through a failed network round-trip.
+   */
+  mockMode?: boolean;
+  /**
+   * Mock-mode-only callback. When `mockMode` is true, the table reports each
+   * applicant mutation upwards so the parent can update its single source of
+   * truth (`allApplicants`). The table's own local `applicantData` snapshot
+   * gets re-derived from the parent every render, so without this we'd lose
+   * the mutation on the next React render.
+   */
+  onMockApplicantChange?: (applicant: Applicant) => void;
 };
 
 /**
@@ -144,6 +184,8 @@ export function ApplicationTable({
   error: errorProp = null,
   onCompleteToggle,
   setSuccessAlert,
+  mockMode = false,
+  onMockApplicantChange,
 }: ApplicationTableProps) {
   // ── UI state ──────────────────────────────────────────────────────────
   /** Whether the entire table section is collapsed (hidden). */
@@ -152,6 +194,8 @@ export function ApplicationTable({
   const [sorting, setSorting] = useState<SortingState>([]);
   /** Map of row IDs → whether their expanded detail panel is open. */
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
+  /** Map of row IDs → whether the row is currently in edit mode. */
+  const [editingRows, setEditingRows] = useState<Record<string, boolean>>({});
   /** Cached pixel heights of each expanded panel (used for CSS transitions). */
   const [expandedHeights, setExpandedHeights] = useState<Record<string, number>>({});
 
@@ -182,7 +226,7 @@ export function ApplicationTable({
       clientNumber: a.applicantNumber,
       clientName: a.applicantName,
       dateSubmitted: a.dateSubmitted.toLocaleDateString("en-CA"),
-      status: parseStatus(a.status),
+      status: deriveDisplayStatus(a.status, a.isCompleted),
       dateOfBirth: a.dateOfBirth.toLocaleDateString("en-CA"),
       education: a.educationStatus,
       employment: a.employmentStatus,
@@ -219,8 +263,39 @@ export function ApplicationTable({
   }, [applications]);
 
   /**
+   * Apply Maya's V2 auto-status rule: any time an admin enriches an applicant
+   * by adding/toggling a to-do or adding a note, advance their status to
+   * "Under Review" if it was still the default "Need to Review". Statuses
+   * already promoted past that ("Under Review", "Reviewed") are left alone.
+   *
+   * Completed applicants are skipped entirely — once `isCompleted` is true,
+   * the row's terminal state is "Reviewed" and admin enrichment must not
+   * silently downgrade it back to "Under Review" (which would make the pill
+   * flicker between green and grey on legacy rows whose stored status field
+   * is still the default "Need to Review").
+   */
+  const advanceStatusOnEnrichment = (current: string, applicantIsCompleted: boolean): string => {
+    if (applicantIsCompleted) return current;
+    return current === "Need to Review" ? "Under Review" : current;
+  };
+
+  /** Generate a stable-enough id for new to-do items. */
+  const generateTodoId = (): string =>
+    "todo-" + Date.now().toString() + "-" + Math.random().toString(36).slice(2, 8);
+
+  /** Format a Date for the notes log (matches existing seed data: M/D/YYYY). */
+  const formatNoteDate = (d: Date): string =>
+    `${(d.getMonth() + 1).toString()}/${d.getDate().toString()}/${d.getFullYear().toString()}`;
+
+  /**
    * Toggle a to-do item for a specific client and persist the change to backend.
    * Uses optimistic UI update, then rolls back if the API call fails.
+   *
+   * Per V2 dashboard design (Maya, "Adding To-do or Notes should turn the Status
+   * to 'Under Review'"), interacting with an applicant's to-dos auto-advances
+   * their status from "Need to Review" → "Under Review". The transition is
+   * one-way and only fires from "Need to Review"; statuses already promoted to
+   * "Under Review" or finalized as "Reviewed" stay put.
    */
   const handleToggleTodo = async (clientNumber: string, todoId: string) => {
     const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
@@ -231,18 +306,55 @@ export function ApplicationTable({
       todo.id === todoId ? { ...todo, completed: !todo.completed } : todo,
     );
 
-    // Optimistic update so the checkbox responds immediately.
+    const previousStatus = applicant.status;
+    const nextStatus = advanceStatusOnEnrichment(previousStatus, applicant.isCompleted);
+    const statusChanged = nextStatus !== previousStatus;
+
+    // Optimistic update so the checkbox (and status pill, if it changed) respond immediately.
     setTodosByClient((prev) => ({
       ...prev,
       [clientNumber]: updatedTodos,
     }));
+    if (statusChanged) {
+      setApplications((prev) =>
+        prev.map((a) =>
+          a.clientNumber === clientNumber ? { ...a, status: parseStatus(nextStatus) } : a,
+        ),
+      );
+    }
+
+    // In mock mode there's no backend to persist to. Push the mutation up to
+    // the parent — its `allApplicants` is the source the table re-derives
+    // from each render, so without this the optimistic update gets clobbered.
+    //
+    // We ALSO update our local `rawApplicants` synchronously: the parent's
+    // re-render lands a tick later via the `applicantData` prop, but the very
+    // next click reads `rawApplicants.find(...)` and would otherwise see a
+    // stale `status`, preventing further `advanceStatusOnEnrichment`
+    // transitions (e.g. an applicant that was just moved from Reviewed →
+    // Need to Review wouldn't advance to Under Review on the next toggle).
+    if (mockMode) {
+      setRawApplicants((prev) =>
+        prev.map((a) =>
+          a.applicantNumber === clientNumber
+            ? { ...a, todos: updatedTodos, status: nextStatus }
+            : a,
+        ),
+      );
+      onMockApplicantChange?.({
+        ...applicant,
+        todos: updatedTodos,
+        status: nextStatus,
+      });
+      return;
+    }
 
     const result = await updateApplicant({
       _id: applicant._id,
       applicantNumber: applicant.applicantNumber,
       applicantName: applicant.applicantName,
       dateSubmitted: applicant.dateSubmitted,
-      status: applicant.status,
+      status: nextStatus,
       dateOfBirth: applicant.dateOfBirth,
       race: applicant.race,
       gender: applicant.gender,
@@ -262,11 +374,18 @@ export function ApplicationTable({
     });
 
     if (!result.success) {
-      // Revert optimistic UI update if persistence fails.
+      // Revert optimistic UI updates if persistence fails.
       setTodosByClient((prev) => ({
         ...prev,
         [clientNumber]: previousTodos,
       }));
+      if (statusChanged) {
+        setApplications((prev) =>
+          prev.map((a) =>
+            a.clientNumber === clientNumber ? { ...a, status: parseStatus(previousStatus) } : a,
+          ),
+        );
+      }
       alert(
         "Failed to update to-do status. Please try again. Error: " +
           (typeof result.error === "string" ? result.error : "Unknown error"),
@@ -275,13 +394,14 @@ export function ApplicationTable({
       return;
     }
 
-    // Keep local applicant snapshots consistent with the persisted todos.
+    // Keep local applicant snapshots consistent with the persisted todos + status.
     setRawApplicants((prev) =>
       prev.map((a) =>
         a.applicantNumber === clientNumber
           ? {
               ...a,
               todos: updatedTodos,
+              status: nextStatus,
             }
           : a,
       ),
@@ -292,6 +412,7 @@ export function ApplicationTable({
           ? {
               ...a,
               todos: updatedTodos,
+              status: parseStatus(nextStatus),
             }
           : a,
       ),
@@ -299,15 +420,39 @@ export function ApplicationTable({
   };
 
   /**
-   * Toggle `isCompleted` for the applicant at the given row index.
-   * Calls `updateApplicant` to persist the change, then re-fetches.
+   * Toggle `isCompleted` for the applicant identified by clientNumber.
+   * Calls `updateApplicant` to persist the change, then triggers a parent re-fetch.
+   *
+   * Looked up by clientNumber rather than row index so the expanded card can
+   * call this without knowing its position in the (possibly sorted/paginated) table.
    */
-  const handleToggleComplete = async (rowIndex: number) => {
-    const applicant = rawApplicants[rowIndex];
+  const handleToggleComplete = async (clientNumber: string) => {
+    const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
     if (!applicant) return;
 
     const newIsCompleted = !applicant.isCompleted;
     const newStatus = newIsCompleted ? "Reviewed" : "Need to Review";
+
+    // In mock mode, push the mutation up so the parent moves the row between
+    // tables, then surface the toast as if it succeeded. Also keep local
+    // `rawApplicants` in lock-step so subsequent clicks (e.g. an immediate
+    // todo toggle) read the freshly-reset status instead of stale data.
+    if (mockMode) {
+      setRawApplicants((prev) =>
+        prev.map((a) =>
+          a.applicantNumber === clientNumber
+            ? { ...a, isCompleted: newIsCompleted, status: newStatus }
+            : a,
+        ),
+      );
+      onMockApplicantChange?.({
+        ...applicant,
+        isCompleted: newIsCompleted,
+        status: newStatus,
+      });
+      setSuccessAlert?.("Application status updated successfully!");
+      return;
+    }
 
     const result = await updateApplicant({
       _id: applicant._id,
@@ -347,12 +492,14 @@ export function ApplicationTable({
   };
 
   // After the DOM updates, measure the natural height of each expanded panel
-  // so we can animate max-height transitions smoothly.
+  // so we can animate max-height transitions smoothly. Re-measures whenever
+  // anything that changes the panel's content height changes — edit mode
+  // toggles (form fields are taller than text), the underlying applications
+  // (e.g. a new todo / note was added), or the persisted-todos map.
   useLayoutEffect(() => {
     const heights: Record<string, number> = {};
     Object.entries(expandedRefs.current).forEach(([rowId, wrapper]) => {
       if (wrapper) {
-        // Get the height of the child content
         const child = wrapper.firstElementChild as HTMLElement;
         if (child) {
           heights[rowId] = child.scrollHeight;
@@ -360,7 +507,339 @@ export function ApplicationTable({
       }
     });
     setExpandedHeights(heights);
-  }, [expandedRows]);
+  }, [expandedRows, editingRows, applications, todosByClient]);
+
+  // Track child-content height via ResizeObserver so the panel still grows
+  // when state owned by `ExpandedRowContent` itself changes — e.g. the user
+  // clicking "Add To-do" or "Add note", which reveals an inline input row
+  // that the parent's deps-based useLayoutEffect above doesn't see. Without
+  // this the new input row gets clipped by the previously-measured
+  // max-height and the user "doesn't see anything pop up".
+  useEffect(() => {
+    if (typeof ResizeObserver === "undefined") return;
+    const observers: ResizeObserver[] = [];
+    Object.entries(expandedRefs.current).forEach(([rowId, wrapper]) => {
+      if (!wrapper) return;
+      const child = wrapper.firstElementChild as HTMLElement | null;
+      if (!child) return;
+      const observer = new ResizeObserver(() => {
+        const next = child.scrollHeight;
+        setExpandedHeights((prev) => (prev[rowId] === next ? prev : { ...prev, [rowId]: next }));
+      });
+      observer.observe(child);
+      observers.push(observer);
+    });
+    return () => {
+      observers.forEach((o) => {
+        o.disconnect();
+      });
+    };
+  }, [expandedRows, editingRows, applications]);
+
+  /**
+   * Append a new to-do item to an applicant. Persists via `updateApplicant`
+   * (or `onMockApplicantChange` in mock mode) and applies the
+   * `advanceStatusOnEnrichment` rule.
+   */
+  const handleAddTodo = async (clientNumber: string, label: string) => {
+    const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
+    if (!applicant) return;
+
+    const previousTodos = todosByClient[clientNumber] ?? applicant.todos ?? [];
+    const newTodo: TodoItem = { id: generateTodoId(), label, completed: false };
+    const updatedTodos = [...previousTodos, newTodo];
+
+    const previousStatus = applicant.status;
+    const nextStatus = advanceStatusOnEnrichment(previousStatus, applicant.isCompleted);
+    const statusChanged = nextStatus !== previousStatus;
+
+    // Optimistic update.
+    setTodosByClient((prev) => ({ ...prev, [clientNumber]: updatedTodos }));
+    if (statusChanged) {
+      setApplications((prev) =>
+        prev.map((a) =>
+          a.clientNumber === clientNumber ? { ...a, status: parseStatus(nextStatus) } : a,
+        ),
+      );
+    }
+
+    if (mockMode) {
+      setRawApplicants((prev) =>
+        prev.map((a) =>
+          a.applicantNumber === clientNumber
+            ? { ...a, todos: updatedTodos, status: nextStatus }
+            : a,
+        ),
+      );
+      onMockApplicantChange?.({ ...applicant, todos: updatedTodos, status: nextStatus });
+      return;
+    }
+
+    const result = await updateApplicant({
+      _id: applicant._id,
+      applicantNumber: applicant.applicantNumber,
+      applicantName: applicant.applicantName,
+      dateSubmitted: applicant.dateSubmitted,
+      status: nextStatus,
+      dateOfBirth: applicant.dateOfBirth,
+      race: applicant.race,
+      gender: applicant.gender,
+      email: applicant.email,
+      address: applicant.address,
+      phoneNumber: applicant.phoneNumber,
+      housingStatus: applicant.housingStatus,
+      educationStatus: applicant.educationStatus,
+      employmentStatus: applicant.employmentStatus,
+      convictionDetails: applicant.convictionDetails,
+      aidRequested: applicant.aidRequested,
+      otherAidRequested: applicant.otherAidRequested,
+      additionalComments: applicant.additionalComments,
+      todos: updatedTodos,
+      notes: applicant.notes,
+      isCompleted: applicant.isCompleted,
+    });
+
+    if (!result.success) {
+      // Rollback optimistic state.
+      setTodosByClient((prev) => ({ ...prev, [clientNumber]: previousTodos }));
+      if (statusChanged) {
+        setApplications((prev) =>
+          prev.map((a) =>
+            a.clientNumber === clientNumber ? { ...a, status: parseStatus(previousStatus) } : a,
+          ),
+        );
+      }
+      alert(
+        "Failed to add to-do. Please try again. Error: " +
+          (typeof result.error === "string" ? result.error : "Unknown error"),
+      );
+      console.error("Failed to add to-do:", result.error);
+      return;
+    }
+
+    setRawApplicants((prev) =>
+      prev.map((a) =>
+        a.applicantNumber === clientNumber ? { ...a, todos: updatedTodos, status: nextStatus } : a,
+      ),
+    );
+    setApplications((prev) =>
+      prev.map((a) =>
+        a.clientNumber === clientNumber
+          ? { ...a, todos: updatedTodos, status: parseStatus(nextStatus) }
+          : a,
+      ),
+    );
+  };
+
+  /**
+   * Append a new dated note to an applicant's history log. Same persistence
+   * + auto-status-transition flow as `handleAddTodo`.
+   */
+  const handleAddNote = async (clientNumber: string, content: string) => {
+    const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
+    if (!applicant) return;
+
+    const previousNotes = applicant.notes ?? [];
+    const updatedNotes = [...previousNotes, { date: formatNoteDate(new Date()), content }];
+
+    const previousStatus = applicant.status;
+    const nextStatus = advanceStatusOnEnrichment(previousStatus, applicant.isCompleted);
+    const statusChanged = nextStatus !== previousStatus;
+
+    // Optimistic update — push the new note into `applications` so the
+    // Notes/History list in the expanded card renders it immediately. Without
+    // this, even though `rawApplicants` and the backend both pick up the
+    // note, the render layer reads `row.original.notes` from `applications`
+    // and the new entry never appears until a full refetch.
+    setApplications((prev) =>
+      prev.map((a) =>
+        a.clientNumber === clientNumber
+          ? {
+              ...a,
+              notes: updatedNotes,
+              status: statusChanged ? parseStatus(nextStatus) : a.status,
+            }
+          : a,
+      ),
+    );
+
+    if (mockMode) {
+      setRawApplicants((prev) =>
+        prev.map((a) =>
+          a.applicantNumber === clientNumber
+            ? { ...a, notes: updatedNotes, status: nextStatus }
+            : a,
+        ),
+      );
+      onMockApplicantChange?.({ ...applicant, notes: updatedNotes, status: nextStatus });
+      return;
+    }
+
+    const result = await updateApplicant({
+      _id: applicant._id,
+      applicantNumber: applicant.applicantNumber,
+      applicantName: applicant.applicantName,
+      dateSubmitted: applicant.dateSubmitted,
+      status: nextStatus,
+      dateOfBirth: applicant.dateOfBirth,
+      race: applicant.race,
+      gender: applicant.gender,
+      email: applicant.email,
+      address: applicant.address,
+      phoneNumber: applicant.phoneNumber,
+      housingStatus: applicant.housingStatus,
+      educationStatus: applicant.educationStatus,
+      employmentStatus: applicant.employmentStatus,
+      convictionDetails: applicant.convictionDetails,
+      aidRequested: applicant.aidRequested,
+      otherAidRequested: applicant.otherAidRequested,
+      additionalComments: applicant.additionalComments,
+      todos: applicant.todos,
+      notes: updatedNotes,
+      isCompleted: applicant.isCompleted,
+    });
+
+    if (!result.success) {
+      if (statusChanged) {
+        setApplications((prev) =>
+          prev.map((a) =>
+            a.clientNumber === clientNumber ? { ...a, status: parseStatus(previousStatus) } : a,
+          ),
+        );
+      }
+      alert(
+        "Failed to add note. Please try again. Error: " +
+          (typeof result.error === "string" ? result.error : "Unknown error"),
+      );
+      console.error("Failed to add note:", result.error);
+      return;
+    }
+
+    setRawApplicants((prev) =>
+      prev.map((a) =>
+        a.applicantNumber === clientNumber ? { ...a, notes: updatedNotes, status: nextStatus } : a,
+      ),
+    );
+    setApplications((prev) =>
+      prev.map((a) =>
+        a.clientNumber === clientNumber
+          ? { ...a, notes: updatedNotes, status: parseStatus(nextStatus) }
+          : a,
+      ),
+    );
+  };
+
+  /**
+   * Persist edits made in the expanded card's edit form. In live mode calls
+   * `updateApplicant`; in mock mode forwards the new state up to the parent
+   * via `onMockApplicantChange`. Either way, exits edit mode on success and
+   * surfaces a success toast.
+   */
+  const handleSaveEdit = async (clientNumber: string, patch: ApplicantEditPatch, rowId: string) => {
+    const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
+    if (!applicant) return;
+
+    // The edit form returns dateOfBirth as a yyyy-mm-dd string from `<input type="date">`;
+    // convert to a Date for the Applicant type. Fall back to the previous value
+    // if the user blanked it out.
+    const parsedDob =
+      patch.dateOfBirth.length > 0 ? new Date(patch.dateOfBirth) : applicant.dateOfBirth;
+    const nextApplicant: Applicant = {
+      ...applicant,
+      applicantName: patch.applicantName,
+      dateOfBirth: parsedDob,
+      race: patch.race,
+      gender: patch.gender,
+      email: patch.email,
+      address: patch.address,
+      phoneNumber: patch.phoneNumber,
+      housingStatus: patch.housingStatus,
+      educationStatus: patch.educationStatus,
+      employmentStatus: patch.employmentStatus,
+      convictionDetails: patch.convictionDetails,
+      aidRequested: patch.aidRequested,
+      otherAidRequested: patch.otherAidRequested,
+      additionalComments: patch.additionalComments,
+    };
+
+    if (mockMode) {
+      setRawApplicants((prev) =>
+        prev.map((a) => (a.applicantNumber === clientNumber ? nextApplicant : a)),
+      );
+      onMockApplicantChange?.(nextApplicant);
+      setEditingRows((prev) => ({ ...prev, [rowId]: false }));
+      setSuccessAlert?.("Application updated successfully!");
+      return;
+    }
+
+    const result = await updateApplicant({
+      _id: nextApplicant._id,
+      applicantNumber: nextApplicant.applicantNumber,
+      applicantName: nextApplicant.applicantName,
+      dateSubmitted: nextApplicant.dateSubmitted,
+      status: nextApplicant.status,
+      dateOfBirth: nextApplicant.dateOfBirth,
+      race: nextApplicant.race,
+      gender: nextApplicant.gender,
+      email: nextApplicant.email,
+      address: nextApplicant.address,
+      phoneNumber: nextApplicant.phoneNumber,
+      housingStatus: nextApplicant.housingStatus,
+      educationStatus: nextApplicant.educationStatus,
+      employmentStatus: nextApplicant.employmentStatus,
+      convictionDetails: nextApplicant.convictionDetails,
+      aidRequested: nextApplicant.aidRequested,
+      otherAidRequested: nextApplicant.otherAidRequested,
+      additionalComments: nextApplicant.additionalComments,
+      todos: nextApplicant.todos,
+      notes: nextApplicant.notes,
+      isCompleted: nextApplicant.isCompleted,
+    });
+
+    if (result.success) {
+      setEditingRows((prev) => ({ ...prev, [rowId]: false }));
+      onCompleteToggle?.();
+      setSuccessAlert?.("Application updated successfully!");
+    } else {
+      alert(
+        "Failed to save edits. Please try again. Error: " +
+          (typeof result.error === "string" ? result.error : "Unknown error"),
+      );
+      console.error("Failed to save applicant edits:", result.error);
+    }
+  };
+
+  /**
+   * Generate a PDF of the applicant record and trigger a browser download.
+   * Uses dynamic import for `@react-pdf/renderer` so the (~500KB) library is
+   * pulled in lazily only when an admin actually downloads — keeps the main
+   * dashboard bundle small.
+   */
+  const handleDownloadPDF = async (clientNumber: string) => {
+    const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
+    if (!applicant) return;
+
+    try {
+      const { pdf } = await import("@react-pdf/renderer");
+      const persistedTodos = todosByClient[clientNumber] ?? applicant.todos;
+      const blob = await pdf(
+        <ApplicantPDF applicant={applicant} todos={persistedTodos} />,
+      ).toBlob();
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      const safeName = applicant.applicantName.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+      link.download = `applicant-${applicant.applicantNumber}-${safeName}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Failed to generate applicant PDF:", err);
+      alert("Failed to generate PDF. Please try again.");
+    }
+  };
 
   // ── Column definitions for @tanstack/react-table ─────────────────────
   const columns: ColumnDef<ApplicationRowData>[] = [
@@ -385,52 +864,64 @@ export function ApplicationTable({
     {
       id: "actions",
       header: "Actions",
-      cell: ({ row }) => (
-        <div className={styles.actionsCell}>
-          {!isCompleted ? (
+      cell: ({ row }) => {
+        const isExpanded = expandedRows[row.id] ?? false;
+        const isEditing = editingRows[row.id] ?? false;
+        return (
+          <div className={styles.actionsCell}>
             <button
-              className={styles.markCompleteButton}
+              className={styles.iconButton}
               onClick={(e) => {
                 e.stopPropagation();
-                void handleToggleComplete(row.index);
+                toggleRowExpanded(row.id);
               }}
+              aria-label={isExpanded ? "Hide application details" : "View application details"}
+              aria-pressed={isExpanded}
+              title={isExpanded ? "Hide details" : "View details"}
             >
-              <span>
-                <Image src="/admin_checkmark_light.svg" alt="Checkmark" width={20} height={20} />
-              </span>
-              <span>Complete</span>
+              <Image
+                src={isExpanded ? "/eyeWithSlash.svg" : "/eye.svg"}
+                width={24}
+                height={24}
+                alt=""
+                className={styles.iconImage}
+              />
             </button>
-          ) : (
             <button
-              className={styles.completedButton}
+              className={styles.iconButton}
               onClick={(e) => {
                 e.stopPropagation();
-                void handleToggleComplete(row.index);
+                // Clicking Edit expands the row (so the form is visible) and flips the
+                // expanded card into edit mode. Toggling again exits edit mode in place.
+                setExpandedRows((prev) => ({ ...prev, [row.id]: true }));
+                setEditingRows((prev) => ({ ...prev, [row.id]: !prev[row.id] }));
               }}
+              aria-label="Edit application"
+              aria-pressed={isEditing}
+              title="Edit application"
             >
-              <span>
-                <Image src="/admin_checkmark_dark.svg" alt="Checkmark" width={20} height={20} />
-              </span>
-              <span>Completed</span>
+              <Image src="/edit.svg" width={24} height={24} alt="" className={styles.iconImage} />
             </button>
-          )}
-          <button
-            className={styles.actionButton}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            aria-label="Download application"
-          >
-            <Image
-              src={"/ic_download.svg"}
-              width={24}
-              height={24}
-              alt="Download application"
-              className={styles.blueFilter}
-            />
-          </button>
-        </div>
-      ),
+            <button
+              className={styles.iconButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                void handleDownloadPDF(row.original.clientNumber);
+              }}
+              aria-label="Download application as PDF"
+              title="Download application as PDF"
+            >
+              <Image
+                src="/ic_download.svg"
+                width={24}
+                height={24}
+                alt=""
+                className={styles.iconImage}
+              />
+            </button>
+          </div>
+        );
+      },
     },
   ];
 
@@ -545,11 +1036,17 @@ export function ApplicationTable({
                           tabIndex={0}
                           aria-expanded={isExpanded}
                           onClick={() => {
+                            // Don't collapse the row while the user is mid-edit
+                            // — collapsing discards unsaved draft state in the
+                            // ExpandedRowContent form. They must use Save or
+                            // Cancel to leave edit mode first.
+                            if (editingRows[row.id]) return;
                             toggleRowExpanded(row.id);
                           }}
                           onKeyDown={(event) => {
                             if (event.key === "Enter" || event.key === " ") {
                               event.preventDefault();
+                              if (editingRows[row.id]) return;
                               toggleRowExpanded(row.id);
                             }
                           }}
@@ -582,6 +1079,23 @@ export function ApplicationTable({
                                   todos={persistedTodos}
                                   onToggleTodo={(todoId) => {
                                     void handleToggleTodo(clientNumber, todoId);
+                                  }}
+                                  onAddTodo={(label) => {
+                                    void handleAddTodo(clientNumber, label);
+                                  }}
+                                  onAddNote={(content) => {
+                                    void handleAddNote(clientNumber, content);
+                                  }}
+                                  isCompleted={Boolean(isCompleted)}
+                                  onToggleComplete={() => {
+                                    void handleToggleComplete(clientNumber);
+                                  }}
+                                  isEditing={editingRows[row.id] ?? false}
+                                  onSaveEdit={(patch) => {
+                                    void handleSaveEdit(clientNumber, patch, row.id);
+                                  }}
+                                  onCancelEdit={() => {
+                                    setEditingRows((prev) => ({ ...prev, [row.id]: false }));
                                   }}
                                 />
                               )}

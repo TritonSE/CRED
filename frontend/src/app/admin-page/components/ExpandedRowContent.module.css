@@ -5,7 +5,13 @@
   padding: 24px;
   max-width: 1121px;
   width: 100%;
-  height: 825px;
+  /*
+   * Use min-height so the panel keeps its visual baseline in view mode but
+   * can grow when edit-mode form controls (inputs/selects/textareas) push
+   * the content past 825px. Without this the bottom action row (Save / Cancel)
+   * gets clipped below the panel's fixed height in edit mode.
+   */
+  min-height: 825px;
   position: relative;
   border-bottom: 1px solid #b4b4b4;
   background-color: #ffffff;
@@ -24,6 +30,188 @@
   flex-direction: column;
   gap: 24px;
   padding-left: 24px;
+}
+
+/* Wraps the "Mark as complete" button at the bottom of the right column. */
+.completeActionRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.markCompleteButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  height: 32px;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #175892;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.markCompleteButton:hover {
+  background-color: #0f3d66;
+}
+
+.completedButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  height: 32px;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #d9d9d9;
+  color: #484848;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.completedButton:hover {
+  background-color: #c4c4c4;
+}
+
+/* ── Edit-mode form controls ──────────────────────────────────────── */
+
+.editInput,
+.editSelect,
+.editTextarea {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  color: #0c2b35;
+  padding: 6px 10px;
+  border: 1px solid #b4b4b4;
+  border-radius: 6px;
+  background-color: #ffffff;
+  transition: border-color 0.15s ease;
+  width: 100%;
+}
+
+.editInput:focus,
+.editSelect:focus,
+.editTextarea:focus {
+  outline: none;
+  border-color: #175892;
+  box-shadow: 0 0 0 2px rgba(23, 88, 146, 0.15);
+}
+
+.editTextarea {
+  resize: vertical;
+  min-height: 64px;
+}
+
+.editAidList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editAidItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  color: #0c2b35;
+  cursor: pointer;
+}
+
+.editAidItem input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #175892;
+  cursor: pointer;
+}
+
+/* Save / Cancel buttons in the bottom action row. */
+.editActions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.saveButton {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  height: 32px;
+  padding: 4px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #175892;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.saveButton:hover {
+  background-color: #0f3d66;
+}
+
+.cancelButton {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  height: 32px;
+  padding: 4px 16px;
+  border: 1px solid #175892;
+  border-radius: 8px;
+  background: transparent;
+  color: #175892;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.cancelButton:hover {
+  background-color: rgba(23, 88, 146, 0.08);
+}
+
+/*
+ * Inline add-todo / add-note layouts. The to-do row keeps the input + Add +
+ * Cancel buttons on a single line; the note column stacks the textarea above
+ * its action row since notes can run multiple lines.
+ */
+.inlineAddRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.inlineAddRow .editInput {
+  flex: 1 1 auto;
+}
+
+.inlineAddColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inlineAddActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 .expandedSection {
