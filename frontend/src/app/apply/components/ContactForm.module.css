@@ -112,6 +112,10 @@
   display: none;
 }
 
+.footerMobile {
+  display: none;
+}
+
 @media (max-width: 402px) {
   .formOuter {
     margin: 20px auto;

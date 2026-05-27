@@ -95,7 +95,6 @@ export const ContactForm = function ContactForm({ initialData, onBack, onNext }:
         <div className={styles.footer}>
           <div className={styles.buttonGroup}>
             <BackButton
-              disabled={!isFormValid}
               onClick={() => {
                 onBack({ email, phone, commentsQuestions });
               }}
@@ -115,7 +114,6 @@ export const ContactForm = function ContactForm({ initialData, onBack, onNext }:
       <div className={styles.footerMobile}>
         <div className={styles.buttonGroup}>
           <BackButton
-            disabled={!isFormValid}
             onClick={() => {
               onBack({ email, phone, commentsQuestions });
             }}
