@@ -37,7 +37,7 @@
 }
 
 .about-title {
-  font-family: "Inter" sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
@@ -60,7 +60,7 @@
   text-align: center;
   margin: 0 auto;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 300;
   line-height: 1.5;
   padding: 0;
   max-width: 1027px;
@@ -75,7 +75,7 @@
 /* Vision Section */
 
 .about-vision-section {
-  background-color: #ffffff;
+  background-color: #faf8f6;
   padding: 2rem 1rem;
 }
 
@@ -241,7 +241,7 @@
   font-weight: 700;
   color: #004377;
   margin-bottom: 1.5rem;
-  text-align: left;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
