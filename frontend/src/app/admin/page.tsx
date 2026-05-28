@@ -1,10 +1,14 @@
 "use client";
 
+import { ProtectedRoute } from "../components/ProtectedRoute";
+
 export default function AdminPage() {
   return (
-    <main>
-      <h1>Admin Dashboard</h1>
-      <p>Welcome! You are logged in.</p>
-    </main>
+    <ProtectedRoute>
+      <main>
+        <h1>Admin Dashboard</h1>
+        <p>Welcome! You are logged in.</p>
+      </main>
+    </ProtectedRoute>
   );
 }

@@ -1,6 +1,8 @@
 import express from "express";
 
 import * as ApplicantController from "../controllers/applicant";
+import { requireAuth } from "../util/auth";
+import { requireTurnstile } from "../util/turnstile";
 import * as ApplicantValidator from "../validators/applicant";
 
 /**
@@ -10,15 +12,30 @@ import * as ApplicantValidator from "../validators/applicant";
 const router = express.Router();
 
 // List endpoint with optional pagination/sort query params.
-router.get("/", ApplicantController.getAllApplicants);
+router.get("/", requireAuth, ApplicantController.getAllApplicants);
 
 // Read a single applicant by document id.
-router.get("/:id", ApplicantController.getApplicant);
-// Create a new applicant record.
-router.post("/", ApplicantValidator.createApplicant, ApplicantController.createApplicant);
+router.get("/:id", requireAuth, ApplicantController.getApplicant);
+// Create a new applicant record (public, needs anti-spam).
+router.post(
+  "/",
+  requireTurnstile,
+  ApplicantValidator.createApplicant,
+  ApplicantController.createApplicant,
+);
 // Full-record update by id.
-router.put("/:id", ApplicantValidator.updateApplicant, ApplicantController.updateApplicant);
+router.put(
+  "/:id",
+  requireAuth,
+  ApplicantValidator.updateApplicant,
+  ApplicantController.updateApplicant,
+);
 // Delete by id with body/id validation.
-router.delete("/:id", ApplicantValidator.removeApplicant, ApplicantController.removeApplicant);
+router.delete(
+  "/:id",
+  requireAuth,
+  ApplicantValidator.removeApplicant,
+  ApplicantController.removeApplicant,
+);
 
 export default router;
