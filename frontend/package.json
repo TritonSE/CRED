@@ -14,7 +14,6 @@
     "prepare": "cd .. && husky"
   },
   "dependencies": {
-    "@marsidev/react-turnstile": "^1.5.2",
     "@tanstack/react-table": "^8.21.3",
     "@tritonse/tse-constellation": "^0.0.22",
     "firebase": "^12.12.1",

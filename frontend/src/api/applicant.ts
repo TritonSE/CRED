@@ -104,7 +104,6 @@ export type CreateApplicantRequest = {
   todos?: { id: string; label: string; completed: boolean }[];
   notes?: { date: string; content: string }[];
   isCompleted?: boolean;
-  turnstileToken?: string;
 };
 
 export type UpdateApplicantRequest = {

@@ -2,7 +2,6 @@ import express from "express";
 
 import * as ApplicantController from "../controllers/applicant";
 import { requireAuth } from "../util/auth";
-import { requireTurnstile } from "../util/turnstile";
 import * as ApplicantValidator from "../validators/applicant";
 
 /**
@@ -17,12 +16,7 @@ router.get("/", requireAuth, ApplicantController.getAllApplicants);
 // Read a single applicant by document id.
 router.get("/:id", requireAuth, ApplicantController.getApplicant);
 // Create a new applicant record (public, needs anti-spam).
-router.post(
-  "/",
-  requireTurnstile,
-  ApplicantValidator.createApplicant,
-  ApplicantController.createApplicant,
-);
+router.post("/", ApplicantValidator.createApplicant, ApplicantController.createApplicant);
 // Full-record update by id.
 router.put(
   "/:id",

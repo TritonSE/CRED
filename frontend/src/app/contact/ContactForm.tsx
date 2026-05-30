@@ -1,6 +1,5 @@
 "use client";
 
-import { Turnstile } from "@marsidev/react-turnstile";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
@@ -123,7 +122,6 @@ export default function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [turnstileToken, setTurnstileToken] = useState<string>("");
 
   const hasErrors = useMemo(() => Object.values(errors).some(Boolean), [errors]);
   const isReadyToSubmit = useMemo(() => {
@@ -171,8 +169,7 @@ export default function ContactForm() {
 
     setIsSubmitting(true);
     try {
-      const payload = { ...normalizedValues, turnstileToken };
-      const result = await sendContactMessage(payload);
+      const result = await sendContactMessage(normalizedValues);
       if (!result.success) {
         setSubmitError(result.error);
         return;
@@ -293,20 +290,11 @@ export default function ContactForm() {
               ) : null}
             </div>
 
-            <div className={styles.field}>
-              <Turnstile
-                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "1x00000000000000000000AA"}
-                onSuccess={(token) => {
-                  setTurnstileToken(token);
-                }}
-              />
-            </div>
-
             <div className={styles.formActions}>
               <button
                 type="submit"
                 className={styles.primaryButton}
-                disabled={!isReadyToSubmit || isSubmitting || !turnstileToken}
+                disabled={!isReadyToSubmit || isSubmitting}
               >
                 {isSubmitting ? "Sending..." : "Submit"}
               </button>

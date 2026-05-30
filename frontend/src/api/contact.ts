@@ -7,7 +7,6 @@ export type SendContactRequest = {
   email: string;
   subject: string;
   message: string;
-  turnstileToken?: string;
 };
 
 export type SendContactResponse = {
