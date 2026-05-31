@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import { auth } from "./firebase";
 
@@ -38,4 +38,11 @@ export async function login(email: string, password: string): Promise<AuthResult
     }
     return { ok: false, code: "UNKNOWN", message: "Something went wrong. Please try again." };
   }
+}
+
+/**
+ * Sign out from Firebase.
+ */
+export async function logout(): Promise<void> {
+  await signOut(auth);
 }
