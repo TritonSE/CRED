@@ -56,6 +56,7 @@ export const NeedInterestsForm = function NeedInterestsForm({
               type="text"
               className={styles.textField}
               value={context}
+              placeholder="Type Here..."
               onChange={(e) => {
                 setContext(e.target.value);
               }}

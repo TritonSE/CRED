@@ -502,7 +502,12 @@
 
 .selectOption:hover {
   background: #f4f4f4;
-  border-left-color: #000000;
+  border-left: solid 2px black;
+}
+
+.selectOption[aria-selected="true"] {
+  background: #f4f4f4;
+  border-left: solid 2px black;
 }
 
 .optionRow input[type="radio"]:hover,
@@ -589,6 +594,9 @@
 .formFooterMobile {
   display: none;
 }
+.mobileText {
+  display: none;
+}
 
 @media (max-width: 1000px) {
   .fieldTop,
@@ -644,6 +652,7 @@
   .fieldTop h4,
   .fieldMiddle h4 {
     font-size: 14px;
+    color: #484848;
   }
   .fieldTop .shortField {
     height: 77px;
@@ -657,10 +666,11 @@
     padding: 10px 12px;
     gap: 175px;
     border: 1px solid #d1d5db;
+    color: #484848;
   }
   .datePlaceholder {
     font-size: 14px;
-    color: #9ca3af;
+    color: #484848;
     left: 0px;
     padding: 10px 12px;
   }
@@ -670,8 +680,34 @@
     color: #909090;
   }
   .selectMenu {
+    top: 101%;
     height: 400%;
+    border: 1px solid #d1d5db;
+    border-radius: 0;
   }
+  .customSelect .selectTrigger .selectValue,
+  .customSelect .selectMenu .selectOption {
+    border: none;
+    border-radius: 0;
+    color: #5a5a5a;
+  }
+  .customSelect .selectMenu .selectOption {
+    border: none;
+    border-radius: 0;
+    color: #5a5a5a;
+    padding: 14px 20px;
+  }
+
+  .customSelect .selectMenu .selectOption:hover {
+    background: #f4f4f4;
+    border-left: solid 2px black;
+  }
+
+  .customSelect .selectMenu .selectOption[aria-selected="true"] {
+    background: #f4f4f4;
+    border-left: solid 2px black;
+  }
+
   .fieldSection .fullWidthField h4 {
     font-size: 14px;
   }
@@ -681,7 +717,7 @@
     width: 100%;
     max-width: 331px;
     height: 48px;
-    color: #909090;
+    color: #484848;
     border: 1px solid #d1d5db;
   }
   .fieldSection {
@@ -691,11 +727,17 @@
     font-size: 14px;
     line-height: 150%;
   }
+  .desktopText {
+    display: none;
+  }
+  .mobileText {
+    display: block;
+  }
   .fieldSection .questionBlock .optionRow span,
   .fieldSection .questionBlock .otherRow span,
   .fieldSection .questionBlock .otherRow input[type="text"] {
     font-size: 14px;
-    color: #5a5a5a;
+    color: #484848;
     line-height: 150%;
   }
   .fieldSection .questionBlock .optionRow input[type="checkbox"],

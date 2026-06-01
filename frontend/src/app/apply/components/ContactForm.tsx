@@ -70,8 +70,17 @@ export const ContactForm = function ContactForm({ initialData, onBack, onNext }:
             </p>
             <input
               type="text"
-              className={styles.textField}
+              className={`${styles.textField} ${styles.desktopText}`}
               value={phone}
+              onChange={(e) => {
+                setPhone(e.target.value);
+              }}
+            />
+            <input
+              type="text"
+              className={`${styles.textField} ${styles.mobileText}`}
+              value={phone}
+              placeholder="Phone Number"
               onChange={(e) => {
                 setPhone(e.target.value);
               }}
@@ -82,9 +91,18 @@ export const ContactForm = function ContactForm({ initialData, onBack, onNext }:
             <p className={styles.contactText}>Any additional comments or questions?</p>
             <input
               type="text"
-              className={styles.textField}
+              className={`${styles.textField} ${styles.desktopText}`}
               value={commentsQuestions}
               placeholder="Enter any additional comments or questions here"
+              onChange={(e) => {
+                setCommentsQuestions(e.target.value);
+              }}
+            />
+            <input
+              type="text"
+              className={`${styles.textField} ${styles.mobileText}`}
+              value={commentsQuestions}
+              placeholder="Type here..."
               onChange={(e) => {
                 setCommentsQuestions(e.target.value);
               }}

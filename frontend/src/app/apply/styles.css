@@ -60,6 +60,7 @@
 }
 
 .apply-intro {
+  max-width: 274px;
   font-family: var(--font-lato), Lato, sans-serif;
   color: #ffffff;
   text-align: center;

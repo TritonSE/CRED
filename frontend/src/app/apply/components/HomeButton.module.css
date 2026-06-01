@@ -25,3 +25,15 @@
   outline: 2px solid #ffb341;
   outline-offset: 2px;
 }
+
+@media (max-width: 402px) {
+  .homebutton {
+    width: 100%;
+    max-width: 130px;
+    height: 39px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 150%;
+    border-radius: 5px;
+  }
+}

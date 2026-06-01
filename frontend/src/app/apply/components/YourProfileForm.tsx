@@ -337,8 +337,12 @@ export const YourProfileForm = function YourProfileForm({
             </div>
 
             <div className={`${styles.questionBlock} ${styles.employmentBlock}`}>
-              <h4>
+              <h4 className={styles.desktopText}>
                 What is your current employment status?
+                <span className={styles.required}>*</span>
+              </h4>
+              <h4 className={styles.mobileText}>
+                What is your current employment status? (Select all that apply)
                 <span className={styles.required}>*</span>
               </h4>
               <label className={styles.optionRow}>
@@ -389,7 +393,8 @@ export const YourProfileForm = function YourProfileForm({
                     setEmployment((prev) => toggleSetMember(prev, "unemployed", e.target.checked));
                   }}
                 />
-                <span>Unemployed/Currently looking for work</span>
+                <span className={styles.desktopText}>Unemployed/Currently looking for work</span>
+                <span className={styles.mobileText}>Unemployed/Looking for work</span>
               </label>
               <label className={styles.otherRow}>
                 <input
@@ -419,8 +424,12 @@ export const YourProfileForm = function YourProfileForm({
             </div>
 
             <div className={`${styles.questionBlock} ${styles.educationBlock}`}>
-              <h4>
+              <h4 className={styles.desktopText}>
                 What best describes your current education status?
+                <span className={styles.required}>*</span>
+              </h4>
+              <h4 className={styles.mobileText}>
+                What best describes your current education status? (Select all that apply)
                 <span className={styles.required}>*</span>
               </h4>
               <label className={styles.optionRow}>
@@ -433,7 +442,8 @@ export const YourProfileForm = function YourProfileForm({
                     setEducation((prev) => toggleSetMember(prev, "enrolled", e.target.checked));
                   }}
                 />
-                <span>Currently enrolled in school or training</span>
+                <span className={styles.desktopText}>Currently enrolled in school or training</span>
+                <span className={styles.mobileText}>Currently enrolled in school/training</span>
               </label>
               <label className={styles.optionRow}>
                 <input
@@ -445,7 +455,8 @@ export const YourProfileForm = function YourProfileForm({
                     setEducation((prev) => toggleSetMember(prev, "planning", e.target.checked));
                   }}
                 />
-                <span>Planning to enroll in school or training</span>
+                <span className={styles.desktopText}>Planning to enroll in school or training</span>
+                <span className={styles.mobileText}>Planning to enroll in school/training</span>
               </label>
               <label className={styles.optionRow}>
                 <input
@@ -499,8 +510,12 @@ export const YourProfileForm = function YourProfileForm({
             </div>
 
             <div className={`${styles.questionBlock} ${styles.housingBlock}`}>
-              <h4>
+              <h4 className={styles.desktopText}>
                 Which option best describes your current housing situation?
+                <span className={styles.required}>*</span>
+              </h4>
+              <h4 className={styles.mobileText}>
+                What best describes your current housing situation? (Select one)
                 <span className={styles.required}>*</span>
               </h4>
               <label className={styles.optionRow}>
@@ -525,7 +540,10 @@ export const YourProfileForm = function YourProfileForm({
                     setHousing(e.target.value);
                   }}
                 />
-                <span>I am temporarily staying with friends or family</span>
+                <span className={styles.desktopText}>
+                  I am temporarily staying with friends or family
+                </span>
+                <span className={styles.mobileText}>Temporarily staying with friends/family</span>
               </label>
               <label className={styles.optionRow}>
                 <input
@@ -537,7 +555,10 @@ export const YourProfileForm = function YourProfileForm({
                     setHousing(e.target.value);
                   }}
                 />
-                <span>I am in transitional housing or a shelter</span>
+                <span className={styles.desktopText}>
+                  I am in transitional housing or a shelter
+                </span>
+                <span className={styles.mobileText}>Transitional housing/shelter</span>
               </label>
               <label className={styles.optionRow}>
                 <input
@@ -549,7 +570,8 @@ export const YourProfileForm = function YourProfileForm({
                     setHousing(e.target.value);
                   }}
                 />
-                <span>I am currently experiencing homelessness</span>
+                <span className={styles.desktopText}>I am currently experiencing homelessness</span>
+                <span className={styles.mobileText}>Currently unhoused</span>
               </label>
               <label className={styles.otherRow}>
                 <input

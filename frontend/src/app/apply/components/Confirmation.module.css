@@ -50,7 +50,7 @@
 /* Section 2 */
 .sectionTwo {
   width: 100%;
-  height: 216px;
+  min-height: 216px;
   background: #f9fafb;
   border-radius: 20px;
   padding: 30px 50px; /* 50px left padding */
@@ -59,11 +59,11 @@
 }
 
 .sectionTwoInner {
-  width: 713px;
-  height: 156px;
+  width: 100%;
+  max-width: 713px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 20px;
 }
 
 .subHeading {
@@ -75,16 +75,16 @@
 }
 
 .stepList {
-  width: 713px;
-  height: 108px;
+  width: 100%;
+  max-width: 713px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
 }
 
 .stepItem {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
 }
 
@@ -108,12 +108,14 @@
 }
 
 .stepText {
+  flex: 1;
+  min-width: 0;
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #000000;
   margin: 0;
-  white-space: nowrap; /* Prevents text from wrapping */
+  line-height: 1.4;
 }
 
 /* Section 3 */
@@ -193,5 +195,96 @@
   .footer {
     font-size: 100%;
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 402px) {
+  .checkmarkIcon {
+    width: 28px;
+    height: 28px;
+  }
+  .formInner {
+    padding: 40px 0px;
+    gap: 20px;
+  }
+  .successCircle {
+    width: 56px;
+    height: 56px;
+  }
+  .successTitle {
+    font-size: 24px;
+    width: 330px;
+  }
+  .sectionTwo {
+    margin: 0px auto;
+    width: 100%;
+    max-width: 320px;
+    background: #f9fafb;
+    border-radius: 20px;
+    padding: 20px 12px;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .sectionTwoInner {
+    width: 100%;
+    max-width: 307px;
+    gap: 12px;
+  }
+  .subHeading {
+    font-size: 16px;
+  }
+  .stepList {
+    width: 100%;
+    max-width: 307px;
+    gap: 15px;
+  }
+  .stepItem {
+    width: 100%;
+  }
+  .stepText {
+    font-size: 14px;
+  }
+  .stepNumberContainer {
+    margin-top: 5px;
+  }
+  .sectionThree {
+    margin: 0px auto;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    padding: 20px 12px;
+    gap: 10px;
+  }
+  .sectionThreeInner {
+    width: 100%;
+    max-width: 307px;
+  }
+  .detailsContent {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .detailsContent .detailRow span,
+  .detailsContent .emailUpdateText {
+    font-size: 14px;
+  }
+  .submittedDate {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .labelLight {
+    width: 100%;
+    max-width: 180px;
+    margin-right: 10px;
+  }
+  .dynamicValue {
+    padding-left: 0;
+  }
+  .emailUpdateText {
+    font-size: 14px;
   }
 }

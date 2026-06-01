@@ -27,6 +27,7 @@ export const Confirmation = function Confirmation({
         <section className={styles.sectionOne}>
           <div className={styles.successCircle}>
             <svg
+              className={styles.checkmarkIcon}
               width="50"
               height="50"
               viewBox="0 0 24 24"
@@ -69,7 +70,7 @@ export const Confirmation = function Confirmation({
               <span className={styles.labelLight}>Client ID/Reference Number:</span>
               <span className={styles.dynamicValue}>{clientId}</span>
             </div>
-            <div className={styles.detailRow}>
+            <div className={`${styles.detailRow} ${styles.submittedDate}`}>
               <span className={styles.labelBold}>Date Submitted:</span>
               <span className={styles.dynamicValue}>{dateSubmitted}</span>
             </div>
