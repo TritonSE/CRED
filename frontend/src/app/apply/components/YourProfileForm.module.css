@@ -747,6 +747,14 @@
     border-radius: 1px;
     border: 1px solid #d1d5db;
   }
+
+  .fieldSection .questionBlock .optionRow input[type="checkbox"]::before,
+  .fieldSection .questionBlock .otherRow input[type="checkbox"]::before,
+  .fieldSection .questionBlock .optionRow input[type="radio"]::before,
+  .fieldSection .questionBlock .otherRow input[type="radio"]::before {
+    width: 15px;
+    height: 15px;
+  }
   .fieldSection .questionBlock .optionRow,
   .fieldSection .questionBlock .otherRow {
     padding: 10px 12px 10px 15px;

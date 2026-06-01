@@ -308,6 +308,12 @@
     border-radius: 1px;
     border: 1px solid #cccccc;
   }
+
+  .questionBlock .optionRow input[type="checkbox"]::before,
+  .questionBlock .otherRow input[type="checkbox"]::before {
+    width: 15px;
+    height: 15px;
+  }
   .questionBlock .optionRow span,
   .questionBlock .otherRow span {
     font-size: 14px;
