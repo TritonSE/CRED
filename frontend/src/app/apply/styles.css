@@ -1,7 +1,7 @@
 .apply-top-section {
   position: relative;
   min-height: 180px;
-  height: 260px;
+  height: 328px;
   display: flex;
   align-items: center;
 
@@ -60,7 +60,7 @@
 }
 
 .apply-intro {
-  max-width: 274px;
+  width: 100%;
   font-family: var(--font-lato), Lato, sans-serif;
   color: #ffffff;
   text-align: center;
