@@ -109,16 +109,35 @@
 
 /* Stack cards into a single column on narrower screens */
 @media (max-width: 900px) {
+  .supportHeader {
+    align-items: flex-start;
+  }
+
+  .supportTitle,
+  .supportSubtitle {
+    text-align: left;
+  }
+
   .supportRow {
     flex-direction: column;
   }
 
+  /* Let each card hug its content instead of using the tall fixed desktop height. */
   .supportCard {
-    min-height: 220px;
+    height: auto;
+    min-height: 200px;
+  }
+
+  /* Put the content in flow so the card grows to fit the text. */
+  .supportCardContent {
+    position: relative;
+    gap: 12px;
+    padding: 28px 24px;
   }
 
   .supportCardTitle {
-    font-size: clamp(22px, 4vw, 32px);
+    font-size: clamp(22px, 6vw, 28px);
+    padding-top: 12px;
   }
 
   .supportCardText {
