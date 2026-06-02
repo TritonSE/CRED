@@ -97,6 +97,8 @@
     line-height: 150%;
   }
   .apply-intro {
+    width: 100%;
+    max-width: 274px;
     font-size: 16px;
     line-height: 150%;
   }
