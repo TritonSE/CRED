@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import styles from "./Collaborator.module.css";
 import { CollaboratorPopup } from "./CollaboratorPopup";
@@ -16,7 +16,7 @@ type CollabPopupData = {
 type CollabData = {
   id: number;
   name: string;
-  category: "Education" | "Housing" | "Development";
+  category: "Education" | "Housing" | "Development" | "Other Resources";
   logo: string;
   data: CollabPopupData;
 };
@@ -279,24 +279,8 @@ const collaboratorsData: CollabData[] = [
   },
   {
     id: 16,
-    name: "Father Joe's Villages",
-    category: "Development",
-    logo: "/home/fjv.png",
-    data: {
-      titles: ["Village Health Center", "Food Services", "Family Services"],
-      program: "1501 Imperial Ave. San Diego, CA 92101",
-      description: [
-        "Provides medical, dental, and behavioral health care and Substance Use Disorder treatment.",
-        "Offers meals and lunch programs as well as a drive-through food pantry.",
-        "Includes therapeutic childcare, allowing parents to pursue housing and employment.",
-      ],
-      link: "https://my.neighbor.org/",
-    },
-  },
-  {
-    id: 17,
     name: "Alpha Project",
-    category: "Development",
+    category: "Other Resources",
     logo: "/home/alpha.png",
     data: {
       titles: ["Wheels of Change", "Living with Dignity", "Family Shelter Program"],
@@ -310,9 +294,25 @@ const collaboratorsData: CollabData[] = [
     },
   },
   {
+    id: 17,
+    name: "Father Joe's Villages",
+    category: "Other Resources",
+    logo: "/home/fjv.png",
+    data: {
+      titles: ["Village Health Center", "Food Services", "Family Services"],
+      program: "1501 Imperial Ave. San Diego, CA 92101",
+      description: [
+        "Provides medical, dental, and behavioral health care and Substance Use Disorder treatment.",
+        "Offers meals and lunch programs as well as a drive-through food pantry.",
+        "Includes therapeutic childcare, allowing parents to pursue housing and employment.",
+      ],
+      link: "https://my.neighbor.org/",
+    },
+  },
+  {
     id: 18,
     name: "Catholic Charities",
-    category: "Development",
+    category: "Other Resources",
     logo: "/home/catholic_charities.png",
     data: {
       titles: [
@@ -333,24 +333,8 @@ const collaboratorsData: CollabData[] = [
   },
   {
     id: 19,
-    name: "Second Chance",
-    category: "Development",
-    logo: "/home/second_chance.png",
-    data: {
-      titles: ["Reentry Support", "Collaborative Court Programs", "Youth Garden"],
-      program: "6145 Imperial Ave, San Diego, CA 92114",
-      description: [
-        "Services include assistance with housing, counseling, and building life skills, aimed at individuals with criminal records and high-risk youth.",
-        "Designed to assist incarcerated individuals with a successful transition to their community.",
-        "The Youth Garden provides eight-weeks of hands-on urban farming, nutrition classes and workforce training. Youth earn a weekly stipend and gain job readiness skills.",
-      ],
-      link: "https://www.secondchanceprogram.org",
-    },
-  },
-  {
-    id: 20,
     name: "Anti-Recidivism Coalition",
-    category: "Development",
+    category: "Other Resources",
     logo: "/home/arc.png",
     data: {
       titles: ["Policy Advocacy", "Supportive Services", "Mentorship and Workshops"],
@@ -361,6 +345,22 @@ const collaboratorsData: CollabData[] = [
         "Formerly incarcerated staff go inside prisons to provide workshops on parole preparation, reentry planning, and mentorship.",
       ],
       link: "https://antirecidivism.org",
+    },
+  },
+  {
+    id: 20,
+    name: "Second Chance",
+    category: "Other Resources",
+    logo: "/home/second_chance.png",
+    data: {
+      titles: ["Reentry Support", "Collaborative Court Programs", "Youth Garden"],
+      program: "6145 Imperial Ave, San Diego, CA 92114",
+      description: [
+        "Services include assistance with housing, counseling, and building life skills, aimed at individuals with criminal records and high-risk youth.",
+        "Designed to assist incarcerated individuals with a successful transition to their community.",
+        "The Youth Garden provides eight-weeks of hands-on urban farming, nutrition classes and workforce training. Youth earn a weekly stipend and gain job readiness skills.",
+      ],
+      link: "https://www.secondchanceprogram.org",
     },
   },
 ];
@@ -375,7 +375,6 @@ export default function Collaborator() {
     null,
   );
 
-  const filteredCollaborators = collaboratorsData.filter((collab) => collab.category === activeTab);
   const selectedCollabData = selectedCollab ? getCollab(selectedCollab.id) : null;
 
   const getIcon = (tabName: string, isActive: boolean) => {
@@ -432,79 +431,120 @@ export default function Collaborator() {
         </svg>
       );
     }
+    if (tabName === "Other Resources") {
+      return (
+        <svg
+          width="52"
+          height="52"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke={color}
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+      );
+    }
   };
 
+  const renderGrid = (category: string) => (
+    <div className={styles.grid}>
+      {collaboratorsData
+        .filter((collab) => collab.category === category)
+        .map((collab) => (
+          <div
+            key={collab.id}
+            className={styles.logoCard}
+            role="button"
+            tabIndex={0}
+            onClick={() => {
+              setSelectedCollab({ id: collab.id, category: collab.category });
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setSelectedCollab({ id: collab.id, category: collab.category });
+              }
+            }}
+          >
+            <div className={styles.imageWrapper}>
+              <Image
+                src={collab.logo}
+                alt={`${collab.name} logo`}
+                fill
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw"
+                unoptimized={true}
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+            <p className={styles.logoName}>{collab.name}</p>
+          </div>
+        ))}
+    </div>
+  );
+
   const tabs = {
-    Education: "Select a partner to view services",
-    Housing: "Transitional and Permanent",
+    Education: "Select a partner to learn more.",
+    Housing: "Select a partner to learn more.",
     Development: "Jobs, Training, Entrepreneurship",
+    "Other Resources": "Additional Support and Services",
   };
 
   return (
     <div className={styles.sectionContainer}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Types of Aid and Partner Programs</h2>
+        <h2 className={styles.title}>Types of Aid and Partners</h2>
         <p className={styles.subtitle}>
           We connect you with education, housing, development, entrepreneurship, and re-entry
           resources for your specific needs. Discover our full list of San Diego-based partners and
-          explore the types of resources we offer. Select each partner to learn more.
+          explore the types of resources we offer.
         </p>
+        <p className={styles.subtitlePrompt}>Select each partner to learn more.</p>
       </div>
 
       <div className={styles.contentWrapper}>
-        {/* Separated Tabs */}
+        {/* Separated Tabs (act as an accordion on mobile) */}
         <div className={styles.tabsContainer}>
           {Object.entries(tabs).map(([tab, description]) => (
-            <button
-              key={tab}
-              className={`${styles.tab} ${activeTab === tab ? styles.activeTab : ""}`}
-              onClick={() => {
-                setActiveTab(tab);
-              }}
-            >
-              {getIcon(tab, activeTab === tab)}
-              <div className={styles.tabTextContainer}>
-                <span className={styles.tabName}>{tab}</span>
-                <span className={styles.tabDescription}>{description}</span>
-              </div>
-            </button>
+            <Fragment key={tab}>
+              <button
+                className={`${styles.tab} ${activeTab === tab ? styles.activeTab : ""}`}
+                aria-expanded={activeTab === tab}
+                onClick={() => {
+                  setActiveTab((current) => (current === tab ? "" : tab));
+                }}
+              >
+                {getIcon(tab, activeTab === tab)}
+                <div className={styles.tabTextContainer}>
+                  <span className={styles.tabName}>{tab}</span>
+                  <span className={styles.tabDescription}>{description}</span>
+                </div>
+                <svg
+                  className={styles.chevron}
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#175892"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+
+              {/* Inline panel shown when expanded on mobile */}
+              <div className={styles.mobilePanel}>{activeTab === tab ? renderGrid(tab) : null}</div>
+            </Fragment>
           ))}
         </div>
 
-        {/* Large White Panel with Logos */}
-        <div className={styles.logoPanel}>
-          <div className={styles.grid}>
-            {filteredCollaborators.map((collab) => (
-              <div
-                key={collab.id}
-                className={styles.logoCard}
-                role="button"
-                tabIndex={0}
-                onClick={() => {
-                  setSelectedCollab({ id: collab.id, category: collab.category });
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setSelectedCollab({ id: collab.id, category: collab.category });
-                  }
-                }}
-              >
-                <div className={styles.imageWrapper}>
-                  <Image
-                    src={collab.logo}
-                    alt={`${collab.name} logo`}
-                    fill
-                    sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw"
-                    unoptimized={true}
-                    style={{ objectFit: "contain" }}
-                  />
-                </div>
-                <p className={styles.logoName}>{collab.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Large White Panel with Logos (desktop) */}
+        <div className={styles.logoPanel}>{renderGrid(activeTab)}</div>
       </div>
       {/* The selected collab name is the name of the program, e.g. not San Diego City College, but City Scholar's */}
       {selectedCollabData && (

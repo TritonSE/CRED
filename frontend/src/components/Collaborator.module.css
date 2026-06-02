@@ -33,6 +33,15 @@
   overflow-wrap: break-word;
 }
 
+.subtitlePrompt {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-size: clamp(16px, 1.4vw, 20px);
+  color: #000000;
+  margin: 16px 0 0 0;
+  width: 100%;
+}
+
 .contentWrapper {
   display: flex;
   flex-direction: row;
@@ -78,14 +87,6 @@
   text-align: left;
 }
 
-/* Stack tabs vertically on phone screens */
-@media (max-width: 480px) {
-  .tabsContainer {
-    flex-direction: column;
-    gap: 8px;
-  }
-}
-
 .tab {
   width: 100%;
   height: 5rem;
@@ -115,8 +116,22 @@
   border-radius: 10px 10px 10px 10px;
 }
 
-.activeTab + .tab {
+/* The panel sits between tabs in the DOM (display:none on desktop), so target
+   the tab two siblings after the active one to keep the divider hidden. */
+.activeTab + .mobilePanel + .tab {
   border-top: none;
+}
+
+.chevron {
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  display: none;
+}
+
+/* Inline accordion panel: hidden on desktop, shown under the active row on mobile. */
+.mobilePanel {
+  display: none;
 }
 
 .logoPanel {
@@ -137,7 +152,7 @@
 
 @media (min-width: 900px) {
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -164,4 +179,96 @@
   max-width: 248px;
   aspect-ratio: 248 / 222;
   border-radius: 7px;
+}
+
+/* Accordion layout on tablet/phone screens.
+   Placed last so these rules win over the base styles above on equal specificity. */
+@media (max-width: 900px) {
+  .header {
+    text-align: left;
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tabsContainer {
+    width: 100%;
+  }
+
+  .tab {
+    height: auto;
+    padding: 22px 4px;
+    gap: 18px;
+    border-top: 1px solid #175892;
+    border-radius: 0;
+  }
+
+  .tab:first-child {
+    border-top: none;
+  }
+
+  /* Neutralize the desktop "filled blue box" highlight in the accordion. */
+  .activeTab {
+    background: transparent;
+    color: #175892;
+    border-radius: 0;
+    border-bottom: none;
+  }
+
+  /* Keep a divider under the active row (overrides the desktop hide rule). */
+  .activeTab + .mobilePanel + .tab {
+    border-top: 1px solid #175892;
+  }
+
+  /* Force the category + chevron icons to stay blue, even when the row is active. */
+  .tab svg {
+    stroke: #175892;
+  }
+
+  .tabName {
+    font-size: clamp(24px, 6vw, 30px);
+    color: #175892;
+  }
+
+  .tabDescription {
+    font-size: 16px;
+    color: #000000;
+  }
+
+  .chevron {
+    display: block;
+  }
+
+  .activeTab .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Hide the desktop side panel; show the partners inline under the active row. */
+  .logoPanel {
+    display: none;
+  }
+
+  .mobilePanel {
+    display: block;
+    padding: 4px 0 28px;
+  }
+
+  /* Collapsed rows render an empty panel — don't let it add vertical space. */
+  .mobilePanel:empty {
+    padding: 0;
+  }
+
+  /* List each partner as a full-width card inside the expanded tab. */
+  .mobilePanel .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mobilePanel .logoCard {
+    border: 1px solid #d6e2ee;
+    border-radius: 10px;
+    padding: 20px 12px;
+  }
 }
