@@ -513,7 +513,10 @@ export default function Collaborator() {
                 className={`${styles.tab} ${activeTab === tab ? styles.activeTab : ""}`}
                 aria-expanded={activeTab === tab}
                 onClick={() => {
-                  setActiveTab((current) => (current === tab ? "" : tab));
+                  const isMobile =
+                    typeof window !== "undefined" &&
+                    window.matchMedia("(max-width: 900px)").matches;
+                  setActiveTab((current) => (isMobile && current === tab ? "" : tab));
                 }}
               >
                 {getIcon(tab, activeTab === tab)}
