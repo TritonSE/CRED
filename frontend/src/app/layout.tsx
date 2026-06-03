@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} antialiased overflow-x-hidden`}>
+      <body className={`${lato.variable} antialiased overflow-x-hidden`} suppressHydrationWarning>
         <AppShell>{children}</AppShell>
       </body>
     </html>
