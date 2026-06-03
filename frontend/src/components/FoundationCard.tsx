@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import styles from "./FoundationCard.module.css";
 
@@ -13,6 +13,33 @@ export type FoundationCardProps = {
 
 export const FoundationCard: React.FC<FoundationCardProps> = ({ iconURL, title, textBody }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [contentHeight, setContentHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mediaQuery = window.matchMedia("(max-width: 1024px)");
+    const handleResize = (event: MediaQueryListEvent | MediaQueryList) => {
+      setIsMobile("matches" in event ? event.matches : mediaQuery.matches);
+    };
+    handleResize(mediaQuery);
+
+    mediaQuery.onchange = handleResize as
+      | ((this: MediaQueryList, ev: MediaQueryListEvent) => void)
+      | null;
+    return () => {
+      mediaQuery.onchange = null;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!contentRef.current) return;
+    const measuredHeight = contentRef.current.scrollHeight + 20; // include vertical padding
+    if (measuredHeight !== contentHeight) {
+      setContentHeight(measuredHeight);
+    }
+  }, [textBody, isOpen, contentHeight]);
 
   // Match "Step X: " prefix to handle mobile hiding per Figma
   const stepMatch = /^(Step \d+:\s*)(.*)$/.exec(title);
@@ -57,8 +84,13 @@ export const FoundationCard: React.FC<FoundationCardProps> = ({ iconURL, title, 
         </div>
       </div>
 
-      <div className={styles.cardTextWrapper}>
-        <p className={styles.cardText}>{textBody}</p>
+      <div
+        className={styles.cardTextWrapper}
+        style={isMobile ? { height: isOpen ? contentHeight : 0 } : undefined}
+      >
+        <div className={styles.cardTextInner} ref={contentRef}>
+          <p className={styles.cardText}>{textBody}</p>
+        </div>
       </div>
     </div>
   );

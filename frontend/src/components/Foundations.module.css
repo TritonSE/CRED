@@ -23,6 +23,7 @@
 /* Card Grid Container */
 .cardGrid {
   display: flex;
+  align-items: stretch;
   justify-content: center;
   gap: 38px;
   width: 100%;
@@ -90,6 +91,18 @@
 
 .cardWrapper {
   width: 100%;
+  display: flex;
+  flex: 1 1 0;
+  align-items: stretch;
+}
+
+/* Ensure the inner card component fills the wrapper height so all cards match */
+.cardWrapper :global(.cardContainer) {
+  height: 100%;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* ===== Responsive ===== */
@@ -109,14 +122,19 @@
     font-size: 40px;
   }
 
+  /* For medium widths, stack cards vertically (one column) and span full width */
   .cardGrid {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     gap: 28px;
   }
 
   .card {
-    flex: 1 1 calc(50% - 28px);
+    flex: none;
+    width: 100%;
     max-width: none;
+    min-height: auto;
+    padding: 36px 20px;
   }
 }
 
