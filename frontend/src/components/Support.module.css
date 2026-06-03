@@ -30,7 +30,7 @@
 .supportSubtitle {
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: clamp(16px, 1.6vw, 24px);
+  font-size: clamp(16px, 1.6vw, 20px);
   line-height: 150%;
   text-align: center;
   color: #000000;
