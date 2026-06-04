@@ -16,11 +16,11 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import styles from "./adminPage.module.css";
-import { AdminHeader } from "./components/AdminHeader";
-import { ApplicationTable } from "./components/ApplicationTable";
-import { SuccessAlert } from "./components/SuccessAlert";
-import alertStyles from "./components/SuccessAlert.module.css";
+import styles from "./AdminPage.module.css";
+import { AdminHeader } from "./admin/AdminHeader";
+import { ApplicationTable } from "./admin/ApplicationTable";
+import { SuccessAlert } from "./admin/SuccessAlert";
+import alertStyles from "./admin/SuccessAlert.module.css";
 
 import type { Applicant } from "@/api/applicant";
 

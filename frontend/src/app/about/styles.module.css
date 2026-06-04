@@ -1,42 +1,41 @@
-.about-page {
+.aboutPage {
   min-height: 0;
 }
 
 /* About page hero overrides (uses shared HeroSection component). */
-.about-hero {
+.aboutHero {
   height: 260px;
 }
 
 @media (min-width: 480px) {
-  .about-hero {
+  .aboutHero {
     height: 280px;
   }
 }
 
 @media (min-width: 768px) {
-  .about-hero {
+  .aboutHero {
     height: 300px;
   }
 }
 
-.about-hero-image {
+.aboutHeroImage {
   object-position: center 40%;
 }
 
 /* Vision Section */
-
-.about-vision-section {
+.aboutVisionSection {
   background-color: #ffffff;
   padding: 2rem 1rem;
 }
 
 @media (min-width: 768px) {
-  .about-vision-section {
+  .aboutVisionSection {
     padding: 6rem 2rem;
   }
 }
 
-.about-grid {
+.aboutGrid {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -45,7 +44,7 @@
 }
 
 @media (min-width: 768px) {
-  .about-grid {
+  .aboutGrid {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
@@ -54,19 +53,19 @@
   }
 }
 
-.about-vision-wrapper {
+.aboutVisionWrapper {
   width: 100%;
   padding-right: 0;
 }
 
 @media (min-width: 768px) {
-  .about-vision-wrapper {
+  .aboutVisionWrapper {
     width: 50%;
     padding-right: 3rem;
   }
 }
 
-.about-heading {
+.aboutHeading {
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
@@ -76,31 +75,31 @@
   margin-bottom: 1.5rem;
 }
 
-.about-vision-content {
+.aboutVisionContent {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.about-vision-content p {
+.aboutVisionContent p {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   font-size: 20px;
   line-height: 150%;
 }
 
-.about-image-placeholder {
+.aboutImagePlaceholder {
   width: 100%;
 }
 
 @media (min-width: 768px) {
-  .about-image-placeholder {
+  .aboutImagePlaceholder {
     width: 50%;
     min-height: 0;
   }
 }
 
-.about-image-placeholder img {
+.aboutImagePlaceholder img {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -109,7 +108,7 @@
 }
 
 @media (min-width: 768px) {
-  .about-image-placeholder img {
+  .aboutImagePlaceholder img {
     width: 100%;
     height: 100%;
     max-width: none;
@@ -138,18 +137,18 @@
   }
 }
 
-.how-we-operate-section {
+.howWeOperateSection {
   background-color: #ffffff;
   padding: 6rem 2rem;
 }
 
-.operate-wrapper {
+.operateWrapper {
   gap: 3rem;
   width: 85%;
   margin: 0 auto;
 }
 
-.operate-heading {
+.operateHeading {
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
@@ -159,7 +158,7 @@
   margin-bottom: 1.5rem;
 }
 
-.about-operate-content {
+.aboutOperateContent {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   line-height: 150%;
@@ -190,6 +189,7 @@
     flex-direction: column;
     align-items: center;
   }
+
   .vectors {
     margin: 2rem auto;
     rotate: 90deg;
@@ -197,11 +197,12 @@
 }
 
 @media (max-width: 900px) {
-  .operate-heading {
+  .operateHeading {
     text-align: center;
     font-size: 2.5rem;
   }
-  .about-operate-content {
+
+  .aboutOperateContent {
     text-align: center;
     font-size: 1rem;
   }
