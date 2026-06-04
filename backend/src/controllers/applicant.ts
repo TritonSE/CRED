@@ -30,6 +30,23 @@ export const getApplicant: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Fields clients are allowed to sort by. Anything else falls back to the default
+// so we don't expose internal fields or pay for scans on unindexed columns.
+const ALLOWED_SORT_FIELDS = [
+  "applicantNumber",
+  "applicantName",
+  "dateSubmitted",
+  "status",
+  "createdAt",
+  "updatedAt",
+] as const;
+
+const DEFAULT_SORT_FIELD = "dateSubmitted";
+
+// Safety cap when no pagination params are supplied, to avoid returning the
+// entire collection as the dataset grows.
+const DEFAULT_MAX_LIMIT = 100;
+
 export const getAllApplicants: RequestHandler = async (req, res, next) => {
   try {
     const pageParam = req.query.page;
@@ -39,7 +56,10 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
 
     const page = typeof pageParam === "string" ? parseInt(pageParam, 10) : NaN;
     const limit = typeof limitParam === "string" ? parseInt(limitParam, 10) : NaN;
-    const sortBy = typeof sortByParam === "string" ? sortByParam : "dateCreated";
+    const requestedSortBy = typeof sortByParam === "string" ? sortByParam : DEFAULT_SORT_FIELD;
+    const sortBy = (ALLOWED_SORT_FIELDS as readonly string[]).includes(requestedSortBy)
+      ? requestedSortBy
+      : DEFAULT_SORT_FIELD;
     const order = typeof orderParam === "string" && orderParam === "asc" ? 1 : -1;
 
     // Secondary _id sort keeps ordering deterministic when sortBy values tie.
@@ -51,9 +71,10 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
     const pageProvided = pageParam !== undefined;
     const limitProvided = limitParam !== undefined;
 
-    // If both page and limit are omitted, return all applicants
+    // If both page and limit are omitted, return applicants capped at
+    // DEFAULT_MAX_LIMIT so a growing collection can't blow up the response.
     if (!pageProvided && !limitProvided) {
-      const applicants = await ApplicantModel.find().sort(sortOptions);
+      const applicants = await ApplicantModel.find().sort(sortOptions).limit(DEFAULT_MAX_LIMIT);
       res.status(200).json(applicants);
       return;
     }
@@ -199,9 +220,12 @@ export const createApplicant: RequestHandler = async (req, res, next) => {
 };
 
 export const removeApplicant: RequestHandler = async (req, res, next) => {
+  const errors = validationResult(req);
   const { id } = req.params;
 
   try {
+    validationErrorParser(errors);
+
     const result = await ApplicantModel.deleteOne({ _id: id });
 
     if (result.deletedCount === 0) {

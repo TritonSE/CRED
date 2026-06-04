@@ -11,7 +11,6 @@ import { ContactData, ContactForm } from "./components/ContactForm";
 import { NeedInterestsForm, NeedsData } from "./components/NeedInterestsForm";
 import { ProfileData, YourProfileForm } from "./components/YourProfileForm";
 
-// @ts-expect-error Next.js supports importing CSS files, but TS may lack the module declaration
 import "./styles.css";
 
 export default function ApplyPage() {

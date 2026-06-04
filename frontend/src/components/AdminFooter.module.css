@@ -1,0 +1,62 @@
+.footer {
+  background-color: #175892;
+  width: 100%;
+  height: 54px;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+.footerInner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 64px 24px 56px;
+  flex: 1;
+}
+
+/* TSE Footer */
+.tseFooter {
+  background-color: #004881;
+  border-top: 1px solid white;
+  width: 100%;
+}
+
+.tseInner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 12px 24px;
+}
+
+.tseContent {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.tseLogoWrapper {
+  position: relative;
+  height: 32px;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.tseText {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: white;
+  line-height: 1.5;
+}
+
+.tseLink {
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.tseLink:hover {
+  color: #ffb341;
+}

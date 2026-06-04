@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 import { MONGODB_URI, port } from "./config";
 import applicantRoutes from "./routes/applicant";
+import contactRoutes from "./routes/contact";
 
 import type { NextFunction, Request, Response } from "express";
 
@@ -28,35 +29,41 @@ app.use(
 
 // Mount applicant API routes under /api/applicant.
 app.use("/api/applicant", applicantRoutes);
+// Mount contact form email route under /api/contact.
+app.use("/api/contact", contactRoutes);
 
 /**
  * Error handler; all errors thrown by server are handled here.
  */
-app.use((error: unknown, req: Request, res: Response, _next: NextFunction) => {
+app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
   let statusCode = 500;
   let errorMessage = "An error has occurred.";
 
   if (isHttpError(error)) {
     statusCode = error.status;
     errorMessage = error.message;
-  } else if (error instanceof Error) {
-    errorMessage = error.message;
+  } else {
+    // Log internal errors server-side but return a generic message so we
+    // don't leak schema details, stack traces, or driver errors to clients.
+    console.error(error);
   }
 
   res.status(statusCode).json({ error: errorMessage });
 });
 
-// Server Startup Logic
-// Connect to MongoDB first; only start listening after a successful DB connection.
-
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => {
-    console.info("Connected to MongoDB (Cred_DB)!");
-    app.listen(port, () => {
-      console.info(`Server running on ${port}.`);
-    });
-  })
-  .catch(console.error);
+// Local dev only: connect to MongoDB and start the Express server.
+// On Vercel (VERCEL=1), backend/src/api/index.ts imports `app` and exports it
+// as a serverless handler — we must NOT call listen() in that environment.
+if (!process.env.VERCEL) {
+  mongoose
+    .connect(MONGODB_URI)
+    .then(() => {
+      console.info("Connected to MongoDB (Cred_DB)!");
+      app.listen(port, () => {
+        console.info(`Server running on ${port}.`);
+      });
+    })
+    .catch(console.error);
+}
 
 export default app;

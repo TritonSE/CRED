@@ -1,0 +1,55 @@
+/**
+ * AdminHeader.module.css
+ * Styles for the AdminHeader component which displays a welcome message
+ * and search bar at the top of the admin page.
+ */
+
+/* Main container using flexbox for horizontal layout */
+.flexContainer {
+  display: flex;
+  height: 40px;
+  width: 100%;
+  max-width: 1121px;
+  flex-direction: row;
+  justify-content: space-between; /* Pushes header and search to opposite ends */
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+/* Column containing the welcome heading */
+.headerColumn {
+  flex: 1 1 auto; /* Allows column to grow/shrink as needed */
+  width: auto;
+  height: 40px;
+  text-align: left;
+  align-items: center;
+}
+
+/* Typography styles for the welcome heading */
+.headingStyle {
+  margin: 0;
+  color: #004377; /* CRED brand primary blue */
+  font-size: 40px; /* Large size to match Figma design */
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: Semi Bold;
+  letter-spacing: 0%;
+}
+
+/* Column containing the search input */
+.searchColumn {
+  max-width: 552px; /* Fixed width for consistent search bar size */
+  width: 100%; /* Fixed width for consistent search bar size */
+  height: 40px;
+  align-items: center;
+  justify-content: right;
+}
+
+.searchBar {
+  background-color: transparent !important;
+}
+
+.searchBar :global(input) {
+  background-color: transparent !important;
+}

@@ -1,9 +1,8 @@
-import { Lato } from "next/font/google";
+import { Inter, Lato } from "next/font/google";
+
+import LayoutShell from "../components/LayoutShell";
 
 import type { Metadata } from "next";
-
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
 
 import "./globals.css";
 
@@ -11,6 +10,12 @@ const lato = Lato({
   weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-lato",
+});
+
+const inter = Inter({
+  weight: ["600"],
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -26,11 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} antialiased overflow-x-hidden`}>
+      <body className={`${lato.variable} ${inter.variable} antialiased overflow-x-hidden`}>
         <div className="min-h-screen w-full bg-[#faf8f6] flex flex-col overflow-x-hidden">
-          <Navbar />
-          <main className="flex-1 pt-[70px]">{children}</main>
-          <Footer />
+          <LayoutShell>{children}</LayoutShell>
         </div>
       </body>
     </html>

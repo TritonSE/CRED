@@ -15,7 +15,7 @@ const validationErrorParser = (errors: Result<ValidationError>) => {
 
     // parse through errors returned by the validator and append them to the error string
     for (const error of errors.array()) {
-      const message = typeof error.msg === "string" ? error.msg : JSON.stringify(error.msg);
+      const message: string = typeof error.msg === "string" ? error.msg : JSON.stringify(error.msg);
       errorString += `${message} `;
     }
 
