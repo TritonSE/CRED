@@ -95,6 +95,14 @@ export default function AdminPage() {
     setAllApplicants((prev) => prev.map((a) => (a._id === updated._id ? updated : a)));
   }, []);
 
+  /**
+   * Mock-mode delete channel. Drops the applicant from the single source of
+   * truth so the row disappears from whichever table it was rendered in.
+   */
+  const handleMockApplicantDelete = useCallback((id: string) => {
+    setAllApplicants((prev) => prev.filter((a) => a._id !== id));
+  }, []);
+
   const alertRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const previousAlertPositions = useRef<Record<string, DOMRect | undefined>>({});
 
@@ -172,6 +180,7 @@ export default function AdminPage() {
             setSuccessAlert={addSuccessAlert}
             mockMode={isUsingMockData}
             onMockApplicantChange={handleMockApplicantChange}
+            onMockApplicantDelete={handleMockApplicantDelete}
           />
         )}
         {showCompleted && (
@@ -186,6 +195,7 @@ export default function AdminPage() {
             setSuccessAlert={addSuccessAlert}
             mockMode={isUsingMockData}
             onMockApplicantChange={handleMockApplicantChange}
+            onMockApplicantDelete={handleMockApplicantDelete}
           />
         )}
       </main>

@@ -40,8 +40,14 @@
   padding-top: 12px;
 }
 
+/*
+ * Mark complete / completed buttons span the full width of the right column
+ * and extend left into the column's 24px padding so the button reaches the
+ * vertical divider between the two columns (per the V2 annotation).
+ */
 .markCompleteButton {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 6px;
   font-family: var(--font-lato), Lato, sans-serif;
@@ -55,6 +61,7 @@
   color: #ffffff;
   cursor: pointer;
   transition: background-color 0.15s ease;
+  width: 100%;
 }
 
 .markCompleteButton:hover {
@@ -62,7 +69,8 @@
 }
 
 .completedButton {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 6px;
   font-family: var(--font-lato), Lato, sans-serif;
@@ -76,6 +84,7 @@
   color: #484848;
   cursor: pointer;
   transition: background-color 0.15s ease;
+  width: 100%;
 }
 
 .completedButton:hover {
@@ -84,6 +93,13 @@
 
 /* ── Edit-mode form controls ──────────────────────────────────────── */
 
+/*
+ * Edit-mode inputs are visually distinct from view-mode values: filled gray
+ * rectangles per the V2 hi-fi Figma. The gray fill makes it obvious which
+ * fields are editable when the card flips into edit mode, while the static
+ * text in view mode remains on the white card background. Focus state keeps
+ * the brand-blue ring so the active field is still clearly highlighted.
+ */
 .editInput,
 .editSelect,
 .editTextarea {
@@ -92,11 +108,19 @@
   line-height: 150%;
   color: #0c2b35;
   padding: 6px 10px;
-  border: 1px solid #b4b4b4;
+  border: 1px solid transparent;
   border-radius: 6px;
-  background-color: #ffffff;
-  transition: border-color 0.15s ease;
+  background-color: #ececec;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
   width: 100%;
+}
+
+.editInput:hover,
+.editSelect:hover,
+.editTextarea:hover {
+  background-color: #e0e0e0;
 }
 
 .editInput:focus,
@@ -104,6 +128,7 @@
 .editTextarea:focus {
   outline: none;
   border-color: #175892;
+  background-color: #ffffff;
   box-shadow: 0 0 0 2px rgba(23, 88, 146, 0.15);
 }
 

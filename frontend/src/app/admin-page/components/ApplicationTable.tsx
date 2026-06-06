@@ -33,12 +33,12 @@ import {
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { updateApplicant } from "../../../api/applicant";
+import { deleteApplicant, updateApplicant } from "../../../api/applicant";
 
 import { ApplicantPDF } from "./ApplicantPDF";
 import styles from "./ApplicationTable.module.css";
 import { ExpandedRowContent } from "./ExpandedRowContent";
-import { StatusLabel } from "./StatusLabel";
+import { StatusDropdown } from "./StatusDropdown";
 
 import type { ApplicantEditPatch } from "./ExpandedRowContent";
 import type { Applicant } from "../../../api/applicant";
@@ -151,6 +151,11 @@ export type ApplicationTableProps = {
    * the mutation on the next React render.
    */
   onMockApplicantChange?: (applicant: Applicant) => void;
+  /**
+   * Mock-mode-only callback. Reports a deleted applicant's `_id` up to the
+   * parent so it can drop the row from its `allApplicants` source of truth.
+   */
+  onMockApplicantDelete?: (id: string) => void;
 };
 
 /**
@@ -186,6 +191,7 @@ export function ApplicationTable({
   setSuccessAlert,
   mockMode = false,
   onMockApplicantChange,
+  onMockApplicantDelete,
 }: ApplicationTableProps) {
   // ── UI state ──────────────────────────────────────────────────────────
   /** Whether the entire table section is collapsed (hidden). */
@@ -491,6 +497,116 @@ export function ApplicationTable({
     }
   };
 
+  /**
+   * Change an applicant's review status from the status-pill dropdown.
+   *
+   * Status drives which dashboard table the row lives in:
+   * - "Reviewed" is the terminal state → `isCompleted: true` → row moves to
+   *   the Completed Applications table.
+   * - "Need to Review" / "Under Review" → `isCompleted: false` → row moves
+   *   back up to the New Applications table.
+   *
+   * On success we trigger a parent re-fetch (live) or push the mutation up
+   * (mock) so the row migrates between tables.
+   */
+  const handleChangeStatus = async (
+    clientNumber: string,
+    nextStatus: ApplicationRowData["status"],
+  ) => {
+    const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
+    if (!applicant) return;
+
+    const nextIsCompleted = nextStatus === "Reviewed";
+
+    if (mockMode) {
+      setRawApplicants((prev) =>
+        prev.map((a) =>
+          a.applicantNumber === clientNumber
+            ? { ...a, status: nextStatus, isCompleted: nextIsCompleted }
+            : a,
+        ),
+      );
+      onMockApplicantChange?.({
+        ...applicant,
+        status: nextStatus,
+        isCompleted: nextIsCompleted,
+      });
+      setSuccessAlert?.("Application status updated successfully!");
+      return;
+    }
+
+    const result = await updateApplicant({
+      _id: applicant._id,
+      applicantNumber: applicant.applicantNumber,
+      applicantName: applicant.applicantName,
+      dateSubmitted: applicant.dateSubmitted,
+      status: nextStatus,
+      dateOfBirth: applicant.dateOfBirth,
+      race: applicant.race,
+      gender: applicant.gender,
+      email: applicant.email,
+      address: applicant.address,
+      phoneNumber: applicant.phoneNumber,
+      housingStatus: applicant.housingStatus,
+      educationStatus: applicant.educationStatus,
+      employmentStatus: applicant.employmentStatus,
+      convictionDetails: applicant.convictionDetails,
+      aidRequested: applicant.aidRequested,
+      otherAidRequested: applicant.otherAidRequested,
+      additionalComments: applicant.additionalComments,
+      todos: applicant.todos,
+      notes: applicant.notes,
+      isCompleted: nextIsCompleted,
+    });
+
+    if (result.success) {
+      onCompleteToggle?.();
+      setSuccessAlert?.("Application status updated successfully!");
+    } else {
+      alert(
+        "Failed to update application status. Please try again. Error: " +
+          (typeof result.error === "string" ? result.error : "Unknown error"),
+      );
+      console.error("Failed to update applicant status:", result.error);
+    }
+  };
+
+  /**
+   * Permanently delete an applicant after a confirmation prompt. Persists via
+   * `deleteApplicant` (live) or drops the row locally and notifies the parent
+   * (mock), then surfaces a success toast.
+   */
+  const handleDeleteApplicant = async (clientNumber: string) => {
+    const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
+    if (!applicant) return;
+
+    const confirmed = window.confirm(
+      `Delete application ${applicant.applicantNumber} (${applicant.applicantName})? This action cannot be undone.`,
+    );
+    if (!confirmed) return;
+
+    if (mockMode) {
+      setRawApplicants((prev) => prev.filter((a) => a.applicantNumber !== clientNumber));
+      setApplications((prev) => prev.filter((a) => a.clientNumber !== clientNumber));
+      onMockApplicantDelete?.(applicant._id);
+      setSuccessAlert?.("Application deleted successfully!");
+      return;
+    }
+
+    const result = await deleteApplicant(applicant._id);
+
+    if (result.success) {
+      onCompleteToggle?.();
+      setSuccessAlert?.("Application deleted successfully!");
+    } else {
+      alert(
+        "Failed to delete application. Please try again. Error: " +
+          (typeof result.error === "string" ? result.error : "Unknown error"),
+      );
+      console.error("Failed to delete applicant:", result.error);
+    }
+  };
+
   // After the DOM updates, measure the natural height of each expanded panel
   // so we can animate max-height transitions smoothly. Re-measures whenever
   // anything that changes the panel's content height changes — edit mode
@@ -540,6 +656,14 @@ export function ApplicationTable({
    * Append a new to-do item to an applicant. Persists via `updateApplicant`
    * (or `onMockApplicantChange` in mock mode) and applies the
    * `advanceStatusOnEnrichment` rule.
+   *
+   * Re-open rule (V2): if the applicant was previously marked complete,
+   * adding a new to-do is treated as the admin re-opening the case. We flip
+   * `isCompleted` back to false and force status to "Under Review" so the
+   * row moves out of the Completed Applications table and into New
+   * Applications. (Adding a *note* on a completed applicant does NOT do this
+   * — see handleAddNote — because a note is a record-keeping action, not a
+   * re-open signal.)
    */
   const handleAddTodo = async (clientNumber: string, label: string) => {
     const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
@@ -550,15 +674,30 @@ export function ApplicationTable({
     const updatedTodos = [...previousTodos, newTodo];
 
     const previousStatus = applicant.status;
-    const nextStatus = advanceStatusOnEnrichment(previousStatus, applicant.isCompleted);
-    const statusChanged = nextStatus !== previousStatus;
+    const previousIsCompleted = applicant.isCompleted;
 
-    // Optimistic update.
+    // Re-open path: completed -> Under Review + isCompleted=false. Otherwise
+    // fall back to the standard "advance from Need to Review" rule.
+    const nextIsCompleted = previousIsCompleted ? false : previousIsCompleted;
+    const nextStatus = previousIsCompleted
+      ? "Under Review"
+      : advanceStatusOnEnrichment(previousStatus, false);
+    const statusChanged = nextStatus !== previousStatus;
+    const completionChanged = nextIsCompleted !== previousIsCompleted;
+
+    // Optimistic update — also flip isCompleted on the local snapshots so the
+    // row visibly leaves the Completed table immediately on the re-open path.
     setTodosByClient((prev) => ({ ...prev, [clientNumber]: updatedTodos }));
-    if (statusChanged) {
+    if (statusChanged || completionChanged) {
       setApplications((prev) =>
         prev.map((a) =>
-          a.clientNumber === clientNumber ? { ...a, status: parseStatus(nextStatus) } : a,
+          a.clientNumber === clientNumber
+            ? {
+                ...a,
+                todos: updatedTodos,
+                status: statusChanged ? parseStatus(nextStatus) : a.status,
+              }
+            : a,
         ),
       );
     }
@@ -567,11 +706,19 @@ export function ApplicationTable({
       setRawApplicants((prev) =>
         prev.map((a) =>
           a.applicantNumber === clientNumber
-            ? { ...a, todos: updatedTodos, status: nextStatus }
+            ? { ...a, todos: updatedTodos, status: nextStatus, isCompleted: nextIsCompleted }
             : a,
         ),
       );
-      onMockApplicantChange?.({ ...applicant, todos: updatedTodos, status: nextStatus });
+      onMockApplicantChange?.({
+        ...applicant,
+        todos: updatedTodos,
+        status: nextStatus,
+        isCompleted: nextIsCompleted,
+      });
+      if (completionChanged) {
+        setSuccessAlert?.("Application moved to New Applications.");
+      }
       return;
     }
 
@@ -596,7 +743,7 @@ export function ApplicationTable({
       additionalComments: applicant.additionalComments,
       todos: updatedTodos,
       notes: applicant.notes,
-      isCompleted: applicant.isCompleted,
+      isCompleted: nextIsCompleted,
     });
 
     if (!result.success) {
@@ -619,7 +766,9 @@ export function ApplicationTable({
 
     setRawApplicants((prev) =>
       prev.map((a) =>
-        a.applicantNumber === clientNumber ? { ...a, todos: updatedTodos, status: nextStatus } : a,
+        a.applicantNumber === clientNumber
+          ? { ...a, todos: updatedTodos, status: nextStatus, isCompleted: nextIsCompleted }
+          : a,
       ),
     );
     setApplications((prev) =>
@@ -629,6 +778,12 @@ export function ApplicationTable({
           : a,
       ),
     );
+    if (completionChanged) {
+      // Trigger a parent re-fetch so the row migrates from the Completed
+      // table into the New Applications table.
+      onCompleteToggle?.();
+      setSuccessAlert?.("Application moved to New Applications.");
+    }
   };
 
   /**
@@ -739,11 +894,26 @@ export function ApplicationTable({
     const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
     if (!applicant) return;
 
-    // The edit form returns dateOfBirth as a yyyy-mm-dd string from `<input type="date">`;
-    // convert to a Date for the Applicant type. Fall back to the previous value
-    // if the user blanked it out.
+    // The edit form returns dateOfBirth as a yyyy-mm-dd string from
+    // `<input type="date">`; convert to a Date for the Applicant type. Fall
+    // back to the previous value if the user blanked it out.
+    //
+    // IMPORTANT: `new Date("2026-04-14")` parses the string as UTC midnight,
+    // which in any timezone west of UTC lands on the *previous* day in local
+    // time. The table renders dateOfBirth via `toLocaleDateString("en-CA")`
+    // (local), so the user-picked date would appear shifted back by one day.
+    // We construct the Date from numeric (year, month-1, day) so it anchors
+    // to local midnight on the picked calendar date.
+    const parseLocalIsoDate = (iso: string): Date | null => {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+      if (!match) return null;
+      const [, yearStr, monthStr, dayStr] = match;
+      return new Date(Number(yearStr), Number(monthStr) - 1, Number(dayStr));
+    };
     const parsedDob =
-      patch.dateOfBirth.length > 0 ? new Date(patch.dateOfBirth) : applicant.dateOfBirth;
+      patch.dateOfBirth.length > 0
+        ? (parseLocalIsoDate(patch.dateOfBirth) ?? applicant.dateOfBirth)
+        : applicant.dateOfBirth;
     const nextApplicant: Applicant = {
       ...applicant,
       applicantName: patch.applicantName,
@@ -859,7 +1029,14 @@ export function ApplicationTable({
     {
       accessorKey: "status",
       header: "Status",
-      cell: ({ row }) => <StatusLabel status={row.original.status} />,
+      cell: ({ row }) => (
+        <StatusDropdown
+          status={row.original.status}
+          onChange={(next) => {
+            void handleChangeStatus(row.original.clientNumber, next);
+          }}
+        />
+      ),
     },
     {
       id: "actions",
@@ -880,7 +1057,7 @@ export function ApplicationTable({
               title={isExpanded ? "Hide details" : "View details"}
             >
               <Image
-                src={isExpanded ? "/eyeWithSlash.svg" : "/eye.svg"}
+                src={isExpanded ? "/upCaret.svg" : "/downCaret.svg"}
                 width={24}
                 height={24}
                 alt=""
@@ -918,6 +1095,17 @@ export function ApplicationTable({
                 alt=""
                 className={styles.iconImage}
               />
+            </button>
+            <button
+              className={styles.iconButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                void handleDeleteApplicant(row.original.clientNumber);
+              }}
+              aria-label="Delete application"
+              title="Delete application"
+            >
+              <Image src="/trash.svg" width={24} height={24} alt="" className={styles.iconImage} />
             </button>
           </div>
         );

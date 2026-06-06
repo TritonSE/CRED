@@ -25,11 +25,13 @@
   font-family: var(--font-lato), Lato, sans-serif;
 }
 
-/* "Under Review" status - Gray theme indicating in-progress */
+/* "Under Review" status - Amber/yellow theme indicating in-progress review */
 .underReview {
   width: 115px;
-  color: #1b1b1b; /* Dark gray text */
-  background-color: #d9d9d9; /* Light gray background */
+  color: #7a4d00; /* Dark amber text — readable on the yellow background and
+                     consistent with the dark-on-light pattern used by the
+                     other pills (e.g. #561818 on pink, #02542d on green). */
+  background-color: #ffdb99; /* Warm yellow background — per V2 hi-fi spec. */
   font-size: 16px;
   font-style: normal;
   font-family: var(--font-lato), Lato, sans-serif;

@@ -1,4 +1,4 @@
-import { get, handleAPIError, post, put } from "./requests";
+import { del, get, handleAPIError, post, put } from "./requests";
 
 import type { APIResult } from "./requests";
 
@@ -222,6 +222,18 @@ export async function updateApplicant(
     const response = await put(`/api/applicant/${applicant._id}`, applicant);
     const json = (await response.json()) as ApplicantJSON;
     return { success: true, data: parseApplicant(json) };
+  } catch (error) {
+    return handleAPIError(error);
+  }
+}
+
+/**
+ * Permanently delete an applicant record by its MongoDB id.
+ */
+export async function deleteApplicant(id: string): Promise<APIResult<null>> {
+  try {
+    await del(`/api/applicant/${id}`);
+    return { success: true, data: null };
   } catch (error) {
     return handleAPIError(error);
   }
