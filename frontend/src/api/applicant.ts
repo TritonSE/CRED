@@ -173,12 +173,11 @@ export async function getApplicant(id: string): Promise<APIResult<Applicant>> {
 }
 
 /**
- * Updated to support Pagination.
- * Returns either a raw array (if no params) or a PaginatedResponse object (if params exist).
+ * Fetch applicants with an always-consistent `{ data, meta }` response shape.
  */
 export async function getAllApplicants(
   options?: GetApplicantsOptions,
-): Promise<APIResult<Applicant[] | PaginatedResponse<Applicant>>> {
+): Promise<APIResult<PaginatedResponse<Applicant>>> {
   try {
     // Construct query parameters only when they are provided by the caller.
     const params = new URLSearchParams();
@@ -191,15 +190,7 @@ export async function getAllApplicants(
     const url = queryString ? `/api/applicant?${queryString}` : `/api/applicant`;
 
     const response = await get(url);
-    const json: unknown = await response.json();
-
-    // When pagination is omitted, backend returns a plain array.
-    if (Array.isArray(json)) {
-      return { success: true, data: (json as ApplicantJSON[]).map(parseApplicant) };
-    }
-
-    // When pagination is provided, backend returns { data, meta }.
-    const result = json as {
+    const result = (await response.json()) as {
       data: ApplicantJSON[];
       meta: { total: number; page: number; totalPages: number };
     };

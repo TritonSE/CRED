@@ -181,6 +181,16 @@
   margin-top: 6px;
 }
 
+.formActionsDesktop {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.formActionsMobile {
+  display: none;
+}
+
 .primaryButton {
   background: #ffb341;
   border-radius: 5px;
@@ -361,4 +371,45 @@
 
 .assistanceLink:hover {
   text-decoration: underline;
+}
+
+/* ===== Mobile (430px and below) ===== */
+@media (max-width: 430px) {
+  .formLayout {
+    gap: 20px;
+  }
+
+  .formActionsDesktop {
+    display: none;
+  }
+
+  .formActionsMobile {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+  }
+
+  .formSubtitle {
+    font-size: 16px;
+  }
+
+  .label {
+    font-weight: 400;
+  }
+
+  .input {
+    border-color: #d1d5db;
+  }
+
+  .input::placeholder {
+    color: #d1d5db;
+  }
+
+  .textarea {
+    border-color: #d1d5db;
+  }
+
+  .textarea::placeholder {
+    color: #d1d5db;
+  }
 }

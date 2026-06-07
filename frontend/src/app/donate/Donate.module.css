@@ -16,6 +16,17 @@
   width: 100%;
 }
 
+/* Hero image object-position is page-specific. */
+.heroImage {
+  object-position: center top;
+}
+
+@media (min-width: 1024px) {
+  .heroImage {
+    object-position: center 12%;
+  }
+}
+
 /* ===== Main Content ===== */
 .mainContent {
   padding: 48px 36px;

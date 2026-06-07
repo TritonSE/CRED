@@ -1,21 +1,41 @@
-.about-page {
+.aboutPage {
   min-height: 0;
 }
 
-/* Vision Section */
+/* About page hero overrides (uses shared HeroSection component). */
+.aboutHero {
+  height: 260px;
+}
 
-.about-vision-section {
-  background-color: #faf8f6;
+@media (min-width: 480px) {
+  .aboutHero {
+    height: 280px;
+  }
+}
+
+@media (min-width: 768px) {
+  .aboutHero {
+    height: 300px;
+  }
+}
+
+.aboutHeroImage {
+  object-position: center 40%;
+}
+
+/* Vision Section */
+.aboutVisionSection {
+  background-color: #ffffff;
   padding: 2rem 1rem;
 }
 
 @media (min-width: 768px) {
-  .about-vision-section {
-    padding: 6rem 0;
+  .aboutVisionSection {
+    padding: 6rem 2rem;
   }
 }
 
-.about-grid {
+.aboutGrid {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -24,7 +44,7 @@
 }
 
 @media (min-width: 768px) {
-  .about-grid {
+  .aboutGrid {
     flex-direction: row;
     justify-content: space-between;
     align-items: center; /* Vertically centered relative to text */
@@ -33,65 +53,53 @@
   }
 }
 
-.about-vision-wrapper {
+.aboutVisionWrapper {
   width: 100%;
   padding-right: 0;
 }
 
 @media (min-width: 768px) {
-  .about-vision-wrapper {
+  .aboutVisionWrapper {
     width: 50%;
     padding-right: 3rem;
   }
 }
 
-.about-heading {
-  font-family: "Inter", sans-serif;
-  font-size: 24px;
+.aboutHeading {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 48px;
   font-weight: 700;
   color: #004377;
   margin-bottom: 1.5rem;
 }
 
-@media (min-width: 768px) {
-  .about-heading {
-    font-size: 48px;
-  }
-}
-
-.about-vision-content {
+.aboutVisionContent {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.about-vision-content p {
+.aboutVisionContent p {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 20px;
+  line-height: 150%;
 }
 
-@media (min-width: 768px) {
-  .about-vision-content p {
-    font-size: 24px;
-  }
-}
-
-.about-image {
+.aboutImagePlaceholder {
   width: 100%;
-  margin: 0 auto;
 }
 
 @media (min-width: 768px) {
-  .about-image {
-    width: 44%; /* Slightly downscaled from 50% to shrink the container footprint */
+  .aboutImagePlaceholder {
+    width: 50%;
     min-height: 0;
-    margin: 0;
   }
 }
 
-.about-image img {
+.aboutImagePlaceholder img {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -100,7 +108,7 @@
 }
 
 @media (min-width: 768px) {
-  .about-image img {
+  .aboutImagePlaceholder img {
     width: 100%;
     height: auto;
     max-width: none;
@@ -120,80 +128,35 @@
   }
 }
 
-.directorBoxes {
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
+.howWeOperateSection {
+  background-color: #ffffff;
+  padding: 6rem 2rem;
 }
 
-@media (min-width: 768px) {
-  .directorBoxes {
-    width: 86%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .directorBoxes {
-    flex-direction: row;
-    gap: 6rem;
-  }
-}
-
-/* How We Operate Section */
-
-.how-we-operate-section {
-  background-color: #faf8f6;
-  padding: 48px 36px;
-}
-
-@media (min-width: 768px) {
-  .how-we-operate-section {
-    padding: 100px 0;
-  }
-}
-
-.operate-wrapper {
+.operateWrapper {
   gap: 3rem;
   width: 90%;
   margin: 0 auto;
 }
 
-@media (min-width: 768px) {
-  .operate-wrapper {
-    width: 86%;
-  }
-}
-
-.operate-heading {
-  font-family: "Inter", sans-serif;
-  font-size: 24px;
+.operateHeading {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 3rem;
   font-weight: 700;
   color: #004377;
   margin-bottom: 1.5rem;
   text-align: center;
 }
 
-@media (min-width: 768px) {
-  .operate-heading {
-    font-size: 48px;
-  }
-}
-
-.about-operate-content {
+.aboutOperateContent {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   line-height: 1.5;
   margin-bottom: 3rem;
   font-size: 14px;
   text-align: left;
-}
-
-@media (min-width: 768px) {
-  .about-operate-content {
-    font-size: 24px;
-  }
 }
 
 .operateCards {
@@ -224,18 +187,20 @@
     flex-direction: column;
     gap: 16px;
   }
+
   .vectors {
     display: none;
   }
 }
 
-@media (max-width: 767px) {
-  .about-header-content,
-  .about-grid,
-  .directorBoxes,
-  .operate-wrapper {
-    width: 100% !important;
-    max-width: 330px !important;
-    margin: 0 auto !important;
+@media (max-width: 900px) {
+  .operateHeading {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+
+  .aboutOperateContent {
+    text-align: center;
+    font-size: 1rem;
   }
 }

@@ -1,16 +1,22 @@
 import Image from "next/image";
 
-import PageHero from "../../components/PageHero";
-
 import styles from "./Donate.module.css";
+
+import HeroSection from "@/components/HeroSection";
 
 export default function DonatePage() {
   return (
     <div className={styles.donatePage}>
-      <PageHero
+      <HeroSection
+        variant="banner"
         imageSrc="/donate-banner.jpg"
+        imageAlt="Hero background"
         title="Your Contribution Counts"
-        subtitle="We help reduce recidivism, mass incarceration, homelessness, and poverty by investing in people."
+        subtitle="Reducing recidivism, mass incarceration, homelessness, and poverty by investing in people."
+        overlayGradient="linear-gradient(to right, rgba(0, 67, 119, 0.8), rgba(30, 115, 190, 0.8))"
+        imageOpacity={0.8}
+        imageClassName={styles.heroImage}
+        priority
       />
 
       {/* Main Content */}
