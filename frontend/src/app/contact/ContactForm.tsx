@@ -187,132 +187,149 @@ export default function ContactForm() {
       {isSubmitted ? (
         <SuccessCard />
       ) : (
-        <div className={styles.card}>
-          <header className={styles.formHeader}>
-            <h2 className={styles.formTitle}>Have Questions?</h2>
-            <p className={styles.formSubtitle}>
-              For more information, please use the contact form below to connect with our team.
-            </p>
-          </header>
+        <>
+          <div className={styles.card}>
+            <header className={styles.formHeader}>
+              <h2 className={styles.formTitle}>Have Questions?</h2>
+              <p className={styles.formSubtitle}>
+                For more information, please use the contact form below to connect with our team.
+              </p>
+            </header>
 
-          <form className={styles.form} onSubmit={(e) => void onSubmit(e)} noValidate>
-            <div className={styles.gridTwoCol}>
+            <form
+              id="contact-form"
+              className={styles.form}
+              onSubmit={(e) => void onSubmit(e)}
+              noValidate
+            >
+              <div className={styles.gridTwoCol}>
+                <div className={styles.field}>
+                  <label className={styles.label} htmlFor="fullName">
+                    Full Name <span className={styles.required}>*</span>
+                  </label>
+                  <input
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    placeholder="Full Name"
+                    value={values.fullName}
+                    onChange={onChange("fullName")}
+                    className={styles.input}
+                    aria-invalid={Boolean(errors.fullName)}
+                    aria-describedby={errors.fullName ? "fullName-error" : undefined}
+                    required
+                  />
+                  {errors.fullName ? (
+                    <p id="fullName-error" className={styles.errorText} role="alert">
+                      {errors.fullName}
+                    </p>
+                  ) : null}
+                </div>
+
+                <div className={styles.field}>
+                  <label className={styles.label} htmlFor="email">
+                    Email <span className={styles.required}>*</span>
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Email Address"
+                    value={values.email}
+                    onChange={onChange("email")}
+                    className={styles.input}
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? "email-error" : undefined}
+                    required
+                  />
+                  {errors.email ? (
+                    <p id="email-error" className={styles.errorText} role="alert">
+                      {errors.email}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+
               <div className={styles.field}>
-                <label className={styles.label} htmlFor="fullName">
-                  Full Name <span className={styles.required}>*</span>
+                <label className={styles.label} htmlFor="subject">
+                  Subject <span className={styles.required}>*</span>
                 </label>
                 <input
-                  id="fullName"
-                  name="fullName"
+                  id="subject"
+                  name="subject"
                   type="text"
-                  placeholder=""
-                  value={values.fullName}
-                  onChange={onChange("fullName")}
+                  placeholder="Type subject here..."
+                  value={values.subject}
+                  onChange={onChange("subject")}
                   className={styles.input}
-                  aria-invalid={Boolean(errors.fullName)}
-                  aria-describedby={errors.fullName ? "fullName-error" : undefined}
+                  aria-invalid={Boolean(errors.subject)}
+                  aria-describedby={errors.subject ? "subject-error" : undefined}
                   required
                 />
-                {errors.fullName ? (
-                  <p id="fullName-error" className={styles.errorText} role="alert">
-                    {errors.fullName}
+                {errors.subject ? (
+                  <p id="subject-error" className={styles.errorText} role="alert">
+                    {errors.subject}
                   </p>
                 ) : null}
               </div>
 
               <div className={styles.field}>
-                <label className={styles.label} htmlFor="email">
-                  Email <span className={styles.required}>*</span>
+                <label className={styles.label} htmlFor="message">
+                  Message <span className={styles.required}>*</span>
                 </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Email Address"
-                  value={values.email}
-                  onChange={onChange("email")}
-                  className={styles.input}
-                  aria-invalid={Boolean(errors.email)}
-                  aria-describedby={errors.email ? "email-error" : undefined}
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Type your message here..."
+                  value={values.message}
+                  onChange={onChange("message")}
+                  className={styles.textarea}
+                  rows={1}
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={errors.message ? "message-error" : undefined}
                   required
                 />
-                {errors.email ? (
-                  <p id="email-error" className={styles.errorText} role="alert">
-                    {errors.email}
+                {errors.message ? (
+                  <p id="message-error" className={styles.errorText} role="alert">
+                    {errors.message}
                   </p>
                 ) : null}
               </div>
-            </div>
 
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="subject">
-                Subject <span className={styles.required}>*</span>
-              </label>
-              <input
-                id="subject"
-                name="subject"
-                type="text"
-                placeholder="Describe your reason for contact (Program Inquiry, Application Support, Partnership Opportunities, Donations)."
-                value={values.subject}
-                onChange={onChange("subject")}
-                className={styles.input}
-                aria-invalid={Boolean(errors.subject)}
-                aria-describedby={errors.subject ? "subject-error" : undefined}
-                required
-              />
-              {errors.subject ? (
-                <p id="subject-error" className={styles.errorText} role="alert">
-                  {errors.subject}
+              {hasErrors ? (
+                <p className={styles.formHint} role="status">
+                  Please fix the highlighted fields and try again.
                 </p>
               ) : null}
-            </div>
 
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="message">
-                Message <span className={styles.required}>*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                placeholder=""
-                value={values.message}
-                onChange={onChange("message")}
-                className={styles.textarea}
-                rows={1}
-                aria-invalid={Boolean(errors.message)}
-                aria-describedby={errors.message ? "message-error" : undefined}
-                required
-              />
-              {errors.message ? (
-                <p id="message-error" className={styles.errorText} role="alert">
-                  {errors.message}
+              {submitError ? (
+                <p className={styles.errorText} role="alert">
+                  {submitError}
                 </p>
               ) : null}
-            </div>
 
-            <div className={styles.formActions}>
-              <button
-                type="submit"
-                className={styles.primaryButton}
-                disabled={!isReadyToSubmit || isSubmitting}
-              >
-                {isSubmitting ? "Sending..." : "Submit"}
-              </button>
-            </div>
-
-            {hasErrors ? (
-              <p className={styles.formHint} role="status">
-                Please fix the highlighted fields and try again.
-              </p>
-            ) : null}
-
-            {submitError ? (
-              <p className={styles.errorText} role="alert">
-                {submitError}
-              </p>
-            ) : null}
-          </form>
-        </div>
+              <div className={styles.formActionsDesktop}>
+                <button
+                  type="submit"
+                  className={styles.primaryButton}
+                  disabled={!isReadyToSubmit || isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Submit"}
+                </button>
+              </div>
+            </form>
+          </div>
+          <div className={styles.formActionsMobile}>
+            <button
+              type="submit"
+              form="contact-form"
+              className={styles.primaryButton}
+              disabled={!isReadyToSubmit || isSubmitting}
+            >
+              {isSubmitting ? "Sending..." : "Submit"}
+            </button>
+          </div>
+        </>
       )}
 
       {isSubmitted ? <NeedImmediateAssistance /> : null}

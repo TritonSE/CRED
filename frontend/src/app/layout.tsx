@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, Lato } from "next/font/google";
 
 import type { Metadata } from "next";
@@ -35,6 +36,7 @@ export default function RootLayout({
         <div className="min-h-screen w-full bg-[#faf8f6] flex flex-col overflow-x-hidden">
           <LayoutShell>{children}</LayoutShell>
         </div>
+        <Analytics />
       </body>
     </html>
   );
