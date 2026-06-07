@@ -18,7 +18,7 @@ export default function Footer() {
           <div className={styles.leftSection}>
             <div className={styles.logoWrapper}>
               <Image
-                src="/cred-logo.png"
+                src="/cred-logo.svg"
                 alt="CRED Logo"
                 fill
                 className="object-contain object-left"
@@ -64,7 +64,7 @@ export default function Footer() {
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M2 6C2 4.89543 2.89543 4 4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6ZM4 6L12 11L20 6H4ZM4 8V18H20V8L12 13L4 8Z"
-                    fill="#FFB341"
+                    fill="#175892"
                   />
                 </svg>
                 <a href="mailto:credsd@credsd.org" className={styles.contactText}>
@@ -77,7 +77,7 @@ export default function Footer() {
                 <svg className={styles.contactIcon} fill="none" viewBox="0 0 24 24">
                   <path
                     d="M6.62 10.79C8.06 13.62 10.38 15.93 13.21 17.38L15.41 15.18C15.68 14.91 16.08 14.82 16.43 14.94C17.55 15.31 18.76 15.51 20 15.51C20.55 15.51 21 15.96 21 16.51V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z"
-                    fill="#FFB341"
+                    fill="#175892"
                   />
                 </svg>
                 <a href="tel:18884534943" className={styles.contactText}>
@@ -90,7 +90,7 @@ export default function Footer() {
                 <svg className={styles.contactIcon} fill="none" viewBox="0 0 24 24">
                   <path
                     d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"
-                    fill="#FFB341"
+                    fill="#175892"
                   />
                 </svg>
                 <div className={styles.addressWrapper}>

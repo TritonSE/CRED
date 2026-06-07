@@ -1,92 +1,41 @@
-.about-page {
+.aboutPage {
   min-height: 0;
 }
 
-.about-top-section {
-  position: relative;
-  min-height: 180px;
+/* About page hero overrides (uses shared HeroSection component). */
+.aboutHero {
   height: 260px;
-  display: flex;
-  align-items: center;
-
-  background: linear-gradient(to right, #004377, rgba(30, 115, 190, 0.8)), url("/BannerPic.jpg");
-
-  background-size: cover;
-  background-position: center 40%;
-  background-repeat: no-repeat;
-
-  padding: 1.5rem 1rem;
-  overflow: hidden;
 }
 
 @media (min-width: 480px) {
-  .about-top-section {
+  .aboutHero {
     height: 280px;
   }
 }
 
 @media (min-width: 768px) {
-  .about-top-section {
+  .aboutHero {
     height: 300px;
-    padding: 0 2rem;
   }
 }
 
-.about-container {
-  margin: 0 auto;
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  z-index: 1;
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .about-container {
-    padding: 0 1rem;
-  }
-}
-
-.about-title {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
-  font-size: 64px;
-  font-weight: 700;
-  color: #ffffff;
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-}
-
-.about-intro {
-  font-family: var(--font-lato), Lato, sans-serif;
-  color: #ffffff;
-  text-align: center;
-  margin: 0 auto;
-  font-size: 24px;
-  line-height: 1.7;
-  padding: 0 0.25rem;
+.aboutHeroImage {
+  object-position: center 40%;
 }
 
 /* Vision Section */
-
-.about-vision-section {
+.aboutVisionSection {
   background-color: #ffffff;
   padding: 2rem 1rem;
 }
 
 @media (min-width: 768px) {
-  .about-vision-section {
+  .aboutVisionSection {
     padding: 6rem 2rem;
   }
 }
 
-.about-grid {
+.aboutGrid {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -95,7 +44,7 @@
 }
 
 @media (min-width: 768px) {
-  .about-grid {
+  .aboutGrid {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
@@ -104,19 +53,19 @@
   }
 }
 
-.about-vision-wrapper {
+.aboutVisionWrapper {
   width: 100%;
   padding-right: 0;
 }
 
 @media (min-width: 768px) {
-  .about-vision-wrapper {
+  .aboutVisionWrapper {
     width: 50%;
     padding-right: 3rem;
   }
 }
 
-.about-heading {
+.aboutHeading {
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
@@ -126,31 +75,31 @@
   margin-bottom: 1.5rem;
 }
 
-.about-vision-content {
+.aboutVisionContent {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.about-vision-content p {
+.aboutVisionContent p {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   font-size: 20px;
   line-height: 150%;
 }
 
-.about-image-placeholder {
+.aboutImagePlaceholder {
   width: 100%;
 }
 
 @media (min-width: 768px) {
-  .about-image-placeholder {
+  .aboutImagePlaceholder {
     width: 50%;
     min-height: 0;
   }
 }
 
-.about-image-placeholder img {
+.aboutImagePlaceholder img {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -159,7 +108,7 @@
 }
 
 @media (min-width: 768px) {
-  .about-image-placeholder img {
+  .aboutImagePlaceholder img {
     width: 100%;
     height: 100%;
     max-width: none;
@@ -188,18 +137,18 @@
   }
 }
 
-.how-we-operate-section {
+.howWeOperateSection {
   background-color: #ffffff;
   padding: 6rem 2rem;
 }
 
-.operate-wrapper {
+.operateWrapper {
   gap: 3rem;
   width: 85%;
   margin: 0 auto;
 }
 
-.operate-heading {
+.operateHeading {
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
@@ -209,7 +158,7 @@
   margin-bottom: 1.5rem;
 }
 
-.about-operate-content {
+.aboutOperateContent {
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   line-height: 150%;
@@ -240,6 +189,7 @@
     flex-direction: column;
     align-items: center;
   }
+
   .vectors {
     margin: 2rem auto;
     rotate: 90deg;
@@ -247,11 +197,12 @@
 }
 
 @media (max-width: 900px) {
-  .operate-heading {
+  .operateHeading {
     text-align: center;
     font-size: 2.5rem;
   }
-  .about-operate-content {
+
+  .aboutOperateContent {
     text-align: center;
     font-size: 1rem;
   }

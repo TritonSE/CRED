@@ -33,13 +33,13 @@ import {
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { updateApplicant } from "../../../api/applicant";
-
 import styles from "./ApplicationTable.module.css";
 import { ExpandedRowContent } from "./ExpandedRowContent";
 import { StatusLabel } from "./StatusLabel";
 
-import type { Applicant } from "../../../api/applicant";
+import type { Applicant } from "@/api/applicant";
+
+import { updateApplicant } from "@/api/applicant";
 
 /**
  * Data structure for a single application row

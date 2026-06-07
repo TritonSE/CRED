@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
-import { sendContactMessage } from "../../api/contact";
-
 import styles from "./Contact.module.css";
+
+import { sendContactMessage } from "@/api/contact";
 
 type ContactFormValues = {
   fullName: string;
