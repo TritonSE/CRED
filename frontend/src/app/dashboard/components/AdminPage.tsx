@@ -118,28 +118,32 @@ export default function AdminPage() {
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
         />
-        {showNew && (
-          <ApplicationTable
-            title="New Applications"
-            globalFilter={searchQuery}
-            applicantData={newApplicants}
-            isLoading={isLoading}
-            error={error}
-            onCompleteToggle={handleCompleteToggle}
-            setSuccessAlert={addSuccessAlert}
-          />
-        )}
-        {showCompleted && (
-          <ApplicationTable
-            title="Completed Applications"
-            isCompleted
-            globalFilter={searchQuery}
-            applicantData={completedApplicants}
-            isLoading={isLoading}
-            error={error}
-            onCompleteToggle={handleCompleteToggle}
-            setSuccessAlert={addSuccessAlert}
-          />
+        {isLoading ? (
+          <p className={styles.statusMessage}>Loading applications…</p>
+        ) : error ? (
+          <p className={`${styles.statusMessage} ${styles.statusMessageError}`}>{error}</p>
+        ) : (
+          <>
+            {showNew && (
+              <ApplicationTable
+                title="New Applications"
+                globalFilter={searchQuery}
+                applicantData={newApplicants}
+                onCompleteToggle={handleCompleteToggle}
+                setSuccessAlert={addSuccessAlert}
+              />
+            )}
+            {showCompleted && (
+              <ApplicationTable
+                title="Completed Applications"
+                isCompleted
+                globalFilter={searchQuery}
+                applicantData={completedApplicants}
+                onCompleteToggle={handleCompleteToggle}
+                setSuccessAlert={addSuccessAlert}
+              />
+            )}
+          </>
         )}
       </main>
       {successAlerts.length > 0 && (

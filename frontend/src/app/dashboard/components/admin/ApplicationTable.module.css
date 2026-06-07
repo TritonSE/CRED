@@ -216,10 +216,9 @@
 }
 
 /*
- * V2 row-action icon buttons (View / Edit / Download).
- * 30×30 hit target with a 24×24 icon. Icons render as dark grey by default and
- * shift to CRED primary blue (#175892) on hover, matching the "hover turns the
- * icons blue" annotation on the V2 Hifi Prototype.
+ * V2 row-action icon buttons. 30×30 hit target with a 24×24 icon. Icons
+ * render as dark grey by default and shift to CRED brand yellow (#ffb341)
+ * on hover/press.
  */
 .iconButton {
   width: 30px;
@@ -232,15 +231,15 @@
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.22s ease-in-out;
 }
 
 .iconButton:hover {
-  background-color: rgba(23, 88, 146, 0.08);
+  background-color: rgba(255, 179, 65, 0.12);
 }
 
 .iconButton:focus-visible {
-  outline: 2px solid #175892;
+  outline: 2px solid #ffb341;
   outline-offset: 1px;
 }
 
@@ -248,14 +247,16 @@
   /* Default: dark grey for black-source SVGs. */
   filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg)
     brightness(95%) contrast(85%);
-  transition: filter 0.15s ease;
+  transition: filter 0.22s ease-in-out;
 }
 
-.iconButton:hover .iconImage,
-.iconButton[aria-pressed="true"] .iconImage {
-  /* Hover / pressed: shift to CRED primary blue (#175892). */
-  filter: brightness(0) saturate(100%) invert(29%) sepia(26%) saturate(1946%) hue-rotate(172deg)
-    brightness(97%) contrast(96%);
+.iconButton:hover .iconImage {
+  /* Hover: shift to CRED brand yellow (#ffb341). The hue-rotate is written
+     as -25deg (equivalent to 335deg for the final color) so the transition
+     interpolates through warm reds/oranges instead of passing through
+     ~167° (cyan/green) at the midpoint. */
+  filter: brightness(0) saturate(100%) invert(76%) sepia(43%) saturate(1583%) hue-rotate(-25deg)
+    brightness(101%) contrast(101%);
 }
 
 .buttonWrapper {
