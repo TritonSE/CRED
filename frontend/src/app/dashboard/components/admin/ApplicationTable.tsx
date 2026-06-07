@@ -292,7 +292,6 @@ export function ApplicationTable({
         "Failed to update to-do status. Please try again. Error: " +
           (typeof result.error === "string" ? result.error : "Unknown error"),
       );
-      console.error("Failed to update applicant todos:", result.error);
       return;
     }
 
@@ -368,7 +367,6 @@ export function ApplicationTable({
         "Failed to update application status. Please try again. Error: " +
           (typeof result.error === "string" ? result.error : "Unknown error"),
       );
-      console.error("Failed to update applicant:", result.error);
     }
   };
 
@@ -424,7 +422,6 @@ export function ApplicationTable({
         "Failed to update application status. Please try again. Error: " +
           (typeof result.error === "string" ? result.error : "Unknown error"),
       );
-      console.error("Failed to update applicant status:", result.error);
     }
   };
 
@@ -451,7 +448,6 @@ export function ApplicationTable({
         "Failed to delete application. Please try again. Error: " +
           (typeof result.error === "string" ? result.error : "Unknown error"),
       );
-      console.error("Failed to delete applicant:", result.error);
     }
   };
 
@@ -587,7 +583,6 @@ export function ApplicationTable({
         "Failed to add to-do. Please try again. Error: " +
           (typeof result.error === "string" ? result.error : "Unknown error"),
       );
-      console.error("Failed to add to-do:", result.error);
       return;
     }
 
@@ -681,7 +676,6 @@ export function ApplicationTable({
         "Failed to add note. Please try again. Error: " +
           (typeof result.error === "string" ? result.error : "Unknown error"),
       );
-      console.error("Failed to add note:", result.error);
       return;
     }
 
@@ -778,7 +772,6 @@ export function ApplicationTable({
         "Failed to save edits. Please try again. Error: " +
           (typeof result.error === "string" ? result.error : "Unknown error"),
       );
-      console.error("Failed to save applicant edits:", result.error);
     }
   };
 
@@ -808,8 +801,7 @@ export function ApplicationTable({
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error("Failed to generate applicant PDF:", err);
+    } catch {
       alert("Failed to generate PDF. Please try again.");
     }
   };
