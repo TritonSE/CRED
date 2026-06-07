@@ -35,7 +35,7 @@ export default function Login() {
       return;
     }
 
-    router.push("/admin");
+    router.push("/dashboard");
   };
 
   return (
