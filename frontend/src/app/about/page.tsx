@@ -4,6 +4,8 @@ import { ThemeProvider } from "@tritonse/tse-constellation";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+import PageHero from "../../components/PageHero";
+
 import { DirectorBox } from "./components/DirectorBox";
 import { OperationsCard } from "./components/OperationsCard";
 
@@ -14,16 +16,11 @@ export default function AboutUsPage() {
   return (
     <ThemeProvider>
       <div className="about-page">
-        <div className="about-top-section">
-          <div className="about-container">
-            <h1 className="about-title">We Are CRED</h1>
-            <p className="about-intro">
-              CRED provides individualized services for system-impacted individuals, low-income
-              families, and transitional age youth in San Diego seeking stability and
-              self-sufficiency.
-            </p>
-          </div>
-        </div>
+        <PageHero
+          imageSrc="/BannerPic.jpg"
+          title="We Are CRED"
+          subtitle="CRED provides individualized services for system-impacted individuals, low-income families, and transitional age youth in San Diego seeking stability and self-sufficiency."
+        />
 
         <div className="about-vision-section">
           <div className="about-grid">
