@@ -7,8 +7,6 @@
  * side requires updating both files (and the mongoose schema's `enum` clause).
  */
 
-export const STATUS_OPTIONS = ["Need to Review", "Under Review", "Reviewed"] as const;
-
 export const RACE_OPTIONS = [
   "White",
   "Black or African American",
@@ -61,6 +59,3 @@ export const EMPLOYMENT_OPTIONS = [
 ] as const;
 
 export const AID_REQUESTED_OPTIONS = ["Housing", "Education", "Development"] as const;
-
-export type StatusOption = (typeof STATUS_OPTIONS)[number];
-export type AidRequestedOption = (typeof AID_REQUESTED_OPTIONS)[number];

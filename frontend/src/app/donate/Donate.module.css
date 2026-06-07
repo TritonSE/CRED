@@ -16,100 +16,14 @@
   width: 100%;
 }
 
-/* ===== Hero Banner ===== */
-.heroBanner {
-  position: relative;
-  width: 100%;
-  padding: 80px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 280px;
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .heroBanner {
-    padding: 80px 120px;
-  }
-}
-
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(0, 67, 119, 0.8), rgba(30, 115, 190, 0.8));
-  z-index: 1;
-}
-
-.heroImageWrapper {
-  position: absolute;
-  inset: 0;
-  opacity: 0.8;
-  z-index: 0;
-}
-
-.heroImageWrapper img {
-  object-fit: cover;
+/* Hero image object-position is page-specific. */
+.heroImage {
   object-position: center top;
 }
 
 @media (min-width: 1024px) {
-  .heroImageWrapper img {
+  .heroImage {
     object-position: center 12%;
-  }
-}
-
-.heroContent {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 1220px;
-  width: 100%;
-}
-
-.heroTitle {
-  font-family:
-    "SF Pro Display",
-    "SF Pro Text",
-    "SF Pro",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 1.5;
-  color: white;
-  margin: 0;
-}
-
-@media (min-width: 768px) {
-  .heroTitle {
-    font-size: 48px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .heroTitle {
-    font-size: 64px;
-  }
-}
-
-.heroSubtitle {
-  font-family: "Lato", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1.5;
-  color: white;
-  margin-top: 8px;
-}
-
-@media (min-width: 768px) {
-  .heroSubtitle {
-    font-size: 24px;
   }
 }
 

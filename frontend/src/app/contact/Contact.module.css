@@ -4,92 +4,6 @@
   width: 100%;
 }
 
-/* ===== Hero Banner ===== */
-.heroBanner {
-  position: relative;
-  width: 100%;
-  padding: 80px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 280px;
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .heroBanner {
-    padding: 80px 120px;
-  }
-}
-
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(0, 67, 119, 0.9), rgba(30, 115, 190, 0.72));
-  z-index: 1;
-}
-
-.heroImageWrapper {
-  position: absolute;
-  inset: 0;
-  opacity: 0.9;
-  z-index: 0;
-}
-
-.heroContent {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 1220px;
-  width: 100%;
-}
-
-.heroTitle {
-  font-family:
-    "SF Pro Display",
-    "SF Pro Text",
-    "SF Pro",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 1.5;
-  color: white;
-  margin: 0;
-}
-
-@media (min-width: 768px) {
-  .heroTitle {
-    font-size: 48px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .heroTitle {
-    font-size: 64px;
-  }
-}
-
-.heroSubtitle {
-  font-family: "Lato", sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 1.5;
-  color: white;
-  margin-top: 10px;
-}
-
-@media (min-width: 768px) {
-  .heroSubtitle {
-    font-size: 24px;
-  }
-}
-
 /* ===== Main Content ===== */
 .mainContent {
   padding: 56px 24px 90px;
@@ -265,6 +179,16 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 6px;
+}
+
+.formActionsDesktop {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.formActionsMobile {
+  display: none;
 }
 
 .primaryButton {
@@ -447,4 +371,45 @@
 
 .assistanceLink:hover {
   text-decoration: underline;
+}
+
+/* ===== Mobile (430px and below) ===== */
+@media (max-width: 430px) {
+  .formLayout {
+    gap: 20px;
+  }
+
+  .formActionsDesktop {
+    display: none;
+  }
+
+  .formActionsMobile {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+  }
+
+  .formSubtitle {
+    font-size: 16px;
+  }
+
+  .label {
+    font-weight: 400;
+  }
+
+  .input {
+    border-color: #d1d5db;
+  }
+
+  .input::placeholder {
+    color: #d1d5db;
+  }
+
+  .textarea {
+    border-color: #d1d5db;
+  }
+
+  .textarea::placeholder {
+    color: #d1d5db;
+  }
 }

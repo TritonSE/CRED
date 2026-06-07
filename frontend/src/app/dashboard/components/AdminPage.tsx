@@ -16,18 +16,17 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { getAllApplicants } from "../../api/applicant";
+import styles from "./AdminPage.module.css";
+import { AdminHeader } from "./admin/AdminHeader";
+import { ApplicationTable } from "./admin/ApplicationTable";
+import { FilterSearchTab } from "./admin/FilterSearchTab";
+import { SuccessAlert } from "./admin/SuccessAlert";
+import alertStyles from "./admin/SuccessAlert.module.css";
 
-import styles from "./adminPage.module.css";
-import { AdminHeader } from "./components/AdminHeader";
-import { ApplicationTable } from "./components/ApplicationTable";
-import { FilterSearchTab } from "./components/FilterSearchTab";
-import { SuccessAlert } from "./components/SuccessAlert";
-import alertStyles from "./components/SuccessAlert.module.css";
-import { MOCK_APPLICANTS } from "./mockApplicants";
+import type { DashboardTab } from "./admin/FilterSearchTab";
+import type { Applicant } from "@/api/applicant";
 
-import type { DashboardTab } from "./components/FilterSearchTab";
-import type { Applicant } from "../../api/applicant";
+import { getAllApplicants } from "@/api/applicant";
 
 type SuccessAlertItem = {
   id: string;
@@ -45,26 +44,13 @@ export default function AdminPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [successAlerts, setSuccessAlerts] = useState<SuccessAlertItem[]>([]);
-  // True when the dashboard is rendering offline mock data instead of live API
-  // results. Triggered only in development after a failed fetch so designers/
-  // developers can preview the V2 layout without a running backend.
-  const [isUsingMockData, setIsUsingMockData] = useState(false);
 
   const fetchApplicants = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     const result = await getAllApplicants();
     if (result.success) {
-      const data = Array.isArray(result.data) ? result.data : result.data.data;
-      setAllApplicants(data);
-      setIsUsingMockData(false);
-    } else if (process.env.NODE_ENV === "development") {
-      console.warn(
-        "[admin-page] Backend fetch failed; falling back to MOCK_APPLICANTS for local preview.",
-        result.error,
-      );
-      setAllApplicants(MOCK_APPLICANTS);
-      setIsUsingMockData(true);
+      setAllApplicants(result.data.data);
     } else {
       setError(typeof result.error === "string" ? result.error : "Failed to load applicants");
     }
@@ -75,33 +61,10 @@ export default function AdminPage() {
     void fetchApplicants();
   }, [fetchApplicants]);
 
-  /**
-   * Called by either table after a successful complete/incomplete toggle.
-   * In mock mode the parent already received the mutation via
-   * `onMockApplicantChange`, so skip the re-fetch which would clobber it.
-   */
+  /** Called by either table after a successful complete/incomplete toggle. */
   const handleCompleteToggle = useCallback(() => {
-    if (isUsingMockData) return;
     void fetchApplicants();
-  }, [fetchApplicants, isUsingMockData]);
-
-  /**
-   * Mock-mode mutation channel. Replaces the matching applicant in the
-   * single-source-of-truth `allApplicants` so the derived New / Completed
-   * splits re-filter correctly (rows move between tables on Mark Complete,
-   * status pills update when to-dos are toggled, etc.).
-   */
-  const handleMockApplicantChange = useCallback((updated: Applicant) => {
-    setAllApplicants((prev) => prev.map((a) => (a._id === updated._id ? updated : a)));
-  }, []);
-
-  /**
-   * Mock-mode delete channel. Drops the applicant from the single source of
-   * truth so the row disappears from whichever table it was rendered in.
-   */
-  const handleMockApplicantDelete = useCallback((id: string) => {
-    setAllApplicants((prev) => prev.filter((a) => a._id !== id));
-  }, []);
+  }, [fetchApplicants]);
 
   const alertRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const previousAlertPositions = useRef<Record<string, DOMRect | undefined>>({});
@@ -178,9 +141,6 @@ export default function AdminPage() {
             error={error}
             onCompleteToggle={handleCompleteToggle}
             setSuccessAlert={addSuccessAlert}
-            mockMode={isUsingMockData}
-            onMockApplicantChange={handleMockApplicantChange}
-            onMockApplicantDelete={handleMockApplicantDelete}
           />
         )}
         {showCompleted && (
@@ -193,9 +153,6 @@ export default function AdminPage() {
             error={error}
             onCompleteToggle={handleCompleteToggle}
             setSuccessAlert={addSuccessAlert}
-            mockMode={isUsingMockData}
-            onMockApplicantChange={handleMockApplicantChange}
-            onMockApplicantDelete={handleMockApplicantDelete}
           />
         )}
       </main>

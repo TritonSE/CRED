@@ -33,15 +33,15 @@ import {
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { deleteApplicant, updateApplicant } from "../../../api/applicant";
-
 import { ApplicantPDF } from "./ApplicantPDF";
 import styles from "./ApplicationTable.module.css";
 import { ExpandedRowContent } from "./ExpandedRowContent";
 import { StatusDropdown } from "./StatusDropdown";
 
 import type { ApplicantEditPatch } from "./ExpandedRowContent";
-import type { Applicant } from "../../../api/applicant";
+import type { Applicant } from "@/api/applicant";
+
+import { deleteApplicant, updateApplicant } from "@/api/applicant";
 
 /**
  * Data structure for a single application row
@@ -136,26 +136,6 @@ export type ApplicationTableProps = {
   onCompleteToggle?: () => void;
   /** Optional callback to show a new status update notification. */
   setSuccessAlert?: (message: string) => void;
-  /**
-   * When true, mutations (to-do toggle, mark complete) are persisted only to
-   * local component state and the `updateApplicant` API call is skipped.
-   * Used by `adminPage` when the dashboard is rendering MOCK_APPLICANTS so
-   * UI mutations don't flicker through a failed network round-trip.
-   */
-  mockMode?: boolean;
-  /**
-   * Mock-mode-only callback. When `mockMode` is true, the table reports each
-   * applicant mutation upwards so the parent can update its single source of
-   * truth (`allApplicants`). The table's own local `applicantData` snapshot
-   * gets re-derived from the parent every render, so without this we'd lose
-   * the mutation on the next React render.
-   */
-  onMockApplicantChange?: (applicant: Applicant) => void;
-  /**
-   * Mock-mode-only callback. Reports a deleted applicant's `_id` up to the
-   * parent so it can drop the row from its `allApplicants` source of truth.
-   */
-  onMockApplicantDelete?: (id: string) => void;
 };
 
 /**
@@ -189,9 +169,6 @@ export function ApplicationTable({
   error: errorProp = null,
   onCompleteToggle,
   setSuccessAlert,
-  mockMode = false,
-  onMockApplicantChange,
-  onMockApplicantDelete,
 }: ApplicationTableProps) {
   // ── UI state ──────────────────────────────────────────────────────────
   /** Whether the entire table section is collapsed (hidden). */
@@ -329,32 +306,6 @@ export function ApplicationTable({
       );
     }
 
-    // In mock mode there's no backend to persist to. Push the mutation up to
-    // the parent — its `allApplicants` is the source the table re-derives
-    // from each render, so without this the optimistic update gets clobbered.
-    //
-    // We ALSO update our local `rawApplicants` synchronously: the parent's
-    // re-render lands a tick later via the `applicantData` prop, but the very
-    // next click reads `rawApplicants.find(...)` and would otherwise see a
-    // stale `status`, preventing further `advanceStatusOnEnrichment`
-    // transitions (e.g. an applicant that was just moved from Reviewed →
-    // Need to Review wouldn't advance to Under Review on the next toggle).
-    if (mockMode) {
-      setRawApplicants((prev) =>
-        prev.map((a) =>
-          a.applicantNumber === clientNumber
-            ? { ...a, todos: updatedTodos, status: nextStatus }
-            : a,
-        ),
-      );
-      onMockApplicantChange?.({
-        ...applicant,
-        todos: updatedTodos,
-        status: nextStatus,
-      });
-      return;
-    }
-
     const result = await updateApplicant({
       _id: applicant._id,
       applicantNumber: applicant.applicantNumber,
@@ -439,27 +390,6 @@ export function ApplicationTable({
     const newIsCompleted = !applicant.isCompleted;
     const newStatus = newIsCompleted ? "Reviewed" : "Need to Review";
 
-    // In mock mode, push the mutation up so the parent moves the row between
-    // tables, then surface the toast as if it succeeded. Also keep local
-    // `rawApplicants` in lock-step so subsequent clicks (e.g. an immediate
-    // todo toggle) read the freshly-reset status instead of stale data.
-    if (mockMode) {
-      setRawApplicants((prev) =>
-        prev.map((a) =>
-          a.applicantNumber === clientNumber
-            ? { ...a, isCompleted: newIsCompleted, status: newStatus }
-            : a,
-        ),
-      );
-      onMockApplicantChange?.({
-        ...applicant,
-        isCompleted: newIsCompleted,
-        status: newStatus,
-      });
-      setSuccessAlert?.("Application status updated successfully!");
-      return;
-    }
-
     const result = await updateApplicant({
       _id: applicant._id,
       applicantNumber: applicant.applicantNumber,
@@ -506,8 +436,7 @@ export function ApplicationTable({
    * - "Need to Review" / "Under Review" → `isCompleted: false` → row moves
    *   back up to the New Applications table.
    *
-   * On success we trigger a parent re-fetch (live) or push the mutation up
-   * (mock) so the row migrates between tables.
+   * On success we trigger a parent re-fetch so the row migrates between tables.
    */
   const handleChangeStatus = async (
     clientNumber: string,
@@ -517,23 +446,6 @@ export function ApplicationTable({
     if (!applicant) return;
 
     const nextIsCompleted = nextStatus === "Reviewed";
-
-    if (mockMode) {
-      setRawApplicants((prev) =>
-        prev.map((a) =>
-          a.applicantNumber === clientNumber
-            ? { ...a, status: nextStatus, isCompleted: nextIsCompleted }
-            : a,
-        ),
-      );
-      onMockApplicantChange?.({
-        ...applicant,
-        status: nextStatus,
-        isCompleted: nextIsCompleted,
-      });
-      setSuccessAlert?.("Application status updated successfully!");
-      return;
-    }
 
     const result = await updateApplicant({
       _id: applicant._id,
@@ -573,8 +485,7 @@ export function ApplicationTable({
 
   /**
    * Permanently delete an applicant after a confirmation prompt. Persists via
-   * `deleteApplicant` (live) or drops the row locally and notifies the parent
-   * (mock), then surfaces a success toast.
+   * `deleteApplicant`, then surfaces a success toast.
    */
   const handleDeleteApplicant = async (clientNumber: string) => {
     const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
@@ -584,14 +495,6 @@ export function ApplicationTable({
       `Delete application ${applicant.applicantNumber} (${applicant.applicantName})? This action cannot be undone.`,
     );
     if (!confirmed) return;
-
-    if (mockMode) {
-      setRawApplicants((prev) => prev.filter((a) => a.applicantNumber !== clientNumber));
-      setApplications((prev) => prev.filter((a) => a.clientNumber !== clientNumber));
-      onMockApplicantDelete?.(applicant._id);
-      setSuccessAlert?.("Application deleted successfully!");
-      return;
-    }
 
     const result = await deleteApplicant(applicant._id);
 
@@ -654,8 +557,7 @@ export function ApplicationTable({
 
   /**
    * Append a new to-do item to an applicant. Persists via `updateApplicant`
-   * (or `onMockApplicantChange` in mock mode) and applies the
-   * `advanceStatusOnEnrichment` rule.
+   * and applies the `advanceStatusOnEnrichment` rule.
    *
    * Re-open rule (V2): if the applicant was previously marked complete,
    * adding a new to-do is treated as the admin re-opening the case. We flip
@@ -700,26 +602,6 @@ export function ApplicationTable({
             : a,
         ),
       );
-    }
-
-    if (mockMode) {
-      setRawApplicants((prev) =>
-        prev.map((a) =>
-          a.applicantNumber === clientNumber
-            ? { ...a, todos: updatedTodos, status: nextStatus, isCompleted: nextIsCompleted }
-            : a,
-        ),
-      );
-      onMockApplicantChange?.({
-        ...applicant,
-        todos: updatedTodos,
-        status: nextStatus,
-        isCompleted: nextIsCompleted,
-      });
-      if (completionChanged) {
-        setSuccessAlert?.("Application moved to New Applications.");
-      }
-      return;
     }
 
     const result = await updateApplicant({
@@ -818,18 +700,6 @@ export function ApplicationTable({
       ),
     );
 
-    if (mockMode) {
-      setRawApplicants((prev) =>
-        prev.map((a) =>
-          a.applicantNumber === clientNumber
-            ? { ...a, notes: updatedNotes, status: nextStatus }
-            : a,
-        ),
-      );
-      onMockApplicantChange?.({ ...applicant, notes: updatedNotes, status: nextStatus });
-      return;
-    }
-
     const result = await updateApplicant({
       _id: applicant._id,
       applicantNumber: applicant.applicantNumber,
@@ -885,10 +755,8 @@ export function ApplicationTable({
   };
 
   /**
-   * Persist edits made in the expanded card's edit form. In live mode calls
-   * `updateApplicant`; in mock mode forwards the new state up to the parent
-   * via `onMockApplicantChange`. Either way, exits edit mode on success and
-   * surfaces a success toast.
+   * Persist edits made in the expanded card's edit form via `updateApplicant`,
+   * then exits edit mode on success and surfaces a success toast.
    */
   const handleSaveEdit = async (clientNumber: string, patch: ApplicantEditPatch, rowId: string) => {
     const applicant = rawApplicants.find((a) => a.applicantNumber === clientNumber);
@@ -931,16 +799,6 @@ export function ApplicationTable({
       otherAidRequested: patch.otherAidRequested,
       additionalComments: patch.additionalComments,
     };
-
-    if (mockMode) {
-      setRawApplicants((prev) =>
-        prev.map((a) => (a.applicantNumber === clientNumber ? nextApplicant : a)),
-      );
-      onMockApplicantChange?.(nextApplicant);
-      setEditingRows((prev) => ({ ...prev, [rowId]: false }));
-      setSuccessAlert?.("Application updated successfully!");
-      return;
-    }
 
     const result = await updateApplicant({
       _id: nextApplicant._id,

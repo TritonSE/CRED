@@ -14,7 +14,7 @@
  */
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 
-import type { Applicant } from "../../../api/applicant";
+import type { Applicant } from "@/api/applicant";
 
 const COLORS = {
   brandPrimary: "#175892",

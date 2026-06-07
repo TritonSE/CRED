@@ -1,9 +1,9 @@
 import { Analytics } from "@vercel/analytics/next";
 import { Inter, Lato } from "next/font/google";
 
-import LayoutShell from "../components/LayoutShell";
-
 import type { Metadata } from "next";
+
+import LayoutShell from "@/components/LayoutShell";
 
 import "./globals.css";
 
