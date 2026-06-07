@@ -1,19 +1,3 @@
-/**
- * ExpandedRowContent Component
- *
- * Renders the detail card for a single application row. Supports two modes:
- *
- * 1. View — readonly profile / contact / program-needs / todos / notes panels.
- * 2. Edit — every field is an editable input/select/textarea, with Save and
- *    Cancel buttons. Implements Maya's V2 annotation: "made an edit view where
- *    the fields look diff in edit view vs non edit view."
- *
- * Edit-mode draft state is kept locally and only flushed to the parent via
- * `onSaveEdit`. This isolates in-progress edits from the source applicant
- * snapshot and lets Cancel cleanly discard.
- *
- * @module ExpandedRowContent
- */
 "use client";
 
 import Image from "next/image";
@@ -121,7 +105,6 @@ export function ExpandedRowContent({
   onSaveEdit,
   onCancelEdit,
 }: ExpandedRowContentProps) {
-  // ── Inline-add state for the new-todo and new-note inputs ───────────
   const [isAddingTodo, setIsAddingTodo] = useState(false);
   const [newTodoLabel, setNewTodoLabel] = useState("");
   const [isAddingNote, setIsAddingNote] = useState(false);
@@ -197,9 +180,7 @@ export function ExpandedRowContent({
 
   return (
     <div className={styles.expandedContent}>
-      {/* Left Column: Client Profile + Program Needs */}
       <div className={styles.expandedLeftCol}>
-        {/* Client Profile Section */}
         <div className={styles.expandedSection}>
           <h4 className={styles.sectionTitle}>Client Profile</h4>
           <div className={styles.profileGrid}>
@@ -359,7 +340,6 @@ export function ExpandedRowContent({
         </div>
 
         <hr className={styles.profileGridDivider} />
-        {/* Program Needs & Interests Section */}
         <div className={styles.expandedSection}>
           <h4 className={styles.sectionTitle}>Program Needs &amp; Interests</h4>
           <div className={styles.programDetails}>
@@ -427,9 +407,7 @@ export function ExpandedRowContent({
         </div>
       </div>
 
-      {/* Right Column: Contact Info + To-Dos + Notes */}
       <div className={styles.expandedRightCol}>
-        {/* Contact Information */}
         <div className={styles.expandedSection}>
           <h4 className={styles.sectionTitle}>Contact Information</h4>
           <div className={styles.contactGrid}>
@@ -467,7 +445,6 @@ export function ExpandedRowContent({
         </div>
 
         <hr className={styles.profileGridDivider} />
-        {/* To-Dos Section */}
         <div className={styles.expandedSection}>
           <h4 className={styles.sectionTitle}>To-Dos</h4>
           <div className={styles.todoList}>
@@ -533,7 +510,6 @@ export function ExpandedRowContent({
         </div>
 
         <hr className={styles.profileGridDivider} />
-        {/* Notes/History Log */}
         <div className={styles.expandedSection}>
           <h4 className={styles.sectionTitle}>Notes/History Log</h4>
           <ul className={styles.notesList}>

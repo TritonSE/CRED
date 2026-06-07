@@ -1,21 +1,9 @@
-/**
- * FilterSearchTab Component
- *
- * Renders the dashboard's tab + search strip:
- *   [ All | New | Completed ]                                 [ search input ]
- *
- * The active tab controls which application tables the parent renders, while
- * the search input filters rows across the visible table(s).
- *
- * @module FilterSearchTab
- */
 "use client";
 
 import { Search } from "@tritonse/tse-constellation";
 
 import styles from "./FilterSearchTab.module.css";
 
-/** Identifiers for the three filter tabs shown above the application tables. */
 export type DashboardTab = "All" | "New" | "Completed";
 
 export const DASHBOARD_TABS: readonly DashboardTab[] = ["All", "New", "Completed"] as const;

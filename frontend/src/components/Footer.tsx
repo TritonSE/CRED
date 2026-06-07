@@ -14,7 +14,6 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.footerInner}>
         <div className={styles.grid}>
-          {/* Left Section - Logo & Mission */}
           <div className={styles.leftSection}>
             <div className={styles.logoWrapper}>
               <Image
@@ -35,7 +34,6 @@ export default function Footer() {
             </button>
           </div>
 
-          {/* Middle Section - Quick Links */}
           <div className={styles.middleSection}>
             <p className={styles.sectionTitle}>Quick Links</p>
             <div className={styles.linkList}>
@@ -53,11 +51,9 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Right Section - Contact Info */}
           <div className={styles.rightSection}>
             <p className={styles.sectionTitle}>Contact Us</p>
             <div className={styles.contactList}>
-              {/* Email */}
               <div className={styles.contactItem}>
                 <svg className={styles.contactIcon} fill="none" viewBox="0 0 24 24">
                   <path
@@ -72,7 +68,6 @@ export default function Footer() {
                 </a>
               </div>
 
-              {/* Phone */}
               <div className={styles.contactItem}>
                 <svg className={styles.contactIcon} fill="none" viewBox="0 0 24 24">
                   <path
@@ -85,7 +80,6 @@ export default function Footer() {
                 </a>
               </div>
 
-              {/* Address */}
               <div className={styles.contactItemTop}>
                 <svg className={styles.contactIcon} fill="none" viewBox="0 0 24 24">
                   <path
@@ -103,7 +97,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* TSE Footer */}
       <div className={styles.tseFooter}>
         <div className={styles.tseInner}>
           <div className={styles.tseContent}>

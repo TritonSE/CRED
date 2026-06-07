@@ -57,6 +57,34 @@
   width: 100%;
   border-collapse: collapse;
   background-color: #fff;
+  /* Fixed layout so column widths come from the rules below instead of
+     each table auto-sizing to its own content. Without this the New and
+     Completed tables sit side-by-side with mismatched columns because
+     their cell content (status pill width, client name length, etc.) differs. */
+  table-layout: fixed;
+}
+
+/* Per-column widths shared by header and body cells. Percentages add up to
+   100% and roughly match the V2 Hifi Prototype column proportions. */
+.tableHeader:nth-child(1),
+.tableCell:nth-child(1) {
+  width: 18%;
+}
+.tableHeader:nth-child(2),
+.tableCell:nth-child(2) {
+  width: 20%;
+}
+.tableHeader:nth-child(3),
+.tableCell:nth-child(3) {
+  width: 22%;
+}
+.tableHeader:nth-child(4),
+.tableCell:nth-child(4) {
+  width: 20%;
+}
+.tableHeader:nth-child(5),
+.tableCell:nth-child(5) {
+  width: 20%;
 }
 
 /* Table head */

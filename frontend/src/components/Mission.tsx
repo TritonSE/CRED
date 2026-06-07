@@ -7,7 +7,6 @@ export default function Mission() {
   return (
     <section className={styles.mission}>
       <div className={styles.missionContainer}>
-        {/* Left Side: Text Content */}
         <div className={styles.missionContent}>
           <h2 className={styles.missionTitle}>Our Mission</h2>
           <p className={styles.missionText}>
@@ -21,7 +20,6 @@ export default function Mission() {
           </Link>
         </div>
 
-        {/* Right Side: Image */}
         <div className={styles.missionImageWrapper}>
           <Image
             src="/home/mission-image.png"

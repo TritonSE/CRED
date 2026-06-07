@@ -1,20 +1,5 @@
 "use client";
 
-/**
- * StatusDropdown Component
- *
- * Renders the color-coded status pill as a clickable trigger that opens a
- * Notion-style dropdown. Picking a different status calls `onChange`.
- *
- * The three review states drive where a row lives on the dashboard:
- * - "Need to Review" / "Under Review" → New Applications
- * - "Reviewed"                        → Completed Applications
- *
- * The popover is rendered in a portal (fixed-positioned from the trigger's
- * bounding rect) so it can't be clipped by the table wrapper's overflow.
- *
- * @module StatusDropdown
- */
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -25,18 +10,13 @@ import type { StatusLabelProps } from "./StatusLabel";
 
 type Status = StatusLabelProps["status"];
 
-/** Order the options appear in the dropdown, matching the review lifecycle. */
 const STATUS_OPTIONS: readonly Status[] = ["Need to Review", "Under Review", "Reviewed"];
 
 export type StatusDropdownProps = {
   status: Status;
-  /** Called with the newly-selected status (only fires when it changes). */
   onChange: (next: Status) => void;
 };
 
-/**
- * StatusDropdown - Clickable status pill with a popover for changing status.
- */
 export function StatusDropdown({ status, onChange }: StatusDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [menuPosition, setMenuPosition] = useState<{ top: number; left: number } | null>(null);

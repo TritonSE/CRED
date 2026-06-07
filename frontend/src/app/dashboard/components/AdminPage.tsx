@@ -1,17 +1,3 @@
-/**
- * AdminPage Component
- *
- * Top-level page for the admin dashboard. Manages two application tables:
- *   1. "New Applications" – submissions that still need review.
- *   2. "Completed Applications" – submissions that have been reviewed.
- *
- * Admins can move rows between the two tables (mark as completed / revert)
- * and filter both tables with a shared search query.
- *
- * Fetches all applicant data once and passes filtered subsets to each table.
- *
- * @module AdminPage
- */
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
