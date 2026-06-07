@@ -1,5 +1,5 @@
 .footer {
-  background-color: #175892;
+  background-color: #faf8f6;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -80,7 +80,7 @@
   font-weight: 500;
   line-height: 1.5;
   font-size: 16px;
-  color: white;
+  color: #000;
   max-width: 100%;
 }
 
@@ -97,12 +97,14 @@
   font-weight: 500;
   line-height: 1.5;
   font-size: 16px;
-  color: #ffb341;
+  color: #175892;
   text-decoration: underline;
   background: none;
   border: none;
   cursor: pointer;
   transition: opacity 0.2s;
+  text-underline-offset: 3px;
+  text-underline-position: from-font;
 }
 
 .backToTop:hover {
@@ -146,7 +148,7 @@
   font-weight: 700;
   line-height: 1.5;
   font-size: 24px;
-  color: #ffb341;
+  color: #175892;
 }
 
 .linkList {
@@ -161,13 +163,16 @@
   font-weight: 500;
   line-height: 1.5;
   font-size: 20px;
-  color: white;
+  color: #000000;
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .navLink:hover {
-  color: #ffb341;
+  color: #fdb832;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-underline-position: from-font;
 }
 
 .applyLink {
@@ -230,7 +235,7 @@
   font-weight: 500;
   line-height: 1.5;
   font-size: 20px;
-  color: white;
+  color: #000000;
   word-break: break-word;
   text-decoration: none;
   transition: color 0.2s;
@@ -238,6 +243,9 @@
 
 .contactText:hover {
   color: #ffb341;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-underline-position: from-font;
 }
 
 .addressWrapper {
@@ -246,7 +254,7 @@
   font-weight: 500;
   line-height: 1.5;
   font-size: 20px;
-  color: white;
+  color: #000000;
 }
 
 /* TSE Footer */

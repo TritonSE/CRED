@@ -11,7 +11,7 @@ export default function AdminNavbar() {
       {/* Logo */}
       <Link href="/" className={styles.logoLink}>
         <div className={styles.logoImageWrapper}>
-          <Image src="/cred-logo.png" alt="CRED Logo" fill className="object-contain" priority />
+          <Image src="/cred-logo.svg" alt="CRED Logo" fill className="object-contain" priority />
         </div>
       </Link>
 

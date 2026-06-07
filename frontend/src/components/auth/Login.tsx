@@ -43,7 +43,7 @@ export default function Login() {
       <div className={styles.card}>
         <div className={styles.logoContainer}>
           <Image
-            src="/cred-logo.png"
+            src="/cred-logo.svg"
             alt="CRED Logo"
             width={450}
             height={260}
