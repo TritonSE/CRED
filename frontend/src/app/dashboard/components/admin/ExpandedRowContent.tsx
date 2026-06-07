@@ -12,6 +12,7 @@ import {
   RACE_OPTIONS,
 } from "../applicantOptions";
 
+import { DatePicker } from "./DatePicker";
 import styles from "./ExpandedRowContent.module.css";
 
 import type { ApplicationRowData, TodoItem } from "./ApplicationTable";
@@ -206,12 +207,10 @@ export function ExpandedRowContent({
             <div className={styles.profileItem}>
               <span className={styles.profileLabel}>Date of Birth</span>
               {isEditing ? (
-                <input
-                  className={styles.editInput}
-                  type="date"
+                <DatePicker
                   value={draft.dateOfBirth}
-                  onChange={(e) => {
-                    updateDraft("dateOfBirth", e.target.value);
+                  onChange={(next) => {
+                    updateDraft("dateOfBirth", next);
                   }}
                 />
               ) : (
