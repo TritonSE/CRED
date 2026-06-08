@@ -57,6 +57,34 @@
   width: 100%;
   border-collapse: collapse;
   background-color: #fff;
+  /* Fixed layout so column widths come from the rules below instead of
+     each table auto-sizing to its own content. Without this the New and
+     Completed tables sit side-by-side with mismatched columns because
+     their cell content (status pill width, client name length, etc.) differs. */
+  table-layout: fixed;
+}
+
+/* Per-column widths shared by header and body cells. Percentages add up to
+   100% and roughly match the V2 Hifi Prototype column proportions. */
+.tableHeader:nth-child(1),
+.tableCell:nth-child(1) {
+  width: 18%;
+}
+.tableHeader:nth-child(2),
+.tableCell:nth-child(2) {
+  width: 20%;
+}
+.tableHeader:nth-child(3),
+.tableCell:nth-child(3) {
+  width: 22%;
+}
+.tableHeader:nth-child(4),
+.tableCell:nth-child(4) {
+  width: 20%;
+}
+.tableHeader:nth-child(5),
+.tableCell:nth-child(5) {
+  width: 20%;
 }
 
 /* Table head */
@@ -185,6 +213,50 @@
 
 .actionButton:hover {
   opacity: 1;
+}
+
+/*
+ * V2 row-action icon buttons. 30×30 hit target with a 24×24 icon. Icons
+ * render as dark grey by default and shift to CRED brand yellow (#ffb341)
+ * on hover/press.
+ */
+.iconButton {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.22s ease-in-out;
+}
+
+.iconButton:hover {
+  background-color: rgba(255, 179, 65, 0.12);
+}
+
+.iconButton:focus-visible {
+  outline: 2px solid #ffb341;
+  outline-offset: 1px;
+}
+
+.iconImage {
+  /* Default: dark grey for black-source SVGs. */
+  filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg)
+    brightness(95%) contrast(85%);
+  transition: filter 0.22s ease-in-out;
+}
+
+.iconButton:hover .iconImage {
+  /* Hover: shift to CRED brand yellow (#ffb341). The hue-rotate is written
+     as -25deg (equivalent to 335deg for the final color) so the transition
+     interpolates through warm reds/oranges instead of passing through
+     ~167° (cyan/green) at the midpoint. */
+  filter: brightness(0) saturate(100%) invert(76%) sepia(43%) saturate(1583%) hue-rotate(-25deg)
+    brightness(101%) contrast(101%);
 }
 
 .buttonWrapper {

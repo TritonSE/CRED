@@ -59,7 +59,6 @@ export default function AboutUsPage() {
 
       <div className={styles.directorBoxContainer}>
         <div className={styles.directorBoxes}>
-          {/* need to add ref to our services page */}
           <DirectorBox
             title="What We Do"
             textBody="We empower individuals to thrive by offering clients financial literacy training, comprehensive re-entry services, job opportunities, and a path to entrepreneurship."
@@ -70,7 +69,6 @@ export default function AboutUsPage() {
               router.push("/dashboard");
             }}
           />
-          {/* need to add ref to support us page */}
           <DirectorBox
             title="Our Goal"
             textBody="CRED's main goal is to provide case management support along with interpersonal skill training support so our clients can thrive as self-sufficient individuals."

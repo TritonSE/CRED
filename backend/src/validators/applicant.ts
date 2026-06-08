@@ -105,6 +105,23 @@ const makeEmailValidator = (): ValidationChain =>
     .isEmail()
     .withMessage("email must be a valid email address");
 
+/**
+ * Relaxed email validator for updates. Existing applicants in the DB may have
+ * been created (or imported) before strict email validation was added, so
+ * requiring a valid email shape on every PUT would block legitimate edits
+ * (e.g. an admin adding a to-do to an applicant whose email is malformed).
+ * We still require the field to be a non-empty string, but we don't enforce
+ * RFC-compliant email shape. New applicants going through `createApplicant`
+ * are still held to the strict validator above.
+ */
+const makeEmailUpdateValidator = (): ValidationChain =>
+  body("email")
+    .exists()
+    .withMessage("email is required")
+    .bail()
+    .isString()
+    .withMessage("email must be a string");
+
 const makeAddressValidator = (): ValidationChain =>
   body("address")
     .exists()
@@ -260,7 +277,10 @@ export const updateApplicant = [
   makeDateOfBirthValidator(),
   makeRaceValidator(),
   makeGenderValidator(),
-  makeEmailValidator(),
+  // Use the relaxed email validator on updates so admin actions (add to-do,
+  // toggle complete, edit other fields) aren't blocked by pre-existing
+  // applicants with malformed email values.
+  makeEmailUpdateValidator(),
   makeAddressValidator(),
   makePhoneNumberValidator(),
   makeHousingStatusValidator(),

@@ -29,10 +29,8 @@ export type StatusLabelProps = {
  * @returns {JSX.Element} A styled div displaying the status text
  */
 export function StatusLabel({ status }: StatusLabelProps) {
-  // Start with base styles, then add status-specific styling
   let statusLabelClass = styles.statusLabel;
 
-  // Apply conditional styling based on status type
   switch (status) {
     case "Need to Review":
       statusLabelClass += ` ${styles.needToReview}`;

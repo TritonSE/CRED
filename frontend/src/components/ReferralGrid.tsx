@@ -93,7 +93,6 @@ export default function ReferralGrid() {
 
   return (
     <div className={styles.referralGrid}>
-      {/* Left: Category tab buttons */}
       <div className={styles.referralTabs}>
         {categories.map((category) => {
           const isActive = category.id === activeId;
@@ -143,7 +142,6 @@ export default function ReferralGrid() {
         })}
       </div>
 
-      {/* Right: Services panel */}
       <div className={styles.referralPanelWrapper}>
         <div className={styles.referralPanel}>
           {activeCategory.services.map((service, index) => (

@@ -17,7 +17,6 @@ const COLLABORATOR_INFO: Record<string, { description: string; link: string }> =
 };
 
 const collaboratorsData = [
-  // --- EDUCATION ---
   {
     id: 1,
     name: "City Scholars",
@@ -46,7 +45,6 @@ const collaboratorsData = [
   { id: 6, name: "Rising Scholars", category: "Education", logo: "/home/rising_scholars.png" },
   { id: 7, name: "Five Keys", category: "Education", logo: "/home/five_keys.png" },
 
-  // --- HOUSING ---
   { id: 9, name: "Father Joe's Villages", category: "Housing", logo: "/home/fjv.png" },
   {
     id: 10,
@@ -58,7 +56,6 @@ const collaboratorsData = [
   { id: 13, name: "Second Chance", category: "Housing", logo: "/home/second_chance.png" },
   { id: 14, name: "Anti-Recidivism Coalition", category: "Housing", logo: "/home/arc.png" },
 
-  // --- DEVELOPMENT ---
   { id: 17, name: "Five Keys", category: "Development", logo: "/home/five_keys.png" },
   {
     id: 18,
@@ -148,7 +145,6 @@ export default function Collaborator() {
       </div>
 
       <div className={styles.contentWrapper}>
-        {/* Separated Tabs */}
         <div className={styles.tabsContainer}>
           {tabs.map((tab) => (
             <button
@@ -164,7 +160,6 @@ export default function Collaborator() {
           ))}
         </div>
 
-        {/* Large White Panel with Logos */}
         <div className={styles.logoPanel}>
           <div className={styles.grid}>
             {filteredCollaborators.map((collab) => (

@@ -19,7 +19,6 @@ export default function DonatePage() {
         priority
       />
 
-      {/* Main Content */}
       <section className={styles.mainContent}>
         <h2 className={styles.mainHeading}>
           We believe in uplifting the most vulnerable members of our community.

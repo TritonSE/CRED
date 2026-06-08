@@ -70,8 +70,8 @@ async function assertOk(response: Response): Promise<void> {
     if (text) {
       message += ": " + text;
     }
-  } catch (e) {
-    console.log(e);
+  } catch {
+    // Reading the body failed; fall through with the status-only message.
   }
 
   throw new Error(message);
