@@ -1,3 +1,19 @@
+/**
+ * ExpandedRowContent Component
+ *
+ * Renders the detail card for a single application row. Supports two modes:
+ *
+ * 1. View — readonly profile / contact / program-needs / todos / notes panels.
+ * 2. Edit — every field is an editable input/select/textarea, with Save and
+ *    Cancel buttons. Implements Maya's V2 annotation: "made an edit view where
+ *    the fields look diff in edit view vs non edit view."
+ *
+ * Edit-mode draft state is kept locally and only flushed to the parent via
+ * `onSaveEdit`. This isolates in-progress edits from the source applicant
+ * snapshot and lets Cancel cleanly discard.
+ *
+ * @module ExpandedRowContent
+ */
 "use client";
 
 import Image from "next/image";

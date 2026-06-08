@@ -1,3 +1,17 @@
+/**
+ * ApplicantPDF Component
+ *
+ * Renders an applicant's full record as a printable PDF using
+ * `@react-pdf/renderer`. Layout mirrors the dashboard's expanded card so admins
+ * can take an offline copy of any application that matches what they'd see in
+ * the UI.
+ *
+ * The Document is consumed by `@react-pdf/renderer`'s `pdf()` helper from
+ * `ApplicationTable`'s download handler, which produces a Blob and triggers a
+ * browser download.
+ *
+ * @module ApplicantPDF
+ */
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 
 import type { Applicant } from "@/api/applicant";

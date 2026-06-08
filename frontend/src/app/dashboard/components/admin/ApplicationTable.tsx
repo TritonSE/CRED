@@ -1,3 +1,22 @@
+/**
+ * ApplicationTable Component
+ *
+ * Displays a collapsible table of client applications with columns for:
+ * - Client Number
+ * - Client Name
+ * - Date Submitted
+ * - Status (with color-coded labels)
+ * - Actions (checkboxes and menu)
+ *
+ * Features expandable rows with detailed client information including:
+ * - Client Profile
+ * - Contact Information
+ * - Program Needs & Interests
+ * - To-Dos
+ * - Notes/History Log
+ *
+ * @module ApplicationTable
+ */
 "use client";
 
 import {
@@ -24,6 +43,9 @@ import type { Applicant } from "@/api/applicant";
 
 import { deleteApplicant, updateApplicant } from "@/api/applicant";
 
+/**
+ * Data structure for a single application row
+ */
 export type ApplicationRowData = {
   clientNumber: string;
   clientName: string;
@@ -51,6 +73,7 @@ export type ApplicationRowData = {
 
 export type TodoItem = NonNullable<ApplicationRowData["todos"]>[number];
 
+/** Valid applicant status values accepted from the API. */
 const STATUS_VALUES: readonly ApplicationRowData["status"][] = [
   "Reviewed",
   "Need to Review",
@@ -91,6 +114,12 @@ function deriveDisplayStatus(
   return parsed === "Reviewed" ? "Need to Review" : parsed;
 }
 
+/**
+ * Props for the ApplicationTable component
+ * @property {string} title - The heading displayed above the table
+ * @property {ApplicationRowData[]} data - Array of application records to display
+ * @property {number} [pageSize] - Number of rows per page (default: 10)
+ */
 export type ApplicationTableProps = {
   title: string;
   pageSize?: number;
@@ -109,6 +138,9 @@ export type ApplicationTableProps = {
   setSuccessAlert?: (message: string) => void;
 };
 
+/**
+ * Sort indicator component
+ */
 function SortIndicator({ isSorted }: { isSorted: false | "asc" | "desc" }) {
   return (
     <span className={styles.sortIndicator}>
@@ -118,6 +150,15 @@ function SortIndicator({ isSorted }: { isSorted: false | "asc" | "desc" }) {
   );
 }
 
+/**
+ * ApplicationTable - Renders a collapsible data table for applications
+ *
+ * @param {ApplicationTableProps} props - Component props
+ * @param {string} props.title - Section title (e.g., "Pending Applications")
+ * @param {ApplicationRowData[]} props.data - Application data to populate the table
+ * @param {number} props.pageSize - Number of rows per page
+ * @returns {JSX.Element} A collapsible table with application data
+ */
 export function ApplicationTable({
   title,
   pageSize = 6,
@@ -129,19 +170,28 @@ export function ApplicationTable({
   onCompleteToggle,
   setSuccessAlert,
 }: ApplicationTableProps) {
+  /** Whether the entire table section is collapsed (hidden). */
   const [isCollapsed, setIsCollapsed] = useState(false);
+  /** Current column sort direction(s). Managed by @tanstack/react-table. */
   const [sorting, setSorting] = useState<SortingState>([]);
+  /** Map of row IDs → whether their expanded detail panel is open. */
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
+  /** Map of row IDs → whether the row is currently in edit mode. */
   const [editingRows, setEditingRows] = useState<Record<string, boolean>>({});
+  /** Cached pixel heights of each expanded panel (used for CSS transitions). */
   const [expandedHeights, setExpandedHeights] = useState<Record<string, number>>({});
 
+  /** Application rows derived from parent-provided applicant data. */
   const [applications, setApplications] = useState<ApplicationRowData[]>([]);
-  // Persisted by client number so collapse/expand keeps checkbox state.
+  /** Persisted to-do state keyed by client number so collapse/expand keeps checkbox state. */
   const [todosByClient, setTodosByClient] = useState<Record<string, TodoItem[]>>({});
+  /** Applicant objects from the parent (needed for updateApplicant). */
   const [rawApplicants, setRawApplicants] = useState<Applicant[]>([]);
 
+  /** Refs to expanded-row wrapper divs, keyed by row ID, for height measurement. */
   const expandedRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
+  /** Toggle a row's expanded/collapsed state by its unique row ID. */
   const toggleRowExpanded = (rowId: string) => {
     setExpandedRows((prev) => ({
       ...prev,
@@ -149,6 +199,7 @@ export function ApplicationTable({
     }));
   };
 
+  /** Convert raw API Applicant objects to table row data. */
   const processApplicants = (rows: Applicant[]) => {
     setRawApplicants(rows);
 
@@ -208,10 +259,11 @@ export function ApplicationTable({
     return current === "Need to Review" ? "Under Review" : current;
   };
 
+  /** Generate a stable-enough id for new to-do items. */
   const generateTodoId = (): string =>
     "todo-" + Date.now().toString() + "-" + Math.random().toString(36).slice(2, 8);
 
-  // Matches existing seed data: M/D/YYYY.
+  /** Format a Date for the notes log (matches existing seed data: M/D/YYYY). */
   const formatNoteDate = (d: Date): string =>
     `${(d.getMonth() + 1).toString()}/${d.getDate().toString()}/${d.getFullYear().toString()}`;
 
@@ -935,6 +987,7 @@ export function ApplicationTable({
     },
   });
 
+  /** Toggle collapse/expand of the whole table section. */
   const handleToggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };

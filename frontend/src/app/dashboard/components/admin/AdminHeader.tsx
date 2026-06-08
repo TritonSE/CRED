@@ -1,3 +1,13 @@
+/**
+ * AdminHeader Component
+ *
+ * Displays the welcome heading row of the admin dashboard.
+ * Search and filter tabs are rendered separately by FilterSearchTab to match
+ * the V2 Hifi Prototype layout (Welcome row → Filter+Search row → tables).
+ *
+ * @module AdminHeader
+ */
+
 import styles from "./AdminHeader.module.css";
 
 export type HeaderProps = {

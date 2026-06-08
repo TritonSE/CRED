@@ -4,6 +4,9 @@ import React from "react";
 import { Button } from "./Button";
 import styles from "./DirectorBox.module.css";
 
+/**
+ * We're going to need to add another prop for the button ref later
+ */
 export type DirectorBoxProps = {
   title: string;
   textBody: string;
