@@ -15,9 +15,7 @@ export default function Support() {
         </p>
       </div>
 
-      {/* Card grid */}
       <div className={styles.supportGrid}>
-        {/* Top row */}
         <div className={styles.supportRow}>
           <div className={styles.supportCard}>
             <Image
@@ -60,7 +58,6 @@ export default function Support() {
           </div>
         </div>
 
-        {/* Bottom row */}
         <div className={styles.supportRow}>
           <div className={styles.supportCard}>
             <Image

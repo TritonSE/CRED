@@ -4,23 +4,21 @@
  * and search bar at the top of the admin page.
  */
 
-/* Main container using flexbox for horizontal layout */
+/* Welcome row sits above the FilterSearchTab strip. */
 .flexContainer {
   display: flex;
-  height: 40px;
+  height: 60px;
   width: 100%;
   max-width: 1121px;
   flex-direction: row;
-  justify-content: space-between; /* Pushes header and search to opposite ends */
+  justify-content: flex-start;
   align-items: center;
-  padding-bottom: 2rem;
+  padding-bottom: 24px;
 }
 
-/* Column containing the welcome heading */
 .headerColumn {
-  flex: 1 1 auto; /* Allows column to grow/shrink as needed */
+  flex: 1 1 auto;
   width: auto;
-  height: 40px;
   text-align: left;
   align-items: center;
 }
