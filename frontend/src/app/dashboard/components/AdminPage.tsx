@@ -19,9 +19,11 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import styles from "./AdminPage.module.css";
 import { AdminHeader } from "./admin/AdminHeader";
 import { ApplicationTable } from "./admin/ApplicationTable";
+import { FilterSearchTab } from "./admin/FilterSearchTab";
 import { SuccessAlert } from "./admin/SuccessAlert";
 import alertStyles from "./admin/SuccessAlert.module.css";
 
+import type { DashboardTab } from "./admin/FilterSearchTab";
 import type { Applicant } from "@/api/applicant";
 
 import { getAllApplicants } from "@/api/applicant";
@@ -34,6 +36,8 @@ type SuccessAlertItem = {
 export default function AdminPage() {
   // Shared search query used to filter both tables simultaneously.
   const [searchQuery, setSearchQuery] = useState("");
+  // Active filter tab — drives which table(s) are visible.
+  const [activeTab, setActiveTab] = useState<DashboardTab>("All");
 
   // All applicants fetched from the backend (single source of truth).
   const [allApplicants, setAllApplicants] = useState<Applicant[]>([]);
@@ -114,30 +118,47 @@ export default function AdminPage() {
   const newApplicants = allApplicants.filter((a) => !a.isCompleted);
   const completedApplicants = allApplicants.filter((a) => a.isCompleted);
 
+  const showNew = activeTab === "All" || activeTab === "New";
+  const showCompleted = activeTab === "All" || activeTab === "Completed";
+
   return (
     <div className={styles.scrollViewport}>
       <main className={styles.mainContent}>
         {/* TODO: Replace hardcoded name with actual logged-in admin's name once auth is set up. */}
-        <AdminHeader name="DeQuan" searchQuery={searchQuery} onSearchChange={setSearchQuery} />
-        <ApplicationTable
-          title="New Applications"
-          globalFilter={searchQuery}
-          applicantData={newApplicants}
-          isLoading={isLoading}
-          error={error}
-          onCompleteToggle={handleCompleteToggle}
-          setSuccessAlert={addSuccessAlert}
+        <AdminHeader name="DeQuan" />
+        <FilterSearchTab
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
         />
-        <ApplicationTable
-          title="Completed Applications"
-          isCompleted
-          globalFilter={searchQuery}
-          applicantData={completedApplicants}
-          isLoading={isLoading}
-          error={error}
-          onCompleteToggle={handleCompleteToggle}
-          setSuccessAlert={addSuccessAlert}
-        />
+        {isLoading ? (
+          <p className={styles.statusMessage}>Loading applications…</p>
+        ) : error ? (
+          <p className={`${styles.statusMessage} ${styles.statusMessageError}`}>{error}</p>
+        ) : (
+          <>
+            {showNew && (
+              <ApplicationTable
+                title="New Applications"
+                globalFilter={searchQuery}
+                applicantData={newApplicants}
+                onCompleteToggle={handleCompleteToggle}
+                setSuccessAlert={addSuccessAlert}
+              />
+            )}
+            {showCompleted && (
+              <ApplicationTable
+                title="Completed Applications"
+                isCompleted
+                globalFilter={searchQuery}
+                applicantData={completedApplicants}
+                onCompleteToggle={handleCompleteToggle}
+                setSuccessAlert={addSuccessAlert}
+              />
+            )}
+          </>
+        )}
       </main>
       {successAlerts.length > 0 && (
         <div className={alertStyles.stack}>

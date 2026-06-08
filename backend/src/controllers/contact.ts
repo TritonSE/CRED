@@ -20,14 +20,6 @@ export const sendContact: RequestHandler = async (req, res, next) => {
   try {
     validationErrorParser(errors);
 
-    // TEMP: Disable email sending outside production while SMTP/Nodemailer credentials aren't given yet.
-    // Remove this block to enable Nodemailer sending once we have the credentials.
-    if (process.env.NODE_ENV !== "production") {
-      console.info("Contact email disabled in non-production environment.", { email, subject });
-      res.status(200).json({ ok: true });
-      return;
-    }
-
     try {
       await sendContactEmail({ fullName, email, subject, message });
     } catch (error) {

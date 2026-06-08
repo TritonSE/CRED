@@ -7,7 +7,6 @@ import styles from "./AdminFooter.module.css";
 export default function AdminFooter() {
   return (
     <footer className={styles.footer}>
-      {/* TSE Footer */}
       <div className={styles.tseFooter}>
         <div className={styles.tseInner}>
           <div className={styles.tseContent}>
