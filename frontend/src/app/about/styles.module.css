@@ -128,6 +128,22 @@
   }
 }
 
+.directorBoxes {
+  width: 82%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 6rem;
+}
+
+@media (max-width: 1200px) {
+  .directorBoxes {
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+  }
+}
+
 .howWeOperateSection {
   background-color: #ffffff;
   padding: 6rem 2rem;
