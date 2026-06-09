@@ -5,7 +5,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import styles from "./FoundationCard.module.css";
 
-export type FoundationCardProps = {
+type FoundationCardProps = {
   iconURL: string;
   title: string;
   textBody: string;

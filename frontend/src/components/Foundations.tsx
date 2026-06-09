@@ -6,25 +6,25 @@ const foundationsData = [
     title: "Community",
     description:
       "We are a community that empowers individuals to uplift each other and build for the better.",
-    icon: "/home/community_icon.svg",
+    icon: "/home/foundations/community_icon.svg",
   },
   {
     title: "Reintegration",
     description:
       "Creating structured pathways for successful re-entry into society with stability and purpose.",
-    icon: "/home/reintegration_icon.svg",
+    icon: "/home/foundations/reintegration_icon.svg",
   },
   {
     title: "Economic Development",
     description:
       "Providing access to workforce opportunities, financial growth, and entrepreneurship.",
-    icon: "/home/economic_icon.svg",
+    icon: "/home/foundations/economic_icon.svg",
   },
   {
     title: "Development",
     description:
       "Supporting underserved individuals into self-sufficient, empowered contributors to society.",
-    icon: "/home/development_icon.svg",
+    icon: "/home/foundations/development_icon.svg",
   },
 ];
 

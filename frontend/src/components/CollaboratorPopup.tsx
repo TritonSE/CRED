@@ -42,42 +42,38 @@ export function CollaboratorPopup({
         }}
       >
         <div className={styles.modalTop}>
-          {image && (
-            <Image
-              src={image}
-              alt={name + "'s logo"}
-              width="86"
-              height="86"
-              className={styles.modalLogo}
-            />
-          )}
+          <Image
+            src={image}
+            alt={`${name} logo`}
+            width="86"
+            height="86"
+            className={styles.modalLogo}
+          />
           <div className={styles.modalInfoWrapper}>
             <h2 className={styles.modalTitle}>{name}</h2>
             <p className={styles.modalProgram}>{program}</p>
           </div>
-          <div
+          <button
+            type="button"
             className={styles.modalClose}
             onClick={() => {
               onClose();
             }}
+            aria-label="Close"
           >
-            <Image src="/home/close.svg" width={30} height={30} alt="close button"></Image>
-          </div>
+            <Image src="/home/collaborators/close.svg" width={30} height={30} alt="" />
+          </button>
         </div>
-        {description?.length === titles.length && <div className={styles.description}>{data}</div>}
+        {description.length === titles.length && <div className={styles.description}>{data}</div>}
         <div className={styles.modalButtonWrapper}>
-          {link ? (
-            <a
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.learnMoreButton}
-            >
-              Visit Website
-            </a>
-          ) : (
-            <button className={styles.learnMoreButton}>Learn More</button>
-          )}
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.learnMoreButton}
+          >
+            Visit Website
+          </a>
         </div>
       </div>
     </div>

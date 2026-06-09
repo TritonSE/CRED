@@ -8,7 +8,7 @@ export default function JourneyBanner() {
     <section className={styles.section}>
       <div className={styles.bgWrapper}>
         <Image
-          src="/home/journey_banner_image.jpg"
+          src="/home/journey/journey_banner_image.jpg"
           alt="CRED background with lightbulbs"
           fill
           sizes="100vw"

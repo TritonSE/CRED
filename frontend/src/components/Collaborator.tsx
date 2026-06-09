@@ -27,7 +27,7 @@ const collaboratorsData: CollabData[] = [
     id: 1,
     name: "City Scholars",
     category: "Education",
-    logo: "/home/san_diego_city_scholars.png",
+    logo: "/home/collaborators/san_diego_city_scholars.png",
     data: {
       titles: [
         "Admissions and Enrollment Support",
@@ -49,7 +49,7 @@ const collaboratorsData: CollabData[] = [
     id: 2,
     name: "Underground Scholars",
     category: "Education",
-    logo: "/home/underground_scholars.png",
+    logo: "/home/collaborators/underground_scholars.png",
     data: {
       titles: ["Peer Mentorship", "Academic Support", "Community Building"],
       program: "UC San Diego",
@@ -65,7 +65,7 @@ const collaboratorsData: CollabData[] = [
     id: 3,
     name: "Project Rebound - SDSU",
     category: "Education",
-    logo: "/home/rebound_sdsu.png",
+    logo: "/home/collaborators/rebound_sdsu.png",
     data: {
       titles: [
         "Admissions and Enrollment Support",
@@ -85,7 +85,7 @@ const collaboratorsData: CollabData[] = [
     id: 4,
     name: "Project Rebound - CSUSM",
     category: "Education",
-    logo: "/home/rebound_san_marcos.png",
+    logo: "/home/collaborators/rebound_san_marcos.png",
     data: {
       titles: ["Enrollment Guidance", "Campus Integration"],
       program: "California State University - San Marcos",
@@ -100,7 +100,7 @@ const collaboratorsData: CollabData[] = [
     id: 5,
     name: "Project Rebound",
     category: "Education",
-    logo: "/home/rebound_cal_state.png",
+    logo: "/home/collaborators/rebound_cal_state.png",
     data: {
       titles: ["Statewide Network", "Scholarships and Financial Aid", "Basic Needs Support"],
       program: "California State University Campuses",
@@ -116,7 +116,7 @@ const collaboratorsData: CollabData[] = [
     id: 6,
     name: "Rising Scholars",
     category: "Education",
-    logo: "/home/rising_scholars.png",
+    logo: "/home/collaborators/rising_scholars.png",
     data: {
       titles: ["In-Custody Education", "Transition Support", "Academic Advising"],
       program: "Palomar College",
@@ -134,7 +134,7 @@ const collaboratorsData: CollabData[] = [
     id: 7,
     name: "Father Joe's Villages",
     category: "Housing",
-    logo: "/home/fjv.png",
+    logo: "/home/collaborators/fjv.png",
     data: {
       titles: [
         "Emergency Shelter & Bridge Housing",
@@ -154,7 +154,7 @@ const collaboratorsData: CollabData[] = [
     id: 8,
     name: "Alpha Project",
     category: "Housing",
-    logo: "/home/alpha.png",
+    logo: "/home/collaborators/alpha.png",
     data: {
       titles: ["Emergency Shelter", "Rapid Re-Housing", "Permanent Supportive Housing"],
       program: "3737 Fifth Ave, Suite 203, San Diego, CA 92103",
@@ -170,7 +170,7 @@ const collaboratorsData: CollabData[] = [
     id: 9,
     name: "Catholic Charities",
     category: "Housing",
-    logo: "/home/catholic_charities.png",
+    logo: "/home/collaborators/catholic_charities.png",
     data: {
       titles: ["Housing Assistance", "Case Management", "Basic Needs"],
       program: "Locations Across San Diego and Imperial Counties",
@@ -186,7 +186,7 @@ const collaboratorsData: CollabData[] = [
     id: 10,
     name: "Five Keys",
     category: "Development",
-    logo: "/home/five_keys.png",
+    logo: "/home/collaborators/five_keys.png",
     data: {
       titles: ["Vocational Training", "High School Diploma & GED", "Career Readiness"],
       program: "Online and locations across California",
@@ -202,7 +202,7 @@ const collaboratorsData: CollabData[] = [
     id: 11,
     name: "SD Workforce Partnership",
     category: "Development",
-    logo: "/home/san_diego_workforce_partnership.png",
+    logo: "/home/collaborators/san_diego_workforce_partnership.png",
     data: {
       titles: ["Job Placement Services", "Skills Training", "Career Counseling"],
       program: "Multiple career center locations across San Diego",
@@ -218,7 +218,7 @@ const collaboratorsData: CollabData[] = [
     id: 12,
     name: "Father Joe's Villages",
     category: "Development",
-    logo: "/home/fjv.png",
+    logo: "/home/collaborators/fjv.png",
     data: {
       titles: ["Employment Classes", "Job Placement & Development", "Job Searching Tools"],
       program: "1501 Imperial Ave. San Diego, CA 92101",
@@ -234,7 +234,7 @@ const collaboratorsData: CollabData[] = [
     id: 13,
     name: "Second Chance",
     category: "Development",
-    logo: "/home/second_chance.png",
+    logo: "/home/collaborators/second_chance.png",
     data: {
       titles: ["Job Readiness Training"],
       program: "6145 Imperial Ave, San Diego, CA 92114",
@@ -248,7 +248,7 @@ const collaboratorsData: CollabData[] = [
     id: 14,
     name: "Defy Ventures",
     category: "Development",
-    logo: "/home/defy_ventures.png",
+    logo: "/home/collaborators/defy_ventures.png",
     data: {
       titles: ["Entrepreneurship Training", "CEO of Your New Life", "Employer Partnerships"],
       program: "In-prison, community-based, and virtual programs",
@@ -264,7 +264,7 @@ const collaboratorsData: CollabData[] = [
     id: 15,
     name: "Anti-Recidivism Coalition",
     category: "Development",
-    logo: "/home/arc.png",
+    logo: "/home/collaborators/arc.png",
     data: {
       titles: ["Workforce Development", "Entrepreneurship Resources", "Community Support"],
       program: "Serving formerly incarcerated individuals throughout California",
@@ -280,7 +280,7 @@ const collaboratorsData: CollabData[] = [
     id: 16,
     name: "Alpha Project",
     category: "Other Resources",
-    logo: "/home/alpha.png",
+    logo: "/home/collaborators/alpha.png",
     data: {
       titles: ["Wheels of Change", "Living with Dignity", "Family Shelter Program"],
       program: "3737 Fifth Ave, Suite 203, San Diego, CA 92103",
@@ -296,7 +296,7 @@ const collaboratorsData: CollabData[] = [
     id: 17,
     name: "Father Joe's Villages",
     category: "Other Resources",
-    logo: "/home/fjv.png",
+    logo: "/home/collaborators/fjv.png",
     data: {
       titles: ["Village Health Center", "Food Services", "Family Services"],
       program: "1501 Imperial Ave. San Diego, CA 92101",
@@ -312,7 +312,7 @@ const collaboratorsData: CollabData[] = [
     id: 18,
     name: "Catholic Charities",
     category: "Other Resources",
-    logo: "/home/catholic_charities.png",
+    logo: "/home/collaborators/catholic_charities.png",
     data: {
       titles: [
         "Food and Nutritional Security",
@@ -334,7 +334,7 @@ const collaboratorsData: CollabData[] = [
     id: 19,
     name: "Anti-Recidivism Coalition",
     category: "Other Resources",
-    logo: "/home/arc.png",
+    logo: "/home/collaborators/arc.png",
     data: {
       titles: ["Policy Advocacy", "Supportive Services", "Mentorship and Workshops"],
       program: "Serving formerly incarcerated individuals throughout California",
@@ -350,7 +350,7 @@ const collaboratorsData: CollabData[] = [
     id: 20,
     name: "Second Chance",
     category: "Other Resources",
-    logo: "/home/second_chance.png",
+    logo: "/home/collaborators/second_chance.png",
     data: {
       titles: ["Reentry Support", "Collaborative Court Programs", "Youth Garden"],
       program: "6145 Imperial Ave, San Diego, CA 92114",

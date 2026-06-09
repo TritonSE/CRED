@@ -241,7 +241,7 @@
     display: block;
   }
 
-  .activeTab .chevron {
+  .tab[aria-expanded="true"] .chevron {
     transform: rotate(180deg);
   }
 
