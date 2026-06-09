@@ -19,7 +19,7 @@ export default function AboutUsPage() {
           className={styles.aboutHero}
           variant="banner"
           imageSrc="/BannerPic.jpg"
-          imageAlt=""
+          imageAlt="CRED community members gathered together"
           imageClassName={styles.aboutHeroImage}
           title="We Are CRED"
           subtitle="CRED provides individualized services for system-impacted individuals, low-income families, and transitional age youth seeking stability and self-sufficiency."
@@ -65,7 +65,6 @@ export default function AboutUsPage() {
               router.push("/");
             }}
           />
-          {/* need to add ref to Donate page */}
           <DirectorBox
             title="Our Goal"
             textBody="CRED's main goal is to provide case management support along with interpersonal skill training support so our clients can thrive as self-sufficient individuals."

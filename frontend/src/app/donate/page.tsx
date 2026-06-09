@@ -37,7 +37,7 @@ export default function DonatePage() {
 
           <div className={styles.contentText}>
             <p className={styles.lessBoldText}>
-              Our programs offers life skills education and a path to self-sufficiency that will
+              Our programs offer life skills education and a path to self-sufficiency that will
               empower our clients to break the cycles they are trapped in.
             </p>
             <p className={styles.lessBoldText}>
