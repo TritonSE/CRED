@@ -1,8 +1,9 @@
-import { Lato } from "next/font/google";
-
-import AppShell from "../components/AppShell";
+import { Analytics } from "@vercel/analytics/next";
+import { Inter, Lato } from "next/font/google";
 
 import type { Metadata } from "next";
+
+import AppShell from "@/components/AppShell";
 
 import "./globals.css";
 
@@ -10,6 +11,12 @@ const lato = Lato({
   weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-lato",
+});
+
+const inter = Inter({
+  weight: ["600"],
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -25,8 +32,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} antialiased overflow-x-hidden`} suppressHydrationWarning>
+      <body
+        className={`${lato.variable} ${inter.variable} antialiased overflow-x-hidden`}
+        suppressHydrationWarning
+      >
         <AppShell>{children}</AppShell>
+        <Analytics />
       </body>
     </html>
   );

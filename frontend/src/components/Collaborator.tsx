@@ -78,7 +78,7 @@ const collaboratorsData: CollabData[] = [
         "Dedicated academic counselors and peer tutors for formerly incarcerated students.",
         "Advising for students moving from community college to four-year universities or graduate programs.",
       ],
-      link: "https://rebound.sdsu.edu",
+      link: "https://rebound.sdsu.edu/",
     },
   },
   {
@@ -163,7 +163,7 @@ const collaboratorsData: CollabData[] = [
         "Provides rental assistance, security deposits, and housing navigation for families and individuals.",
         "Manages housing units for individuals with chronic illnesses or disabilities, including Alpha Square and Alpha Lofts for veterans.",
       ],
-      link: "https://alphaproject.org",
+      link: "https://alphaproject.org/",
     },
   },
   {
@@ -179,7 +179,7 @@ const collaboratorsData: CollabData[] = [
         "Comprehensive case management to address barriers to stability and self-sufficiency.",
         "Food, clothing, and essential supplies for individuals experiencing hardship.",
       ],
-      link: "https://ccdsd.org",
+      link: "https://catholiccharitiesca.org/agency/catholic-charities-diocese-of-san-diego/",
     },
   },
   {
@@ -195,7 +195,7 @@ const collaboratorsData: CollabData[] = [
         "Accredited charter school programs available inside correctional facilities.",
         "Job skills training, resume building, and interview preparation.",
       ],
-      link: "https://oasis.ucsd.edu/programs/USI-folder/index.html",
+      link: "https://www.fivekeyscharter.org/",
     },
   },
   {
@@ -211,12 +211,12 @@ const collaboratorsData: CollabData[] = [
         "Industry-specific training programs in technology, healthcare, and skilled trades.",
         "One-on-one guidance to identify career paths and develop professional skills.",
       ],
-      link: "https://workforce.org",
+      link: "https://workforce.org/",
     },
   },
   {
     id: 12,
-    name: "Father Joe’s Villages",
+    name: "Father Joe's Villages",
     category: "Development",
     logo: "/home/fjv.png",
     data: {
@@ -230,7 +230,6 @@ const collaboratorsData: CollabData[] = [
       link: "https://my.neighbor.org/",
     },
   },
-  // TODO: Fix line break
   {
     id: 13,
     name: "Second Chance",
@@ -242,7 +241,7 @@ const collaboratorsData: CollabData[] = [
       description: [
         "Job Readiness Training helps justice involved San Diegans find work and build pathways to self-sufficiency and financial independence.\n\nParticipants engage in 160 hours of comprehensive instruction in which they break down personal barriers to employment, develop new skills, create résumés and master interviewing techniques.\n\nClassroom exercises are group based, supplemented by one-on-one sessions with staff who help connect each person with additional resources outside of Second Chance, identify potential employment opportunities and provide encouragement.",
       ],
-      link: "https://www.secondchanceprogram.org",
+      link: "https://www.secondchanceprogram.org/",
     },
   },
   {
@@ -258,7 +257,7 @@ const collaboratorsData: CollabData[] = [
         "Comprehensive personal and professional development program for formerly incarcerated individuals.",
         "Connections to employers and investors who believe in second chances.",
       ],
-      link: "https://www.defyventures.org",
+      link: "https://www.defyventures.org/",
     },
   },
   {
@@ -274,7 +273,7 @@ const collaboratorsData: CollabData[] = [
         "Support for aspiring business owners including planning, microloans, and mentorship.",
         "Life coaching, mentorship, and community building for formerly incarcerated individuals.",
       ],
-      link: "https://antirecidivism.org",
+      link: "https://antirecidivism.org/",
     },
   },
   {
@@ -328,7 +327,7 @@ const collaboratorsData: CollabData[] = [
         "Counseling services, foster grandparent mentoring, and support for individuals with disabilities",
         "Immediate relief for clothing, household items, and hygiene kits.",
       ],
-      link: "https://ccdsd.org",
+      link: "https://catholiccharitiesca.org/agency/catholic-charities-diocese-of-san-diego/",
     },
   },
   {
@@ -344,7 +343,7 @@ const collaboratorsData: CollabData[] = [
         "Comprehensive care including case management, mental health treatment, trauma-informed therapy, and grief counseling.",
         "Formerly incarcerated staff go inside prisons to provide workshops on parole preparation, reentry planning, and mentorship.",
       ],
-      link: "https://antirecidivism.org",
+      link: "https://antirecidivism.org/",
     },
   },
   {
@@ -360,7 +359,7 @@ const collaboratorsData: CollabData[] = [
         "Designed to assist incarcerated individuals with a successful transition to their community.",
         "The Youth Garden provides eight-weeks of hands-on urban farming, nutrition classes and workforce training. Youth earn a weekly stipend and gain job readiness skills.",
       ],
-      link: "https://www.secondchanceprogram.org",
+      link: "https://www.secondchanceprogram.org/",
     },
   },
 ];
@@ -370,7 +369,10 @@ function getCollab(id: number) {
 }
 
 export default function Collaborator() {
-  const [activeTab, setActiveTab] = useState("Education");
+  const [activeTab, setActiveTab] = useState<string>("Education");
+  // Tracks whether the mobile accordion is currently expanded for the active tab.
+  // Desktop always treats the active tab as expanded.
+  const [isMobileExpanded, setIsMobileExpanded] = useState(true);
   const [selectedCollab, setSelectedCollab] = useState<{ id: number; category: string } | null>(
     null,
   );
@@ -511,12 +513,17 @@ export default function Collaborator() {
             <Fragment key={tab}>
               <button
                 className={`${styles.tab} ${activeTab === tab ? styles.activeTab : ""}`}
-                aria-expanded={activeTab === tab}
+                aria-expanded={activeTab === tab && isMobileExpanded}
                 onClick={() => {
                   const isMobile =
                     typeof window !== "undefined" &&
                     window.matchMedia("(max-width: 900px)").matches;
-                  setActiveTab((current) => (isMobile && current === tab ? "" : tab));
+                  if (isMobile && activeTab === tab) {
+                    setIsMobileExpanded((prev) => !prev);
+                  } else {
+                    setActiveTab(tab);
+                    setIsMobileExpanded(true);
+                  }
                 }}
               >
                 {getIcon(tab, activeTab === tab)}
@@ -541,7 +548,9 @@ export default function Collaborator() {
               </button>
 
               {/* Inline panel shown when expanded on mobile */}
-              <div className={styles.mobilePanel}>{activeTab === tab ? renderGrid(tab) : null}</div>
+              <div className={styles.mobilePanel}>
+                {activeTab === tab && isMobileExpanded ? renderGrid(tab) : null}
+              </div>
             </Fragment>
           ))}
         </div>

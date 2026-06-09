@@ -20,16 +20,14 @@ export const FoundationCard: React.FC<FoundationCardProps> = ({ iconURL, title, 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const mediaQuery = window.matchMedia("(max-width: 1024px)");
-    const handleResize = (event: MediaQueryListEvent | MediaQueryList) => {
-      setIsMobile("matches" in event ? event.matches : mediaQuery.matches);
+    const handleChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
     };
-    handleResize(mediaQuery);
+    setIsMobile(mediaQuery.matches);
 
-    mediaQuery.onchange = handleResize as
-      | ((this: MediaQueryList, ev: MediaQueryListEvent) => void)
-      | null;
+    mediaQuery.addEventListener("change", handleChange);
     return () => {
-      mediaQuery.onchange = null;
+      mediaQuery.removeEventListener("change", handleChange);
     };
   }, []);
 
