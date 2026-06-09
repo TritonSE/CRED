@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <HeroSection
       variant="tall"
-      imageSrc="/home/home-page-banner.jpg"
+      imageSrc="/home/HomepageHero.jpg"
       imageAlt="Hands coming together in community support"
       unoptimized
       title="Supporting Community, Stability, and Brighter Futures"
