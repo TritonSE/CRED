@@ -8,6 +8,17 @@
   gap: 72px;
 }
 
+/* Section Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 1047px;
+  text-align: center;
+}
+
 /* Section Title */
 .title {
   font-family: "Inter", sans-serif;
@@ -17,6 +28,17 @@
   letter-spacing: 0%;
   text-align: center;
   color: #175892;
+  margin: 0;
+}
+
+/* Section Subtitle */
+.subtitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 1.6vw, 24px);
+  line-height: 150%;
+  text-align: center;
+  color: #000000;
   margin: 0;
 }
 
@@ -142,6 +164,15 @@
   .foundations {
     padding: 48px 24px;
     gap: 36px;
+  }
+
+  .header {
+    align-items: flex-start;
+  }
+
+  .title,
+  .subtitle {
+    text-align: left;
   }
 
   .title {

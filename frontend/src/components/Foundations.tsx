@@ -31,7 +31,13 @@ const foundationsData = [
 export default function Foundations() {
   return (
     <section className={styles.foundations}>
-      <h2 className={styles.title}>The Foundation of Our Work</h2>
+      <div className={styles.header}>
+        <h2 className={styles.title}>The Foundation of Our Work</h2>
+        <p className={styles.subtitle}>
+          Our work is rooted in these core pillars. We strive to integrate these values to better
+          serve our clients.
+        </p>
+      </div>
 
       <div className={styles.cardGrid}>
         {foundationsData.map((item, index) => (

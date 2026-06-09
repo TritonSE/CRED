@@ -42,7 +42,15 @@ export function CollaboratorPopup({
         }}
       >
         <div className={styles.modalTop}>
-          {image && <Image src={image} alt={name + "'s logo"} width="86" height="86" />}
+          {image && (
+            <Image
+              src={image}
+              alt={name + "'s logo"}
+              width="86"
+              height="86"
+              className={styles.modalLogo}
+            />
+          )}
           <div className={styles.modalInfoWrapper}>
             <h2 className={styles.modalTitle}>{name}</h2>
             <p className={styles.modalProgram}>{program}</p>
