@@ -1,0 +1,73 @@
+/* Shared hero/hero-banner styles used across pages. */
+.root {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.tall {
+  height: clamp(450px, 55vw, 713px);
+}
+
+.banner {
+  min-height: 280px;
+  padding: 80px 24px;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .banner {
+    padding: 80px 120px;
+  }
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 1120px;
+  padding: 0 clamp(16px, 4vw, 56px);
+}
+
+.title {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 4.5vw, 64px);
+  line-height: 150%;
+  color: #ffffff;
+  margin: 0;
+  max-width: 30ch;
+}
+
+.subtitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: clamp(16px, 1.8vw, 24px);
+  line-height: 150%;
+  color: #ffffff;
+  margin: 16px 0 0 0;
+  max-width: 80ch;
+}
+
+.subtitleBold {
+  font-weight: 700;
+}

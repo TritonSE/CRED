@@ -14,7 +14,10 @@
     "prepare": "cd .. && husky"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.5.1",
+    "@tanstack/react-table": "^8.21.3",
     "@tritonse/tse-constellation": "^0.0.22",
+    "@vercel/analytics": "^2.0.1",
     "firebase": "^12.12.1",
     "next": "^15.5.9",
     "react": "^19.2.5",

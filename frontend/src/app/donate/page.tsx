@@ -2,31 +2,23 @@ import Image from "next/image";
 
 import styles from "./Donate.module.css";
 
+import HeroSection from "@/components/HeroSection";
+
 export default function DonatePage() {
   return (
     <div className={styles.donatePage}>
-      {/* Hero Banner */}
-      <section className={styles.heroBanner}>
-        <div className={styles.heroOverlay} />
-        <div className={styles.heroImageWrapper}>
-          <Image
-            src="/donate-banner.jpg"
-            alt="Hero background"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>Your Contribution Counts</h1>
-          <p className={styles.heroSubtitle}>
-            Reducing recidivism, mass incarceration, homelessness, and poverty by investing in
-            people.
-          </p>
-        </div>
-      </section>
+      <HeroSection
+        variant="banner"
+        imageSrc="/donate-banner.jpg"
+        imageAlt="Hero background"
+        title="Your Contribution Counts"
+        subtitle="Reducing recidivism, mass incarceration, homelessness, and poverty by investing in people."
+        overlayGradient="linear-gradient(to right, rgba(0, 67, 119, 0.8), rgba(30, 115, 190, 0.8))"
+        imageOpacity={0.8}
+        imageClassName={styles.heroImage}
+        priority
+      />
 
-      {/* Main Content */}
       <section className={styles.mainContent}>
         <h2 className={styles.mainHeading}>
           We believe in uplifting the most vulnerable members of our community.

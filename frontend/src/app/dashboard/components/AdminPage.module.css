@@ -1,0 +1,27 @@
+.scrollViewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+.mainContent {
+  padding-top: 5rem;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+  margin: 0 auto;
+  background-color: #faf8f6;
+  min-height: 100vh;
+  width: max-content;
+  min-width: 1200px;
+}
+
+.statusMessage {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  color: #6b7280;
+  padding: 32px 0;
+  text-align: center;
+}
+
+.statusMessageError {
+  color: #b00020;
+}

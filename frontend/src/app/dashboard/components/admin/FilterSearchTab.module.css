@@ -1,0 +1,85 @@
+/**
+ * FilterSearchTab.module.css
+ * Styles the tab + search strip rendered above the application tables.
+ *
+ * Layout intent (from V2 Hifi Prototype, Filter + Search Tab component):
+ *   - 40px tall horizontal strip, 1122px max width.
+ *   - Tabs flush-left, search flush-right.
+ *   - Active tab uses CRED primary blue with a bottom underline.
+ */
+
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 1121px;
+  height: 40px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  height: 100%;
+  align-items: center;
+}
+
+.tab {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 8px 4px;
+  cursor: pointer;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  transition: color 0.15s ease;
+}
+
+.tab:hover {
+  color: #175892;
+}
+
+.tab:focus-visible {
+  outline: 2px solid #175892;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.tabActive {
+  color: #175892;
+  font-weight: 700;
+}
+
+/* Underline indicator for the active tab. */
+.tabActive::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  background-color: #175892;
+  border-radius: 1px;
+}
+
+.searchColumn {
+  max-width: 552px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.searchBar {
+  background-color: transparent !important;
+}
+
+.searchBar :global(input) {
+  background-color: transparent !important;
+}
