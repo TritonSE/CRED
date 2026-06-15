@@ -8,7 +8,7 @@ export default function JourneyBanner() {
     <section className={styles.section}>
       <div className={styles.bgWrapper}>
         <Image
-          src="/home/JourneyImage.jpg"
+          src="/home/journey/journey_banner_image.jpg"
           alt="CRED background with lightbulbs"
           fill
           sizes="100vw"
@@ -30,7 +30,7 @@ export default function JourneyBanner() {
 
         <div className={styles.buttonContainer}>
           <Link href="/apply" className={styles.button}>
-            Start Application
+            Apply Now
           </Link>
         </div>
       </div>

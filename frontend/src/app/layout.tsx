@@ -32,8 +32,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} ${inter.variable} antialiased overflow-x-clip`}>
-        <div className="min-h-screen w-full bg-[#faf8f6] flex flex-col overflow-x-clip">
+      <body className={`${lato.variable} ${inter.variable} antialiased overflow-x-hidden`}>
+        <div className="min-h-screen w-full bg-[#faf8f6] flex flex-col overflow-x-hidden">
           <LayoutShell>{children}</LayoutShell>
         </div>
         <Analytics />

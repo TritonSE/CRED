@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import styles from "./HeroSection.module.css";
 
-export type HeroSectionVariant = "tall" | "banner";
+type HeroSectionVariant = "tall" | "banner";
 
 type HeroSectionProps = {
   title: string;

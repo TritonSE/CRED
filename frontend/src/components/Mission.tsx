@@ -22,7 +22,7 @@ export default function Mission() {
 
         <div className={styles.missionImageWrapper}>
           <Image
-            src="/home/mission-image.png"
+            src="/home/mission/mission-image.png"
             alt="Two people embracing in support"
             fill
             sizes="(max-width: 900px) 100vw, 50vw"
