@@ -30,7 +30,7 @@
 .supportSubtitle {
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: clamp(16px, 1.6vw, 24px);
+  font-size: clamp(16px, 1.6vw, 20px);
   line-height: 150%;
   text-align: center;
   color: #000000;
@@ -56,6 +56,7 @@
   position: relative;
   flex: 1;
   min-width: 0;
+  height: 25rem;
   min-height: clamp(200px, 22vw, 296px);
   border-radius: 15px;
   overflow: hidden;
@@ -89,11 +90,12 @@
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: clamp(22px, 2.8vw, 40px);
-  line-height: 130%;
+  line-height: 150%;
   color: #ffffff;
   margin: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  padding-top: 2rem;
 }
 
 .supportCardText {
@@ -107,16 +109,35 @@
 
 /* Stack cards into a single column on narrower screens */
 @media (max-width: 900px) {
+  .supportHeader {
+    align-items: flex-start;
+  }
+
+  .supportTitle,
+  .supportSubtitle {
+    text-align: left;
+  }
+
   .supportRow {
     flex-direction: column;
   }
 
+  /* Let each card hug its content instead of using the tall fixed desktop height. */
   .supportCard {
-    min-height: 220px;
+    height: auto;
+    min-height: 200px;
+  }
+
+  /* Put the content in flow so the card grows to fit the text. */
+  .supportCardContent {
+    position: relative;
+    gap: 12px;
+    padding: 28px 24px;
   }
 
   .supportCardTitle {
-    font-size: clamp(22px, 4vw, 32px);
+    font-size: clamp(22px, 6vw, 28px);
+    padding-top: 12px;
   }
 
   .supportCardText {

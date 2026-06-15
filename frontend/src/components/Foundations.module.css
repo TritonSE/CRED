@@ -8,6 +8,17 @@
   gap: 72px;
 }
 
+/* Section Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 1047px;
+  text-align: center;
+}
+
 /* Section Title */
 .title {
   font-family: "Inter", sans-serif;
@@ -20,9 +31,21 @@
   margin: 0;
 }
 
+/* Section Subtitle */
+.subtitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 1.6vw, 24px);
+  line-height: 150%;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}
+
 /* Card Grid Container */
 .cardGrid {
   display: flex;
+  align-items: stretch;
   justify-content: center;
   gap: 38px;
   width: 100%;
@@ -40,7 +63,7 @@
   align-items: center;
   gap: 20px;
   border-radius: 10px;
-  background: #ffffff;
+  background: #ebf5fd;
   box-shadow: 0px 5px 10px 0px #00000026;
   transition: background-color 0.1s ease;
 }
@@ -88,6 +111,22 @@
   margin: 0;
 }
 
+.cardWrapper {
+  width: 100%;
+  display: flex;
+  flex: 1 1 0;
+  align-items: stretch;
+}
+
+/* Ensure the inner card component fills the wrapper height so all cards match */
+.cardWrapper :global(.cardContainer) {
+  height: 100%;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 1280px) {
   .foundations {
@@ -105,14 +144,19 @@
     font-size: 40px;
   }
 
+  /* For medium widths, stack cards vertically (one column) and span full width */
   .cardGrid {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     gap: 28px;
   }
 
   .card {
-    flex: 1 1 calc(50% - 28px);
+    flex: none;
+    width: 100%;
     max-width: none;
+    min-height: auto;
+    padding: 36px 20px;
   }
 }
 
@@ -120,6 +164,15 @@
   .foundations {
     padding: 48px 24px;
     gap: 36px;
+  }
+
+  .header {
+    align-items: flex-start;
+  }
+
+  .title,
+  .subtitle {
+    text-align: left;
   }
 
   .title {

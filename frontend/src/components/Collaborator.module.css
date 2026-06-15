@@ -9,6 +9,9 @@
 .header {
   text-align: center;
   margin-bottom: 40px;
+  max-width: 1220px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .title {
@@ -24,67 +27,121 @@
   font-size: clamp(16px, 1.4vw, 20px);
   color: #000000;
   margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.subtitlePrompt {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-size: clamp(16px, 1.4vw, 20px);
+  color: #000000;
+  margin: 16px 0 0 0;
+  width: 100%;
 }
 
 .contentWrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
   max-width: 1220px;
-  gap: 0;
+  gap: 3rem;
 }
 
 .tabsContainer {
   display: flex;
-  width: 100%;
-  gap: 16px;
+  flex-direction: column;
+  width: 30rem;
 }
 
-/* Stack tabs vertically on phone screens */
-@media (max-width: 480px) {
-  .tabsContainer {
-    flex-direction: column;
-    gap: 8px;
-  }
+.tabTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.tabName {
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: Bold;
+  line-height: 150%;
+  letter-spacing: 0%;
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+}
+
+.tabDescription {
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 13px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  display: inline-block;
+  width: 100%;
+  text-align: left;
 }
 
 .tab {
-  flex: 1;
+  width: 100%;
+  height: 5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   gap: 8px;
   padding: 16px;
   cursor: pointer;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-bottom: none;
-  border-radius: 12px 12px 0 0;
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: clamp(14px, 1.2vw, 16px);
   color: #175892;
   transition: all 0.1s ease;
+  border-top: 2px solid #004377;
+}
+
+.tab:first-child {
+  border-top: none;
 }
 
 .activeTab {
-  background: #175892;
+  background: #004377;
   color: #ffffff;
-  border-color: #175892;
+  border-color: #004377;
+  border-bottom: none;
+  border-radius: 10px 10px 10px 10px;
+}
+
+/* The panel sits between tabs in the DOM (display:none on desktop), so target
+   the tab two siblings after the active one to keep the divider hidden. */
+.activeTab + .mobilePanel + .tab {
+  border-top: none;
+}
+
+.chevron {
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  display: none;
+}
+
+/* Inline accordion panel: hidden on desktop, shown under the active row on mobile. */
+.mobilePanel {
+  display: none;
 }
 
 .logoPanel {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 0 0 12px 12px;
-  padding: clamp(24px, 3.5vw, 48px);
   width: 100%;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 56px 24px;
+  gap: 24px 24px;
 }
 
 @media (min-width: 600px) {
@@ -95,7 +152,7 @@
 
 @media (min-width: 900px) {
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -109,6 +166,7 @@
   border-radius: 10px;
   padding: 12px;
   transition: border-color 0.2s ease;
+  background-color: #ffffff;
 }
 
 .logoCard:hover {
@@ -123,102 +181,94 @@
   border-radius: 7px;
 }
 
-.modalOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 24px;
-}
+/* Accordion layout on tablet/phone screens.
+   Placed last so these rules win over the base styles above on equal specificity. */
+@media (max-width: 900px) {
+  .header {
+    text-align: left;
+  }
 
-.modal {
-  width: 100%;
-  max-width: 1057px;
-  background: #ffffff;
-  border-radius: 0px 0px 10px 10px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: clamp(32px, 5vw, 64px) clamp(24px, 7vw, 100px) clamp(48px, 7vw, 100px);
-  gap: clamp(20px, 3vw, 37px);
-  box-sizing: border-box;
-}
+  .contentWrapper {
+    flex-direction: column;
+    gap: 0;
+  }
 
-.modalClose {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 24px;
-  height: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: var(--secondary-blue-darker, #004377);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
+  .tabsContainer {
+    width: 100%;
+  }
 
-.modalTitle {
-  font-family: "Inter", sans-serif;
-  font-weight: 590;
-  font-size: clamp(24px, 3vw, 40px);
-  line-height: 150%;
-  text-align: center;
-  color: var(--secondary-blue-darker, #004377);
-  width: 100%;
-  margin: 0;
-}
+  .tab {
+    height: auto;
+    padding: 22px 4px;
+    gap: 18px;
+    border-top: 1px solid #175892;
+    border-radius: 0;
+  }
 
-.modalDescription {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-size: clamp(16px, 1.4vw, 20px);
-  line-height: 150%;
-  text-align: center;
-  color: #000000;
-  width: 100%;
-  margin: 0;
-}
+  .tab:first-child {
+    border-top: none;
+  }
 
-.modalButtonWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  /* Neutralize the desktop "filled blue box" highlight in the accordion. */
+  .activeTab {
+    background: transparent;
+    color: #175892;
+    border-radius: 0;
+    border-bottom: none;
+  }
 
-.learnMoreButton {
-  background: #ffb341;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  padding: 12px 24px;
-  box-sizing: border-box;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 150%;
-  text-align: center;
-  text-decoration: none;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #000000;
-}
+  /* Keep a divider under the active row (overrides the desktop hide rule). */
+  .activeTab + .mobilePanel + .tab {
+    border-top: 1px solid #175892;
+  }
 
-.logoName {
-  font-family: "Lato", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #000000;
-  margin: 0;
-  text-align: center;
+  /* Force the category + chevron icons to stay blue, even when the row is active. */
+  .tab svg {
+    stroke: #175892;
+  }
+
+  .tabName {
+    font-size: clamp(24px, 6vw, 30px);
+    color: #175892;
+  }
+
+  .tabDescription {
+    font-size: 16px;
+    color: #000000;
+  }
+
+  .chevron {
+    display: block;
+  }
+
+  .tab[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Hide the desktop side panel; show the partners inline under the active row. */
+  .logoPanel {
+    display: none;
+  }
+
+  .mobilePanel {
+    display: block;
+    padding: 4px 0 28px;
+  }
+
+  /* Collapsed rows render an empty panel — don't let it add vertical space. */
+  .mobilePanel:empty {
+    padding: 0;
+  }
+
+  /* List each partner as a full-width card inside the expanded tab. */
+  .mobilePanel .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mobilePanel .logoCard {
+    border: 1px solid #d6e2ee;
+    border-radius: 10px;
+    padding: 20px 12px;
+  }
 }
