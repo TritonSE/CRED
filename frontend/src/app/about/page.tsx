@@ -19,7 +19,7 @@ export default function AboutUsPage() {
           className={styles.aboutHero}
           variant="banner"
           imageSrc="/BannerPic.jpg"
-          imageAlt=""
+          imageAlt="CRED community members gathered together"
           imageClassName={styles.aboutHeroImage}
           title="We Are CRED"
           subtitle="CRED provides individualized services for system-impacted individuals, low-income families, and transitional age youth seeking stability and self-sufficiency."
@@ -33,24 +33,20 @@ export default function AboutUsPage() {
               <h2 className={styles.aboutHeading}>Our Vision</h2>
               <div className={styles.aboutVisionContent}>
                 <p>
-                  We seek to address systemic issues that impact our communities, including racial
-                  inequality, economic disparities, and barriers to higher education and employment
-                  opportunities.
-                </p>
-                <p>
-                  Through education, interpersonal development of life skills and lived experience
-                  mentorship, CRED&apos;s empowerment and healing centered engagement ensures
-                  clients success.
+                  Our vision is to restore and realign communities by addressing the root causes of
+                  incarceration. Through education, life skills development, and mentorship grounded
+                  in lived experience, CRED creates pathways for sustainable success and
+                  generational impact.
                 </p>
               </div>
             </div>
 
             <div className={styles.aboutImagePlaceholder}>
               <Image
-                src="/OurVisionImage.png"
+                src="/OurVision.png"
                 alt="Illustration accompanying the Our Vision section"
-                width={400}
-                height={300}
+                width={500}
+                height={335}
               />
             </div>
           </div>
@@ -62,11 +58,11 @@ export default function AboutUsPage() {
           <DirectorBox
             title="What We Do"
             textBody="We empower individuals to thrive by offering clients financial literacy training, comprehensive re-entry services, job opportunities, and a path to entrepreneurship."
-            buttonlabel="Our Services"
+            buttonlabel="Types of Aid"
             imageUrl="/Map_Marker.svg"
             backgroundUrl="/What_We_Do_Background.jpg"
             onButtonClick={() => {
-              router.push("/dashboard");
+              router.push("/");
             }}
           />
           <DirectorBox
@@ -76,7 +72,7 @@ export default function AboutUsPage() {
             imageUrl="/folder_people.svg"
             backgroundUrl="/Our_Goal_Background.jpg"
             onButtonClick={() => {
-              router.push("/dashboard");
+              router.push("/donate");
             }}
           />
         </div>
@@ -95,7 +91,7 @@ export default function AboutUsPage() {
           <div className={styles.operateCards}>
             <OperationsCard
               iconURL="/apply_icon.svg"
-              title="You Apply to CRED"
+              title="Step 1: You Apply to CRED"
               textBody="Review CRED's programs and see which type of support best fits your current situation. Then, fill out the application form."
             />
             <Image
@@ -107,7 +103,7 @@ export default function AboutUsPage() {
             />
             <OperationsCard
               iconURL="/assess_needs_icon.svg"
-              title="We Assess Your Needs"
+              title="Step 2: We Assess Your Needs"
               textBody="After you submit, CRED's team will review your application and follow up with next steps. We'll contact you if we need more information."
             />
             <Image
@@ -119,7 +115,7 @@ export default function AboutUsPage() {
             />
             <OperationsCard
               iconURL="/client_icon.svg"
-              title="You Become a Client!"
+              title="Step 3: You Become a Client!"
               textBody="Our clients have moved on to find stability and build better lives through entrepreneurship and life skill development."
             />
           </div>

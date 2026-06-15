@@ -21,7 +21,7 @@ export default function DonatePage() {
 
       <section className={styles.mainContent}>
         <h2 className={styles.mainHeading}>
-          We believe in uplifting the most vulnerable members of our community.
+          We Believe in Uplifting the Most Vulnerable Members of Our Community.
         </h2>
 
         <div className={styles.contentRow}>
@@ -31,20 +31,21 @@ export default function DonatePage() {
               alt="Community support"
               fill
               className="object-cover"
-              sizes="(min-width: 1024px) 538px, 100vw"
+              sizes="(min-width: 1200px) 538px, (min-width: 1024px) 480px, 100vw"
             />
           </div>
 
           <div className={styles.contentText}>
             <p className={styles.lessBoldText}>
-              Our programs offers life skills education and a path to self-sufficiency that will
+              Our programs offer life skills education and a path to self-sufficiency that will
               empower our clients to break the cycles they are trapped in.
             </p>
             <p className={styles.lessBoldText}>
-              <span className={styles.extraBoldText}>But we can&apos;t do it alone</span>. By
+              <span className={styles.extraBoldText}>But we can&apos;t do it alone.</span> By
               contributing to CRED, you&apos;re investing in a future where these individuals have
               the support, skills, and opportunities they need to thrive.
             </p>
+
             <a
               href="https://www.paypal.com/donate/?hosted_button_id=2EJN3L8MH3LVA"
               target="_blank"
