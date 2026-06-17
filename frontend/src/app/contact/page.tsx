@@ -8,7 +8,7 @@ export default function ContactPage() {
     <div className={styles.contactPage}>
       <HeroSection
         variant="banner"
-        imageSrc="/contact-banner.jpg"
+        imageSrc="/contact/banner.jpg"
         imageAlt=""
         title="Contact Us"
         subtitle="CRED is committed to supporting system-impacted individuals. We welcome inquiries, collaboration, and contributions from all individuals."

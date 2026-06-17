@@ -141,7 +141,7 @@ export const YourProfileForm = function YourProfileForm({
         <div className={styles.formInner}>
           <div className={styles.progressCenter}>
             <Image
-              src="/Progress-Bar-One.svg"
+              src="/apply/progress-bar-1.svg"
               alt="Application progress: step 1 of 3"
               width={245}
               height={30}

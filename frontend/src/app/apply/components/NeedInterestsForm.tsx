@@ -34,7 +34,7 @@ export const NeedInterestsForm = function NeedInterestsForm({
         <div className={styles.progressCenter}>
           <Image
             className={styles.progressBarTwo}
-            src="/Progress-Bar-Two.png"
+            src="/apply/progress-bar-2.png"
             alt="Step 2 of 3"
             width={245}
             height={30}

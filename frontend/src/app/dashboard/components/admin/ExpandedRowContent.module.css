@@ -407,7 +407,7 @@
   height: 24px;
   border: none;
   border-radius: 3px;
-  background-image: url("/checkedBox.svg");
+  background-image: url("/dashboard/checked-box.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -431,7 +431,7 @@
   height: 24px;
   border: none;
   border-radius: 3px;
-  background-image: url("/checkedBoxAid.svg");
+  background-image: url("/dashboard/checked-box-aid.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

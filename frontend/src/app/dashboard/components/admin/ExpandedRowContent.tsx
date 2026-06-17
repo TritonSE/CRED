@@ -517,7 +517,7 @@ export function ExpandedRowContent({
                 }}
               >
                 <span className={styles.addTodoPlus}>
-                  <Image src="/plus.svg" alt="add" width={14} height={14} />
+                  <Image src="/dashboard/plus.svg" alt="add" width={14} height={14} />
                 </span>
                 <span>Add To-do</span>
               </button>
@@ -576,7 +576,7 @@ export function ExpandedRowContent({
               }}
             >
               <span className={styles.addTodoPlus}>
-                <Image src="/plus.svg" alt="add" width={14} height={14} />
+                <Image src="/dashboard/plus.svg" alt="add" width={14} height={14} />
               </span>
               <span>Add note</span>
             </button>
@@ -612,7 +612,9 @@ export function ExpandedRowContent({
                 onClick={onToggleComplete}
               >
                 <Image
-                  src={isCompleted ? "/admin_checkmark_dark.svg" : "/admin_checkmark_light.svg"}
+                  src={
+                    isCompleted ? "/dashboard/checkmark-dark.svg" : "/dashboard/checkmark-light.svg"
+                  }
                   alt=""
                   width={20}
                   height={20}

@@ -9,7 +9,7 @@ export default function DonatePage() {
     <div className={styles.donatePage}>
       <HeroSection
         variant="banner"
-        imageSrc="/donate-banner.jpg"
+        imageSrc="/donate/banner.jpg"
         imageAlt="Hero background"
         title="Your Contribution Counts"
         subtitle="Reducing recidivism, mass incarceration, homelessness, and poverty by investing in people."
@@ -27,7 +27,7 @@ export default function DonatePage() {
         <div className={styles.contentRow}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/donate-image.png"
+              src="/donate/image.png"
               alt="Community support"
               fill
               className="object-cover"

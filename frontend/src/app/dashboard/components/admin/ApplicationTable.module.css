@@ -284,7 +284,7 @@
   height: 18px;
   border: none;
   border-radius: 3px;
-  background-image: url("/checkedBox.svg");
+  background-image: url("/dashboard/checked-box.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

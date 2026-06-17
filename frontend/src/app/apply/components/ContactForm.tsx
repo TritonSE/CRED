@@ -38,7 +38,7 @@ export const ContactForm = function ContactForm({
         <div className={styles.progressCenter}>
           <Image
             className={styles.progressBarThree}
-            src="/Progress-Bar-Three.png"
+            src="/apply/progress-bar-3.png"
             alt="Step 3 of 3"
             width={245}
             height={30}

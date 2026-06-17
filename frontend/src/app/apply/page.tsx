@@ -209,7 +209,7 @@ export default function ApplyPage() {
     <ThemeProvider>
       <HeroSection
         variant="banner"
-        imageSrc="/ApplyBanner.jpg"
+        imageSrc="/apply/banner.jpg"
         imageAlt=""
         title="Join CRED Today"
         subtitle="Your journey to self-sufficiency starts here. We empower you with the tools to thrive, not just survive."

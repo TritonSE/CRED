@@ -17,7 +17,7 @@ export default function Footer() {
           <div className={styles.leftSection}>
             <div className={styles.logoWrapper}>
               <Image
-                src="/cred-logo.svg"
+                src="/logos/cred-logo.svg"
                 alt="CRED Logo"
                 fill
                 className="object-contain object-left"
@@ -102,7 +102,7 @@ export default function Footer() {
           <div className={styles.tseContent}>
             <div className={styles.tseLogoWrapper}>
               <Image
-                src="/tse-logo.png"
+                src="/logos/tse-logo.png"
                 alt="Triton Software Engineering Logo"
                 fill
                 className="object-contain"

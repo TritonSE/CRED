@@ -12,7 +12,7 @@ export default function AdminFooter() {
           <div className={styles.tseContent}>
             <div className={styles.tseLogoWrapper}>
               <Image
-                src="/tse-logo.png"
+                src="/logos/tse-logo.png"
                 alt="Triton Software Engineering Logo"
                 fill
                 className="object-contain"
