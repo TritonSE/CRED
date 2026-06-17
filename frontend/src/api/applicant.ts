@@ -19,8 +19,11 @@ export type Applicant = {
   address: string;
   phoneNumber: string;
   housingStatus?: string;
-  educationStatus?: string;
-  employmentStatus?: string;
+  otherHousingStatus?: string;
+  educationStatus?: string[];
+  otherEducationStatus?: string;
+  employmentStatus?: string[];
+  otherEmploymentStatus?: string;
   convictionDetails?: string;
   aidRequested: string[];
   otherAidRequested?: string;
@@ -43,8 +46,11 @@ type ApplicantJSON = {
   address: string;
   phoneNumber: string;
   housingStatus?: string;
-  educationStatus?: string;
-  employmentStatus?: string;
+  otherHousingStatus?: string;
+  educationStatus?: string[];
+  otherEducationStatus?: string;
+  employmentStatus?: string[];
+  otherEmploymentStatus?: string;
   convictionDetails?: string;
   aidRequested: string[];
   otherAidRequested?: string;
@@ -72,8 +78,11 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
     address: applicant.address,
     phoneNumber: applicant.phoneNumber,
     housingStatus: applicant.housingStatus,
+    otherHousingStatus: applicant.otherHousingStatus,
     educationStatus: applicant.educationStatus,
+    otherEducationStatus: applicant.otherEducationStatus,
     employmentStatus: applicant.employmentStatus,
+    otherEmploymentStatus: applicant.otherEmploymentStatus,
     convictionDetails: applicant.convictionDetails,
     aidRequested: applicant.aidRequested,
     otherAidRequested: applicant.otherAidRequested,
@@ -85,7 +94,7 @@ function parseApplicant(applicant: ApplicantJSON): Applicant {
 }
 
 export type CreateApplicantRequest = {
-  applicantNumber: string;
+  applicantNumber?: string;
   applicantName: string;
   status?: string;
   dateOfBirth: Date;
@@ -95,15 +104,18 @@ export type CreateApplicantRequest = {
   address: string;
   phoneNumber: string;
   housingStatus?: string;
-  educationStatus?: string;
-  employmentStatus?: string;
+  otherHousingStatus?: string;
+  educationStatus?: string[];
+  otherEducationStatus?: string;
+  employmentStatus?: string[];
+  otherEmploymentStatus?: string;
   convictionDetails?: string;
   aidRequested: string[];
   otherAidRequested?: string;
   additionalComments?: string;
   todos?: { id: string; label: string; completed: boolean }[];
   notes?: { date: string; content: string }[];
-  isCompleted?: boolean;
+  isCompleted: boolean;
 };
 
 export type UpdateApplicantRequest = {
@@ -119,8 +131,11 @@ export type UpdateApplicantRequest = {
   address: string;
   phoneNumber: string;
   housingStatus?: string;
-  educationStatus?: string;
-  employmentStatus?: string;
+  otherHousingStatus?: string;
+  educationStatus?: string[];
+  otherEducationStatus?: string;
+  employmentStatus?: string[];
+  otherEmploymentStatus?: string;
   convictionDetails?: string;
   aidRequested: string[];
   otherAidRequested?: string;

@@ -49,7 +49,7 @@
 }
 
 .title {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
   font-size: clamp(32px, 4.5vw, 64px);
   line-height: 150%;
@@ -59,8 +59,8 @@
 }
 
 .subtitle {
-  font-family: "Lato", sans-serif;
-  font-weight: 500;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-weight: 400;
   font-size: clamp(16px, 1.8vw, 24px);
   line-height: 150%;
   color: #ffffff;

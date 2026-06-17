@@ -1,0 +1,745 @@
+.formBlock {
+  width: 100%;
+  max-width: 982px;
+  margin: 30px auto;
+}
+
+.content {
+  background: #ffffff;
+  padding: 64px;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.progressCenter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.progressBar {
+  width: 245px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.formInner {
+  width: 100%;
+  max-width: 854px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  box-sizing: border-box;
+}
+
+.heading {
+  text-align: left;
+}
+
+.heading h2 {
+  margin: 0 0 10px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #000000;
+}
+
+.headingSubtitle {
+  margin: 0;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #000000;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .headingSubtitle {
+    white-space: normal;
+  }
+}
+
+.required {
+  color: #ff0000;
+  font-weight: 700;
+}
+
+.fieldSection {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 100%;
+  font-family: var(--font-lato), Lato, sans-serif;
+}
+
+.fieldTop,
+.fieldMiddle {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 54px;
+  width: 854px;
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .fieldTop,
+  .fieldMiddle {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}
+
+.shortField {
+  width: 400px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.fullWidthField {
+  width: 100%;
+  max-width: 854px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.fieldSection h4,
+.questionBlock > h4 {
+  margin: 0;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  min-height: 30px;
+  color: #222222;
+}
+
+.questionBlock > h4 {
+  line-height: 1.35;
+  min-height: unset;
+  margin-bottom: 0;
+}
+
+.fieldSection .shortField input[type="text"],
+.fieldSection .shortField input[type="date"],
+.fieldSection .fullWidthField input[type="text"] {
+  border: 1px solid #5a5a5a;
+  border-radius: 8px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #222222;
+  padding: 0 20px 0 29px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.fieldSection .shortField select {
+  border: 1px solid #5a5a5a;
+  border-radius: 8px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #7e7e7e;
+  width: 400px;
+  max-width: 100%;
+  height: 50px;
+  padding: 0 52px 0 29px;
+  line-height: 50px;
+  display: block;
+  white-space: nowrap;
+  text-overflow: clip;
+  overflow: visible;
+}
+
+.fieldSection .shortField input[type="text"] {
+  max-width: 100%;
+  color: #7e7e7e;
+}
+
+.fieldSection .fullWidthField input[type="text"] {
+  width: 100%;
+  max-width: 854px;
+  color: #7e7e7e;
+}
+
+.fieldSection .shortField input[type="text"]:focus,
+.fieldSection .shortField input[type="text"]:focus-visible,
+.fieldSection .shortField select:focus,
+.fieldSection .shortField select:focus-visible,
+.fieldSection .fullWidthField input[type="text"]:focus,
+.fieldSection .fullWidthField input[type="text"]:focus-visible {
+  outline: none;
+}
+
+.fieldSection input::placeholder {
+  color: #7e7e7e;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: var(--font-lato), Lato, sans-serif;
+}
+
+.selectPlaceholder {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 50px;
+}
+
+.fieldSection .shortField select.selectPlaceholder {
+  color: #7e7e7e;
+}
+
+.fieldSection .shortField select.selectPlaceholder:focus,
+.fieldSection .shortField select.selectPlaceholder:focus-visible {
+  color: #7e7e7e;
+}
+
+.fieldSection select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8' fill='none'%3E%3Cpath d='M1 1.5L7 6.5L13 1.5' stroke='%235A5A5A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 22px center;
+  background-size: 14px 8px;
+  padding-right: 52px;
+  cursor: pointer;
+}
+
+/* Date-of-birth uses the shared <DatePicker>. Restyle its trigger button to
+   match the form's other fields. Scoped under .birthdateBlock so these rules
+   win over the component's default trigger skin regardless of CSS load order. */
+.birthdateBlock .dateTrigger {
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  padding: 0 20px 0 29px;
+  background-color: #ffffff;
+  border: 1px solid #5a5a5a;
+  border-radius: 8px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  color: #7e7e7e;
+}
+
+.birthdateBlock .dateTrigger:hover {
+  background-color: #ffffff;
+}
+
+.birthdateBlock .dateTrigger:focus-visible {
+  outline: none;
+  border-color: #5a5a5a;
+  background-color: #ffffff;
+  box-shadow: none;
+}
+
+.questionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 854px;
+}
+
+.optionRow,
+.otherRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 20px 20px 29px;
+  border: 1px solid #5a5a5a;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 854px;
+  max-width: 100%;
+  transition: none;
+}
+
+.optionRow:hover,
+.otherRow:hover {
+  border-color: #5a5a5a;
+  box-shadow: none;
+}
+
+.optionRow input[type="checkbox"],
+.optionRow input[type="radio"],
+.otherRow input[type="checkbox"],
+.otherRow input[type="radio"] {
+  appearance: none;
+  margin: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.optionRow input[type="checkbox"],
+.otherRow input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid #5a5a5a;
+  border-radius: 5px;
+  position: relative;
+  background: #ffffff;
+}
+
+.optionRow input[type="checkbox"],
+.otherRow input[type="checkbox"],
+.optionRow input[type="radio"],
+.otherRow input[type="radio"] {
+  position: relative;
+}
+
+.optionRow input[type="checkbox"]::before,
+.otherRow input[type="checkbox"]::before,
+.optionRow input[type="radio"]::before,
+.otherRow input[type="radio"]::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 179, 65, 0);
+  pointer-events: none;
+}
+
+.optionRow input[type="checkbox"]:hover::before,
+.otherRow input[type="checkbox"]:hover::before,
+.optionRow input[type="radio"]:hover::before,
+.otherRow input[type="radio"]:hover::before {
+  background: rgba(255, 179, 65, 0.1);
+}
+
+.optionRow input[type="checkbox"]:active::before,
+.otherRow input[type="checkbox"]:active::before,
+.optionRow input[type="radio"]:active::before,
+.otherRow input[type="radio"]:active::before {
+  background: rgba(255, 179, 65, 0.2);
+}
+
+.optionRow input[type="checkbox"]:hover,
+.otherRow input[type="checkbox"]:hover {
+  border-color: #ffb341;
+  box-shadow: 0 0 0 1px #ffb341;
+}
+
+.optionRow input[type="checkbox"]:checked,
+.otherRow input[type="checkbox"]:checked {
+  background-color: #ffb341;
+  border: 1.5px solid #ffb341;
+  box-shadow: none;
+}
+
+.optionRow input[type="checkbox"]:checked::after,
+.otherRow input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 9px;
+  margin-top: -1px;
+  border: solid #faf8f6;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-sizing: border-box;
+}
+
+.optionRow input[type="radio"],
+.otherRow input[type="radio"] {
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid #5a5a5a;
+  border-radius: 50%;
+  position: relative;
+  background: #ffffff;
+}
+
+.customSelect {
+  position: relative;
+  width: 100%;
+}
+
+.selectTrigger {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #5a5a5a;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0 29px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 10px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #7e7e7e;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.selectValue {
+  width: 356px;
+  height: 24px;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  flex: 1;
+  font-size: inherit;
+}
+
+.chevron {
+  width: 20px;
+  height: 10px;
+  position: absolute;
+  right: 22px; /* Balanced with the 29px left padding */
+  left: auto; /* Remove the previous fixed left position */
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8' fill='none'%3E%3Cpath d='M1 1.5L7 6.5L13 1.5' stroke='%235A5A5A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.selectMenu {
+  position: absolute;
+  top: calc(50px + 4px);
+  left: 0;
+  width: 100%;
+  height: 208px;
+  background: #ffffff;
+  border: 1px solid #5a5a5a;
+  border-radius: 8px;
+  padding: 0;
+  overflow: auto;
+  z-index: 20;
+  box-sizing: border-box;
+}
+
+.selectOption {
+  width: 100%;
+  height: 52px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: none;
+  border-left: 2px solid transparent;
+  text-align: left;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000000;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.selectOption:hover {
+  background: #f4f4f4;
+  border-left: solid 2px black;
+}
+
+.selectOption[aria-selected="true"] {
+  background: #f4f4f4;
+  border-left: solid 2px black;
+}
+
+.optionRow input[type="radio"]:hover,
+.otherRow input[type="radio"]:hover {
+  border-color: #ffb341;
+  box-shadow: 0 0 0 1px #ffb341;
+}
+
+.optionRow input[type="radio"]:checked,
+.otherRow input[type="radio"]:checked {
+  border: 1.5px solid #ffb341;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.optionRow input[type="radio"]:checked::after,
+.otherRow input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #ffb341;
+}
+
+.optionRow span {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #7e7e7e;
+  line-height: 1.4;
+}
+
+.labelText {
+  white-space: nowrap;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #7e7e7e;
+  flex-shrink: 0;
+}
+
+.inlineText {
+  flex: 1;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #5a5a5a;
+  border-radius: 0;
+  padding: 4px 0;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: var(--font-lato), Lato, sans-serif;
+  outline: none;
+  background: transparent;
+  color: #7e7e7e;
+}
+
+.inlineText:focus {
+  border-bottom-color: #5a5a5a;
+}
+
+.inlineTextInactive {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.inlineTextActive {
+  color: rgba(0, 0, 0, 1);
+}
+
+.formFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 0;
+  padding-top: 0;
+  width: 100%;
+  max-width: 854px;
+}
+
+.formFooterMobile {
+  display: none;
+}
+.mobileText {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .fieldTop,
+  .fieldMiddle,
+  .formInner {
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+  }
+
+  .nameBlock {
+    width: 100%;
+  }
+
+  .birthdateBlock {
+    width: 100%;
+  }
+
+  .fieldMiddle .shortField {
+    width: 100%;
+  }
+  .fieldMiddle .customSelect {
+    width: 100%;
+  }
+}
+
+/* screen size of 402 px */
+@media (max-width: 402px) {
+  .formBlock {
+    margin: 20px auto;
+  }
+  .content {
+    border-radius: 10px;
+  }
+  .progressBar {
+    width: 123.4800033569336px;
+    height: 15.119999885559082px;
+  }
+  .heading h2 {
+    font-size: 24px;
+    line-height: 150%;
+  }
+  .headingSubtitle {
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .content {
+    padding: 40px 20px;
+  }
+  .formFooter {
+    display: none;
+  }
+  .fieldTop h4,
+  .fieldMiddle h4 {
+    font-size: 14px;
+    color: #484848;
+  }
+  .fieldTop .shortField {
+    height: 77px;
+    gap: 8px;
+  }
+  .fieldTop .shortField input[type="text"],
+  .fieldTop .shortField input[type="date"],
+  .fieldMiddle .shortField button {
+    height: 48px;
+    font-size: 14px;
+    padding: 10px 12px;
+    gap: 175px;
+    border: 1px solid #d1d5db;
+    color: #484848;
+  }
+  .birthdateBlock .dateTrigger {
+    height: 48px;
+    font-size: 14px;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+  }
+  .selectMenu {
+    top: 101%;
+    height: 400%;
+    border: 1px solid #d1d5db;
+    border-radius: 0;
+  }
+  .customSelect .selectTrigger .selectValue,
+  .customSelect .selectMenu .selectOption {
+    border: none;
+    border-radius: 0;
+    color: #5a5a5a;
+  }
+  .customSelect .selectMenu .selectOption {
+    border: none;
+    border-radius: 0;
+    color: #5a5a5a;
+    padding: 14px 20px;
+  }
+
+  .customSelect .selectMenu .selectOption:hover {
+    background: #f4f4f4;
+    border-left: solid 2px black;
+  }
+
+  .customSelect .selectMenu .selectOption[aria-selected="true"] {
+    background: #f4f4f4;
+    border-left: solid 2px black;
+  }
+
+  .fieldSection .fullWidthField h4 {
+    font-size: 14px;
+  }
+  .fieldSection .fullWidthField input[type="text"] {
+    font-size: 14px;
+    padding: 10px 12px;
+    width: 100%;
+    max-width: 331px;
+    height: 48px;
+    color: #484848;
+    border: 1px solid #d1d5db;
+  }
+  .fieldSection {
+    gap: 30px;
+  }
+  .questionBlock h4 {
+    font-size: 14px;
+    line-height: 150%;
+  }
+  .desktopText {
+    display: none;
+  }
+  .mobileText {
+    display: block;
+  }
+  .fieldSection .questionBlock .optionRow span,
+  .fieldSection .questionBlock .otherRow span,
+  .fieldSection .questionBlock .otherRow input[type="text"] {
+    font-size: 14px;
+    color: #484848;
+    line-height: 150%;
+  }
+  .fieldSection .questionBlock .optionRow input[type="checkbox"],
+  .fieldSection .questionBlock .otherRow input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    border-radius: 1px;
+    border: 1px solid #d1d5db;
+  }
+
+  .fieldSection .questionBlock .optionRow input[type="checkbox"]::before,
+  .fieldSection .questionBlock .otherRow input[type="checkbox"]::before,
+  .fieldSection .questionBlock .optionRow input[type="radio"]::before,
+  .fieldSection .questionBlock .otherRow input[type="radio"]::before {
+    width: 15px;
+    height: 15px;
+  }
+  .fieldSection .questionBlock .optionRow,
+  .fieldSection .questionBlock .otherRow {
+    padding: 10px 12px 10px 15px;
+    gap: 15px;
+    width: 100%;
+    max-width: 331px;
+    height: 48px;
+    border: 1px solid #cccccc;
+  }
+  .inlineText,
+  .inlineText:focus {
+    border-bottom: 1px solid #cccccc;
+    font-size: 14px;
+    color: #5a5a5a;
+    line-height: 150%;
+  }
+
+  .fieldSection .questionBlock .optionRow input[type="radio"],
+  .fieldSection .questionBlock .otherRow input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #cccccc;
+  }
+  .formFooterMobile {
+    display: flex;
+    padding: 20px 0px 0px 0px;
+    justify-content: right;
+    align-items: center;
+  }
+}

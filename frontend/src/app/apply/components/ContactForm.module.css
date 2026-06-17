@@ -1,0 +1,175 @@
+.formOuter {
+  width: 100%;
+  max-width: 982px;
+  margin: 0 auto;
+}
+
+.progressCenter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.progressBarThree {
+  width: 245px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.formInner {
+  width: 100%;
+  max-width: 854px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.formContent {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 64px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 0;
+  padding-top: 0;
+  width: 100%;
+  max-width: 854px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: right;
+  width: 236px;
+  gap: 10px;
+}
+
+.contactTitle,
+.contactTitleMobile {
+  font-size: 40px;
+  font-weight: 600;
+  font-style: semi-bold;
+  line-height: 150%;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+.contactIntro {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 150%;
+  font-family:
+    Lato,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  margin-bottom: 20px;
+}
+
+.required {
+  color: #ff0000;
+}
+
+.contactText {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 150%;
+  font-family:
+    Lato,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  margin-bottom: 10px;
+}
+
+.textField {
+  width: 100%;
+  height: 58px;
+  padding: 20px 20px 20px 29px;
+  border: 1px solid #5a5a5a;
+  border-radius: 10px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  color: #7e7e7e;
+  margin-bottom: 15px;
+}
+
+.contactTitleMobile {
+  display: none;
+}
+
+.footerMobile {
+  display: none;
+}
+
+@media (max-width: 402px) {
+  .formOuter {
+    margin: 20px auto;
+  }
+  .formContent {
+    border-radius: 10px;
+    padding: 40px 20px;
+    gap: 37px;
+  }
+  .progressBarThree {
+    width: 123.4800033569336px;
+    height: 15.119999885559082px;
+  }
+  .contactTitle {
+    display: none;
+  }
+  .contactTitleMobile {
+    display: block;
+    font-size: 24px;
+    line-height: 150%;
+    margin-bottom: 10px;
+  }
+  .contactIntro {
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .contactText {
+    font-size: 14px;
+    line-height: 150%;
+    margin-bottom: 8px;
+    color: #484848;
+    margin-top: 10px;
+  }
+  .textField {
+    height: 48px;
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: #5a5a5a;
+  }
+  .footer {
+    display: none;
+  }
+
+  .footerMobile {
+    display: block;
+    width: 100%;
+    padding: 20px 0px 0px 0px;
+  }
+  .footerMobile .buttonGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

@@ -76,7 +76,7 @@
 
 .missionText {
   margin-top: -8px;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 500;
   line-height: 1.5;
   font-size: 16px;
@@ -93,7 +93,7 @@
 .backToTop {
   margin-top: -4px;
   width: fit-content;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 500;
   line-height: 1.5;
   font-size: 16px;
@@ -144,7 +144,7 @@
 }
 
 .sectionTitle {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 700;
   line-height: 1.5;
   font-size: 24px;
@@ -159,7 +159,7 @@
 }
 
 .navLink {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 500;
   line-height: 1.5;
   font-size: 20px;
@@ -196,7 +196,7 @@
 }
 
 .applyButtonText {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 500;
   line-height: 1.5;
   font-size: 20px;
@@ -231,7 +231,7 @@
 
 .contactText {
   flex: 1;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 500;
   line-height: 1.5;
   font-size: 20px;
@@ -250,7 +250,7 @@
 
 .addressWrapper {
   flex: 1;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 500;
   line-height: 1.5;
   font-size: 20px;
@@ -259,8 +259,7 @@
 
 /* TSE Footer */
 .tseFooter {
-  background-color: #004881;
-  border-top: 1px solid white;
+  background-color: #004377;
   width: 100%;
 }
 
@@ -287,7 +286,7 @@
 }
 
 .tseText {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 500;
   font-size: 16px;
   color: white;

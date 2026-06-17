@@ -46,11 +46,11 @@ export function SuccessAlert({ message, onClose }: SuccessAlertProps) {
 
   return (
     <div className={`${styles.container} ${closing ? styles.closing : ""}`}>
-      <Image src="/green_check.svg" alt="success" width={20} height={20} />
+      <Image src="/dashboard/green-check.svg" alt="success" width={20} height={20} />
       <span className={styles.message}>{message}</span>
 
       <button onClick={triggerClose} className={styles.closeButton}>
-        <Image src="/cross.svg" alt="close" width={13} height={13} />
+        <Image src="/dashboard/cross.svg" alt="close" width={13} height={13} />
       </button>
     </div>
   );

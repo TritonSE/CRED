@@ -105,18 +105,6 @@
   position: relative;
 }
 
-/*
-.tableHeader:not(:first-child):after {
-  content: "";
-  background: white;
-  position: absolute;
-  bottom: 7%;
-  left: 0;
-  height: 86%;
-  width: 1px;
-}
-*/
-
 .tableHeader:first-child {
   border-top-left-radius: 10px;
 }
@@ -173,10 +161,6 @@
   background-color: #f0f7ff;
 }
 
-.expandedRow {
-  background-color: #f8fafc;
-}
-
 /* Table cells */
 .tableCell {
   padding: 12px 16px;
@@ -197,22 +181,6 @@
   align-items: center;
   gap: 12px;
   justify-content: flex-start;
-}
-
-.actionButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  transition: opacity 0.15s;
-}
-
-.actionButton:hover {
-  opacity: 1;
 }
 
 /*
@@ -259,47 +227,6 @@
     brightness(101%) contrast(101%);
 }
 
-.buttonWrapper {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.buttonWrapper input[type="checkbox"] {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid #175892;
-  border-radius: 3px;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.15s ease;
-}
-
-.buttonWrapper input[type="checkbox"]:checked {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border: none;
-  border-radius: 3px;
-  background-image: url("/checkedBox.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.moreButton:hover {
-  opacity: 1;
-}
-
-.blueFilter {
-  /* Approximation of #175892 for a black source icon */
-  filter: brightness(0) saturate(100%) invert(29%) sepia(26%) saturate(1946%) hue-rotate(172deg)
-    brightness(97%) contrast(96%);
-}
-
 /* Expanded row detail styles */
 .expandedDetailRow {
   background-color: #f8fafc;
@@ -335,57 +262,6 @@
 }
 .expandedContentWrapper.open > * {
   transform: translateY(0);
-}
-
-/* Mark complete button */
-.markCompleteButton {
-  font-family: var(--font-lato), Lato, sans-serif;
-  font-weight: 400;
-  font-style: Regular;
-  font-size: 16px;
-  line-height: 150%;
-  letter-spacing: 0%;
-
-  width: 111;
-  height: 32;
-  gap: 6px;
-  opacity: 1;
-  border-radius: 8px;
-  padding-top: 4px;
-  padding-right: 8px;
-  padding-bottom: 4px;
-  padding-left: 8px;
-  background: #175892;
-  color: white;
-  display: flex;
-  align-items: center;
-}
-
-.markCompleteButton:hover {
-  background-color: #0f3d66;
-}
-
-.completedButton {
-  font-family: var(--font-lato), Lato, sans-serif;
-  font-weight: 400;
-  font-style: Regular;
-  font-size: 16px;
-  line-height: 150%;
-  letter-spacing: 0%;
-  color: #484848;
-
-  width: 111;
-  height: 32;
-  gap: 6px;
-  opacity: 1;
-  border-radius: 8px;
-  padding-top: 4px;
-  padding-right: 8px;
-  padding-bottom: 4px;
-  padding-left: 8px;
-  background: #d9d9d9;
-  display: flex;
-  align-items: center;
 }
 
 /* Pagination */

@@ -1,4 +1,4 @@
-import { Model, Schema, model, models } from "mongoose";
+import { Document, Model, Schema, model, models } from "mongoose";
 
 import type { InferSchemaType } from "mongoose";
 
@@ -9,6 +9,7 @@ export const RACE_OPTIONS = [
   "Asian",
   "American Indian or Alaska Native",
   "Native Hawaiian or Other Pacific Islander",
+  "Middle Eastern or North African",
   "Two or More Races",
   "Hispanic or Latino",
   "Not Hispanic or Latino",
@@ -36,14 +37,12 @@ export const HOUSING_STATUS_OPTIONS = [
   "Other",
 ] as const;
 
-// Allowed values describing applicant education level.
+// Allowed values describing the applicant's current education/enrollment status.
 export const EDUCATION_OPTIONS = [
-  "Less than high school",
-  "High school diploma or GED",
-  "Some college",
-  "Associate degree",
-  "Bachelor's degree",
-  "Graduate or professional degree",
+  "Currently enrolled in school or training",
+  "Planning to enroll in school or training",
+  "Not currently enrolled",
+  "Completed my education",
   "Other",
 ] as const;
 
@@ -82,6 +81,14 @@ const noteSchema = new Schema(
   { _id: false },
 );
 
+const counterSchema = new Schema({
+  _id: { type: String, required: true },
+  seq: { type: Number, default: 0 },
+});
+
+const Counter =
+  (models.Counter as Model<{ _id: string; seq: number }>) || model("Counter", counterSchema);
+
 /**
  * Core applicant persistence schema used by the API.
  * Optional fields support progressive intake where partial information may be saved first.
@@ -115,14 +122,17 @@ const applicantSchema = new Schema(
       type: String,
       enum: HOUSING_STATUS_OPTIONS,
     },
+    otherHousingStatus: { type: String },
     educationStatus: {
-      type: String,
+      type: [String],
       enum: EDUCATION_OPTIONS,
     },
+    otherEducationStatus: { type: String },
     employmentStatus: {
-      type: String,
+      type: [String],
       enum: EMPLOYMENT_OPTIONS,
     },
+    otherEmploymentStatus: { type: String },
     convictionDetails: { type: String },
     aidRequested: {
       type: [String],
@@ -141,6 +151,19 @@ const applicantSchema = new Schema(
 );
 
 export type Applicant = InferSchemaType<typeof applicantSchema>;
+
+applicantSchema.pre("validate", async function (this: Document & Applicant) {
+  if (this.isNew && !this.applicantNumber) {
+    const counter = await Counter.findOneAndUpdate(
+      { _id: "applicantNumber" },
+      { $inc: { seq: 1 } },
+      { new: true, upsert: true },
+    );
+    if (counter) {
+      this.applicantNumber = `CF-${counter.seq.toString().padStart(8, "0")}`;
+    }
+  }
+});
 
 // Reuse existing model in dev/hot-reload environments to avoid OverwriteModelError.
 export default (models.Applicant as Model<Applicant>) ||

@@ -71,7 +71,7 @@
 }
 
 .formSubtitle {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.5;
@@ -111,7 +111,7 @@
 }
 
 .label {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 600;
   font-size: 18px;
   line-height: 1.5;
@@ -127,7 +127,7 @@
   border-radius: 10px;
   border: 1px solid #5a5a5a;
   padding: 0 18px;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: black;
@@ -148,7 +148,7 @@
   border-radius: 10px;
   border: 1px solid #5a5a5a;
   padding: 16px 18px;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: black;
@@ -167,18 +167,12 @@
 }
 
 .errorText {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
   color: #d4183d;
   margin: 0;
-}
-
-.formActions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 6px;
 }
 
 .formActionsDesktop {
@@ -199,7 +193,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 700;
   font-size: 18px;
   color: black;
@@ -220,7 +214,7 @@
 }
 
 .formHint {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
@@ -255,7 +249,7 @@
 }
 
 .successTitle {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 700;
   font-size: 24px;
   line-height: 1.5;
@@ -264,7 +258,7 @@
 }
 
 .successText {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.5;
@@ -305,7 +299,7 @@
 }
 
 .assistanceTitle {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 600;
   font-size: 20px;
   line-height: 1.5;
@@ -314,7 +308,7 @@
 }
 
 .assistanceText {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
@@ -353,7 +347,7 @@
 }
 
 .assistanceLabel {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
@@ -361,7 +355,7 @@
 }
 
 .assistanceLink {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;

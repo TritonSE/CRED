@@ -1,11 +1,13 @@
-import admin from "firebase-admin";
+import { cert, getApps, initializeApp } from "firebase-admin/app";
+import { getAuth } from "firebase-admin/auth";
 import createHttpError from "http-errors";
 
 import type { NextFunction, Request, Response } from "express";
+import type { ServiceAccount } from "firebase-admin/app";
 
 // Initialize Firebase Admin SDK
 // The service account should be passed as a JSON string in the FIREBASE_SERVICE_ACCOUNT environment variable.
-if (!admin.apps.length) {
+if (!getApps().length) {
   try {
     const serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT;
     if (!serviceAccountString) {
@@ -13,9 +15,9 @@ if (!admin.apps.length) {
         "FIREBASE_SERVICE_ACCOUNT environment variable is not set. Admin routes will fail.",
       );
     } else {
-      const serviceAccount = JSON.parse(serviceAccountString) as admin.ServiceAccount;
-      admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
+      const serviceAccount = JSON.parse(serviceAccountString) as ServiceAccount;
+      initializeApp({
+        credential: cert(serviceAccount),
       });
       console.info("Firebase Admin SDK initialized successfully.");
     }
@@ -46,7 +48,7 @@ export async function requireAuth(req: Request, res: Response, next: NextFunctio
   }
 
   try {
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const decodedToken = await getAuth().verifyIdToken(idToken);
     // Attach the decoded user information to the request object for downstream use if needed
     Object.assign(req, { user: decodedToken });
     next();

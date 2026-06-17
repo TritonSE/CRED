@@ -28,10 +28,11 @@ import {
   RACE_OPTIONS,
 } from "../applicantOptions";
 
-import { DatePicker } from "./DatePicker";
 import styles from "./ExpandedRowContent.module.css";
 
 import type { ApplicationRowData, TodoItem } from "./ApplicationTable";
+
+import { DatePicker } from "@/components/DatePicker";
 
 /**
  * Subset of applicant fields the edit form mutates and forwards to the parent
@@ -48,8 +49,8 @@ export type ApplicantEditPatch = {
   address: string;
   phoneNumber: string;
   housingStatus?: string;
-  educationStatus?: string;
-  employmentStatus?: string;
+  educationStatus: string[];
+  employmentStatus: string[];
   convictionDetails?: string;
   aidRequested: string[];
   otherAidRequested?: string;
@@ -101,8 +102,10 @@ function buildDraft(row: ApplicationRowData): ApplicantEditPatch {
     address: orEmpty(row.address),
     phoneNumber: orEmpty(row.phoneNumber),
     housingStatus: row.housingStatus,
-    educationStatus: row.education,
-    employmentStatus: row.employment,
+    // education/employment are multi-value; the row carries them as a ", "-joined
+    // display string, so split back into the arrays the edit form mutates.
+    educationStatus: row.education ? row.education.split(", ") : [],
+    employmentStatus: row.employment ? row.employment.split(", ") : [],
     convictionDetails: row.convictionDetails,
     aidRequested: row.aidRequested ?? [],
     otherAidRequested: row.otherAidRequested,
@@ -191,6 +194,19 @@ export function ExpandedRowContent({
     }));
   };
 
+  // Education and employment are multi-select (stored as arrays on the backend).
+  const toggleMultiField = (key: "educationStatus" | "employmentStatus", option: string) => {
+    setDraft((prev) => {
+      const current = prev[key];
+      return {
+        ...prev,
+        [key]: current.includes(option)
+          ? current.filter((v) => v !== option)
+          : [...current, option],
+      };
+    });
+  };
+
   const handleSave = () => {
     void onSaveEdit?.(draft);
   };
@@ -254,7 +270,7 @@ export function ExpandedRowContent({
               )}
             </div>
             <div className={`${styles.profileItem} ${styles.profileItemWide}`}>
-              <span className={styles.profileLabel}>Race</span>
+              <span className={styles.profileLabel}>Race/Ethnicity</span>
               {isEditing ? (
                 <select
                   className={styles.editSelect}
@@ -291,20 +307,20 @@ export function ExpandedRowContent({
             <div className={`${styles.profileItem} ${styles.profileItemWide}`}>
               <span className={styles.profileLabel}>Employment</span>
               {isEditing ? (
-                <select
-                  className={styles.editSelect}
-                  value={draft.employmentStatus ?? ""}
-                  onChange={(e) => {
-                    updateDraft("employmentStatus", e.target.value || undefined);
-                  }}
-                >
-                  <option value="">-</option>
+                <div className={styles.editAidList}>
                   {EMPLOYMENT_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
+                    <label key={opt} className={styles.editAidItem}>
+                      <input
+                        type="checkbox"
+                        checked={draft.employmentStatus.includes(opt)}
+                        onChange={() => {
+                          toggleMultiField("employmentStatus", opt);
+                        }}
+                      />
+                      <span>{opt}</span>
+                    </label>
                   ))}
-                </select>
+                </div>
               ) : (
                 <span className={styles.profileValue}>{row.employment ?? "-"}</span>
               )}
@@ -333,20 +349,20 @@ export function ExpandedRowContent({
             <div className={`${styles.profileItem} ${styles.profileItemWide}`}>
               <span className={styles.profileLabel}>Education</span>
               {isEditing ? (
-                <select
-                  className={styles.editSelect}
-                  value={draft.educationStatus ?? ""}
-                  onChange={(e) => {
-                    updateDraft("educationStatus", e.target.value || undefined);
-                  }}
-                >
-                  <option value="">-</option>
+                <div className={styles.editAidList}>
                   {EDUCATION_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
+                    <label key={opt} className={styles.editAidItem}>
+                      <input
+                        type="checkbox"
+                        checked={draft.educationStatus.includes(opt)}
+                        onChange={() => {
+                          toggleMultiField("educationStatus", opt);
+                        }}
+                      />
+                      <span>{opt}</span>
+                    </label>
                   ))}
-                </select>
+                </div>
               ) : (
                 <span className={styles.profileValue}>{row.education ?? "-"}</span>
               )}
@@ -516,7 +532,7 @@ export function ExpandedRowContent({
                 }}
               >
                 <span className={styles.addTodoPlus}>
-                  <Image src="/plus.svg" alt="add" width={14} height={14} />
+                  <Image src="/dashboard/plus.svg" alt="add" width={14} height={14} />
                 </span>
                 <span>Add To-do</span>
               </button>
@@ -575,7 +591,7 @@ export function ExpandedRowContent({
               }}
             >
               <span className={styles.addTodoPlus}>
-                <Image src="/plus.svg" alt="add" width={14} height={14} />
+                <Image src="/dashboard/plus.svg" alt="add" width={14} height={14} />
               </span>
               <span>Add note</span>
             </button>
@@ -611,7 +627,9 @@ export function ExpandedRowContent({
                 onClick={onToggleComplete}
               >
                 <Image
-                  src={isCompleted ? "/admin_checkmark_dark.svg" : "/admin_checkmark_light.svg"}
+                  src={
+                    isCompleted ? "/dashboard/checkmark-dark.svg" : "/dashboard/checkmark-light.svg"
+                  }
                   alt=""
                   width={20}
                   height={20}

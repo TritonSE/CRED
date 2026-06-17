@@ -28,7 +28,7 @@
   margin: 0;
   color: #004377; /* CRED brand primary blue */
   font-size: 40px; /* Large size to match Figma design */
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: Semi Bold;
@@ -36,18 +36,3 @@
 }
 
 /* Column containing the search input */
-.searchColumn {
-  max-width: 552px; /* Fixed width for consistent search bar size */
-  width: 100%; /* Fixed width for consistent search bar size */
-  height: 40px;
-  align-items: center;
-  justify-content: right;
-}
-
-.searchBar {
-  background-color: transparent !important;
-}
-
-.searchBar :global(input) {
-  background-color: transparent !important;
-}

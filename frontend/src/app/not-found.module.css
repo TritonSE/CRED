@@ -6,7 +6,7 @@
 }
 
 .heading {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 64px;
   font-weight: 700;
   color: black;
@@ -14,7 +14,7 @@
 }
 
 .message {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 20px;
   line-height: 1.5;
   color: black;
@@ -42,7 +42,7 @@
 }
 
 .homeButtonText {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   line-height: 1.5;
   font-size: 17px;
   color: black;

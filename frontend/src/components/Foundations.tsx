@@ -34,8 +34,8 @@ export default function Foundations() {
       <div className={styles.header}>
         <h2 className={styles.title}>The Foundation of Our Work</h2>
         <p className={styles.subtitle}>
-          Our work is rooted in these core pillars. We strive to integrate these values to better
-          serve our clients.
+          Our work at CRED is rooted in these core pillars. We strive to integrate these values to
+          better serve our clients.
         </p>
       </div>
 

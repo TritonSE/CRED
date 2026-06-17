@@ -10,8 +10,7 @@ export default function Support() {
         <p className={styles.supportSubtitle}>
           CRED serves a diverse population and recognizes the common challenges and experiences
           shared by different groups. We are committed to addressing the unique needs and challenges
-          of anyone looking for support, with an end goal of giving our clients the resources they
-          need to find their path to self-sufficiency.
+          of anyone looking for support.
         </p>
       </div>
 

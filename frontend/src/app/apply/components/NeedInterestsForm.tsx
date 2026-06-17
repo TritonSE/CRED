@@ -1,0 +1,192 @@
+import Image from "next/image";
+import React from "react";
+
+import { BackButton } from "./BackButton";
+import styles from "./NeedsInterestsForm.module.css";
+import { NextButton } from "./NextButton";
+
+export type NeedsData = {
+  context: string;
+  aid: string[];
+  otherNeed: string;
+};
+
+type Props = {
+  initialData: NeedsData;
+  onBack: (data: NeedsData) => void;
+  onNext: (data: NeedsData) => void;
+};
+
+export const NeedInterestsForm = function NeedInterestsForm({
+  initialData,
+  onBack,
+  onNext,
+}: Props) {
+  const [context, setContext] = React.useState<string>(initialData.context);
+  const [aid, setAid] = React.useState<string[]>(initialData.aid);
+  const [otherNeed, setOtherNeed] = React.useState<string>(initialData.otherNeed);
+
+  const isFormValid = aid.length > 0 && (!aid.includes("other") || otherNeed.trim().length > 0);
+
+  return (
+    <div className={styles.formOuter}>
+      <div className={styles.formContent}>
+        <div className={styles.progressCenter}>
+          <Image
+            className={styles.progressBarTwo}
+            src="/apply/progress-bar-2.png"
+            alt="Step 2 of 3"
+            width={245}
+            height={30}
+            priority
+          />
+        </div>
+
+        <div className={styles.formInner}>
+          <h2 className={styles.needsTitle}>Your Needs & Program Interests</h2>
+          <p className={styles.needsIntro}>
+            This helps CRED connect you with the programs and services best suited to your needs.
+          </p>
+
+          <div className={styles.contextSection}>
+            <p className={styles.needsText}>
+              Please describe your current/prior conviction (if applicable).
+            </p>
+            <input
+              type="text"
+              className={styles.textField}
+              value={context}
+              placeholder="Type Here..."
+              onChange={(e) => {
+                setContext(e.target.value);
+              }}
+            />
+          </div>
+
+          <div className={styles.questionBlock}>
+            <p className={styles.needsText}>
+              What type of aid do you need? (Select all that apply)
+              <span className={styles.required}>*</span>
+            </p>
+
+            <label className={styles.optionRow}>
+              <input
+                type="checkbox"
+                name="aid"
+                value="housing"
+                checked={aid.includes("housing")}
+                onChange={(e) => {
+                  setAid((prev) =>
+                    e.target.checked
+                      ? [...prev, "housing"]
+                      : prev.filter((item) => item !== "housing"),
+                  );
+                }}
+              />
+              <span>Housing</span>
+            </label>
+
+            <label className={styles.optionRow}>
+              <input
+                type="checkbox"
+                name="aid"
+                value="education"
+                checked={aid.includes("education")}
+                onChange={(e) => {
+                  setAid((prev) =>
+                    e.target.checked
+                      ? [...prev, "education"]
+                      : prev.filter((item) => item !== "education"),
+                  );
+                }}
+              />
+              <span>Education</span>
+            </label>
+
+            <label className={styles.optionRow}>
+              <input
+                type="checkbox"
+                name="aid"
+                value="development"
+                checked={aid.includes("development")}
+                onChange={(e) => {
+                  setAid((prev) =>
+                    e.target.checked
+                      ? [...prev, "development"]
+                      : prev.filter((item) => item !== "development"),
+                  );
+                }}
+              />
+              <span>Development</span>
+            </label>
+
+            <label className={styles.otherRow}>
+              <input
+                type="checkbox"
+                name="aid"
+                value="other"
+                checked={aid.includes("other")}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setAid((prev) => [...prev, "other"]);
+                  } else {
+                    setAid((prev) => prev.filter((item) => item !== "other"));
+                    setOtherNeed("");
+                  }
+                }}
+              />
+              <span className={styles.labelText}>Other/Not Sure:</span>
+              <input
+                type="text"
+                className={`${styles.inlineText} ${
+                  otherNeed.trim().length > 0 ? styles.inlineTextActive : styles.inlineTextInactive
+                }`}
+                name="otherNeed"
+                value={otherNeed}
+                onChange={(e) => {
+                  setOtherNeed(e.target.value);
+                }}
+                disabled={!aid.includes("other")}
+              />
+            </label>
+          </div>
+        </div>
+
+        <div className={styles.footer}>
+          <div className={styles.buttonGroup}>
+            <BackButton
+              onClick={() => {
+                onBack({ context, aid, otherNeed });
+              }}
+            />
+            <NextButton
+              disabled={!isFormValid}
+              isComplete={isFormValid}
+              onClick={() => {
+                if (!isFormValid) return;
+                onNext({ context, aid, otherNeed });
+              }}
+            />
+          </div>
+        </div>
+      </div>
+      <div className={styles.footerMobile}>
+        <div className={styles.buttonGroup}>
+          <BackButton
+            onClick={() => {
+              onBack({ context, aid, otherNeed });
+            }}
+          />
+          <NextButton
+            disabled={!isFormValid}
+            isComplete={isFormValid}
+            onClick={() => {
+              if (!isFormValid) return;
+              onNext({ context, aid, otherNeed });
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -209,8 +209,8 @@ export function ApplicationTable({
       dateSubmitted: a.dateSubmitted.toLocaleDateString("en-CA"),
       status: deriveDisplayStatus(a.status, a.isCompleted),
       dateOfBirth: a.dateOfBirth.toLocaleDateString("en-CA"),
-      education: a.educationStatus,
-      employment: a.employmentStatus,
+      education: a.educationStatus?.join(", "),
+      employment: a.employmentStatus?.join(", "),
       race: a.race,
       gender: a.gender,
       address: a.address,
@@ -783,8 +783,8 @@ export function ApplicationTable({
       address: patch.address,
       phoneNumber: patch.phoneNumber,
       housingStatus: patch.housingStatus,
-      educationStatus: patch.educationStatus,
-      employmentStatus: patch.employmentStatus,
+      educationStatus: patch.educationStatus.length > 0 ? patch.educationStatus : undefined,
+      employmentStatus: patch.employmentStatus.length > 0 ? patch.employmentStatus : undefined,
       convictionDetails: patch.convictionDetails,
       aidRequested: patch.aidRequested,
       otherAidRequested: patch.otherAidRequested,
@@ -903,7 +903,7 @@ export function ApplicationTable({
               title={isExpanded ? "Hide details" : "View details"}
             >
               <Image
-                src={isExpanded ? "/upCaret.svg" : "/downCaret.svg"}
+                src={isExpanded ? "/dashboard/up-caret.svg" : "/dashboard/down-caret.svg"}
                 width={24}
                 height={24}
                 alt=""
@@ -923,7 +923,13 @@ export function ApplicationTable({
               aria-pressed={isEditing}
               title="Edit application"
             >
-              <Image src="/edit.svg" width={24} height={24} alt="" className={styles.iconImage} />
+              <Image
+                src="/dashboard/edit.svg"
+                width={24}
+                height={24}
+                alt=""
+                className={styles.iconImage}
+              />
             </button>
             <button
               className={styles.iconButton}
@@ -935,7 +941,7 @@ export function ApplicationTable({
               title="Download application as PDF"
             >
               <Image
-                src="/ic_download.svg"
+                src="/dashboard/download.svg"
                 width={24}
                 height={24}
                 alt=""
@@ -951,7 +957,13 @@ export function ApplicationTable({
               aria-label="Delete application"
               title="Delete application"
             >
-              <Image src="/trash.svg" width={24} height={24} alt="" className={styles.iconImage} />
+              <Image
+                src="/dashboard/trash.svg"
+                width={24}
+                height={24}
+                alt=""
+                className={styles.iconImage}
+              />
             </button>
           </div>
         );
@@ -1008,7 +1020,7 @@ export function ApplicationTable({
           aria-label={isCollapsed ? "Expand table" : "Collapse table"}
         >
           <Image
-            src={isCollapsed ? "/upCaret.svg" : "/downCaret.svg"}
+            src={isCollapsed ? "/dashboard/up-caret.svg" : "/dashboard/down-caret.svg"}
             width={24}
             height={24}
             alt={isCollapsed ? "Expand" : "Collapse"}
