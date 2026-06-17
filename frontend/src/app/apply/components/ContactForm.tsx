@@ -18,7 +18,12 @@ type Props = {
   isSubmitting?: boolean;
 };
 
-export const ContactForm = function ContactForm({ initialData, onBack, onNext }: Props) {
+export const ContactForm = function ContactForm({
+  initialData,
+  onBack,
+  onNext,
+  isSubmitting = false,
+}: Props) {
   const [email, setEmail] = React.useState<string>(initialData.email);
   const [phone, setPhone] = React.useState<string>(initialData.phone);
   const [commentsQuestions, setCommentsQuestions] = React.useState<string>(
@@ -70,15 +75,7 @@ export const ContactForm = function ContactForm({ initialData, onBack, onNext }:
             </p>
             <input
               type="text"
-              className={`${styles.textField} ${styles.desktopText}`}
-              value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value);
-              }}
-            />
-            <input
-              type="text"
-              className={`${styles.textField} ${styles.mobileText}`}
+              className={styles.textField}
               value={phone}
               placeholder="Phone Number"
               onChange={(e) => {
@@ -91,18 +88,9 @@ export const ContactForm = function ContactForm({ initialData, onBack, onNext }:
             <p className={styles.contactText}>Any additional comments or questions?</p>
             <input
               type="text"
-              className={`${styles.textField} ${styles.desktopText}`}
+              className={styles.textField}
               value={commentsQuestions}
               placeholder="Enter any additional comments or questions here"
-              onChange={(e) => {
-                setCommentsQuestions(e.target.value);
-              }}
-            />
-            <input
-              type="text"
-              className={`${styles.textField} ${styles.mobileText}`}
-              value={commentsQuestions}
-              placeholder="Type here..."
               onChange={(e) => {
                 setCommentsQuestions(e.target.value);
               }}
@@ -120,7 +108,7 @@ export const ContactForm = function ContactForm({ initialData, onBack, onNext }:
             <NextButton
               disabled={!isFormValid}
               isComplete={isFormValid}
-              submitting={true}
+              submitting={isSubmitting}
               onClick={() => {
                 if (!isFormValid) return;
                 onNext({ email, phone, commentsQuestions });

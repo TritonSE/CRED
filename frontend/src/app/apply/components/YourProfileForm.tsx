@@ -337,11 +337,7 @@ export const YourProfileForm = function YourProfileForm({
             </div>
 
             <div className={`${styles.questionBlock} ${styles.employmentBlock}`}>
-              <h4 className={styles.desktopText}>
-                What is your current employment status?
-                <span className={styles.required}>*</span>
-              </h4>
-              <h4 className={styles.mobileText}>
+              <h4>
                 What is your current employment status? (Select all that apply)
                 <span className={styles.required}>*</span>
               </h4>
@@ -424,11 +420,7 @@ export const YourProfileForm = function YourProfileForm({
             </div>
 
             <div className={`${styles.questionBlock} ${styles.educationBlock}`}>
-              <h4 className={styles.desktopText}>
-                What best describes your current education status?
-                <span className={styles.required}>*</span>
-              </h4>
-              <h4 className={styles.mobileText}>
+              <h4>
                 What best describes your current education status? (Select all that apply)
                 <span className={styles.required}>*</span>
               </h4>
@@ -510,12 +502,8 @@ export const YourProfileForm = function YourProfileForm({
             </div>
 
             <div className={`${styles.questionBlock} ${styles.housingBlock}`}>
-              <h4 className={styles.desktopText}>
+              <h4>
                 Which option best describes your current housing situation?
-                <span className={styles.required}>*</span>
-              </h4>
-              <h4 className={styles.mobileText}>
-                What best describes your current housing situation? (Select one)
                 <span className={styles.required}>*</span>
               </h4>
               <label className={styles.optionRow}>

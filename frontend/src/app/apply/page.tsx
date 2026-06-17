@@ -11,6 +11,8 @@ import { ContactData, ContactForm } from "./components/ContactForm";
 import { NeedInterestsForm, NeedsData } from "./components/NeedInterestsForm";
 import { ProfileData, YourProfileForm } from "./components/YourProfileForm";
 
+import HeroSection from "@/components/HeroSection";
+
 import "./styles.css";
 
 export default function ApplyPage() {
@@ -90,7 +92,7 @@ export default function ApplyPage() {
     };
 
     const mapEthnicity = (e: string) => {
-      if (e === "mena") return "Other";
+      if (e === "mena") return "Middle Eastern or North African";
       if (e === "naan") return "American Indian or Alaska Native";
       if (e === "nhpi") return "Native Hawaiian or Other Pacific Islander";
       return "Other";
@@ -205,15 +207,15 @@ export default function ApplyPage() {
 
   return (
     <ThemeProvider>
-      <div className="apply-top-section">
-        <div className="apply-container">
-          <h1 className="apply-title">Join CRED Today</h1>
-          <p className="apply-intro">
-            Your journey to self-sufficiency starts here. We empower you with the tools to thrive,
-            not just survive.
-          </p>
-        </div>
-      </div>
+      <HeroSection
+        variant="banner"
+        imageSrc="/ApplyBanner.jpg"
+        imageAlt=""
+        title="Join CRED Today"
+        subtitle="Your journey to self-sufficiency starts here. We empower you with the tools to thrive, not just survive."
+        overlayGradient="linear-gradient(to right, #004377, rgba(30, 115, 190, 0.8))"
+        priority
+      />
 
       <div className="apply-form-section">
         {step === 1 && <YourProfileForm initialData={profileData} onNext={handleProfileNext} />}

@@ -2,7 +2,15 @@ import { validationResult } from "express-validator";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
 
-import ApplicantModel from "../models/applicant";
+import ApplicantModel, {
+  AID_REQUESTED_OPTIONS,
+  EDUCATION_OPTIONS,
+  EMPLOYMENT_OPTIONS,
+  GENDER_OPTIONS,
+  HOUSING_STATUS_OPTIONS,
+  RACE_OPTIONS,
+  STATUS_OPTIONS,
+} from "../models/applicant";
 import validationErrorParser from "../util/validationErrorParser";
 
 import type { RequestHandler } from "express";
@@ -94,24 +102,35 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Validated request bodies carry only enum-approved values (enforced by the
+// express-validator chains), so model their option fields with the schema's
+// literal unions to satisfy ApplicantModel.create()'s typed input.
+type StatusOption = (typeof STATUS_OPTIONS)[number];
+type RaceOption = (typeof RACE_OPTIONS)[number];
+type GenderOption = (typeof GENDER_OPTIONS)[number];
+type HousingStatusOption = (typeof HOUSING_STATUS_OPTIONS)[number];
+type EducationOption = (typeof EDUCATION_OPTIONS)[number];
+type EmploymentOption = (typeof EMPLOYMENT_OPTIONS)[number];
+type AidRequestedOption = (typeof AID_REQUESTED_OPTIONS)[number];
+
 type CreateApplicantBody = {
   applicantNumber?: string;
   applicantName: string;
-  status?: string;
+  status?: StatusOption;
   dateOfBirth: Date;
-  race: string;
-  gender: string;
+  race: RaceOption;
+  gender: GenderOption;
   email: string;
   address: string;
   phoneNumber: string;
-  housingStatus?: string;
+  housingStatus?: HousingStatusOption;
   otherHousingStatus?: string;
-  educationStatus?: string[];
+  educationStatus?: EducationOption[];
   otherEducationStatus?: string;
-  employmentStatus?: string[];
+  employmentStatus?: EmploymentOption[];
   otherEmploymentStatus?: string;
   convictionDetails?: string;
-  aidRequested: string[];
+  aidRequested: AidRequestedOption[];
   otherAidRequested?: string;
   additionalComments?: string;
   todos?: { id: string; label: string; completed: boolean }[];
@@ -123,21 +142,21 @@ type UpdateApplicantBody = {
   applicantNumber: string;
   applicantName: string;
   dateSubmitted: Date;
-  status?: string;
+  status?: StatusOption;
   dateOfBirth: Date;
-  race: string;
-  gender: string;
+  race: RaceOption;
+  gender: GenderOption;
   email: string;
   address: string;
   phoneNumber: string;
-  housingStatus?: string;
+  housingStatus?: HousingStatusOption;
   otherHousingStatus?: string;
-  educationStatus?: string[];
+  educationStatus?: EducationOption[];
   otherEducationStatus?: string;
-  employmentStatus?: string[];
+  employmentStatus?: EmploymentOption[];
   otherEmploymentStatus?: string;
   convictionDetails?: string;
-  aidRequested: string[];
+  aidRequested: AidRequestedOption[];
   otherAidRequested?: string;
   additionalComments?: string;
   todos?: { id: string; label: string; completed: boolean }[];

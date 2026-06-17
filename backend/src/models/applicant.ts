@@ -9,6 +9,7 @@ export const RACE_OPTIONS = [
   "Asian",
   "American Indian or Alaska Native",
   "Native Hawaiian or Other Pacific Islander",
+  "Middle Eastern or North African",
   "Two or More Races",
   "Hispanic or Latino",
   "Not Hispanic or Latino",
@@ -153,7 +154,7 @@ const applicantSchema = new Schema(
 
 export type Applicant = InferSchemaType<typeof applicantSchema>;
 
-applicantSchema.pre("validate", async function (this: Document & Applicant, next) {
+applicantSchema.pre("validate", async function (this: Document & Applicant) {
   if (this.isNew && !this.applicantNumber) {
     const counter = await Counter.findOneAndUpdate(
       { _id: "applicantNumber" },
@@ -164,7 +165,6 @@ applicantSchema.pre("validate", async function (this: Document & Applicant, next
       this.applicantNumber = `CF-${counter.seq.toString().padStart(8, "0")}`;
     }
   }
-  next();
 });
 
 // Reuse existing model in dev/hot-reload environments to avoid OverwriteModelError.

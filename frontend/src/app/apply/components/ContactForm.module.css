@@ -115,17 +115,8 @@
 .footerMobile {
   display: none;
 }
-.mobileText {
-  display: none;
-}
 
 @media (max-width: 402px) {
-  .desktopText {
-    display: none;
-  }
-  .mobileText {
-    display: block;
-  }
   .formOuter {
     margin: 20px auto;
   }

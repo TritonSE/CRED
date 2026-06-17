@@ -146,6 +146,14 @@ export function ApplicantPDF({ applicant, todos }: ApplicantPDFProps) {
   const aidLine = [...applicant.aidRequested, applicant.otherAidRequested]
     .filter((s): s is string => Boolean(s))
     .join(", ");
+  const educationParts: string[] = applicant.educationStatus ?? [];
+  const educationLine = [...educationParts, applicant.otherEducationStatus]
+    .filter((s): s is string => Boolean(s))
+    .join(", ");
+  const employmentParts: string[] = applicant.employmentStatus ?? [];
+  const employmentLine = [...employmentParts, applicant.otherEmploymentStatus]
+    .filter((s): s is string => Boolean(s))
+    .join(", ");
 
   return (
     <Document
@@ -186,11 +194,13 @@ export function ApplicantPDF({ applicant, todos }: ApplicantPDFProps) {
           </View>
           <View style={styles.field}>
             <Text style={styles.fieldLabel}>Education</Text>
-            <Text style={styles.fieldValue}>{orDash(applicant.educationStatus)}</Text>
+            <Text style={styles.fieldValue}>{educationLine.length > 0 ? educationLine : "-"}</Text>
           </View>
           <View style={styles.field}>
             <Text style={styles.fieldLabel}>Employment</Text>
-            <Text style={styles.fieldValue}>{orDash(applicant.employmentStatus)}</Text>
+            <Text style={styles.fieldValue}>
+              {employmentLine.length > 0 ? employmentLine : "-"}
+            </Text>
           </View>
           <View style={styles.fieldFull}>
             <Text style={styles.fieldLabel}>Address</Text>

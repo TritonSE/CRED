@@ -13,6 +13,7 @@ export const RACE_OPTIONS = [
   "Asian",
   "American Indian or Alaska Native",
   "Native Hawaiian or Other Pacific Islander",
+  "Middle Eastern or North African",
   "Two or More Races",
   "Hispanic or Latino",
   "Not Hispanic or Latino",
