@@ -13,13 +13,11 @@ const validationErrorParser = (errors: Result<ValidationError>) => {
   if (!errors.isEmpty()) {
     let errorString = "";
 
-    // parse through errors returned by the validator and append them to the error string
     for (const error of errors.array()) {
       const message: string = typeof error.msg === "string" ? error.msg : JSON.stringify(error.msg);
       errorString += `${message} `;
     }
 
-    // trim removes the trailing space created in the for loop
     throw createHttpError(400, errorString.trim());
   }
 };

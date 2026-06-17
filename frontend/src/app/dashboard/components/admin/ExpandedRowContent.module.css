@@ -1,0 +1,570 @@
+.expandedContent {
+  display: grid;
+  grid-template-columns: 3fr 1.5fr;
+  gap: 0;
+  padding: 24px;
+  max-width: 1121px;
+  width: 100%;
+  /*
+   * Use min-height so the panel keeps its visual baseline in view mode but
+   * can grow when edit-mode form controls (inputs/selects/textareas) push
+   * the content past 825px. Without this the bottom action row (Save / Cancel)
+   * gets clipped below the panel's fixed height in edit mode.
+   */
+  min-height: 825px;
+  position: relative;
+  border-bottom: 1px solid #b4b4b4;
+  background-color: #ffffff;
+}
+
+.expandedLeftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-right: 24px;
+  border-right: 1px solid #e0e0e0;
+}
+
+.expandedRightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-left: 24px;
+}
+
+/* Wraps the "Mark as complete" button at the bottom of the right column. */
+.completeActionRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/*
+ * Mark complete / completed buttons span the full width of the right column
+ * and extend left into the column's 24px padding so the button reaches the
+ * vertical divider between the two columns (per the V2 annotation).
+ */
+.markCompleteButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  height: 32px;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #175892;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  width: 100%;
+}
+
+.markCompleteButton:hover {
+  background-color: #0f3d66;
+}
+
+.completedButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  height: 32px;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #d9d9d9;
+  color: #484848;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  width: 100%;
+}
+
+.completedButton:hover {
+  background-color: #c4c4c4;
+}
+
+/* ── Edit-mode form controls ──────────────────────────────────────── */
+
+/*
+ * Edit-mode inputs are visually distinct from view-mode values: filled gray
+ * rectangles per the V2 hi-fi Figma. The gray fill makes it obvious which
+ * fields are editable when the card flips into edit mode, while the static
+ * text in view mode remains on the white card background. Focus state keeps
+ * the brand-blue ring so the active field is still clearly highlighted.
+ */
+.editInput,
+.editSelect,
+.editTextarea {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  color: #0c2b35;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: #ececec;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+  width: 100%;
+}
+
+.editInput:hover,
+.editSelect:hover,
+.editTextarea:hover {
+  background-color: #e0e0e0;
+}
+
+.editInput:focus,
+.editSelect:focus,
+.editTextarea:focus {
+  outline: none;
+  border-color: #175892;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(23, 88, 146, 0.15);
+}
+
+.editTextarea {
+  resize: vertical;
+  min-height: 64px;
+}
+
+.editAidList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editAidItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  color: #0c2b35;
+  cursor: pointer;
+}
+
+.editAidItem input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #175892;
+  cursor: pointer;
+}
+
+/* Save / Cancel buttons in the bottom action row. */
+.editActions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.saveButton {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  height: 32px;
+  padding: 4px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #175892;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.saveButton:hover {
+  background-color: #0f3d66;
+}
+
+.cancelButton {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  height: 32px;
+  padding: 4px 16px;
+  border: 1px solid #175892;
+  border-radius: 8px;
+  background: transparent;
+  color: #175892;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.cancelButton:hover {
+  background-color: rgba(23, 88, 146, 0.08);
+}
+
+/*
+ * Inline add-todo / add-note layouts. The to-do row keeps the input + Add +
+ * Cancel buttons on a single line; the note column stacks the textarea above
+ * its action row since notes can run multiple lines.
+ */
+.inlineAddRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.inlineAddRow .editInput {
+  flex: 1 1 auto;
+}
+
+.inlineAddColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inlineAddActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.expandedSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.sectionTitle {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  width: 100%;
+  height: 22px;
+  opacity: 1;
+  color: #004377;
+}
+
+.sectionDivider {
+  border: none;
+  border-top: 1px solid #b4b4b4;
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.profileItemWide {
+  grid-column: span 2;
+}
+
+.profileGridDivider {
+  width: 100%;
+  height: 0px;
+  opacity: 1;
+  border: none;
+  border-top: 1px solid #e0e0e0;
+}
+
+.idLink {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 14px;
+  color: #175892;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.contactGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profileItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profileLabel {
+  color: #757880;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.profileValue {
+  font-family: var(--font-lato), Lato, sans-serif;
+  color: #0c2b35;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.programDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.programSubtitle {
+  font-family: var(--font-lato), Lato, sans-serif;
+  color: #757880;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.programText {
+  font-family: var(--font-lato), Lato, sans-serif;
+  color: #000000;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+
+.aidDetails {
+  font-family: var(--font-lato), Lato, sans-serif;
+  color: #000000;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+
+.aidSubLabel {
+  font-family: var(--font-lato), Lato, sans-serif;
+  color: #000000;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+
+.aidList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.aidItem {
+  font-family: var(--font-lato), Lato, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+  pointer-events: none;
+  cursor: default;
+}
+
+.checkbox {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #175892;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.checkbox:checked {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 3px;
+  background-image: url("/checkedBox.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.aidCheckbox {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #b4b4b4;
+  border-radius: 3px;
+  cursor: default;
+  pointer-events: none;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.aidCheckbox:checked {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 3px;
+  background-image: url("/checkedBoxAid.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.aidText {
+  font-family: var(--font-lato), Lato, sans-serif;
+  color: #909090;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+
+.aidCheckbox:checked + .aidText {
+  color: #000;
+}
+
+.otherAidRequestedBox {
+  border-radius: 4px;
+  display: flex;
+  width: 100%;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: #b4b4b4;
+  border-width: 1px;
+}
+
+.otherAidRequestedText {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  color: #000000;
+  font-style: italic;
+  line-height: 150%;
+  width: 90%;
+}
+
+.commentsBox {
+  border-radius: 6px;
+}
+
+.commentsText {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  color: #000000;
+  margin: 0;
+}
+
+.todoList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.todoListWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: calc(3 * (1em + 8px) + 2 * 8px);
+  overflow-y: scroll;
+  padding-right: 6px;
+}
+
+.todoListWrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+.todoListWrapper::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.todoListWrapper::-webkit-scrollbar-thumb {
+  background-color: #175892;
+  border-radius: 4px;
+}
+
+.todoItem {
+  font-family: var(--font-lato), Lato, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+}
+
+.addTodoButton {
+  font-family: var(--font-lato), Lato, sans-serif;
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.addTodoPlus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  color: #175892;
+}
+
+.addTodoButton:hover span:last-child {
+  text-decoration: underline;
+}
+
+.notesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 0px;
+  padding-left: 20px;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.noteItem {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  color: #000000;
+  margin: 0;
+}

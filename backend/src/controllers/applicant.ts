@@ -54,8 +54,8 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
     const sortByParam = req.query.sortBy;
     const orderParam = req.query.order;
 
-    const page = typeof pageParam === "string" ? parseInt(pageParam, 10) : NaN;
-    const limit = typeof limitParam === "string" ? parseInt(limitParam, 10) : NaN;
+    const page = typeof pageParam === "string" ? parseInt(pageParam, 10) : 1;
+    const limit = typeof limitParam === "string" ? parseInt(limitParam, 10) : DEFAULT_MAX_LIMIT;
     const requestedSortBy = typeof sortByParam === "string" ? sortByParam : DEFAULT_SORT_FIELD;
     const sortBy = (ALLOWED_SORT_FIELDS as readonly string[]).includes(requestedSortBy)
       ? requestedSortBy
@@ -68,21 +68,10 @@ export const getAllApplicants: RequestHandler = async (req, res, next) => {
       _id: order,
     };
 
-    const pageProvided = pageParam !== undefined;
-    const limitProvided = limitParam !== undefined;
-
-    // If both page and limit are omitted, return applicants capped at
-    // DEFAULT_MAX_LIMIT so a growing collection can't blow up the response.
-    if (!pageProvided && !limitProvided) {
-      const applicants = await ApplicantModel.find().sort(sortOptions).limit(DEFAULT_MAX_LIMIT);
-      res.status(200).json(applicants);
-      return;
-    }
-
-    // If either param is present but invalid (NaN or < 1), return 400
+    // If either param is present but invalid (NaN or < 1), throw an HTTP error so the
+    // global error handler formats the response consistently.
     if (isNaN(page) || isNaN(limit) || page < 1 || limit < 1) {
-      res.status(400).json({ error: "Invalid pagination parameters." });
-      return;
+      throw createHttpError(400, "Invalid pagination parameters.");
     }
 
     const skip = (page - 1) * limit;

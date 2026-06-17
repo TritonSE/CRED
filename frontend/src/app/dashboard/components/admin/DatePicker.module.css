@@ -1,0 +1,211 @@
+.wrapper {
+  width: 100%;
+}
+
+/* Trigger matches the .editInput style in ExpandedRowContent.module.css so
+   the date field sits visually next to the other edit-mode fields (gray fill,
+   transparent border, brand-blue focus ring). */
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 10px;
+  background-color: #ececec;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  color: #0c2b35;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.trigger:hover {
+  background-color: #e0e0e0;
+}
+
+.trigger:focus-visible {
+  outline: none;
+  border-color: #175892;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(23, 88, 146, 0.15);
+}
+
+.value {
+  color: #0c2b35;
+}
+
+.placeholder {
+  color: #909090;
+}
+
+.calendarIcon {
+  flex-shrink: 0;
+  color: #757880;
+}
+
+/* ---------- Popover ---------- */
+
+.popover {
+  position: fixed;
+  z-index: 1000;
+  width: 264px;
+  padding: 14px;
+  background-color: #f5f5f5;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 14, 51, 0.15);
+  font-family: var(--font-lato), Lato, sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  color: #1f1f1f;
+  cursor: pointer;
+  box-shadow: 0 1px 1px rgba(0, 14, 51, 0.08);
+  transition: background-color 0.15s ease;
+}
+
+.navButton:hover {
+  background-color: #ececec;
+}
+
+.monthYearPills {
+  display: flex;
+  gap: 4px;
+}
+
+.pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #1f1f1f;
+  cursor: pointer;
+  box-shadow: 0 1px 1px rgba(0, 14, 51, 0.08);
+}
+
+.pillSelect {
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0 14px 0 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: 12px;
+  color: #1f1f1f;
+  cursor: pointer;
+  outline: none;
+}
+
+.pillCaret {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #1f1f1f;
+}
+
+/* ---------- Grid ---------- */
+
+.daysOfWeek {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+
+.dayOfWeek {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  font-size: 11px;
+  color: #1f1f1f;
+}
+
+.weeks {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.dayCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  margin: 1px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 11px;
+  color: #1f1f1f;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.inside {
+  background-color: #ffffff;
+  box-shadow: 0 1px 1px rgba(0, 14, 51, 0.05);
+}
+
+.outside {
+  color: rgba(0, 23, 84, 0.25);
+}
+
+.outside:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.inside:hover {
+  background-color: rgba(23, 88, 146, 0.1);
+}
+
+.today {
+  color: #000000;
+  font-weight: 700;
+}
+
+.selected {
+  background-color: #175892;
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(23, 88, 146, 0.3);
+}
+
+.selected:hover {
+  background-color: #0f3d66;
+}

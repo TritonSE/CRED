@@ -1,0 +1,209 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.modal {
+  width: 100%;
+  max-width: 782px;
+  background: #ffffff;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: clamp(16px, 32px, 32px) clamp(12px, 32px, 50px) clamp(16px, 32px, 32px);
+  gap: clamp(20px, 3vw, 37px);
+  box-sizing: border-box;
+}
+
+.modalClose {
+  background: none;
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  line-height: 40px;
+  border: none;
+  cursor: pointer;
+  font-size: 40px;
+  color: var(--secondary-blue-darker, #004377);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalTop {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.modalInfoWrapper {
+  line-height: normal;
+  padding: 0px 0px 0px 16.5px;
+}
+
+.modalTitle {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  line-height: 150%;
+  font-size: clamp(24px, 40px, 40px);
+  letter-spacing: 0%;
+  text-align: left;
+  color: var(--secondary-blue-darker, #004377);
+  width: 100%;
+  margin: 0;
+}
+
+.modalProgram {
+  font-family: "Inter", sans-serif;
+  color: #000000;
+  font-weight: 400;
+  line-height: 150%;
+  font-size: clamp(12px, 20px, 24px);
+  letter-spacing: 0%;
+  text-align: left;
+  width: 100%;
+  margin: 0;
+}
+
+.modalDescription {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 150%;
+  text-align: left;
+  color: #000000;
+  width: 100%;
+  margin: 0;
+}
+
+.modalButtonWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: calc(12px - clamp(20px, 3vw, 37px));
+}
+
+.learnMoreButton {
+  background: #ffb341;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+}
+
+.logoName {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  margin: 0;
+  text-align: center;
+}
+
+.descriptionTitle {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #000000;
+}
+
+.descriptionDetail {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #000000;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 12px, 14px);
+  width: 100%;
+  margin-top: calc(12px - clamp(20px, 3vw, 37px));
+}
+
+.description > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+@media (max-width: 600px) {
+  .modalOverlay {
+    padding: 16px;
+    align-items: center;
+  }
+
+  .modal {
+    padding: 24px 20px;
+    gap: 20px;
+    border-radius: 12px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modalTop {
+    align-items: center;
+    gap: 4px;
+  }
+
+  .modalLogo {
+    display: none;
+  }
+
+  .modalInfoWrapper {
+    padding-left: 0;
+    padding-right: 36px;
+  }
+
+  .modalTitle {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  .modalProgram {
+    font-size: 20px;
+  }
+
+  .descriptionTitle {
+    font-size: 20px;
+  }
+
+  .descriptionDetail {
+    font-size: 16px;
+  }
+
+  .learnMoreButton {
+    font-size: 20px;
+    padding: 14px 28px;
+  }
+}

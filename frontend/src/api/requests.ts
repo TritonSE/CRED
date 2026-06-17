@@ -10,6 +10,8 @@ type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 
+import { auth } from "../lib/firebase";
+
 /**
  * A wrapper around the built-in `fetch()` function that abstracts away some of
  * the low-level details so we can focus on the important parts of each request.
@@ -31,6 +33,12 @@ async function fetchRequest(
   const newHeaders = { ...headers };
   if (hasBody) {
     newHeaders["Content-Type"] = "application/json";
+  }
+
+  // Attach Firebase ID Token if user is authenticated
+  const token = await auth.currentUser?.getIdToken();
+  if (token) {
+    newHeaders.Authorization = `Bearer ${token}`;
   }
 
   const response = await fetch(url, {
@@ -62,8 +70,8 @@ async function assertOk(response: Response): Promise<void> {
     if (text) {
       message += ": " + text;
     }
-  } catch (e) {
-    console.log(e);
+  } catch {
+    // Reading the body failed; fall through with the status-only message.
   }
 
   throw new Error(message);

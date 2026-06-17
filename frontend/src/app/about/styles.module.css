@@ -1,0 +1,222 @@
+.aboutPage {
+  min-height: 0;
+}
+
+/* About page hero overrides (uses shared HeroSection component). */
+.aboutHero {
+  height: 260px;
+}
+
+@media (min-width: 480px) {
+  .aboutHero {
+    height: 280px;
+  }
+}
+
+@media (min-width: 768px) {
+  .aboutHero {
+    height: 300px;
+  }
+}
+
+.aboutHeroImage {
+  object-position: center 40%;
+}
+
+/* Vision Section */
+.aboutVisionSection {
+  background-color: #ffffff;
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .aboutVisionSection {
+    padding: 6rem 2rem;
+  }
+}
+
+.aboutGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .aboutGrid {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; /* Vertically centered relative to text */
+    gap: 3%;
+    width: 86%;
+  }
+}
+
+.aboutVisionWrapper {
+  width: 100%;
+  padding-right: 0;
+}
+
+@media (min-width: 768px) {
+  .aboutVisionWrapper {
+    width: 50%;
+    padding-right: 3rem;
+  }
+}
+
+.aboutHeading {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #004377;
+  margin-bottom: 1.5rem;
+}
+
+.aboutVisionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.aboutVisionContent p {
+  font-family: var(--font-lato), Lato, sans-serif;
+  color: #000000;
+  font-size: 20px;
+  line-height: 150%;
+}
+
+.aboutImagePlaceholder {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .aboutImagePlaceholder {
+    width: 50%;
+    min-height: 0;
+  }
+}
+
+.aboutImagePlaceholder img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 9px;
+}
+
+@media (min-width: 768px) {
+  .aboutImagePlaceholder img {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.directorBoxContainer {
+  padding: 48px 36px;
+  background-color: #faf8f6;
+}
+
+@media (min-width: 768px) {
+  .directorBoxContainer {
+    padding: 100px 0;
+  }
+}
+
+.directorBoxes {
+  width: 82%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 6rem;
+}
+
+@media (max-width: 1200px) {
+  .directorBoxes {
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+  }
+}
+
+.howWeOperateSection {
+  background-color: #ffffff;
+  padding: 6rem 2rem;
+}
+
+.operateWrapper {
+  gap: 3rem;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.operateHeading {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #004377;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.aboutOperateContent {
+  font-family: var(--font-lato), Lato, sans-serif;
+  color: #000000;
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  font-size: 14px;
+  text-align: left;
+}
+
+.operateCards {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+  .operateCards {
+    gap: 0;
+  }
+}
+
+.vectors {
+  height: auto;
+  width: 39px;
+  align-self: center;
+  filter: brightness(0) saturate(100%) invert(14%) sepia(60%) saturate(900%) hue-rotate(196deg)
+    brightness(90%) contrast(110%);
+}
+
+@media (max-width: 1100px) {
+  .operateCards {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .vectors {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .operateHeading {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+
+  .aboutOperateContent {
+    text-align: center;
+    font-size: 1rem;
+  }
+}

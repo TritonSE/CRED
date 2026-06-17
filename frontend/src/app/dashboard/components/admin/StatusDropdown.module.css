@@ -1,0 +1,79 @@
+/**
+ * StatusDropdown.module.css
+ * Styles for the Notion-style status picker that wraps the StatusLabel pill.
+ */
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* The pill itself acts as the trigger; reset native button chrome. */
+.trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  border-radius: 8px;
+  transition: box-shadow 0.15s ease;
+}
+
+.trigger:hover {
+  box-shadow: 0 0 0 2px rgba(23, 88, 146, 0.15);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid #175892;
+  outline-offset: 2px;
+}
+
+/* Popover menu floating below the pill (rendered in a body portal). */
+.menu {
+  position: fixed;
+  z-index: 1000;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.16);
+}
+
+.menuHeading {
+  font-family: var(--font-lato), Lato, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #757880;
+  padding: 2px 4px 4px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.menuItem:hover {
+  background-color: #f0f7ff;
+}
+
+/*
+ * Mark the active status with a brand-colored ring around its pill rather than
+ * a filled background, for a cleaner indication that doesn't look like a
+ * lingering hover state. `inset` box-shadow keeps the row height stable.
+ */
+.menuItem[aria-selected="true"] {
+  box-shadow: inset 0 0 0 2px #175892;
+}

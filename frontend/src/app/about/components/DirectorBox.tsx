@@ -29,8 +29,8 @@ export const DirectorBox: React.FC<DirectorBoxProps> = ({
       <Image
         src={imageUrl}
         alt="Director Box Image"
-        width={60}
-        height={60}
+        width={72}
+        height={72}
         className={styles.imageSpace}
       />
 
