@@ -260,11 +260,6 @@
   color: #004377;
 }
 
-.sectionDivider {
-  border: none;
-  border-top: 1px solid #b4b4b4;
-}
-
 .profileGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -282,14 +277,6 @@
   opacity: 1;
   border: none;
   border-top: 1px solid #e0e0e0;
-}
-
-.idLink {
-  font-family: var(--font-lato), Lato, sans-serif;
-  font-size: 14px;
-  color: #175892;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 .contactGrid {
@@ -363,33 +350,6 @@
   letter-spacing: 0%;
 }
 
-.aidSubLabel {
-  font-family: var(--font-lato), Lato, sans-serif;
-  color: #000000;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 16px;
-  line-height: 150%;
-  letter-spacing: 0%;
-}
-
-.aidList {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.aidItem {
-  font-family: var(--font-lato), Lato, sans-serif;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: #374151;
-  pointer-events: none;
-  cursor: default;
-}
-
 .checkbox {
   appearance: none;
   width: 24px;
@@ -411,65 +371,6 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-}
-
-.aidCheckbox {
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  border: 2px solid #b4b4b4;
-  border-radius: 3px;
-  cursor: default;
-  pointer-events: none;
-  position: relative;
-  transition: background 0.15s ease;
-}
-
-.aidCheckbox:checked {
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  border: none;
-  border-radius: 3px;
-  background-image: url("/dashboard/checked-box-aid.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.aidText {
-  font-family: var(--font-lato), Lato, sans-serif;
-  color: #909090;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 16px;
-  line-height: 150%;
-  letter-spacing: 0%;
-}
-
-.aidCheckbox:checked + .aidText {
-  color: #000;
-}
-
-.otherAidRequestedBox {
-  border-radius: 4px;
-  display: flex;
-  width: 100%;
-  height: 56px;
-  align-items: center;
-  justify-content: center;
-  border-style: solid;
-  border-color: #b4b4b4;
-  border-width: 1px;
-}
-
-.otherAidRequestedText {
-  font-family: var(--font-lato), Lato, sans-serif;
-  font-size: 16px;
-  color: #000000;
-  font-style: italic;
-  line-height: 150%;
-  width: 90%;
 }
 
 .commentsBox {

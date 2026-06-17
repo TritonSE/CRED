@@ -38,7 +38,7 @@
 .successTitle {
   width: 100%;
   height: 72px;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 700;
   font-size: 24px;
   color: #000000;
@@ -67,7 +67,7 @@
 }
 
 .subHeading {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 500;
   font-size: 20px;
   color: #000000;
@@ -101,7 +101,7 @@
 }
 
 .stepNumber {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 13px;
   color: #175892;
@@ -110,7 +110,7 @@
 .stepText {
   flex: 1;
   min-width: 0;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #000000;
@@ -146,7 +146,7 @@
 
 .labelLight {
   width: 206px;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 300;
   font-size: 16px;
   color: #000000;
@@ -154,21 +154,21 @@
 
 .labelBold {
   width: 115px;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #000000;
 }
 
 .dynamicValue {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   color: #000000;
   padding-left: 8px;
 }
 
 .emailUpdateText {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 16px;
   color: #000000;
   margin: 0;

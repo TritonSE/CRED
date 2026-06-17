@@ -90,18 +90,30 @@ export const YourProfileForm = function YourProfileForm({
 
   type SelectOption = { value: string; label: string };
 
+  // Values match the backend GENDER_OPTIONS / RACE_OPTIONS enums exactly so they
+  // are submitted as-is (see backend/src/models/applicant.ts).
   const genderOptions: SelectOption[] = [
-    { value: "male", label: "Male" },
-    { value: "female", label: "Female" },
-    { value: "other", label: "Other" },
-    { value: "prefer", label: "Prefer not to say" },
+    { value: "Male", label: "Male" },
+    { value: "Female", label: "Female" },
+    { value: "Non-binary", label: "Non-binary" },
+    { value: "Prefer not to say", label: "Prefer not to say" },
+    { value: "Other", label: "Other" },
   ];
 
   const ethnicityOptions: SelectOption[] = [
-    { value: "mena", label: "Middle Eastern or North African" },
-    { value: "naan", label: "Native American or Alaska Native" },
-    { value: "nhpi", label: "Native Hawaiian or Pacific Islander" },
-    { value: "other", label: "Other" },
+    { value: "White", label: "White" },
+    { value: "Black or African American", label: "Black or African American" },
+    { value: "Asian", label: "Asian" },
+    { value: "American Indian or Alaska Native", label: "American Indian or Alaska Native" },
+    {
+      value: "Native Hawaiian or Other Pacific Islander",
+      label: "Native Hawaiian or Other Pacific Islander",
+    },
+    { value: "Middle Eastern or North African", label: "Middle Eastern or North African" },
+    { value: "Two or More Races", label: "Two or More Races" },
+    { value: "Hispanic or Latino", label: "Hispanic or Latino" },
+    { value: "Not Hispanic or Latino", label: "Not Hispanic or Latino" },
+    { value: "Other", label: "Other" },
   ];
 
   const [isGenderOpen, setIsGenderOpen] = useState(false);

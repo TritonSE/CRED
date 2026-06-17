@@ -46,7 +46,7 @@ export const ContactForm = function ContactForm({
           />
         </div>
         <div className={styles.formInner}>
-          <h2 className={styles.contactTitle}>Your Contact Information</h2>
+          <h2 className={styles.contactTitle}>Contact Information</h2>
           <h2 className={styles.contactTitleMobile}>Contact Information</h2>
           <p className={styles.contactIntro}>
             Please provide your preferred contact details so we can follow up with you.
@@ -127,7 +127,7 @@ export const ContactForm = function ContactForm({
           <NextButton
             disabled={!isFormValid}
             isComplete={isFormValid}
-            submitting={true}
+            submitting={isSubmitting}
             onClick={() => {
               if (!isFormValid) return;
               onNext({ email, phone, commentsQuestions });

@@ -63,9 +63,8 @@ function SuccessCard() {
       <div className={styles.successContent}>
         <h2 className={styles.successTitle}>Your Form Has Been Submitted!</h2>
         <p className={styles.successText}>
-          Thank you for contacting us. Your message has been
-          <br />
-          successfully received, and we&apos;ll be in touch shortly.
+          Thank you for contacting us. Your message has been successfully received and we will be in
+          touch shortly.
         </p>
         <Link href="/" className={styles.primaryButton}>
           Back to Home
@@ -258,7 +257,7 @@ export default function ContactForm() {
                   id="subject"
                   name="subject"
                   type="text"
-                  placeholder="Type subject here..."
+                  placeholder="Describe your reason for contact (Program Inquiry, Application Support, Partnership Opportunities, Donations)."
                   value={values.subject}
                   onChange={onChange("subject")}
                   className={styles.input}

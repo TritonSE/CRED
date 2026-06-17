@@ -29,7 +29,7 @@
   font-weight: 700;
   color: #1b4b82;
   margin: 0;
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
 }
 
 .missionText {
@@ -37,7 +37,7 @@
   line-height: 1.6;
   color: #000000;
   margin: 0;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
 }
 
 .missionBtn {
@@ -51,7 +51,7 @@
   transition: background-color 0.2s ease;
   margin-top: 0.5rem;
   white-space: nowrap;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: clamp(16px, 1.6vw, 20px);
 }
 

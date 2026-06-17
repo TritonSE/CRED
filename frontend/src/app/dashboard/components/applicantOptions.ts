@@ -38,12 +38,10 @@ export const HOUSING_STATUS_OPTIONS = [
 ] as const;
 
 export const EDUCATION_OPTIONS = [
-  "Less than high school",
-  "High school diploma or GED",
-  "Some college",
-  "Associate degree",
-  "Bachelor's degree",
-  "Graduate or professional degree",
+  "Currently enrolled in school or training",
+  "Planning to enroll in school or training",
+  "Not currently enrolled",
+  "Completed my education",
   "Other",
 ] as const;
 

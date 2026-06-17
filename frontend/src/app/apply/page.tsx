@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 
 import { CreateApplicantRequest, createApplicant } from "../../api/applicant";
 
-import { Confirmation } from "./components/ Confirmation";
+import { Confirmation } from "./components/Confirmation";
 import { ContactData, ContactForm } from "./components/ContactForm";
 import { NeedInterestsForm, NeedsData } from "./components/NeedInterestsForm";
 import { ProfileData, YourProfileForm } from "./components/YourProfileForm";
@@ -83,21 +83,6 @@ export default function ApplyPage() {
     setContactData(data);
     setSubmitting(true);
 
-    const mapGender = (g: string) => {
-      if (g === "male") return "Male";
-      if (g === "female") return "Female";
-      if (g === "other") return "Other";
-      if (g === "prefer") return "Prefer not to say";
-      return "Other";
-    };
-
-    const mapEthnicity = (e: string) => {
-      if (e === "mena") return "Middle Eastern or North African";
-      if (e === "naan") return "American Indian or Alaska Native";
-      if (e === "nhpi") return "Native Hawaiian or Other Pacific Islander";
-      return "Other";
-    };
-
     const mapHousing = (h: string) => {
       if (h === "stable") return "Stable housing";
       if (h === "transitional") return "Transitional housing";
@@ -117,10 +102,10 @@ export default function ApplyPage() {
 
     const mapEducation = (e: Set<string>) => {
       const mapped: string[] = [];
-      if (e.has("completed")) mapped.push("Bachelor's degree");
-      if (e.has("enrolled")) mapped.push("Some college");
-      if (e.has("planning")) mapped.push("High school diploma or GED");
-      if (e.has("not-enrolled")) mapped.push("Less than high school");
+      if (e.has("enrolled")) mapped.push("Currently enrolled in school or training");
+      if (e.has("planning")) mapped.push("Planning to enroll in school or training");
+      if (e.has("not-enrolled")) mapped.push("Not currently enrolled");
+      if (e.has("completed")) mapped.push("Completed my education");
       if (e.has("other")) mapped.push("Other");
       return mapped;
     };
@@ -143,8 +128,8 @@ export default function ApplyPage() {
     const req: CreateApplicantRequest = {
       applicantName: profileData.fullName,
       dateOfBirth: new Date(profileData.dateOfBirth),
-      race: mapEthnicity(profileData.ethnicity),
-      gender: mapGender(profileData.gender),
+      race: profileData.ethnicity,
+      gender: profileData.gender,
       email: data.email,
       address: profileData.address,
       phoneNumber: data.phone,
@@ -202,7 +187,7 @@ export default function ApplyPage() {
   };
 
   const handleHome = () => {
-    router.push("/about"); // placeholder until home page is ready
+    router.push("/");
   };
 
   return (

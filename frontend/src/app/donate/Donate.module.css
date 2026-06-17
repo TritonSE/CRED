@@ -69,7 +69,7 @@
 }
 
 .mainHeading {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
   color: #004377;
   font-size: 24px;
@@ -157,7 +157,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
@@ -243,7 +243,7 @@
 }
 
 .donateButtonText {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;

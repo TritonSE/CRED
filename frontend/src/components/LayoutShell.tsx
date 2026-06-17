@@ -15,9 +15,11 @@ import Navbar from "./Navbar";
  */
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isDashboard = pathname?.startsWith("/dashboard") ?? false;
+  // The dashboard and the admin login screen share the admin chrome
+  // (AdminNavbar + AdminFooter) and the constellation ThemeProvider.
+  const isAdminArea = (pathname?.startsWith("/dashboard") ?? false) || pathname === "/login";
 
-  if (isDashboard) {
+  if (isAdminArea) {
     return (
       <ThemeProvider>
         <AdminNavbar />

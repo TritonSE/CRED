@@ -19,7 +19,7 @@ export const NextButton = function NextButton({
     <button
       type="button"
       className={`${styles.nextbutton} ${isComplete ? styles.nextbuttonComplete : ""} ${submitting ? styles.submitting : ""}`}
-      disabled={disabled}
+      disabled={disabled || submitting}
       onClick={onClick}
     >
       {submitting ? "Submit" : "Next"}

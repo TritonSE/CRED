@@ -1,5 +1,5 @@
 .container {
-  /* Fill the viewport below the fixed 70px navbar and center the card within it. */
+  /* Fill the viewport below the 70px admin navbar and center the card within it. */
   min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
@@ -12,11 +12,6 @@
   max-width: 600px;
   width: 100%;
   padding: 0 80px 60px;
-}
-
-.cardWithError {
-  border: 4px dashed #6366f1;
-  padding: 0 76px 56px;
 }
 
 .form {
@@ -112,21 +107,6 @@
   margin-right: 4px;
 }
 
-.errorLink {
-  color: #ef4444;
-  text-decoration: underline;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  font-size: 13px;
-  margin-left: 4px;
-}
-
-.errorLink:hover {
-  color: #dc2626;
-}
-
 .buttonContainer {
   margin-top: 40px;
   width: 100%;
@@ -155,42 +135,9 @@
   background-color: #124570;
 }
 
+.buttonPrimary:disabled,
 .buttonDisabled {
   background-color: #d1d5db;
   color: #9ca3af;
   cursor: not-allowed;
-}
-
-.buttonSecondary {
-  background-color: transparent;
-  color: #374151;
-  border: 1px solid #d1d5db;
-}
-
-.buttonSecondary:hover {
-  background-color: #f3f4f6;
-}
-
-.description {
-  font-size: 14px;
-  color: #374151;
-  margin-bottom: 32px;
-  line-height: 1.5;
-}
-
-.successContainer {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.successMessage {
-  font-size: 14px;
-  color: #374151;
-  margin-bottom: 32px;
-}
-
-.buttonSmall {
-  width: auto;
-  padding: 10px 32px;
-  font-size: 14px;
 }

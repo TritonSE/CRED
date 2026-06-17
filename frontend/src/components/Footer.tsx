@@ -26,8 +26,9 @@ export default function Footer() {
               />
             </div>
             <p className={styles.missionText}>
-              Our mission is to disrupt the cycles of recidivism, mass incarceration, homelessness,
-              and poverty by helping people find their way to self-sufficiency.
+              CRED is a reintegration and economic development organization focused on bridging the
+              gap between economic independence, incarceration and stability through practical
+              support, workforce development, and mentorship.
             </p>
             <button onClick={scrollToTop} className={styles.backToTop}>
               Back to Top
@@ -37,6 +38,9 @@ export default function Footer() {
           <div className={styles.middleSection}>
             <p className={styles.sectionTitle}>Quick Links</p>
             <div className={styles.linkList}>
+              <Link href="/" className={styles.navLink}>
+                Home
+              </Link>
               <Link href="/about" className={styles.navLink}>
                 About Us
               </Link>

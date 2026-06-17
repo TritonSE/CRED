@@ -14,7 +14,7 @@ const lato = Lato({
 });
 
 const inter = Inter({
-  weight: ["600"],
+  weight: ["400", "600", "700"],
   subsets: ["latin"],
   variable: "--font-inter",
 });

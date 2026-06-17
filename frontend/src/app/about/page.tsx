@@ -22,7 +22,7 @@ export default function AboutUsPage() {
           imageAlt="CRED community members gathered together"
           imageClassName={styles.aboutHeroImage}
           title="We Are CRED"
-          subtitle="CRED provides individualized services for system-impacted individuals, low-income families, and transitional age youth seeking stability and self-sufficiency."
+          subtitle="CRED provides individualized services for system-impacted individuals, low-income families, and transitional age youth in San Diego seeking stability and self-sufficiency."
           overlayGradient="linear-gradient(to right, #004377, rgba(30, 115, 190, 0.8))"
           priority
         />
@@ -82,10 +82,9 @@ export default function AboutUsPage() {
         <div className={styles.operateWrapper}>
           <h2 className={styles.operateHeading}>How We Operate</h2>
           <p className={styles.aboutOperateContent}>
-            CRED is unique in being a lived experience expert-based organization serving minorities
-            as our main clientele to bridge the barrier gap in services. We support survivors of
-            systemic injustice and misplacement due to recidivism, homelessness, domestic violence,
-            gang violence, and human trafficking.
+            CRED is unique in serving minorities to bridge the barrier gap in services and
+            knowledge. We want our clients to find the right types of resources to be
+            self-sufficient empower their communities.
           </p>
 
           <div className={styles.operateCards}>

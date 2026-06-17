@@ -15,7 +15,7 @@
 }
 
 .title {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
   font-size: clamp(32px, 3.5vw, 48px);
   color: #175892;
@@ -23,7 +23,7 @@
 }
 
 .subtitle {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: clamp(16px, 1.4vw, 20px);
   color: #000000;
   margin: 0;
@@ -34,7 +34,7 @@
 }
 
 .subtitlePrompt {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-weight: 700;
   font-size: clamp(16px, 1.4vw, 20px);
   color: #000000;
@@ -63,7 +63,7 @@
 }
 
 .tabName {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 24px;
   font-weight: 700;
   font-style: Bold;
@@ -75,7 +75,7 @@
 }
 
 .tabDescription {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   font-size: 13px;
   font-weight: 400;
   font-style: Regular;
@@ -96,7 +96,7 @@
   gap: 8px;
   padding: 16px;
   cursor: pointer;
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 600;
   font-size: clamp(14px, 1.2vw, 16px);
   color: #175892;
