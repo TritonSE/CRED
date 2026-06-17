@@ -14,6 +14,8 @@ export type DatePickerProps = {
   minYear?: number;
   /** Newest year selectable. Defaults to the current year. */
   maxYear?: number;
+  /** Extra class merged onto the trigger button so consumers can restyle it. */
+  triggerClassName?: string;
 };
 
 const MONTHS_SHORT = [
@@ -74,6 +76,7 @@ export function DatePicker({
   id,
   minYear = 1900,
   maxYear = new Date().getFullYear(),
+  triggerClassName,
 }: DatePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [menuPos, setMenuPos] = useState<{ top: number; left: number } | null>(null);
@@ -201,7 +204,7 @@ export function DatePicker({
         ref={triggerRef}
         type="button"
         id={id}
-        className={styles.trigger}
+        className={[styles.trigger, triggerClassName].filter(Boolean).join(" ")}
         onClick={toggleOpen}
         aria-haspopup="dialog"
         aria-expanded={isOpen}

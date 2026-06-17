@@ -28,10 +28,11 @@ import {
   RACE_OPTIONS,
 } from "../applicantOptions";
 
-import { DatePicker } from "./DatePicker";
 import styles from "./ExpandedRowContent.module.css";
 
 import type { ApplicationRowData, TodoItem } from "./ApplicationTable";
+
+import { DatePicker } from "@/components/DatePicker";
 
 /**
  * Subset of applicant fields the edit form mutates and forwards to the parent

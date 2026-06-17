@@ -4,6 +4,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { NextButton } from "./NextButton";
 import styles from "./YourProfileForm.module.css";
 
+import { DatePicker } from "@/components/DatePicker";
+
 function toggleSetMember(set: Set<string>, value: string, checked: boolean): Set<string> {
   const next = new Set(set);
   if (checked) {
@@ -133,8 +135,6 @@ export const YourProfileForm = function YourProfileForm({
     };
   }, [isGenderOpen, isEthnicityOpen]);
 
-  const dobRef = useRef<HTMLInputElement | null>(null);
-
   return (
     <div className={styles.formBlock}>
       <div className={styles.content}>
@@ -180,54 +180,11 @@ export const YourProfileForm = function YourProfileForm({
                 <h4>
                   Date of Birth<span className={styles.required}>*</span>
                 </h4>
-                <div
-                  className={`${styles.dateInputWrap} ${dateOfBirth === "" ? styles.dateInputEmpty : ""}`}
-                >
-                  {dateOfBirth === "" ? (
-                    <span className={styles.datePlaceholder} aria-hidden="true">
-                      MM/DD/YYYY
-                    </span>
-                  ) : null}
-                  <input
-                    ref={dobRef}
-                    type="date"
-                    name="dateOfBirth"
-                    autoComplete="bday"
-                    value={dateOfBirth}
-                    onChange={(e) => {
-                      setDateOfBirth(e.target.value);
-                    }}
-                  />
-                  <button
-                    type="button"
-                    className={styles.calendarButton}
-                    aria-label="Open calendar"
-                    onClick={() => {
-                      const el = dobRef.current;
-                      if (!el) return;
-                      const anyEl = el as unknown as { showPicker?: () => void };
-                      if (typeof anyEl.showPicker === "function") anyEl.showPicker();
-                      else el.focus();
-                    }}
-                  >
-                    <svg
-                      width="15"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M7 2V4M17 2V4M4 8H20M5 5H19C20.1046 5 21 5.89543 21 7V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V7C3 5.89543 3.89543 5 5 5Z"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
+                <DatePicker
+                  value={dateOfBirth}
+                  onChange={setDateOfBirth}
+                  triggerClassName={styles.dateTrigger}
+                />
               </div>
             </div>
 
