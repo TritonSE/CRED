@@ -1,10 +1,11 @@
 .container {
-  min-height: 100vh;
+  /* Fill the viewport below the fixed 70px navbar and center the card within it. */
+  min-height: calc(100vh - 70px);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   background-color: #faf8f6;
-  padding: 0 20px 20px;
+  padding: 20px;
 }
 
 .card {
