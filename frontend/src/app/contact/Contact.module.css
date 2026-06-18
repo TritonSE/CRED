@@ -47,16 +47,7 @@
 }
 
 .formTitle {
-  font-family:
-    "SF Pro Display",
-    "SF Pro Text",
-    "SF Pro",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 600;
   font-size: 32px;
   line-height: 1.5;

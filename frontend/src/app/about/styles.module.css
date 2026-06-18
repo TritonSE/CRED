@@ -66,9 +66,7 @@
 }
 
 .aboutHeading {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-size: 48px;
   font-weight: 700;
   color: #004377;
@@ -156,9 +154,7 @@
 }
 
 .operateHeading {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-size: 3rem;
   font-weight: 700;
   color: #004377;
