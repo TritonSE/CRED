@@ -166,9 +166,10 @@
   font-family: var(--font-lato), Lato, sans-serif;
   color: #000000;
   line-height: 1.5;
-  margin-bottom: 3rem;
-  font-size: 14px;
-  text-align: left;
+  max-width: 1146px;
+  margin: 0 auto 3rem;
+  font-size: 24px;
+  text-align: center;
 }
 
 .operateCards {
