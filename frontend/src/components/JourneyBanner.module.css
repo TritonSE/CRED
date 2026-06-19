@@ -47,7 +47,7 @@
   text-align: center;
   width: 100%;
   max-width: 1440px;
-  padding: clamp(64px, 11vw, 160px) 24px;
+  padding: clamp(64px, 11vw, 160px) 32px;
   gap: clamp(24px, 4vw, 48px);
 }
 

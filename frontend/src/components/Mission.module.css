@@ -1,6 +1,6 @@
 /* --- Mission Section --- */
 .mission {
-  padding: clamp(48px, 6vw, 100px) clamp(24px, 4vw, 80px);
+  padding: clamp(48px, 6vw, 100px) clamp(32px, 4vw, 80px);
   background-color: #faf8f6;
   display: flex;
   justify-content: center;

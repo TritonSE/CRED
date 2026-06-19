@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: clamp(40px, 5vw, 64px) 24px;
+  padding: clamp(40px, 5vw, 64px) 32px;
 }
 
 .header {

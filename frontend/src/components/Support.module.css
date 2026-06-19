@@ -1,7 +1,7 @@
 /* ===== Who We Support Section ===== */
 .support {
   background: #faf8f6;
-  padding: clamp(48px, 7vw, 100px) clamp(24px, 6vw, 110px);
+  padding: clamp(48px, 7vw, 100px) clamp(32px, 6vw, 110px);
   display: flex;
   flex-direction: column;
   align-items: center;

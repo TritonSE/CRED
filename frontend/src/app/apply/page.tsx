@@ -179,9 +179,8 @@ export default function ApplyPage() {
       } else {
         alert("Failed to submit application: " + res.error);
       }
-    } catch (e) {
+    } catch {
       setSubmitting(false);
-      console.error(e);
       alert("An error occurred while submitting. Please try again.");
     }
   };
