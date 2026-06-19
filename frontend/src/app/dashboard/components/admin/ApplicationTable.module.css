@@ -55,6 +55,7 @@
 /* Table styling */
 .table {
   width: 100%;
+  min-width: 680px;
   border-collapse: collapse;
   background-color: #fff;
   /* Fixed layout so column widths come from the rules below instead of

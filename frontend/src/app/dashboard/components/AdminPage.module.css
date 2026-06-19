@@ -1,7 +1,5 @@
 .scrollViewport {
   width: 100%;
-  overflow-x: auto;
-  overflow-y: visible;
 }
 
 .mainContent {
@@ -10,8 +8,8 @@
   margin: 0 auto;
   background-color: #faf8f6;
   min-height: 100vh;
-  width: max-content;
-  min-width: 1200px;
+  width: 100%;
+  max-width: 1217px;
 }
 
 .statusMessage {
