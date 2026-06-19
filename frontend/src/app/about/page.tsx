@@ -62,7 +62,7 @@ export default function AboutUsPage() {
             imageUrl="/about/map-marker.svg"
             backgroundUrl="/about/what-we-do-bg.jpg"
             onButtonClick={() => {
-              router.push("/");
+              router.push("/#partner-programs");
             }}
           />
           <DirectorBox

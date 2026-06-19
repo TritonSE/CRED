@@ -154,34 +154,6 @@
   text-underline-position: from-font;
 }
 
-.applyLink {
-  width: fit-content;
-  text-decoration: none;
-}
-
-.applyButton {
-  background-color: #ffb341;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
-  padding: 12px 24px;
-  border-radius: 5px;
-  transition: opacity 0.2s;
-}
-
-.applyButton:hover {
-  opacity: 0.9;
-}
-
-.applyButtonText {
-  font-family: var(--font-lato), Lato, sans-serif;
-  font-weight: 500;
-  line-height: 1.5;
-  font-size: 20px;
-  color: black;
-}
-
 /* Contact Section */
 .contactList {
   display: flex;

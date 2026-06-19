@@ -47,11 +47,6 @@ export default function Footer() {
               <Link href="/donate" className={styles.navLink}>
                 Donate
               </Link>
-              <Link href="/apply" className={styles.applyLink}>
-                <div className={styles.applyButton}>
-                  <p className={styles.applyButtonText}>Apply to CRED</p>
-                </div>
-              </Link>
             </div>
           </div>
 

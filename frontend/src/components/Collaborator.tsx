@@ -495,7 +495,7 @@ export default function Collaborator() {
   };
 
   return (
-    <div className={styles.sectionContainer}>
+    <div id="partner-programs" className={styles.sectionContainer}>
       <div className={styles.header}>
         <h2 className={styles.title}>Types of Aid and Partner Programs</h2>
         <p className={styles.subtitle}>

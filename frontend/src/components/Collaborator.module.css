@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   padding: clamp(40px, 5vw, 64px) 32px;
+  scroll-margin-top: 90px;
 }
 
 .header {
