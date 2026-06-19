@@ -5,9 +5,8 @@ import { InternalError } from "./errors";
 // Retrieve .env variables
 dotenv.config();
 
-// Required app port for Express server startup.
-if (!process.env.PORT) throw InternalError.NO_APP_PORT;
-const port = process.env.PORT;
+if (!process.env.VERCEL && !process.env.PORT) throw InternalError.NO_APP_PORT;
+const port = process.env.PORT ?? "3001";
 
 // Required MongoDB connection string for Mongoose.
 if (!process.env.MONGODB_URI) throw InternalError.NO_MONGO_URI;
