@@ -19,7 +19,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-validator": "^7.3.2",
-    "firebase-admin": "^14.0.0",
+    "firebase-admin": "^13.10.0",
     "http-errors": "^2.0.1",
     "mongoose": "^9.5.0",
     "nodemailer": "^9.0.1"
