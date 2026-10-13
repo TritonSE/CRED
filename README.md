@@ -1,8 +1,38 @@
 # CRED
 
-A website revamp for Cred, an organization focused on providing help for post-incarcerated inviduals. This website aims to declutter the original website while adding modular features that allow the website to grow with the organization.
+A website revamp for [CRED](https://cred-sd.vercel.app), a San Diego organization that helps people coming out of incarceration find their way to self-sufficiency. The new site declutters the original and adds features that let it grow with the organization: an intake form for clients and an admin portal for staff.
 
-This website adds an admin portal to facilitate website integration into organization operations, including a custom form for clients to send their information.
+Built by a student team at Triton Software Engineering (UC San Diego).
+
+**Live:** [cred-sd.vercel.app](https://cred-sd.vercel.app)
+
+## What's in it
+
+- **Public site:** home, about, donate, and contact pages.
+- **Apply:** a client intake form. Submissions are validated on the server and stored in MongoDB.
+- **Admin portal:** staff sign in with Firebase Authentication and review applicants in a paginated dashboard, with status tracking.
+- **Contact:** messages from the contact form are emailed to staff through Nodemailer.
+
+## Stack
+
+| Part | Tech |
+| --- | --- |
+| Frontend | Next.js (App Router), React, TypeScript, Tailwind CSS |
+| Backend | Express 5, TypeScript, Mongoose, express-validator |
+| Auth | Firebase Authentication (client), Firebase Admin token checks (server) |
+| Hosting | Vercel: the Next.js app and the Express API (served under `/api`) deploy together, see `vercel.json` |
+
+Sensitive applicant fields are defined in strict Mongoose schemas with matching TypeScript types (`backend/src/models/applicant.ts`), and every write goes through a validator (`backend/src/validators/`).
+
+```
+frontend/src/app/     pages: /, about, apply, contact, donate, login, dashboard
+backend/src/
+  routes/             /api/applicant, /api/contact
+  controllers/        request handlers
+  models/             Mongoose schemas
+  validators/         express-validator chains
+  util/               auth middleware, mailer
+```
 
 ## Setup
 
@@ -17,7 +47,7 @@ Before starting development, make sure you have these tools installed:
 ### Environment
 To define and manage environment variables, make sure to maintain `.env` files in both the `frontend` and `backend` directories. Ensure that `.env` is specified in your root `.gitignore` file to prevent pushing secrets. This should already be the case, but the secret scanner hook will check for this if something gets changed
 
-Add the `.env.frontend` and `.env.backend` from the project Google Drive to their respective directories in your local branch.
+Team members: add the `.env.frontend` and `.env.backend` from the project Google Drive to their respective directories. Everyone else: copy `frontend/.env.example` to `frontend/.env` and fill in your own Firebase project values. The frontend build needs the `NEXT_PUBLIC_*` Firebase values to prerender the dashboard.
 
 ### Backend
 
